@@ -3,15 +3,34 @@ import websockets
 
 
 class GameState:
+
     def __init__(self, connection_string: str):
         self.connection_string = connection_string
-        print(self.connection_string)
+        self.is_game_running = True
 
+    async def connect(self):
+        self.connection = await websockets.client.connect(self.connection_string)
+        if self.connection.open:
+            return self.connection
 
-# async def hello():
-#     uri = "ws://127.0.0.1:3000/?role=agent&agentId=agentId&name=defaultName"
-#     async with websockets.connect(uri) as websocket:
-#         await websocket.send("Hello world!")
-#         await websocket.recv()
+    async def sendMessage(self, message):
+        await self.connection.send(message)
 
-# asyncio.get_event_loop().run_until_complete(hello())
+    async def receiveMessage(self, connection):
+
+        while self.is_game_running is True:
+            try:
+                message = await connection.recv()
+                print(str(message))
+            except websockets.exceptions.ConnectionClosed:
+                print('Connection with server closed')
+                break
+
+    async def heartbeat(self, connection):
+        while True:
+            try:
+                await connection.send('ping')
+                await asyncio.sleep(5)
+            except websockets.exceptions.ConnectionClosed:
+                print('Connection with server closed')
+                break
