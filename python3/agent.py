@@ -1,4 +1,4 @@
-from game_state.game_state import GameState
+from game_state import GameState
 import asyncio
 
 uri = "ws://127.0.0.1:3000/?role=agent&agentId=agentId&name=defaultName"
