@@ -32,8 +32,8 @@ mock_tick_expired_packet = create_mock_tick_packet(69, [
 mock_agent_state_payload = {"coordinates": [6, 7], "hp": 3, "inventory": {
     "bombs": 2}, "blast_diameter": 3, "number": 0, "invulnerability": 0}
 
-mock_tick_agent_state_packet = {"type": "agent_state",
-                                "data": mock_agent_state_payload}
+mock_tick_agent_state_packet = create_mock_tick_packet(50, [{"type": "agent_state",
+                                                            "data": mock_agent_state_payload}])
 
 
 mock_tick_agent_action_packet = create_mock_tick_packet(5, [

@@ -47,9 +47,6 @@ class GameState:
         elif data_type == "tick":
             payload = data.get("payload")
             self._on_game_tick(payload)
-        elif data_type == "agent_state":
-            payload = data.get("data")
-            self._on_agent_state(payload)
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 
@@ -67,6 +64,9 @@ class GameState:
             elif event_type == "agent":
                 agent_action = event.get("data")
                 self._on_agent_action(agent_action)
+            elif event_type == "agent_state":
+                payload = event.get("data")
+                self._on_agent_state(payload)
             else:
                 print(f"unknown event type {event_type}: {event}")
 
