@@ -34,17 +34,19 @@ class GameState:
 
     def _on_data(self, data):
         data_type = data.get("type")
-        payload = data.get("payload")
 
         if data_type == "info":
             # no operation
             pass
         elif data_type == "game_state":
+            payload = data.get("payload")
             self._on_game_state(payload)
         elif data_type == "tick":
+            payload = data.get("payload")
             self._on_game_tick(payload)
-        # elif data_type == "agent_state":
-            # self._on_agent_state(payload)
+        elif data_type == "agent_state":
+            payload = data.get("data")
+            self._on_agent_state(payload)
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 
@@ -78,3 +80,7 @@ class GameState:
 
         self._state["entities"] = list(filter(
             filter_entity_fn, self._state["entities"]))
+
+    def _on_agent_state(self, agent_state):
+        agent_number = agent_state.get("number")
+        self._state["agentState"][str(agent_number)] = agent_state
