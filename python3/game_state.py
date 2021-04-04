@@ -41,6 +41,8 @@ class GameState:
             pass
         elif data_type == "game_state":
             self._on_game_state(payload)
+        elif data_type == "tick":
+            self._on_game_tick(payload)
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 
@@ -48,4 +50,15 @@ class GameState:
         self._state = game_state
 
     def _on_game_tick(self, game_tick):
-        print(game_tick)
+        events = game_tick.get("events")
+        for event in events:
+            event_type = event.get("type")
+            if event_type == "entity_spawned":
+                self._on_entity_spawned(event)
+            else:
+                print(f"unknown event type {event_type}: event")
+
+    def _on_entity_spawned(self, spawn_event):
+        spawn_payload = spawn_event.get("data")
+        self._state["entities"].append(spawn_payload)
+        print(self._state["entities"])
