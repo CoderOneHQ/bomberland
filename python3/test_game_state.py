@@ -28,6 +28,8 @@ mock_agent_state_payload = {"coordinates": [6, 7], "hp": 3, "inventory": {
 mock_agent_state_packet = {"type": "agent_state",
                            "data": mock_agent_state_payload}
 
+mock_agent_move_packet = {"type": "agent", "data": [0, "left"]}
+
 
 def copy_object(data):
     return copy.deepcopy(data)
@@ -38,10 +40,10 @@ class TestGameState(IsolatedAsyncioTestCase):
         self.client = GameState("")
         self.maxDiff = None
 
-    def assert_object_equal(self, first, second, msg=None):
+    def assert_object_equal(self, first, second):
         j1 = json.dumps(first, sort_keys=True, indent=4)
         j2 = json.dumps(second, sort_keys=True, indent=4)
-        self.assertEqual(j1, j2, msg)
+        self.assertEqual(j1, j2)
 
     async def test_initial_game_state_constructor(self):
         self.assertTrue(self.client._state == None)
@@ -73,6 +75,14 @@ class TestGameState(IsolatedAsyncioTestCase):
         self.client._on_data(copy_object(mock_agent_state_packet))
         expected = copy_object(mock_state)
         expected["agentState"]["0"] = mock_agent_state_payload
+        self.assert_object_equal(
+            self.client._state, expected)
+
+    def test_on_agent_move_packet(self):
+        self.client._on_data(copy_object(mock_state_packet))
+        self.client._on_data(copy_object(mock_agent_move_packet))
+        expected = copy_object(mock_state)
+        expected["agentState"]["0"]["coordinates"] = [5, 7]
         self.assert_object_equal(
             self.client._state, expected)
 

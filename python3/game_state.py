@@ -47,6 +47,9 @@ class GameState:
         elif data_type == "agent_state":
             payload = data.get("data")
             self._on_agent_state(payload)
+        elif data_type == "agent":
+            payload = data.get("data")
+            self._on_agent_action(payload)
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 
@@ -84,3 +87,25 @@ class GameState:
     def _on_agent_state(self, agent_state):
         agent_number = agent_state.get("number")
         self._state["agentState"][str(agent_number)] = agent_state
+
+    def _on_agent_action(self, agent_action):
+        [agent_number, action] = agent_action
+        agent = self._state["agentState"][str(agent_number)]
+        coordinates = agent.get("coordinates")
+        new_coordinates = self._get_new_agent_coordinates(
+            coordinates, action)
+        self._state["agentState"][str(
+            agent_number)]["coordinates"] = new_coordinates
+
+    def _get_new_agent_coordinates(self, coordinates, action) -> [int, int]:
+        [x, y] = coordinates
+        if action == "up":
+            return [x, y+1]
+        elif action == "down":
+            return [x, y-1]
+        elif action == "right":
+            return [x+1, y]
+        elif action == "left":
+            return [x-1, y]
+        else:
+            print(f"unknown action: {action}")
