@@ -52,6 +52,7 @@ class GameState:
     def _on_game_tick(self, game_tick):
         events = game_tick.get("events")
         for event in events:
+            print(len(events))
             event_type = event.get("type")
             if event_type == "entity_spawned":
                 self._on_entity_spawned(event)
@@ -61,4 +62,3 @@ class GameState:
     def _on_entity_spawned(self, spawn_event):
         spawn_payload = spawn_event.get("data")
         self._state["entities"].append(spawn_payload)
-        print(self._state["entities"])
