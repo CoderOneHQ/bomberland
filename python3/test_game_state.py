@@ -53,7 +53,7 @@ class TestGameState(IsolatedAsyncioTestCase):
     async def test_initial_game_state_constructor(self):
         self.assertTrue(self.client._state == None)
         self.assertTrue(self.client._connection_string == "")
-        self.assertTrue(self.client._generate_agent_action_callback == None)
+        self.assertTrue(self.client._tick_callback == None)
 
     def test_on_game_state_payload(self):
         self.client._on_data(mock_state_packet)

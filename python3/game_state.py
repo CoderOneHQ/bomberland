@@ -11,31 +11,32 @@ class GameState:
         self._connection_string = connection_string
         self._is_game_running = True
         self._state = None
-        self._generate_agent_action_callback = None
+        self._tick_callback = None
 
     def set_game_tick_callback(self, generate_agent_action_callback):
-        self._generate_agent_action_callback = generate_agent_action_callback
+        self._tick_callback = generate_agent_action_callback
 
     async def connect(self):
         self.connection = await websockets.client.connect(self._connection_string)
         if self.connection.open:
             return self.connection
 
-    async def send_message(self, message):
-        await self.connection.send(message)
+    async def _send(self, move: str):
+        payload = {"type": "action", "payload": {"move": move}}
+        await self.connection.send(move)
 
-    async def _handle_messages(self, connection):
+    async def _handle_messages(self, connection: str):
 
         while self._is_game_running is True:
             try:
                 raw_data = await connection.recv()
                 data = json.loads(raw_data)
-                self._on_data(data)
+                await self._on_data(data)
             except websockets.exceptions.ConnectionClosed:
                 print('Connection with server closed')
                 break
 
-    def _on_data(self, data):
+    async def _on_data(self, data):
         data_type = data.get("type")
 
         if data_type == "info":
@@ -46,14 +47,14 @@ class GameState:
             self._on_game_state(payload)
         elif data_type == "tick":
             payload = data.get("payload")
-            self._on_game_tick(payload)
+            await self._on_game_tick(payload)
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 
     def _on_game_state(self, game_state):
         self._state = game_state
 
-    def _on_game_tick(self, game_tick):
+    async def _on_game_tick(self, game_tick):
         events = game_tick.get("events")
         for event in events:
             event_type = event.get("type")
@@ -69,6 +70,9 @@ class GameState:
                 self._on_agent_state(payload)
             else:
                 print(f"unknown event type {event_type}: {event}")
+        if self._tick_callback is not None:
+            tick_number = game_tick.get("tick")
+            await self._tick_callback(tick_number, self._state, self._send)
 
     def _on_entity_spawned(self, spawn_event):
         spawn_payload = spawn_event.get("data")
