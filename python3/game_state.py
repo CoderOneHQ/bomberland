@@ -69,6 +69,10 @@ class GameState:
 
         def filter_entity_fn(entity):
             [x, y] = expire_payload
-            return entity.get("x") != x and entity.get("y") != y
-        self._state["entities"] = filter(
-            filter_entity_fn, self._state["entities"])
+            entity_x = entity.get("x")
+            entity_y = entity.get("y")
+            should_remove = entity_x == x and entity_y == y
+            return should_remove == False
+
+        self._state["entities"] = list(filter(
+            filter_entity_fn, self._state["entities"]))

@@ -18,9 +18,9 @@ mock_tick_spawn_packet = {
 
 
 mock_tick_expired = {"tick": 69, "events": [
-    {"type": "entity_expired", "data": [4, 6]}]}
+    {"type": "entity_expired", "data": [5, 4]}]}
 mock_tick_expired_packet = {
-    "type": "tick", "payload": mock_tick_spawn}
+    "type": "tick", "payload": mock_tick_expired}
 
 
 def copy_object(data):
@@ -59,8 +59,6 @@ class TestGameState(IsolatedAsyncioTestCase):
         self.client._on_data(copy_object(mock_tick_spawn_packet))
         self.client._on_data(copy_object(mock_tick_expired_packet))
         expected = copy_object(mock_state)
-        expected["entities"].append(
-            {"x": 5, "y": 4, "type": "a", "expires": 73})
         self.assertJsonEqual(self.client._state, expected)
 
 
