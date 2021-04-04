@@ -36,12 +36,8 @@ mock_agent_state_packet = {"type": "agent_state",
                            "data": mock_agent_state_payload}
 
 
-mock_tick_agent_action_payload = {"tick": 5, "events": [
-    {"type": "agent", "data": [0, "left"]}]}
-
-
-mock_tick_agent_action_packet = {
-    "type": "tick", "payload": mock_tick_agent_action_payload}
+mock_tick_agent_action_packet = create_mock_tick_packet(5, [
+    {"type": "agent", "data": [0, "left"]}])
 
 
 class TestGameState(IsolatedAsyncioTestCase):
