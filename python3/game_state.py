@@ -23,7 +23,7 @@ class GameState:
 
     async def _send(self, move: str):
         payload = {"type": "action", "payload": {"move": move}}
-        await self.connection.send(payload)
+        await self.connection.send(json.dumps(payload))
 
     async def _handle_messages(self, connection: str):
 

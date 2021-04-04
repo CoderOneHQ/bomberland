@@ -14,7 +14,6 @@ def generate_random_action():
 
 async def on_game_tick(tick_number, game_state, send):
     random_action = generate_random_action()
-    print(random_action)
     await send(random_action)
 
 
