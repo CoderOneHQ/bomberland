@@ -47,9 +47,6 @@ class GameState:
         elif data_type == "agent_state":
             payload = data.get("data")
             self._on_agent_state(payload)
-        elif data_type == "agent":
-            payload = data.get("data")
-            self._on_agent_action(payload)
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 
@@ -64,6 +61,9 @@ class GameState:
                 self._on_entity_spawned(event)
             elif event_type == "entity_expired":
                 self._on_entity_expired(event)
+            elif event_type == "agent":
+                agent_action = event.get("data")
+                self._on_agent_action(agent_action)
             else:
                 print(f"unknown event type {event_type}: {event}")
 

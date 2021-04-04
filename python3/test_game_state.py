@@ -28,7 +28,13 @@ mock_agent_state_payload = {"coordinates": [6, 7], "hp": 3, "inventory": {
 mock_agent_state_packet = {"type": "agent_state",
                            "data": mock_agent_state_payload}
 
-mock_agent_move_packet = {"type": "agent", "data": [0, "left"]}
+
+mock_tick_agent_action_payload = {"tick": 5, "events": [
+    {"type": "agent", "data": [0, "left"]}]}
+
+
+mock_tick_agent_action_packet = {
+    "type": "tick", "payload": mock_tick_agent_action_payload}
 
 
 def copy_object(data):
@@ -80,7 +86,7 @@ class TestGameState(IsolatedAsyncioTestCase):
 
     def test_on_agent_move_packet(self):
         self.client._on_data(copy_object(mock_state_packet))
-        self.client._on_data(copy_object(mock_agent_move_packet))
+        self.client._on_data(copy_object(mock_tick_agent_action_packet))
         expected = copy_object(mock_state)
         expected["agentState"]["0"]["coordinates"] = [5, 7]
         self.assert_object_equal(
