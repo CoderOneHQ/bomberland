@@ -43,6 +43,8 @@ class GameState:
             self._on_game_state(payload)
         elif data_type == "tick":
             self._on_game_tick(payload)
+        # elif data_type == "agent_state":
+            # self._on_agent_state(payload)
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 

@@ -22,6 +22,12 @@ mock_tick_expired = {"tick": 69, "events": [
 mock_tick_expired_packet = {
     "type": "tick", "payload": mock_tick_expired}
 
+mock_agent_state_payload = {"coordinates": [6, 7], "hp": 3, "inventory": {
+    "bombs": 2}, "blast_diameter": 3, "number": 0, "invulnerability": 0}
+
+mock_agent_state_packet = {"type": "agent_state",
+                           "data": mock_agent_state_payload}
+
 
 def copy_object(data):
     return copy.deepcopy(data)
@@ -44,9 +50,10 @@ class TestGameState(IsolatedAsyncioTestCase):
 
     def test_on_game_state_payload(self):
         self.client._on_data(mock_state_packet)
-        self.assertEqual(self.client._state, mock_state)
+        expected = copy_object(mock_state)
+        self.assertEqual(self.client._state, expected)
 
-    def test_on_game_entity_spawn_payload(self):
+    def test_on_game_entity_spawn_packet(self):
         self.client._on_data(copy_object(mock_state_packet))
         self.client._on_data(copy_object(mock_tick_spawn_packet))
         expected = copy_object(mock_state)
@@ -54,12 +61,20 @@ class TestGameState(IsolatedAsyncioTestCase):
             {"x": 5, "y": 4, "type": "a", "expires": 73})
         self.assert_object_equal(self.client._state, expected)
 
-    def test_on_game_entity_expired_payload(self):
+    def test_on_game_entity_expired_packet(self):
         self.client._on_data(copy_object(mock_state_packet))
         self.client._on_data(copy_object(mock_tick_spawn_packet))
         self.client._on_data(copy_object(mock_tick_expired_packet))
         expected = copy_object(mock_state)
         self.assert_object_equal(self.client._state, expected)
+
+    def test_on_agent_state_packet(self):
+        self.client._on_data(copy_object(mock_state_packet))
+        self.client._on_data(copy_object(mock_agent_state_packet))
+        expected = copy_object(mock_state)
+        expected["agentState"]["0"] = mock_agent_state_payload
+        self.assert_object_equal(
+            self.client._state, expected)
 
 
 if __name__ == '__main__':
