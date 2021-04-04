@@ -55,9 +55,20 @@ class GameState:
             event_type = event.get("type")
             if event_type == "entity_spawned":
                 self._on_entity_spawned(event)
+            elif event_type == "entity_expired":
+                self._on_entity_expired(event)
             else:
-                print(f"unknown event type {event_type}: event")
+                print(f"unknown event type {event_type}: {event}")
 
     def _on_entity_spawned(self, spawn_event):
         spawn_payload = spawn_event.get("data")
         self._state["entities"].append(spawn_payload)
+
+    def _on_entity_expired(self, spawn_event):
+        expire_payload = spawn_event.get("data")
+
+        def filter_entity_fn(entity):
+            [x, y] = expire_payload
+            return entity.get("x") != x and entity.get("y") != y
+        self._state["entities"] = filter(
+            filter_entity_fn, self._state["entities"])
