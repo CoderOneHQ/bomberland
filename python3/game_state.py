@@ -21,23 +21,28 @@ class GameState:
     async def send_message(self, message):
         await self.connection.send(message)
 
-    async def _on_message(self, connection):
+    async def _handle_messages(self, connection):
 
         while self._is_game_running is True:
             try:
                 raw_data = await connection.recv()
                 data = json.loads(raw_data)
-                data_type = data.get("type")
-                payload = data.get("payload")
-                if data_type == "info":
-                    continue
-                if data_type == "game_state":
-                    self._on_game_state(payload)
-                else:
-                    print(f"unknown packet \"{data_type}\": {raw_data}")
+                self._on_data(data)
             except websockets.exceptions.ConnectionClosed:
                 print('Connection with server closed')
                 break
+
+    def _on_data(self, data):
+        data_type = data.get("type")
+        payload = data.get("payload")
+
+        if data_type == "info":
+            # no operation
+            pass
+        elif data_type == "game_state":
+            self._on_game_state(payload)
+        else:
+            print(f"unknown packet \"{data_type}\": {data}")
 
     def _on_game_state(self, game_state):
         self._state = game_state
