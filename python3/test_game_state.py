@@ -32,7 +32,7 @@ class TestGameState(IsolatedAsyncioTestCase):
         self.client = GameState("")
         self.maxDiff = None
 
-    def assertJsonEqual(self, first, second, msg=None):
+    def assert_object_equal(self, first, second, msg=None):
         j1 = json.dumps(first, sort_keys=True, indent=4)
         j2 = json.dumps(second, sort_keys=True, indent=4)
         self.assertEqual(j1, j2, msg)
@@ -52,14 +52,14 @@ class TestGameState(IsolatedAsyncioTestCase):
         expected = copy_object(mock_state)
         expected["entities"].append(
             {"x": 5, "y": 4, "type": "a", "expires": 73})
-        self.assertJsonEqual(self.client._state, expected)
+        self.assert_object_equal(self.client._state, expected)
 
     def test_on_game_entity_expired_payload(self):
         self.client._on_data(copy_object(mock_state_packet))
         self.client._on_data(copy_object(mock_tick_spawn_packet))
         self.client._on_data(copy_object(mock_tick_expired_packet))
         expected = copy_object(mock_state)
-        self.assertJsonEqual(self.client._state, expected)
+        self.assert_object_equal(self.client._state, expected)
 
 
 if __name__ == '__main__':
