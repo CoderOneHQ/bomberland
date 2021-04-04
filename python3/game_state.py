@@ -3,6 +3,9 @@ import websockets
 import json
 
 
+_agent_move_set = set(("up", "down", "left", "right"))
+
+
 class GameState:
     def __init__(self, connection_string: str):
         self._connection_string = connection_string
@@ -88,24 +91,25 @@ class GameState:
         agent_number = agent_state.get("number")
         self._state["agentState"][str(agent_number)] = agent_state
 
-    def _on_agent_action(self, agent_action):
-        [agent_number, action] = agent_action
+    def _on_agent_action(self, action_data):
+        [agent_number, action] = action_data
         agent = self._state["agentState"][str(agent_number)]
         coordinates = agent.get("coordinates")
-        new_coordinates = self._get_new_agent_coordinates(
-            coordinates, action)
-        self._state["agentState"][str(
-            agent_number)]["coordinates"] = new_coordinates
-
-    def _get_new_agent_coordinates(self, coordinates, action) -> [int, int]:
-        [x, y] = coordinates
-        if action == "up":
-            return [x, y+1]
-        elif action == "down":
-            return [x, y-1]
-        elif action == "right":
-            return [x+1, y]
-        elif action == "left":
-            return [x-1, y]
+        if action in _agent_move_set:
+            new_coordinates = self._get_new_agent_coordinates(
+                coordinates, action)
+            self._state["agentState"][str(
+                agent_number)]["coordinates"] = new_coordinates
         else:
-            print(f"unknown action: {action}")
+            print(f"Unhandled agent action: {action_data}")
+
+    def _get_new_agent_coordinates(self, coordinates, move_action) -> [int, int]:
+        [x, y] = coordinates
+        if move_action == "up":
+            return [x, y+1]
+        elif move_action == "down":
+            return [x, y-1]
+        elif move_action == "right":
+            return [x+1, y]
+        elif move_action == "left":
+            return [x-1, y]
