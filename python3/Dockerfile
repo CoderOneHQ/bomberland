@@ -4,4 +4,4 @@ COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
 RUN python -m pip install -r requirements.txt
 COPY . /app/
-ENTRYPOINT python game_state.py
+ENTRYPOINT python agent.py
