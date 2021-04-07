@@ -9,7 +9,7 @@ services:
             - WORLD_SEED=1234
             - TRAINING_MODE_ENABLED=0
         networks:
-            - coderone-tournament
+            - coderone-tournament-dev
     python3-agent:
         build:
             context: python3
@@ -19,7 +19,7 @@ services:
         depends_on:
             - game-server
         networks:
-            - coderone-tournament
+            - coderone-tournament-dev
 
     python3-fwd:
         build:
@@ -31,6 +31,6 @@ services:
         depends_on:
             - game-server
         networks:
-            - coderone-tournament
+            - coderone-tournament-dev
 networks:
-    coderone-tournament:
+    coderone-tournament-dev:
