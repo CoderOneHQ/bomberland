@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-server:
-        image: coderone.azurecr.io/game-server:241
+        image: coderone.azurecr.io/game-server:246
         ports:
             - 3000:3000
         environment:
@@ -27,6 +27,7 @@ services:
             dockerfile: Dockerfile.fwd
         environment:
             - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
+            - TELEMETRY_ENABLED=0
         depends_on:
             - game-server
         networks:
