@@ -1,7 +1,8 @@
 FROM python:3.9.4-buster
-RUN apt-get update && apt-get install parallel -y
 COPY --from=coderone.azurecr.io/game-server:246 /app/game-server /app/game-server
 WORKDIR /app
 RUN chmod +x ./game-server
-ENTRYPOINT "parallel -j2 --halt now,success=1 ::: 'python3 agent_fwd.py' '/app/game-server'"
+COPY ./agent_fwd_entrypoint.sh /app/entrypoint.sh
+RUN chmod +x ./entrypoint.sh
+ENTRYPOINT ./entrypoint.sh
 
