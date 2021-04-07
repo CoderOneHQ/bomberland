@@ -1,8 +1,10 @@
 from game_state import GameState
 import asyncio
 import random
+import os
 
-uri = "ws://127.0.0.1:3000/?role=agent&agentId=agentId&name=defaultName"
+uri = os.environ.get(
+    'GAME_CONNECTION_STRING') or "ws://127.0.0.1:3000/?role=agent&agentId=agentId&name=defaultName"
 
 actions = ["up", "down", "left", "right", "bomb"]
 

@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-server:
-        image: docker run coderone.azurecr.io/game-server:241
+        image: coderone.azurecr.io/game-server:241
         ports:
             - 3000:3000
         environment:
@@ -10,6 +10,14 @@ services:
             - TRAINING_MODE_ENABLED=0
         networks:
             - coderone-tournament
-volumes:
+    python3-agent:
+        build:
+            context: python3
+        environment:
+            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
+        depends_on:
+            - game-server
+        networks:
+            - coderone-tournament
 networks:
     coderone-tournament:
