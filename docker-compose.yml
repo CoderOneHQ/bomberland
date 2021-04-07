@@ -1,0 +1,15 @@
+version: "3"
+services:
+    game-server:
+        image: docker run coderone.azurecr.io/game-server:241
+        ports:
+            - 3000:3000
+        environment:
+            - PRNG_SEED=1234
+            - WORLD_SEED=1234
+            - TRAINING_MODE_ENABLED=0
+        networks:
+            - coderone-tournament
+volumes:
+networks:
+    coderone-tournament:
