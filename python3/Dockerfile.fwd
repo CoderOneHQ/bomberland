@@ -1,4 +1,5 @@
 FROM python:3.9.4-buster
+RUN apt-get install parallel
 COPY --from=coderone.azurecr.io/game-server:246 /app/game-server /app/game-server
 WORKDIR /app
 RUN chmod +x ./game-server
