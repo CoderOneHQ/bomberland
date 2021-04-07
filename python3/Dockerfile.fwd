@@ -1,5 +1,5 @@
 FROM python:3.9.4-buster
-COPY --from=coderone.azurecr.io/game-server:241 /app/game-server/game-server /app/game-server
+COPY --from=coderone.azurecr.io/game-server:241 /app/game-server /app/game-server
 WORKDIR /app
 RUN chmod +x ./game-server
 ENTRYPOINT ["/app/game-server"]
