@@ -3,6 +3,8 @@ import asyncio
 import random
 import os
 
+print("Starting agent fwd")
+
 fwd_model_uri = os.environ.get(
     'FWD_MODEL_CONNECTION_STRING') or "ws://127.0.0.1:6969/?role=admin"
 
