@@ -29,10 +29,3 @@ class ForwardModel:
 
     def _on_game_state(self, game_state):
         self._state = game_state
-
-    # {
-    #     move: AgentMove.Left,
-    #     agentNumber: 1,
-    # }
-
-    # def next_state(self, game_state,
