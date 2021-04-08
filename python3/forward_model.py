@@ -29,3 +29,23 @@ class ForwardModel:
 
     def _on_game_state(self, game_state):
         self._state = game_state
+
+    """
+    sample moves payload:
+    [{
+        "move": "right",
+        "agentNumber": 0,
+    }, {
+        "move": "left",
+        "agentNumber": 1,
+    }]
+
+    REMARKS:
+    `sequence_id` is used to for you match up an evalauted
+    next_state call since payloads can come back in any order
+    It should ideally be unique
+    """
+
+    async def send_next_state(self, sequence_id, game_state, moves):
+        payload = {"type": "action", "payload": {"move": move}}
+        await self.connection.send(json.dumps(payload))

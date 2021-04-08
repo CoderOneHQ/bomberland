@@ -2,12 +2,10 @@ FROM python:3.9.4-buster
 COPY --from=coderone.azurecr.io/game-server:254 /app/game-server /app/game-server
 WORKDIR /app
 RUN chmod +x ./game-server
-COPY ./agent_fwd_entrypoint.sh /app/agent_fwd_entrypoint.sh
-RUN chmod +x ./agent_fwd_entrypoint.sh
 COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
-RUN python -m pip install -r requirements.txt
 COPY . /app/
+RUN chmod +x ./agent_fwd_entrypoint.sh
+RUN python -m pip install -r requirements.txt
 RUN python -m unittest
 ENTRYPOINT ./agent_fwd_entrypoint.sh
-
