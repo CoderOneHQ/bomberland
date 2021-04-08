@@ -21,14 +21,18 @@ class ForwardModel:
         if data_type == "info":
             # no operation
             pass
-        elif data_type == "game_state":
+        elif data_type == "next_game_state":
             payload = data.get("payload")
             self._on_game_state(payload)
-        elif data_type == "tick":
-            payload = data.get("payload")
-            await self._on_game_tick(payload)
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 
     def _on_game_state(self, game_state):
         self._state = game_state
+
+    # {
+    #     move: AgentMove.Left,
+    #     agentNumber: 1,
+    # }
+
+    def next_state(self, game_state,
