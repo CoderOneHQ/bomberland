@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-server:
-        image: coderone.azurecr.io/game-server:246
+        image: coderone.azurecr.io/game-server:254
         ports:
             - 3000:3000
         environment:
