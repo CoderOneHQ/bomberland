@@ -1,4 +1,5 @@
 from game_state import GameState
+from forward_model import ForwardModel
 import asyncio
 import random
 import os
