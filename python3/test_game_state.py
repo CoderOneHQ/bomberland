@@ -19,7 +19,7 @@ mock_state = {"agentState": {"0": {"coordinates": [6, 7], "hp": 3, "inventory": 
 
 
 mock_state_packet = {"type": "game_state",
-                     "payload": mock_state}
+                     "payload": copy_object(mock_state)}
 
 
 mock_tick_spawn_packet = create_mock_tick_packet(33, [
