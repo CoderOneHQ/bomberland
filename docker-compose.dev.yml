@@ -1,0 +1,40 @@
+version: "3"
+services:
+    game-server:
+        image: coderone.azurecr.io/game-server:254
+        ports:
+            - 3000:3000
+        environment:
+            - PRNG_SEED=1234
+            - WORLD_SEED=1234
+            - TRAINING_MODE_ENABLED=0
+        networks:
+            - coderone-tournament-dev
+    python3-agent:
+        build:
+            context: python3
+            dockerfile: Dockerfile.dev
+        volumes:
+            - ./python3:/app
+        environment:
+            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
+        depends_on:
+            - game-server
+        networks:
+            - coderone-tournament-dev
+
+    python3-fwd:
+        build:
+            context: python3
+            dockerfile: Dockerfile.fwd.dev
+        volumes:
+            - ./python3:/app
+        environment:
+            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
+            - TELEMETRY_ENABLED=0
+        depends_on:
+            - game-server
+        networks:
+            - coderone-tournament-dev
+networks:
+    coderone-tournament-dev:

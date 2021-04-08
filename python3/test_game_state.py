@@ -19,7 +19,7 @@ mock_state = {"agentState": {"0": {"coordinates": [6, 7], "hp": 3, "inventory": 
 
 
 mock_state_packet = {"type": "game_state",
-                     "payload": mock_state}
+                     "payload": copy_object(mock_state)}
 
 
 mock_tick_spawn_packet = create_mock_tick_packet(33, [
@@ -55,37 +55,37 @@ class TestGameState(IsolatedAsyncioTestCase):
         self.assertTrue(self.client._connection_string == "")
         self.assertTrue(self.client._tick_callback == None)
 
-    def test_on_game_state_payload(self):
-        self.client._on_data(mock_state_packet)
+    async def test_on_game_state_payload(self):
+        await self.client._on_data(mock_state_packet)
         expected = copy_object(mock_state)
         self.assertEqual(self.client._state, expected)
 
-    def test_on_game_entity_spawn_packet(self):
-        self.client._on_data(copy_object(mock_state_packet))
-        self.client._on_data(copy_object(mock_tick_spawn_packet))
+    async def test_on_game_entity_spawn_packet(self):
+        await self.client._on_data(copy_object(mock_state_packet))
+        await self.client._on_data(copy_object(mock_tick_spawn_packet))
         expected = copy_object(mock_state)
         expected["entities"].append(
             {"x": 5, "y": 4, "type": "a", "expires": 73})
         self.assert_object_equal(self.client._state, expected)
 
-    def test_on_game_entity_expired_packet(self):
-        self.client._on_data(copy_object(mock_state_packet))
-        self.client._on_data(copy_object(mock_tick_spawn_packet))
-        self.client._on_data(copy_object(mock_tick_expired_packet))
+    async def test_on_game_entity_expired_packet(self):
+        await self.client._on_data(copy_object(mock_state_packet))
+        await self.client._on_data(copy_object(mock_tick_spawn_packet))
+        await self.client._on_data(copy_object(mock_tick_expired_packet))
         expected = copy_object(mock_state)
         self.assert_object_equal(self.client._state, expected)
 
-    def test_on_agent_state_packet(self):
-        self.client._on_data(copy_object(mock_state_packet))
-        self.client._on_data(copy_object(mock_tick_agent_state_packet))
+    async def test_on_agent_state_packet(self):
+        await self.client._on_data(copy_object(mock_state_packet))
+        await self.client._on_data(copy_object(mock_tick_agent_state_packet))
         expected = copy_object(mock_state)
         expected["agentState"]["0"] = mock_agent_state_payload
         self.assert_object_equal(
             self.client._state, expected)
 
-    def test_on_agent_move_packet(self):
-        self.client._on_data(copy_object(mock_state_packet))
-        self.client._on_data(copy_object(mock_tick_agent_action_packet))
+    async def test_on_agent_move_packet(self):
+        await self.client._on_data(copy_object(mock_state_packet))
+        await self.client._on_data(copy_object(mock_tick_agent_action_packet))
         expected = copy_object(mock_state)
         expected["agentState"]["0"]["coordinates"] = [5, 7]
         self.assert_object_equal(

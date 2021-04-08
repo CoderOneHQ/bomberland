@@ -1,7 +1,13 @@
 from game_state import GameState
+from forward_model import ForwardModel
 import asyncio
 import random
 import os
+
+print("Starting agent fwd")
+
+fwd_model_uri = os.environ.get(
+    'FWD_MODEL_CONNECTION_STRING') or "ws://127.0.0.1:6969/?role=admin"
 
 uri = os.environ.get(
     'GAME_CONNECTION_STRING') or "ws://127.0.0.1:3000/?role=agent&agentId=agentId&name=defaultName"
@@ -20,6 +26,7 @@ async def on_game_tick(tick_number, game_state, send):
 
 
 def main():
+    client_fwd = ForwardModel(fwd_model_uri)
     client = GameState(uri)
     client.set_game_tick_callback(on_game_tick)
     loop = asyncio.get_event_loop()
