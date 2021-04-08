@@ -1,5 +1,5 @@
 import unittest
-from game_state import GameState
+from forward_model import ForwardModel
 from unittest import IsolatedAsyncioTestCase
 import copy
 import json
@@ -40,9 +40,9 @@ mock_tick_agent_action_packet = create_mock_tick_packet(5, [
     {"type": "agent", "data": [0, "left"]}])
 
 
-class TestGameState(IsolatedAsyncioTestCase):
+class TestForwardModel(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.client = GameState("")
+        self.client = ForwardModel("")
         self.maxDiff = None
 
     def assert_object_equal(self, first, second):
@@ -54,42 +54,6 @@ class TestGameState(IsolatedAsyncioTestCase):
         self.assertTrue(self.client._state == None)
         self.assertTrue(self.client._connection_string == "")
         self.assertTrue(self.client._tick_callback == None)
-
-    def test_on_game_state_payload(self):
-        self.client._on_data(mock_state_packet)
-        expected = copy_object(mock_state)
-        self.assertEqual(self.client._state, expected)
-
-    def test_on_game_entity_spawn_packet(self):
-        self.client._on_data(copy_object(mock_state_packet))
-        self.client._on_data(copy_object(mock_tick_spawn_packet))
-        expected = copy_object(mock_state)
-        expected["entities"].append(
-            {"x": 5, "y": 4, "type": "a", "expires": 73})
-        self.assert_object_equal(self.client._state, expected)
-
-    def test_on_game_entity_expired_packet(self):
-        self.client._on_data(copy_object(mock_state_packet))
-        self.client._on_data(copy_object(mock_tick_spawn_packet))
-        self.client._on_data(copy_object(mock_tick_expired_packet))
-        expected = copy_object(mock_state)
-        self.assert_object_equal(self.client._state, expected)
-
-    def test_on_agent_state_packet(self):
-        self.client._on_data(copy_object(mock_state_packet))
-        self.client._on_data(copy_object(mock_tick_agent_state_packet))
-        expected = copy_object(mock_state)
-        expected["agentState"]["0"] = mock_agent_state_payload
-        self.assert_object_equal(
-            self.client._state, expected)
-
-    def test_on_agent_move_packet(self):
-        self.client._on_data(copy_object(mock_state_packet))
-        self.client._on_data(copy_object(mock_tick_agent_action_packet))
-        expected = copy_object(mock_state)
-        expected["agentState"]["0"]["coordinates"] = [5, 7]
-        self.assert_object_equal(
-            self.client._state, expected)
 
 
 if __name__ == '__main__':
