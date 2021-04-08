@@ -35,4 +35,4 @@ class ForwardModel:
     #     agentNumber: 1,
     # }
 
-    def next_state(self, game_state,
+    # def next_state(self, game_state,
