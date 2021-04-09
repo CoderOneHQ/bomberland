@@ -1,5 +1,5 @@
 import unittest
-from forward_model import ForwadModel
+from forward_model import ForwardModel
 from unittest import IsolatedAsyncioTestCase
 import copy
 import json
