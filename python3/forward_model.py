@@ -55,4 +55,5 @@ class ForwardModel:
     async def send_next_state(self, sequence_id, game_state, moves):
         payload = {"type": "next", "moves": moves,
                    "state": game_state, "sequence_id": sequence_id}
-        await self.connection.send(json.dumps(payload))
+        packet = {"type": "admin", "payload": payload}
+        await self.connection.send(json.dumps(packet))

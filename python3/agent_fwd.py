@@ -51,7 +51,7 @@ class Agent():
     async def on_game_tick(self, tick_number, game_state):
         random_action = self.generate_random_action()
         game_state = self._client._state
-        await self._client_fwd.send_next_state(1, game_state, [])
+        await self._client_fwd.send_next_state(tick_number, game_state, [])
         await self._client._send(random_action)
 
     def generate_random_action(self):
