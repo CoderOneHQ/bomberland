@@ -14,6 +14,8 @@ uri = os.environ.get(
 
 actions = ["up", "down", "left", "right", "bomb"]
 
+sequence = 0
+
 
 def generate_random_action():
     actions_length = len(actions)
@@ -25,17 +27,22 @@ async def on_game_tick(tick_number, game_state, send):
     await send(random_action)
 
 
-def main():
-    client_fwd = ForwardModel(fwd_model_uri)
-    client = GameState(uri)
-    client.set_game_tick_callback(on_game_tick)
-    loop = asyncio.get_event_loop()
-    connection = loop.run_until_complete(client.connect())
-    tasks = [
-        asyncio.ensure_future(client._handle_messages(connection)),
-    ]
+class Agent():
+    def __init__(self):
+        client_fwd = ForwardModel(fwd_model_uri)
+        client = GameState(uri)
+        client.set_game_tick_callback(on_game_tick)
+        loop = asyncio.get_event_loop()
+        connection = loop.run_until_complete(client.connect())
+        tasks = [
+            asyncio.ensure_future(client._handle_messages(connection)),
+        ]
 
-    loop.run_until_complete(asyncio.wait(tasks))
+        loop.run_until_complete(asyncio.wait(tasks))
+
+
+def main():
+    Agent()
 
 
 if __name__ == "__main__":

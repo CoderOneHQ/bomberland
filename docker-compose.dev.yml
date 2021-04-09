@@ -8,6 +8,7 @@ services:
             - PRNG_SEED=1234
             - WORLD_SEED=1234
             - TRAINING_MODE_ENABLED=0
+            - TELEMETRY_ENABLED=0
         networks:
             - coderone-tournament-dev
     python3-agent:
@@ -31,7 +32,6 @@ services:
             - ./python3:/app
         environment:
             - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
-            - TELEMETRY_ENABLED=0
         depends_on:
             - game-server
         networks:
