@@ -42,7 +42,7 @@ mock_tick_agent_action_packet = create_mock_tick_packet(5, [
 
 class TestGameState(IsolatedAsyncioTestCase):
     def setUp(self):
-        self.client = GameState("")
+        self.client = ForwardModel("")
         self.maxDiff = None
 
     def assert_object_equal(self, first, second):
