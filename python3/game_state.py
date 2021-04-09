@@ -2,7 +2,6 @@ import asyncio
 import websockets
 import json
 
-
 _agent_move_set = set(("up", "down", "left", "right"))
 
 

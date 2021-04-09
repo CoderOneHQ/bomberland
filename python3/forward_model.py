@@ -3,9 +3,6 @@ import websockets
 import json
 
 
-_agent_move_set = set(("up", "down", "left", "right"))
-
-
 class ForwardModel:
     def __init__(self, connection_string: str):
         self._connection_string = connection_string
@@ -14,6 +11,16 @@ class ForwardModel:
         self.connection = await websockets.client.connect(self._connection_string)
         if self.connection.open:
             return self.connection
+
+    async def _handle_messages(self, connection: str):
+        while True:
+            try:
+                raw_data = await connection.recv()
+                data = json.loads(raw_data)
+                await self._on_data(data)
+            except websockets.exceptions.ConnectionClosed:
+                print('Connection with server closed')
+                break
 
     async def _on_data(self, data):
         data_type = data.get("type")
