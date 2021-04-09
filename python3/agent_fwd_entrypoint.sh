@@ -1,6 +1,5 @@
-python3 agent_fwd.py & p1=$!
-/game-server & p2=$!
-
+#!/bin/bash
+{ python3 agent_fwd.py; } &
+{ /game-server; } &
 wait -n
-[ "$?" -gt 1 ] || kill "$p1" "$p2"
-wait
+pkill -P $$
