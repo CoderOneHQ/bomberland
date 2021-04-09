@@ -41,11 +41,11 @@ class ForwardModel:
     }]
 
     REMARKS:
-    `sequence_id` is used to for you match up an evalauted
+    `sequence_id` is used to for you match up an evaluated
     next_state call since payloads can come back in any order
     It should ideally be unique
     """
-
     async def send_next_state(self, sequence_id, game_state, moves):
-        payload = {"type": "action", "payload": {"move": move}}
+        payload = {"type": "next", "moves": moves,
+                   "state": game_state, "sequence_id": sequence_id}
         await self.connection.send(json.dumps(payload))
