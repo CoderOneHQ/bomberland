@@ -4,8 +4,6 @@ import asyncio
 import random
 import os
 
-print("Starting agent fwd")
-
 fwd_model_uri = os.environ.get(
     'FWD_MODEL_CONNECTION_STRING') or "ws://127.0.0.1:6969/?role=admin"
 
@@ -14,24 +12,12 @@ uri = os.environ.get(
 
 actions = ["up", "down", "left", "right", "bomb"]
 
-sequence = 0
-
-
-def generate_random_action():
-    actions_length = len(actions)
-    return actions[random.randint(0, actions_length - 1)]
-
-
-async def on_game_tick(tick_number, game_state, send):
-    random_action = generate_random_action()
-    await send(random_action)
-
 
 class Agent():
     def __init__(self):
         client_fwd = ForwardModel(fwd_model_uri)
         client = GameState(uri)
-        client.set_game_tick_callback(on_game_tick)
+        client.set_game_tick_callback(self.on_game_tick)
         loop = asyncio.get_event_loop()
         connection = loop.run_until_complete(client.connect())
         tasks = [
@@ -39,7 +25,14 @@ class Agent():
         ]
 
         loop.run_until_complete(asyncio.wait(tasks))
-        print("Agent starting")
+
+    async def on_game_tick(self, tick_number, game_state, send):
+        random_action = self.generate_random_action()
+        await send(random_action)
+
+    def generate_random_action(self):
+        actions_length = len(actions)
+        return actions[random.randint(0, actions_length - 1)]
 
 
 def main():
