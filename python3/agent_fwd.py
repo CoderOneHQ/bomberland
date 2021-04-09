@@ -39,6 +39,7 @@ class Agent():
         ]
 
         loop.run_until_complete(asyncio.wait(tasks))
+        print("Agent starting")
 
 
 def main():

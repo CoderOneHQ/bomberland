@@ -7,6 +7,4 @@ WORKDIR /app
 COPY . /app/
 RUN python -m pip install -r requirements.txt
 RUN python -m unittest
-ENV TELEMETRY_ENABLED=0
-ENV IS_TRAINING_MODE=1
 ENTRYPOINT chmod +x ./agent_fwd_entrypoint.sh && ./agent_fwd_entrypoint.sh
