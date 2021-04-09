@@ -8,7 +8,7 @@ services:
             - PRNG_SEED=1234
             - WORLD_SEED=1234
             - TRAINING_MODE_ENABLED=0
-            - TELEMETRY_ENABLED=1
+            - TELEMETRY_ENABLED=0
         networks:
             - coderone-tournament-dev
     python3-agent:
