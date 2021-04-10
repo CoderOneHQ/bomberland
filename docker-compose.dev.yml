@@ -1,14 +1,14 @@
 version: "3"
 services:
     fwd-server:
-        image: coderone.azurecr.io/game-server:259
+        image: coderone.azurecr.io/game-server:267
         environment:
             - TELEMETRY_ENABLED=0
             - PORT=6969
         networks:
             - coderone-tournament-dev
     game-server:
-        image: coderone.azurecr.io/game-server:259
+        image: coderone.azurecr.io/game-server:267
         ports:
             - 3000:3000
         environment:
@@ -16,7 +16,8 @@ services:
             - WORLD_SEED=1234
             - TRAINING_MODE_ENABLED=0
             - TELEMETRY_ENABLED=0
-            - TICK_RATE_HZ=1
+            - TICK_RATE_HZ=10
+            - SHUTDOWN_ON_GAME_END_ENABLED=1
         networks:
             - coderone-tournament-dev
     python3-agent:
