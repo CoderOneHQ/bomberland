@@ -2,14 +2,12 @@ import asyncio
 import websockets
 import json
 
-
 _agent_move_set = set(("up", "down", "left", "right"))
 
 
 class GameState:
     def __init__(self, connection_string: str):
         self._connection_string = connection_string
-        self._is_game_running = True
         self._state = None
         self._tick_callback = None
 
@@ -26,8 +24,7 @@ class GameState:
         await self.connection.send(json.dumps(payload))
 
     async def _handle_messages(self, connection: str):
-
-        while self._is_game_running is True:
+        while True:
             try:
                 raw_data = await connection.recv()
                 data = json.loads(raw_data)
@@ -72,7 +69,7 @@ class GameState:
                 print(f"unknown event type {event_type}: {event}")
         if self._tick_callback is not None:
             tick_number = game_tick.get("tick")
-            await self._tick_callback(tick_number, self._state, self._send)
+            await self._tick_callback(tick_number, self._state)
 
     def _on_entity_spawned(self, spawn_event):
         spawn_payload = spawn_event.get("data")
