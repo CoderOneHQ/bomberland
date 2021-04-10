@@ -5,4 +5,4 @@ WORKDIR /app
 RUN python -m pip install -r requirements.txt
 RUN python -m unittest
 COPY . /app/
-ENTRYPOINT python agent.py
+ENTRYPOINT PYTHONUNBUFFERED=1 python agent.py
