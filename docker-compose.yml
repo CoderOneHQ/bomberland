@@ -1,15 +1,24 @@
 version: "3"
 services:
+    fwd-server:
+        image: coderone.azurecr.io/game-server:259
+        environment:
+            - TELEMETRY_ENABLED=0
+            - PORT=6969
+        networks:
+            - coderone-tournament-dev
     game-server:
-        image: coderone.azurecr.io/game-server:254
+        image: coderone.azurecr.io/game-server:259
         ports:
             - 3000:3000
         environment:
             - PRNG_SEED=1234
             - WORLD_SEED=1234
             - TRAINING_MODE_ENABLED=0
+            - TELEMETRY_ENABLED=0
+            - TICK_RATE_HZ=1
         networks:
-            - coderone-tournament
+            - coderone-tournament-dev
     python3-agent:
         build:
             context: python3
@@ -27,7 +36,7 @@ services:
             dockerfile: Dockerfile.fwd
         environment:
             - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
-            - TELEMETRY_ENABLED=0
+            - FWD_MODEL_CONNECTION_STRING=ws://fwd-server:6969/?role=admin
         depends_on:
             - game-server
         networks:
