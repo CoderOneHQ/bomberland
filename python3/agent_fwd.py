@@ -4,8 +4,6 @@ import asyncio
 import random
 import os
 
-max_fwd_model_retries = 10
-
 fwd_model_uri = os.environ.get(
     "FWD_MODEL_CONNECTION_STRING") or "ws://127.0.0.1:6969/?role=admin"
 
@@ -29,14 +27,8 @@ class Agent():
         client_connection = loop.run_until_complete(self._client.connect())
         client_fwd_connection = None
 
-        for i in range(0, max_fwd_model_retries):
-            try:
-                client_fwd_connection = loop.run_until_complete(
-                    self._client_fwd.connect())
-            except ConnectionRefusedError:
-                print(f"Waiting for forward model game server {i}")
-                time.sleep(1)
-                continue
+        client_fwd_connection = loop.run_until_complete(
+            self._client_fwd.connect())
 
         loop = asyncio.get_event_loop()
         loop.create_task(self._client._handle_messages(client_connection))
