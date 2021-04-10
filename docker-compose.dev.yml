@@ -16,7 +16,7 @@ services:
             - WORLD_SEED=1234
             - TRAINING_MODE_ENABLED=0
             - TELEMETRY_ENABLED=0
-            - TICK_RATE_HZ=10
+            - TICK_RATE_HZ=1
         networks:
             - coderone-tournament-dev
     python3-agent:

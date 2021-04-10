@@ -18,7 +18,8 @@ class Agent():
         self._client_fwd = ForwardModel(fwd_model_uri)
         self._client = GameState(uri)
 
-        self._client.set_game_tick_callback(self.on_game_tick)
+        self._client.set_game_tick_callback(self._on_game_tick)
+        self._client_fwd.set_next_state_callback(self._on_next_game_state)
         self.connect()
 
     def connect(self):
@@ -36,13 +37,13 @@ class Agent():
             self._client_fwd._handle_messages(client_fwd_connection))
         loop.run_forever()
 
-    async def on_game_tick(self, tick_number, game_state):
+    async def _on_game_tick(self, tick_number, game_state):
         random_action = self.generate_random_action()
         game_state = self._client._state
         await self._client_fwd.send_next_state(tick_number, game_state, [])
         await self._client._send(random_action)
 
-    async def on_next_game_state(self, state):
+    async def _on_next_game_state(self, state):
         print(state)
 
     def generate_random_action(self):

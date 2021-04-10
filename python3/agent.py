@@ -13,16 +13,15 @@ class Agent():
     def __init__(self):
         self._client = GameState(uri)
 
-        self._client.set_game_tick_callback(self.on_game_tick)
+        self._client.set_game_tick_callback(self._on_game_tick)
         loop = asyncio.get_event_loop()
         connection = loop.run_until_complete(self._client.connect())
         tasks = [
             asyncio.ensure_future(self._client._handle_messages(connection)),
         ]
-
         loop.run_until_complete(asyncio.wait(tasks))
 
-    async def on_game_tick(self, tick_number, game_state):
+    async def _on_game_tick(self, tick_number, game_state):
         random_action = self.generate_random_action()
         await self._client._send(random_action)
 
