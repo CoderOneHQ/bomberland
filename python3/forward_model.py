@@ -16,6 +16,7 @@ class ForwardModel:
         while True:
             try:
                 raw_data = await connection.recv()
+                print("packet received")
                 data = json.loads(raw_data)
                 await self._on_data(data)
             except websockets.exceptions.ConnectionClosed:
@@ -24,6 +25,7 @@ class ForwardModel:
 
     async def _on_data(self, data):
         data_type = data.get("type")
+        print(data_type)
 
         if data_type == "info":
             # no operation
@@ -53,7 +55,7 @@ class ForwardModel:
     It should ideally be unique
     """
     async def send_next_state(self, sequence_id, game_state, moves):
-        payload = {"type": "next", "moves": moves,
+        payload = {"action": "next", "moves": moves,
                    "state": game_state, "sequence_id": sequence_id}
         packet = {"type": "admin", "payload": payload}
         await self.connection.send(json.dumps(packet))

@@ -8,10 +8,10 @@ import time
 max_fwd_model_retries = 10
 
 fwd_model_uri = os.environ.get(
-    'FWD_MODEL_CONNECTION_STRING') or "ws://127.0.0.1:6969/?role=admin"
+    "FWD_MODEL_CONNECTION_STRING") or "ws://127.0.0.1:6969/?role=admin"
 
 uri = os.environ.get(
-    'GAME_CONNECTION_STRING') or "ws://127.0.0.1:3000/?role=agent&agentId=agentId&name=defaultName"
+    "GAME_CONNECTION_STRING") or "ws://127.0.0.1:3000/?role=agent&agentId=agentId&name=defaultName"
 
 actions = ["up", "down", "left", "right", "bomb"]
 
@@ -39,14 +39,11 @@ class Agent():
                 time.sleep(1)
                 continue
 
-        tasks = [
-            asyncio.ensure_future(
-                self._client._handle_messages(client_connection)),
-            asyncio.ensure_future(
-                self._client_fwd._handle_messages(client_fwd_connection))
-        ]
-
-        loop.run_until_complete(asyncio.wait(tasks))
+        loop = asyncio.get_event_loop()
+        loop.create_task(self._client._handle_messages(client_connection))
+        loop.create_task(
+            self._client_fwd._handle_messages(client_fwd_connection))
+        loop.run_forever()
 
     async def on_game_tick(self, tick_number, game_state):
         random_action = self.generate_random_action()

@@ -8,7 +8,6 @@ _agent_move_set = set(("up", "down", "left", "right"))
 class GameState:
     def __init__(self, connection_string: str):
         self._connection_string = connection_string
-        self._is_game_running = True
         self._state = None
         self._tick_callback = None
 
@@ -25,8 +24,7 @@ class GameState:
         await self.connection.send(json.dumps(payload))
 
     async def _handle_messages(self, connection: str):
-
-        while self._is_game_running is True:
+        while True:
             try:
                 raw_data = await connection.recv()
                 data = json.loads(raw_data)
