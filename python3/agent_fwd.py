@@ -1,8 +1,9 @@
-from game_state import GameState
 from forward_model import ForwardModel
+from game_state import GameState
 import asyncio
-import random
+import copy
 import os
+import random
 
 fwd_model_uri = os.environ.get(
     "FWD_MODEL_CONNECTION_STRING") or "ws://127.0.0.1:6969/?role=admin"
@@ -39,7 +40,8 @@ class Agent():
 
     async def _on_game_tick(self, tick_number, game_state):
         random_action = self.generate_random_action()
-        game_state = self._client._state
+        game_state = copy.deepcopy(self._client._state)
+        del game_state["connection"]
         await self._client_fwd.send_next_state(tick_number, game_state, [])
         await self._client._send(random_action)
 
