@@ -3,7 +3,6 @@ from forward_model import ForwardModel
 import asyncio
 import random
 import os
-import time
 
 max_fwd_model_retries = 10
 
