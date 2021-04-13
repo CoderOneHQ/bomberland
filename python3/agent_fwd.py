@@ -46,7 +46,8 @@ class Agent():
         await self._client._send(random_action)
 
     async def _on_next_game_state(self, state):
-        print(state)
+        #print(state)
+        pass
 
     def generate_random_action(self):
         actions_length = len(actions)
