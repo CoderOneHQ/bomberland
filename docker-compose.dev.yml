@@ -1,14 +1,14 @@
 version: "3"
 services:
     fwd-server:
-        image: coderone.azurecr.io/game-server:282
+        image: coderone.azurecr.io/game-server:287
         environment:
             - TELEMETRY_ENABLED=0
             - PORT=6969
         networks:
             - coderone-tournament-dev
     game-server:
-        image: coderone.azurecr.io/game-server:282
+        image: coderone.azurecr.io/game-server:287
         ports:
             - 3000:3000
         environment:
