@@ -62,7 +62,7 @@
                                 "state": {
                                     "additionalProperties": false,
                                     "properties": {
-                                        "agentState": {
+                                        "agent_state": {
                                             "additionalProperties": {
                                                 "additionalProperties": false,
                                                 "properties": {
@@ -116,6 +116,26 @@
                                             },
                                             "type": "object"
                                         },
+                                        "config": {
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "fire_spawn_interval_ticks": {
+                                                    "type": "number"
+                                                },
+                                                "game_duration_ticks": {
+                                                    "type": "number"
+                                                },
+                                                "tick_rate_hz": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "fire_spawn_interval_ticks",
+                                                "game_duration_ticks",
+                                                "tick_rate_hz"
+                                            ],
+                                            "type": "object"
+                                        },
                                         "entities": {
                                             "items": {
                                                 "additionalProperties": false,
@@ -158,6 +178,9 @@
                                             },
                                             "type": "array"
                                         },
+                                        "tick": {
+                                            "type": "number"
+                                        },
                                         "world": {
                                             "additionalProperties": false,
                                             "properties": {
@@ -176,8 +199,10 @@
                                         }
                                     },
                                     "required": [
-                                        "agentState",
+                                        "agent_state",
+                                        "config",
                                         "entities",
+                                        "tick",
                                         "world"
                                     ],
                                     "type": "object"
