@@ -1,14 +1,18 @@
 version: "3"
 services:
     fwd-server:
-        image: coderone.azurecr.io/game-server:287
+        extends:
+            file: base-compose.yml
+            service: game-server
         environment:
             - TELEMETRY_ENABLED=0
             - PORT=6969
         networks:
             - coderone-tournament-dev
     game-server:
-        image: coderone.azurecr.io/game-server:287
+        extends:
+            file: base-compose.yml
+            service: game-server
         ports:
             - 3000:3000
         environment:
