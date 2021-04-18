@@ -69,6 +69,9 @@ class TestGameState(IsolatedAsyncioTestCase):
             validate(instance=mock_tick_agent_action_packet, schema=schema.get(
                 "definitions").get("ValidServerPacket"))
 
+            validate(instance=mock_tick_agent_state_packet, schema=schema.get(
+                "definitions").get("ValidServerPacket"))
+
     async def test_initial_game_state_constructor(self):
         self.assertTrue(self.client._state == None)
         self.assertTrue(self.client._connection_string == "")
