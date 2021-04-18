@@ -59,7 +59,7 @@ class GameState:
                 self._on_entity_spawned(event)
             elif event_type == "entity_expired":
                 self._on_entity_expired(event)
-            elif event_type == "agent":
+            elif event_type == "move":
                 agent_action = event.get("data")
                 self._on_agent_action(agent_action)
             elif event_type == "agent_state":

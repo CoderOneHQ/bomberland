@@ -1,6 +1,7 @@
 import unittest
 from game_state import GameState
 from unittest import IsolatedAsyncioTestCase
+from jsonschema import validate
 import copy
 import json
 
@@ -43,7 +44,7 @@ mock_tick_agent_state_packet = create_mock_tick_packet(50, [{"type": "agent_stat
 
 
 mock_tick_agent_action_packet = create_mock_tick_packet(5, [
-    {"type": "agent", "data": [0, "left"]}])
+    {"type": "move", "data": [0, "left"]}])
 
 
 class TestGameState(IsolatedAsyncioTestCase):
@@ -55,6 +56,18 @@ class TestGameState(IsolatedAsyncioTestCase):
         j1 = json.dumps(first, sort_keys=True, indent=4)
         j2 = json.dumps(second, sort_keys=True, indent=4)
         self.assertEqual(j1, j2)
+
+    def test_mocks_are_valid_with_latest_schema(self):
+        with open('validation.schema.json') as f:
+            schema = json.load(f)
+            validate(instance=mock_state_packet, schema=schema.get(
+                "definitions").get("ValidServerPacket"))
+
+            validate(instance=mock_tick_spawn_packet, schema=schema.get(
+                "definitions").get("ValidServerPacket"))
+
+            validate(instance=mock_tick_agent_action_packet, schema=schema.get(
+                "definitions").get("ValidServerPacket"))
 
     async def test_initial_game_state_constructor(self):
         self.assertTrue(self.client._state == None)
