@@ -19,9 +19,22 @@ class GameState:
         if self.connection.open:
             return self.connection
 
-    async def _send(self, move: str):
-        payload = {"type": "action", "payload": {"move": move}}
-        await self.connection.send(json.dumps(payload))
+    async def _send(self, packet):
+        await self.connection.send(json.dumps(packet))
+
+    async def send_move(self, move: str):
+        if move in _agent_move_set:
+            packet = {"type": "move", "move": move}
+            await self._send(packet)
+
+    async def send_bomb(self):
+        packet = {"type": "bomb"}
+        await self._send(packet)
+
+    async def send_detonate(self, x, y):
+        if move in _agent_move_set:
+            packet = {"type": "bomb"}
+            await self._send(packet)
 
     async def _handle_messages(self, connection: str):
         while True:
