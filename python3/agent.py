@@ -29,6 +29,8 @@ class Agent():
         bomb = next(iter(bombs or []), None)
         if bomb != None:
             return [bomb.get("x"), bomb.get("y")]
+        else:
+            return None
 
     async def _on_game_tick(self, tick_number, game_state):
         random_action = self.generate_random_action()

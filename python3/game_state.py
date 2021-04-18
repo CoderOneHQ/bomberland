@@ -32,7 +32,7 @@ class GameState:
         await self._send(packet)
 
     async def send_detonate(self, x, y):
-        packet = {"type": "bomb"}
+        packet = {"type": "detonate", "coordinates": [x, y]}
         await self._send(packet)
 
     async def _handle_messages(self, connection: str):
