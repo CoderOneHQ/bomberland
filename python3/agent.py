@@ -22,7 +22,13 @@ class Agent():
         loop.run_until_complete(asyncio.wait(tasks))
 
     def _get_bomb_to_detonate(self, game_state) -> [int, int] or None:
-        self._client._state
+        agent_number = game_state.get("connection").get("agentNumber")
+        entities = self._client._state.get("entities")
+        bombs = list(filter(lambda entity: entity.get(
+            "owner") == agent_number and entity.get("type") == "b", entities))
+        bomb = next(iter(bombs or []), None)
+        if bomb != None:
+            return [bomb.get("x"), bomb.get("y")]
 
     async def _on_game_tick(self, tick_number, game_state):
         random_action = self.generate_random_action()
