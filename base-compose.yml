@@ -1,29 +1,8 @@
 version: "3"
 services:
-    fwd-server:
-        extends:
-            file: base-compose.yml
-            service: game-server
-        environment:
-            - TELEMETRY_ENABLED=0
-            - PORT=6969
-        networks:
-            - coderone-tournament
     game-server:
-        extends:
-            file: base-compose.yml
-            service: game-server
-        ports:
-            - 3000:3000
-        environment:
-            - PRNG_SEED=1234
-            - WORLD_SEED=1234
-            - TRAINING_MODE_ENABLED=0
-            - TELEMETRY_ENABLED=0
-            - TICK_RATE_HZ=10
-            - SHUTDOWN_ON_GAME_END_ENABLED=1
-        networks:
-            - coderone-tournament
+        image: coderone.azurecr.io/game-server:296
+
     python3-agent:
         build:
             context: python3

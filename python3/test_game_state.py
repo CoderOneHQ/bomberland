@@ -1,6 +1,7 @@
 import unittest
 from game_state import GameState
 from unittest import IsolatedAsyncioTestCase
+from jsonschema import validate
 import copy
 import json
 
@@ -15,7 +16,8 @@ def create_mock_tick_packet(tick_number, events):
 
 
 mock_state = {"agent_state": {"0": {"coordinates": [6, 7], "hp": 3, "inventory": {"bombs": 3}, "blast_diameter": 3, "number": 0, "invulnerability": 0}, "1": {"coordinates": [6, 6], "hp": 3, "inventory": {"bombs": 3}, "blast_diameter": 3, "number": 1, "invulnerability": 0}}, "entities": [{"x": 8, "y": 4, "type": "m"}, {"x": 2, "y": 5, "type": "m"}, {"x": 2, "y": 6, "type": "m"}, {"x": 2, "y": 7, "type": "m"}, {"x": 1, "y": 5, "type": "m"}, {"x": 6, "y": 8, "type": "m"}, {"x": 4, "y": 4, "type": "m"}, {"x": 8, "y": 6, "type": "m"}, {"x": 3, "y": 3, "type": "m"}, {"x": 0, "y": 5, "type": "m"}, {"x": 8, "y": 2, "type": "m"}, {"x": 1, "y": 8, "type": "m"}, {"x": 2, "y": 2, "type": "m"}, {"x": 5, "y": 6, "type": "m"}, {"x": 3, "y": 0, "type": "m"}, {"x": 2, "y": 8, "type": "m"}, {"x": 8, "y": 1, "type": "m"}, {
-    "x": 6, "y": 2, "type": "w"}, {"x": 2, "y": 3, "type": "w"}, {"x": 3, "y": 5, "type": "w"}, {"x": 7, "y": 6, "type": "w"}, {"x": 4, "y": 3, "type": "w"}, {"x": 0, "y": 3, "type": "w"}, {"x": 5, "y": 3, "type": "w"}, {"x": 3, "y": 2, "type": "w"}, {"x": 5, "y": 5, "type": "w"}, {"x": 8, "y": 7, "type": "w"}, {"x": 3, "y": 7, "type": "w"}, {"x": 1, "y": 7, "type": "w"}, {"x": 4, "y": 0, "type": "w"}, {"x": 3, "y": 6, "type": "w"}, {"x": 0, "y": 0, "type": "w"}, {"x": 7, "y": 5, "type": "w"}, {"x": 3, "y": 4, "type": "w"}, {"x": 0, "y": 8, "type": "w"}, {"x": 8, "y": 3, "type": "w"}, {"x": 6, "y": 0, "type": "w"}, {"x": 1, "y": 4, "type": "o"}, {"x": 0, "y": 4, "type": "o"}, {"x": 3, "y": 8, "type": "o"}, {"x": 0, "y": 2, "type": "o"}, {"x": 4, "y": 7, "type": "o"}], "world": {"width": 9, "height": 9}, "connection": {"id": 7, "role": "agent", "agentNumber": 0},        "tick": 0,
+    "x": 6, "y": 2, "type": "w"}, {"x": 2, "y": 3, "type": "w"}, {"x": 3, "y": 5, "type": "w"}, {"x": 7, "y": 6, "type": "w"}, {"x": 4, "y": 3, "type": "w"}, {"x": 0, "y": 3, "type": "w"}, {"x": 5, "y": 3, "type": "w"}, {"x": 3, "y": 2, "type": "w"}, {"x": 5, "y": 5, "type": "w"}, {"x": 8, "y": 7, "type": "w"}, {"x": 3, "y": 7, "type": "w"}, {"x": 1, "y": 7, "type": "w"}, {"x": 4, "y": 0, "type": "w"}, {"x": 3, "y": 6, "type": "w"}, {"x": 0, "y": 0, "type": "w"}, {"x": 7, "y": 5, "type": "w"}, {"x": 3, "y": 4, "type": "w"}, {"x": 0, "y": 8, "type": "w"}, {"x": 8, "y": 3, "type": "w"}, {"x": 6, "y": 0, "type": "w"}, {"x": 1, "y": 4, "type": "o"}, {"x": 0, "y": 4, "type": "o"}, {"x": 3, "y": 8, "type": "o"}, {"x": 0, "y": 2, "type": "o"}, {"x": 4, "y": 7, "type": "o"}], "world": {"width": 9, "height": 9}, "connection": {"id": 7, "role": "agent", "agentNumber": 0},
+    "tick": 0,
     "config": {
     "tick_rate_hz": 20,
     "game_duration_ticks": 10,
@@ -41,8 +43,8 @@ mock_tick_agent_state_packet = create_mock_tick_packet(50, [{"type": "agent_stat
                                                             "data": mock_agent_state_payload}])
 
 
-mock_tick_agent_action_packet = create_mock_tick_packet(5, [
-    {"type": "agent", "data": [0, "left"]}])
+mock_tick_agent_action_packet = create_mock_tick_packet(
+    5, [{"type": "agent", "data": [0, {"type": "move", "move": "left"}]}])
 
 
 class TestGameState(IsolatedAsyncioTestCase):
@@ -54,6 +56,21 @@ class TestGameState(IsolatedAsyncioTestCase):
         j1 = json.dumps(first, sort_keys=True, indent=4)
         j2 = json.dumps(second, sort_keys=True, indent=4)
         self.assertEqual(j1, j2)
+
+    def test_mocks_are_valid_with_latest_schema(self):
+        with open('validation.schema.json') as f:
+            schema = json.load(f)
+            validate(instance=mock_state_packet, schema=schema.get(
+                "definitions").get("ValidServerPacket"))
+
+            validate(instance=mock_tick_spawn_packet, schema=schema.get(
+                "definitions").get("ValidServerPacket"))
+
+            validate(instance=mock_tick_agent_action_packet, schema=schema.get(
+                "definitions").get("ValidServerPacket"))
+
+            validate(instance=mock_tick_agent_state_packet, schema=schema.get(
+                "definitions").get("ValidServerPacket"))
 
     async def test_initial_game_state_constructor(self):
         self.assertTrue(self.client._state == None)
