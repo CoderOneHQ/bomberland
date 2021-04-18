@@ -93,14 +93,17 @@ class GameState:
         self._state["agent_state"][str(agent_number)] = agent_state
 
     def _on_agent_action(self, action_data):
-        [agent_number, action] = action_data
+        [agent_number, action_packet] = action_data
         agent = self._state["agent_state"][str(agent_number)]
         coordinates = agent.get("coordinates")
-        if action in _agent_move_set:
-            new_coordinates = self._get_new_agent_coordinates(
-                coordinates, action)
-            self._state["agent_state"][str(
-                agent_number)]["coordinates"] = new_coordinates
+        action_type = action_packet.get("type")
+        if action_type == "move":
+            move = action_packet.get("move")
+            if move in _agent_move_set:
+                new_coordinates = self._get_new_agent_coordinates(
+                    coordinates, move)
+                self._state["agent_state"][str(
+                    agent_number)]["coordinates"] = new_coordinates
         else:
             print(f"Unhandled agent action: {action_data}")
 
