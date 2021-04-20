@@ -39,9 +39,9 @@ class Agent():
         elif random_action == "bomb":
             await self._client.send_bomb()
         elif random_action == "detonate":
-            bomb_coordiantes = self._get_bomb_to_detonate(game_state)
-            if bomb_coordiantes != None:
-                x, y = bomb_coordiantes
+            bomb_coordinates = self._get_bomb_to_detonate(game_state)
+            if bomb_coordinates != None:
+                x, y = bomb_coordinates
                 await self._client.send_detonate(x, y)
         else:
             print(f"Unhandled action: {random_action}")
