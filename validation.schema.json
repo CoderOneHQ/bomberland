@@ -1255,11 +1255,15 @@
                                         "world"
                                     ],
                                     "type": "object"
+                                },
+                                "winning_agent_number": {
+                                    "type": "number"
                                 }
                             },
                             "required": [
                                 "history",
-                                "initial_state"
+                                "initial_state",
+                                "winning_agent_number"
                             ],
                             "type": "object"
                         },

@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-server:
-        image: coderone.azurecr.io/game-server:319
+        image: coderone.azurecr.io/game-server:331
         environment:
             - WORLD_SEED=1234
 

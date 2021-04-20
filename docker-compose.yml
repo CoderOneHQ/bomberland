@@ -9,11 +9,12 @@ services:
         environment:
             - AGENT_ID_MAPPING=agentA,agentB
             - PRNG_SEED=1234
-            - WORLD_SEED=1234
-            - TRAINING_MODE_ENABLED=0
-            - TELEMETRY_ENABLED=0
-            - TICK_RATE_HZ=10
             - SHUTDOWN_ON_GAME_END_ENABLED=1
+            - TELEMETRY_ENABLED=1
+            - TICK_RATE_HZ=10
+            - TOURNAMENT_AGENT_CONNECTION_GRACE_PERIOD_MS=30000
+            - TRAINING_MODE_ENABLED=0
+            - WORLD_SEED=1234
         networks:
             - coderone-tournament
     agent-a:
