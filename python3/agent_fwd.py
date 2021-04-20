@@ -39,7 +39,7 @@ class Agent():
         loop.run_forever()
 
     def _get_bomb_to_detonate(self, game_state) -> [int, int] or None:
-        agent_number = game_state.get("connection").get("agentNumber")
+        agent_number = game_state.get("connection").get("agent_number")
         entities = self._client._state.get("entities")
         bombs = list(filter(lambda entity: entity.get(
             "owner") == agent_number and entity.get("type") == "b", entities))
@@ -56,9 +56,9 @@ class Agent():
         elif random_action == "bomb":
             await self._client.send_bomb()
         elif random_action == "detonate":
-            bomb_coordiantes = self._get_bomb_to_detonate(game_state)
-            if bomb_coordiantes != None:
-                x, y = bomb_coordiantes
+            bomb_coordinates = self._get_bomb_to_detonate(game_state)
+            if bomb_coordinates != None:
+                x, y = bomb_coordinates
                 await self._client.send_detonate(x, y)
         else:
             print(f"Unhandled action: {random_action}")

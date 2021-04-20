@@ -46,10 +46,10 @@ class ForwardModel:
     sample moves payload:
     [{
         "move": "right",
-        "agentNumber": 0,
+        "agent_number": 0,
     }, {
         "move": "left",
-        "agentNumber": 1,
+        "agent_number": 1,
     }]
 
     REMARKS:
