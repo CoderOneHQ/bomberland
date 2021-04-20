@@ -22,7 +22,7 @@ class Agent():
         loop.run_until_complete(asyncio.wait(tasks))
 
     def _get_bomb_to_detonate(self, game_state) -> [int, int] or None:
-        agent_number = game_state.get("connection").get("agentNumber")
+        agent_number = game_state.get("connection").get("agent_number")
         entities = self._client._state.get("entities")
         bombs = list(filter(lambda entity: entity.get(
             "owner") == agent_number and entity.get("type") == "b", entities))
