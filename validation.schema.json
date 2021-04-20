@@ -722,7 +722,7 @@
                                 "connection": {
                                     "additionalProperties": false,
                                     "properties": {
-                                        "agentNumber": {
+                                        "agent_number": {
                                             "type": "number"
                                         },
                                         "id": {
@@ -738,7 +738,7 @@
                                         }
                                     },
                                     "required": [
-                                        "agentNumber",
+                                        "agent_number",
                                         "id",
                                         "role"
                                     ],
