@@ -23,6 +23,8 @@ services:
     python3-fwd-dev:
         build:
             context: python3
-            dockerfile: Dockerfile.fwd
+            dockerfile: Dockerfile.fwd.dev
+        volumes:
+            - ./python3:/app
 networks:
     coderone-tournament:
