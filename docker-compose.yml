@@ -1,14 +1,5 @@
 version: "3"
 services:
-    fwd-server:
-        extends:
-            file: base-compose.yml
-            service: game-server
-        environment:
-            - TELEMETRY_ENABLED=0
-            - PORT=6969
-        networks:
-            - coderone-tournament
     game-server:
         extends:
             file: base-compose.yml
@@ -16,6 +7,7 @@ services:
         ports:
             - 3000:3000
         environment:
+            - AGENT_ID_MAPPING=agentA,agentB
             - PRNG_SEED=1234
             - WORLD_SEED=1234
             - TRAINING_MODE_ENABLED=0
@@ -24,26 +16,51 @@ services:
             - SHUTDOWN_ON_GAME_END_ENABLED=1
         networks:
             - coderone-tournament
-    python3-agent:
-        build:
-            context: python3
-            dockerfile: Dockerfile
+    agent-a:
+        extends:
+            file: base-compose.yml
+            # update next line with a service in base-compose.yml to change agent
+            service: python3-agent-dev
         environment:
-            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
+            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentA&name=python3-agent
+            - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-a:6969/?role=admin
         depends_on:
             - game-server
+            - fwd-server-a
         networks:
             - coderone-tournament
 
-    python3-fwd:
-        build:
-            context: python3
-            dockerfile: Dockerfile.fwd
+    fwd-server-a:
+        extends:
+            file: base-compose.yml
+            service: game-server
         environment:
-            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
-            - FWD_MODEL_CONNECTION_STRING=ws://fwd-server:6969/?role=admin
+            - TELEMETRY_ENABLED=0
+            - PORT=6969
+        networks:
+            - coderone-tournament
+
+    agent-b:
+        extends:
+            file: base-compose.yml
+            # update next line with a service in base-compose.yml to change agent
+            service: python3-agent
+        environment:
+            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentB&name=python3-agent
+            - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-b:6969/?role=admin
         depends_on:
             - game-server
+            - fwd-server-b
+        networks:
+            - coderone-tournament
+
+    fwd-server-b:
+        extends:
+            file: base-compose.yml
+            service: game-server
+        environment:
+            - TELEMETRY_ENABLED=0
+            - PORT=6969
         networks:
             - coderone-tournament
 networks:
