@@ -7,23 +7,20 @@ services:
         build:
             context: python3
             dockerfile: Dockerfile
-        environment:
-            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
-        depends_on:
-            - game-server
-        networks:
-            - coderone-tournament
+
+    python3-agent-dev:
+        build:
+            context: python3
+            dockerfile: Dockerfile.dev
 
     python3-fwd:
         build:
             context: python3
             dockerfile: Dockerfile.fwd
-        environment:
-            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
-            - FWD_MODEL_CONNECTION_STRING=ws://fwd-server:6969/?role=admin
-        depends_on:
-            - game-server
-        networks:
-            - coderone-tournament
+
+    python3-fwd-dev:
+        build:
+            context: python3
+            dockerfile: Dockerfile.fwd
 networks:
     coderone-tournament:
