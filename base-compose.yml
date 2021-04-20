@@ -12,6 +12,8 @@ services:
         build:
             context: python3
             dockerfile: Dockerfile.dev
+        volumes:
+            - ./python3:/app
 
     python3-fwd:
         build:

@@ -7,6 +7,7 @@ services:
         ports:
             - 3000:3000
         environment:
+            - AGENT_ID_MAPPING=agentA,agentB
             - PRNG_SEED=1234
             - WORLD_SEED=1234
             - TRAINING_MODE_ENABLED=0
@@ -20,7 +21,7 @@ services:
             file: base-compose.yml
             service: python3-agent-dev
         environment:
-            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentA=agentId&name=python3-agent
+            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentA&name=python3-agent
             - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-a:6969/?role=admin
         depends_on:
             - game-server
@@ -42,7 +43,7 @@ services:
             file: base-compose.yml
             service: python3-agent-dev
         environment:
-            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentB=agentId&name=python3-agent
+            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentB&name=python3-agent
             - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-b:6969/?role=admin
         depends_on:
             - game-server
