@@ -26,5 +26,3 @@ services:
             dockerfile: Dockerfile.fwd.dev
         volumes:
             - ./python3:/app
-networks:
-    coderone-tournament:
