@@ -1,0 +1,15 @@
+FROM node:12.19.0-alpine3.9
+COPY package.json /app/package.json
+COPY yarn.lock /app/yarn.lock
+
+COPY game-library/package.json /app/game-library/package.json
+COPY game-library/tsconfig.json /app/game-library/tsconfig.json
+
+COPY ./agent-random/package.json /app/agent-random/package.json
+COPY ./agent-random/yarn.lock /app/agent-random/yarn.lock
+
+WORKDIR /app
+RUN yarn install
+
+WORKDIR /app/game-library
+ENTRYPOINT yarn build && cd ../game && yarn install && yarn run start
