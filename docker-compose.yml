@@ -48,7 +48,7 @@ services:
     #     extends:
     #         file: base-compose.yml
     #         # update next line with a service in base-compose.yml to change agent
-    #         service: typescript-agent
+    #         service: typescript-agent-dev
     #     environment:
     #         - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentB&name=python3-agent
     #         - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-b:6969/?role=admin
