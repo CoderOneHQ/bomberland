@@ -4,5 +4,6 @@ COPY yarn.lock /app/yarn.lock
 
 WORKDIR /app
 RUN yarn install
+COPY . /app/
 RUN yarn build
 ENTRYPOINT yarn run run
