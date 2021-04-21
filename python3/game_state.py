@@ -116,8 +116,14 @@ class GameState:
                     coordinates, move)
                 self._state["agent_state"][str(
                     agent_number)]["coordinates"] = new_coordinates
+        elif action_type == "bomb":
+            # no - op since this is redudnant info
+            pass
+        elif action_type == "detonate":
+            # no - op since this is redudnant info
+            pass
         else:
-            print(f"Unhandled agent action: {action_data}")
+            print(f"Unhandled agent action recieved: {action_data}")
 
     def _get_new_agent_coordinates(self, coordinates, move_action) -> [int, int]:
         [x, y] = coordinates
