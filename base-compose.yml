@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-server:
-        image: coderone.azurecr.io/game-server:331
+        image: coderone.azurecr.io/game-server:333
         environment:
             - WORLD_SEED=1234
 
@@ -28,3 +28,15 @@ services:
             dockerfile: Dockerfile.fwd.dev
         volumes:
             - ./python3:/app
+
+    typescript-agent:
+        build:
+            context: typescript
+            dockerfile: Dockerfile
+
+    typescript-agent-dev:
+        build:
+            context: typescript
+            dockerfile: Dockerfile.dev
+        volumes:
+            - ./typescript:/app
