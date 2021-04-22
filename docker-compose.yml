@@ -19,19 +19,22 @@ services:
             - WORLD_SEED=1234
         networks:
             - coderone-tournament
-    agent-a:
-        extends:
-            file: base-compose.yml
-            # update next line with a service in base-compose.yml to change agent
-            service: python3-agent-dev
-        environment:
-            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentA&name=python3-agent
-            - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-a:6969/?role=admin
-        depends_on:
-            - game-server
-            - fwd-server-a
-        networks:
-            - coderone-tournament
+
+    # UNCOMMENT THE NEXT BLOCK AFTER YOU HAVE CONNECTED AS A HUMAN AGENT PLAYING AGAINST THE RANDOM_AGENT
+
+    # agent-a:
+    #     extends:
+    #         file: base-compose.yml
+    #         # update next line with a service in base-compose.yml to change agent
+    #         service: python3-agent-dev
+    #     environment:
+    #         - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentA&name=python3-agent
+    #         - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-a:6969/?role=admin
+    #     depends_on:
+    #         - game-server
+    #         - fwd-server-a
+    #     networks:
+    #         - coderone-tournament
 
     fwd-server-a:
         extends:
@@ -44,21 +47,19 @@ services:
         networks:
             - coderone-tournament
 
-    # UNCOMMENT THE NEXT BLOCK AFTER YOU HAVE CONNECTED AS A HUMAN AGENT PLAYING AGAINST THE RANDOM_AGENT
-
-    # agent-b:
-    #     extends:
-    #         file: base-compose.yml
-    #         # update next line with a service in base-compose.yml to change agent
-    #         service: typescript-agent-dev
-    #     environment:
-    #         - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentB&name=python3-agent
-    #         - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-b:6969/?role=admin
-    #     depends_on:
-    #         - game-server
-    #         - fwd-server-b
-    #     networks:
-    #         - coderone-tournament
+    agent-b:
+        extends:
+            file: base-compose.yml
+            # update next line with a service in base-compose.yml to change agent
+            service: typescript-agent-dev
+        environment:
+            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentB&name=python3-agent
+            - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-b:6969/?role=admin
+        depends_on:
+            - game-server
+            - fwd-server-b
+        networks:
+            - coderone-tournament
 
     fwd-server-b:
         extends:
