@@ -2,8 +2,6 @@ version: "3"
 services:
     game-server:
         image: coderone.azurecr.io/game-server:345
-        environment:
-            - WORLD_SEED=1234
 
     python3-agent:
         build:
