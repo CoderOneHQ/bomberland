@@ -77,6 +77,9 @@ class GameState:
             elif event_type == "agent_state":
                 payload = event.get("data")
                 self._on_agent_state(payload)
+            elif event_type == "entity_state":
+                payload = event.get("updated_entity")
+                self._on_entity_state(payload)
             else:
                 print(f"unknown event type {event_type}: {event}")
         if self._tick_callback is not None:
@@ -103,6 +106,13 @@ class GameState:
     def _on_agent_state(self, agent_state):
         agent_number = agent_state.get("number")
         self._state["agent_state"][str(agent_number)] = agent_state
+
+    def _on_entity_state(self, updated_entity):
+        for e in self._state["entities"]:
+            if e.get("type") == updated_entity["type"] and e.get("x") == updated_entity["x"] and e.get("y") == updated_entity["y"]:
+                self._state["entities"].remove(e)
+        self._state["entities"].append(updated_entity)
+
 
     def _on_agent_action(self, action_data):
         [agent_number, action_packet] = action_data
