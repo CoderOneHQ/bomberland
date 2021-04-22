@@ -194,6 +194,9 @@
                                     "items": {
                                         "additionalProperties": false,
                                         "properties": {
+                                            "blast_diameter": {
+                                                "type": "number"
+                                            },
                                             "expires": {
                                                 "type": "number"
                                             },
@@ -493,9 +496,84 @@
                                             {
                                                 "additionalProperties": false,
                                                 "properties": {
+                                                    "coordinates": {
+                                                        "items": [
+                                                            {
+                                                                "type": "number"
+                                                            },
+                                                            {
+                                                                "type": "number"
+                                                            }
+                                                        ],
+                                                        "maxItems": 2,
+                                                        "minItems": 2,
+                                                        "type": "array"
+                                                    },
+                                                    "type": {
+                                                        "enum": [
+                                                            "entity_state"
+                                                        ],
+                                                        "type": "string"
+                                                    },
+                                                    "updated_entity": {
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "blast_diameter": {
+                                                                "type": "number"
+                                                            },
+                                                            "expires": {
+                                                                "type": "number"
+                                                            },
+                                                            "hp": {
+                                                                "type": "number"
+                                                            },
+                                                            "owner": {
+                                                                "type": "number"
+                                                            },
+                                                            "type": {
+                                                                "enum": [
+                                                                    "a",
+                                                                    "b",
+                                                                    "bp",
+                                                                    "m",
+                                                                    "o",
+                                                                    "t",
+                                                                    "w",
+                                                                    "x"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "x": {
+                                                                "type": "number"
+                                                            },
+                                                            "y": {
+                                                                "type": "number"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "type",
+                                                            "x",
+                                                            "y"
+                                                        ],
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "coordinates",
+                                                    "type",
+                                                    "updated_entity"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            {
+                                                "additionalProperties": false,
+                                                "properties": {
                                                     "data": {
                                                         "additionalProperties": false,
                                                         "properties": {
+                                                            "blast_diameter": {
+                                                                "type": "number"
+                                                            },
                                                             "expires": {
                                                                 "type": "number"
                                                             },
@@ -748,6 +826,9 @@
                                     "items": {
                                         "additionalProperties": false,
                                         "properties": {
+                                            "blast_diameter": {
+                                                "type": "number"
+                                            },
                                             "expires": {
                                                 "type": "number"
                                             },
@@ -973,9 +1054,84 @@
                                                         {
                                                             "additionalProperties": false,
                                                             "properties": {
+                                                                "coordinates": {
+                                                                    "items": [
+                                                                        {
+                                                                            "type": "number"
+                                                                        },
+                                                                        {
+                                                                            "type": "number"
+                                                                        }
+                                                                    ],
+                                                                    "maxItems": 2,
+                                                                    "minItems": 2,
+                                                                    "type": "array"
+                                                                },
+                                                                "type": {
+                                                                    "enum": [
+                                                                        "entity_state"
+                                                                    ],
+                                                                    "type": "string"
+                                                                },
+                                                                "updated_entity": {
+                                                                    "additionalProperties": false,
+                                                                    "properties": {
+                                                                        "blast_diameter": {
+                                                                            "type": "number"
+                                                                        },
+                                                                        "expires": {
+                                                                            "type": "number"
+                                                                        },
+                                                                        "hp": {
+                                                                            "type": "number"
+                                                                        },
+                                                                        "owner": {
+                                                                            "type": "number"
+                                                                        },
+                                                                        "type": {
+                                                                            "enum": [
+                                                                                "a",
+                                                                                "b",
+                                                                                "bp",
+                                                                                "m",
+                                                                                "o",
+                                                                                "t",
+                                                                                "w",
+                                                                                "x"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "x": {
+                                                                            "type": "number"
+                                                                        },
+                                                                        "y": {
+                                                                            "type": "number"
+                                                                        }
+                                                                    },
+                                                                    "required": [
+                                                                        "type",
+                                                                        "x",
+                                                                        "y"
+                                                                    ],
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "coordinates",
+                                                                "type",
+                                                                "updated_entity"
+                                                            ],
+                                                            "type": "object"
+                                                        },
+                                                        {
+                                                            "additionalProperties": false,
+                                                            "properties": {
                                                                 "data": {
                                                                     "additionalProperties": false,
                                                                     "properties": {
+                                                                        "blast_diameter": {
+                                                                            "type": "number"
+                                                                        },
                                                                         "expires": {
                                                                             "type": "number"
                                                                         },
@@ -1189,6 +1345,9 @@
                                             "items": {
                                                 "additionalProperties": false,
                                                 "properties": {
+                                                    "blast_diameter": {
+                                                        "type": "number"
+                                                    },
                                                     "expires": {
                                                         "type": "number"
                                                     },
@@ -1395,6 +1554,9 @@
                                             "items": {
                                                 "additionalProperties": false,
                                                 "properties": {
+                                                    "blast_diameter": {
+                                                        "type": "number"
+                                                    },
                                                     "expires": {
                                                         "type": "number"
                                                     },
