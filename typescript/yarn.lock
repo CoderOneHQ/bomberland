@@ -91,10 +91,10 @@
     "@babel/helper-validator-identifier" "^7.12.11"
     to-fast-properties "^2.0.0"
 
-"@coderone/game-library@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@coderone/game-library/-/game-library-1.0.1.tgz#e60d3a8ad5f0fe67675ed4e95910d72c0dac3406"
-  integrity sha512-Y7DnuHtgP3vs71JdVwR4zY5c4eRFF3Hgh2hGsYY36BybulYUdVguuQQT2cETnxrgJ1o5FybbWZ1X9XeluS17TA==
+"@coderone/game-library@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@coderone/game-library/-/game-library-1.0.3.tgz#ecfc8b36fe710afbe3e53e5b76c1767f73ca3768"
+  integrity sha512-UlloOXA/WJCPyLENSNsBmoL/a7smU002BQBMkxQgs9Kh66kMKAdc9ARnCwnBLa/ZUpmqRN2S3nZ3Ub7Xcmr7fw==
   dependencies:
     websocket "^1.0.33"
 
