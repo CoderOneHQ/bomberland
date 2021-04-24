@@ -368,88 +368,81 @@
                                             {
                                                 "additionalProperties": false,
                                                 "properties": {
+                                                    "agent_number": {
+                                                        "type": "number"
+                                                    },
                                                     "data": {
-                                                        "items": [
+                                                        "anyOf": [
                                                             {
-                                                                "type": "number"
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "move": {
+                                                                        "enum": [
+                                                                            "down",
+                                                                            "left",
+                                                                            "right",
+                                                                            "up"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "move"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "move",
+                                                                    "type"
+                                                                ],
+                                                                "type": "object"
                                                             },
                                                             {
-                                                                "anyOf": [
-                                                                    {
-                                                                        "additionalProperties": false,
-                                                                        "properties": {
-                                                                            "move": {
-                                                                                "enum": [
-                                                                                    "down",
-                                                                                    "left",
-                                                                                    "right",
-                                                                                    "up"
-                                                                                ],
-                                                                                "type": "string"
-                                                                            },
-                                                                            "type": {
-                                                                                "enum": [
-                                                                                    "move"
-                                                                                ],
-                                                                                "type": "string"
-                                                                            }
-                                                                        },
-                                                                        "required": [
-                                                                            "move",
-                                                                            "type"
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "bomb"
                                                                         ],
-                                                                        "type": "object"
-                                                                    },
-                                                                    {
-                                                                        "additionalProperties": false,
-                                                                        "properties": {
-                                                                            "type": {
-                                                                                "enum": [
-                                                                                    "bomb"
-                                                                                ],
-                                                                                "type": "string"
-                                                                            }
-                                                                        },
-                                                                        "required": [
-                                                                            "type"
-                                                                        ],
-                                                                        "type": "object"
-                                                                    },
-                                                                    {
-                                                                        "additionalProperties": false,
-                                                                        "properties": {
-                                                                            "coordinates": {
-                                                                                "items": [
-                                                                                    {
-                                                                                        "type": "number"
-                                                                                    },
-                                                                                    {
-                                                                                        "type": "number"
-                                                                                    }
-                                                                                ],
-                                                                                "maxItems": 2,
-                                                                                "minItems": 2,
-                                                                                "type": "array"
-                                                                            },
-                                                                            "type": {
-                                                                                "enum": [
-                                                                                    "detonate"
-                                                                                ],
-                                                                                "type": "string"
-                                                                            }
-                                                                        },
-                                                                        "required": [
-                                                                            "coordinates",
-                                                                            "type"
-                                                                        ],
-                                                                        "type": "object"
+                                                                        "type": "string"
                                                                     }
-                                                                ]
+                                                                },
+                                                                "required": [
+                                                                    "type"
+                                                                ],
+                                                                "type": "object"
+                                                            },
+                                                            {
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "coordinates": {
+                                                                        "items": [
+                                                                            {
+                                                                                "type": "number"
+                                                                            },
+                                                                            {
+                                                                                "type": "number"
+                                                                            }
+                                                                        ],
+                                                                        "maxItems": 2,
+                                                                        "minItems": 2,
+                                                                        "type": "array"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "detonate"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "coordinates",
+                                                                    "type"
+                                                                ],
+                                                                "type": "object"
                                                             }
-                                                        ],
-                                                        "maxItems": 2,
-                                                        "minItems": 2,
-                                                        "type": "array"
+                                                        ]
                                                     },
                                                     "type": {
                                                         "enum": [
@@ -459,6 +452,7 @@
                                                     }
                                                 },
                                                 "required": [
+                                                    "agent_number",
                                                     "data",
                                                     "type"
                                                 ],
@@ -926,88 +920,81 @@
                                                         {
                                                             "additionalProperties": false,
                                                             "properties": {
+                                                                "agent_number": {
+                                                                    "type": "number"
+                                                                },
                                                                 "data": {
-                                                                    "items": [
+                                                                    "anyOf": [
                                                                         {
-                                                                            "type": "number"
+                                                                            "additionalProperties": false,
+                                                                            "properties": {
+                                                                                "move": {
+                                                                                    "enum": [
+                                                                                        "down",
+                                                                                        "left",
+                                                                                        "right",
+                                                                                        "up"
+                                                                                    ],
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "type": {
+                                                                                    "enum": [
+                                                                                        "move"
+                                                                                    ],
+                                                                                    "type": "string"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "move",
+                                                                                "type"
+                                                                            ],
+                                                                            "type": "object"
                                                                         },
                                                                         {
-                                                                            "anyOf": [
-                                                                                {
-                                                                                    "additionalProperties": false,
-                                                                                    "properties": {
-                                                                                        "move": {
-                                                                                            "enum": [
-                                                                                                "down",
-                                                                                                "left",
-                                                                                                "right",
-                                                                                                "up"
-                                                                                            ],
-                                                                                            "type": "string"
-                                                                                        },
-                                                                                        "type": {
-                                                                                            "enum": [
-                                                                                                "move"
-                                                                                            ],
-                                                                                            "type": "string"
-                                                                                        }
-                                                                                    },
-                                                                                    "required": [
-                                                                                        "move",
-                                                                                        "type"
+                                                                            "additionalProperties": false,
+                                                                            "properties": {
+                                                                                "type": {
+                                                                                    "enum": [
+                                                                                        "bomb"
                                                                                     ],
-                                                                                    "type": "object"
-                                                                                },
-                                                                                {
-                                                                                    "additionalProperties": false,
-                                                                                    "properties": {
-                                                                                        "type": {
-                                                                                            "enum": [
-                                                                                                "bomb"
-                                                                                            ],
-                                                                                            "type": "string"
-                                                                                        }
-                                                                                    },
-                                                                                    "required": [
-                                                                                        "type"
-                                                                                    ],
-                                                                                    "type": "object"
-                                                                                },
-                                                                                {
-                                                                                    "additionalProperties": false,
-                                                                                    "properties": {
-                                                                                        "coordinates": {
-                                                                                            "items": [
-                                                                                                {
-                                                                                                    "type": "number"
-                                                                                                },
-                                                                                                {
-                                                                                                    "type": "number"
-                                                                                                }
-                                                                                            ],
-                                                                                            "maxItems": 2,
-                                                                                            "minItems": 2,
-                                                                                            "type": "array"
-                                                                                        },
-                                                                                        "type": {
-                                                                                            "enum": [
-                                                                                                "detonate"
-                                                                                            ],
-                                                                                            "type": "string"
-                                                                                        }
-                                                                                    },
-                                                                                    "required": [
-                                                                                        "coordinates",
-                                                                                        "type"
-                                                                                    ],
-                                                                                    "type": "object"
+                                                                                    "type": "string"
                                                                                 }
-                                                                            ]
+                                                                            },
+                                                                            "required": [
+                                                                                "type"
+                                                                            ],
+                                                                            "type": "object"
+                                                                        },
+                                                                        {
+                                                                            "additionalProperties": false,
+                                                                            "properties": {
+                                                                                "coordinates": {
+                                                                                    "items": [
+                                                                                        {
+                                                                                            "type": "number"
+                                                                                        },
+                                                                                        {
+                                                                                            "type": "number"
+                                                                                        }
+                                                                                    ],
+                                                                                    "maxItems": 2,
+                                                                                    "minItems": 2,
+                                                                                    "type": "array"
+                                                                                },
+                                                                                "type": {
+                                                                                    "enum": [
+                                                                                        "detonate"
+                                                                                    ],
+                                                                                    "type": "string"
+                                                                                }
+                                                                            },
+                                                                            "required": [
+                                                                                "coordinates",
+                                                                                "type"
+                                                                            ],
+                                                                            "type": "object"
                                                                         }
-                                                                    ],
-                                                                    "maxItems": 2,
-                                                                    "minItems": 2,
-                                                                    "type": "array"
+                                                                    ]
                                                                 },
                                                                 "type": {
                                                                     "enum": [
@@ -1017,6 +1004,7 @@
                                                                 }
                                                             },
                                                             "required": [
+                                                                "agent_number",
                                                                 "data",
                                                                 "type"
                                                             ],
