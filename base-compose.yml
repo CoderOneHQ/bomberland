@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-server:
-        image: coderone.azurecr.io/game-server:373
+        image: coderone.azurecr.io/game-server:384
 
     python3-agent:
         build:
