@@ -133,7 +133,7 @@ class GameState:
             # no - op since this is redudnant info
             pass
         else:
-            print(f"Unhandled agent action recieved: {action_data}")
+            print(f"Unhandled agent action recieved: {action_type}")
 
     def _get_new_agent_coordinates(self, coordinates, move_action) -> [int, int]:
         [x, y] = coordinates
