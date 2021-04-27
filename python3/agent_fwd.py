@@ -50,6 +50,7 @@ class Agent():
             return None
 
     async def _on_game_tick(self, tick_number, game_state):
+        await self._send_eval_next_state()
         random_action = self.generate_random_action()
         if random_action in ["up", "left", "right", "down"]:
             await self._client.send_move(random_action)
@@ -62,6 +63,18 @@ class Agent():
                 await self._client.send_detonate(x, y)
         else:
             print(f"Unhandled action: {random_action}")
+
+    async def _send_eval_next_state(self):
+        actions = [
+            {
+                "action": {"move": "right", "type": "move"},
+                "agent_number": 0,
+            }, {
+                "action": {"move": "left", "type": "move"},
+                "agent_number": 1,
+            }
+        ]
+        await self._client_fwd.send_next_state(1, self._client._state, actions)
 
     def generate_random_action(self):
         actions_length = len(actions)
