@@ -1,6 +1,7 @@
 import asyncio
 import websockets
 import json
+import copy
 
 
 class ForwardModel:
@@ -44,21 +45,23 @@ class ForwardModel:
 
     """
     sample moves payload:
-    [{
-        "move": "right",
-        "agent_number": 0,
-    }, {
-        "move": "left",
-        "agent_number": 1,
-    }]
+    [
+        {
+            "action": {"move": "right", "type": "move"},
+            "agent_number": 0,
+        }, {
+            "action": {"move": "left", "type": "move"},
+            "agent_number": 1,
+        }
+    ]
 
     REMARKS:
     `sequence_id` is used to for you match up an evaluated
     next_state call since payloads can come back in any order
     It should ideally be unique
     """
-    async def send_next_state(self, sequence_id, game_state, moves):
-        payload = {"action": "next", "moves": moves,
-                   "state": game_state, "sequence_id": sequence_id}
-        packet = {"type": "admin", "payload": payload}
+    async def send_next_state(self, sequence_id, game_state, actions):
+        game_state.pop("connection", None)
+        packet = {"actions": actions,
+                  "type": "evaluate_next_state", "state": game_state, "sequence_id": sequence_id}
         await self.connection.send(json.dumps(packet))
