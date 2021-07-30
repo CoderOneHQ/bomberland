@@ -8,12 +8,13 @@ uri = os.environ.get(
 
 actions = ["up", "down", "left", "right", "bomb", "detonate"]
 
-
 class Agent():
     def __init__(self):
         self._client = GameState(uri)
 
+        ### any initialization code can go here
         self._client.set_game_tick_callback(self._on_game_tick)
+
         loop = asyncio.get_event_loop()
         connection = loop.run_until_complete(self._client.connect())
         tasks = [
@@ -21,11 +22,11 @@ class Agent():
         ]
         loop.run_until_complete(asyncio.wait(tasks))
 
-    def _get_bomb_to_detonate(self, game_state) -> [int, int] or None:
-        agent_number = game_state.get("connection").get("agent_number")
+    # returns coordinates of the first bomb placed by a unit    
+    def _get_bomb_to_detonate(self, unit) -> [int, int] or None:
         entities = self._client._state.get("entities")
         bombs = list(filter(lambda entity: entity.get(
-            "owner") == agent_number and entity.get("type") == "b", entities))
+            "owner_unit_id") == unit and entity.get("type") == "b", entities))
         bomb = next(iter(bombs or []), None)
         if bomb != None:
             return [bomb.get("x"), bomb.get("y")]
@@ -33,27 +34,30 @@ class Agent():
             return None
 
     async def _on_game_tick(self, tick_number, game_state):
-        random_action = self.generate_random_action()
-        if random_action in ["up", "left", "right", "down"]:
-            await self._client.send_move(random_action)
-        elif random_action == "bomb":
-            await self._client.send_bomb()
-        elif random_action == "detonate":
-            bomb_coordinates = self._get_bomb_to_detonate(game_state)
-            if bomb_coordinates != None:
-                x, y = bomb_coordinates
-                await self._client.send_detonate(x, y)
-        else:
-            print(f"Unhandled action: {random_action}")
 
-    def generate_random_action(self):
-        actions_length = len(actions)
-        return actions[random.randint(0, actions_length - 1)]
+        # get my units
+        my_agent_id = game_state.get("connection").get("agent_id")
+        my_units = game_state.get("agents").get(my_agent_id).get("unit_ids")
 
+        # send each unit a random action
+        for unit_id in my_units:
+
+            action = random.choice(actions)
+
+            if action in ["up", "left", "right", "down"]:
+                await self._client.send_move(action, unit_id)
+            elif action == "bomb":
+                await self._client.send_bomb(unit_id)
+            elif action == "detonate":
+                bomb_coordinates = self._get_bomb_to_detonate(unit_id)
+                if bomb_coordinates != None:
+                    x, y = bomb_coordinates
+                    await self._client.send_detonate(x, y, unit_id)
+            else:
+                print(f"Unhandled action: {action} for unit {unit_id}")
 
 def main():
     Agent()
-
 
 if __name__ == "__main__":
     main()
