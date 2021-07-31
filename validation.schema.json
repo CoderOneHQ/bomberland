@@ -1,6 +1,12 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
+        "IHashMapObject": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
         "ValidAdminPacket": {
             "anyOf": [
                 {
@@ -44,11 +50,15 @@
                                                             "move"
                                                         ],
                                                         "type": "string"
+                                                    },
+                                                    "unit_id": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "required": [
                                                     "move",
-                                                    "type"
+                                                    "type",
+                                                    "unit_id"
                                                 ],
                                                 "type": "object"
                                             },
@@ -60,10 +70,14 @@
                                                             "bomb"
                                                         ],
                                                         "type": "string"
+                                                    },
+                                                    "unit_id": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "required": [
-                                                    "type"
+                                                    "type",
+                                                    "unit_id"
                                                 ],
                                                 "type": "object"
                                             },
@@ -88,23 +102,27 @@
                                                             "detonate"
                                                         ],
                                                         "type": "string"
+                                                    },
+                                                    "unit_id": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "required": [
                                                     "coordinates",
-                                                    "type"
+                                                    "type",
+                                                    "unit_id"
                                                 ],
                                                 "type": "object"
                                             }
                                         ]
                                     },
-                                    "agent_number": {
-                                        "type": "number"
+                                    "agent_id": {
+                                        "type": "string"
                                     }
                                 },
                                 "required": [
                                     "action",
-                                    "agent_number"
+                                    "agent_id"
                                 ],
                                 "type": "object"
                             },
@@ -116,10 +134,110 @@
                         "state": {
                             "additionalProperties": false,
                             "properties": {
-                                "agent_state": {
+                                "agents": {
                                     "additionalProperties": {
                                         "additionalProperties": false,
                                         "properties": {
+                                            "agent_id": {
+                                                "type": "string"
+                                            },
+                                            "unit_ids": {
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            }
+                                        },
+                                        "required": [
+                                            "agent_id",
+                                            "unit_ids"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "object"
+                                },
+                                "config": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "fire_spawn_interval_ticks": {
+                                            "type": "number"
+                                        },
+                                        "game_duration_ticks": {
+                                            "type": "number"
+                                        },
+                                        "tick_rate_hz": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "fire_spawn_interval_ticks",
+                                        "game_duration_ticks",
+                                        "tick_rate_hz"
+                                    ],
+                                    "type": "object"
+                                },
+                                "entities": {
+                                    "items": {
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "agent_id": {
+                                                "type": "string"
+                                            },
+                                            "blast_diameter": {
+                                                "type": "number"
+                                            },
+                                            "created": {
+                                                "type": "number"
+                                            },
+                                            "expires": {
+                                                "type": "number"
+                                            },
+                                            "hp": {
+                                                "type": "number"
+                                            },
+                                            "type": {
+                                                "enum": [
+                                                    "a",
+                                                    "b",
+                                                    "bp",
+                                                    "m",
+                                                    "o",
+                                                    "t",
+                                                    "w",
+                                                    "x"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            "unit_id": {
+                                                "type": "string"
+                                            },
+                                            "x": {
+                                                "type": "number"
+                                            },
+                                            "y": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "created",
+                                            "type",
+                                            "x",
+                                            "y"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "tick": {
+                                    "type": "number"
+                                },
+                                "unit_state": {
+                                    "additionalProperties": {
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "agent_id": {
+                                                "type": "string"
+                                            },
                                             "blast_diameter": {
                                                 "type": "number"
                                             },
@@ -154,89 +272,22 @@
                                             "invulnerability": {
                                                 "type": "number"
                                             },
-                                            "number": {
-                                                "type": "number"
+                                            "unit_id": {
+                                                "type": "string"
                                             }
                                         },
                                         "required": [
+                                            "agent_id",
                                             "blast_diameter",
                                             "coordinates",
                                             "hp",
                                             "inventory",
                                             "invulnerability",
-                                            "number"
+                                            "unit_id"
                                         ],
                                         "type": "object"
                                     },
                                     "type": "object"
-                                },
-                                "config": {
-                                    "additionalProperties": false,
-                                    "properties": {
-                                        "fire_spawn_interval_ticks": {
-                                            "type": "number"
-                                        },
-                                        "game_duration_ticks": {
-                                            "type": "number"
-                                        },
-                                        "tick_rate_hz": {
-                                            "type": "number"
-                                        }
-                                    },
-                                    "required": [
-                                        "fire_spawn_interval_ticks",
-                                        "game_duration_ticks",
-                                        "tick_rate_hz"
-                                    ],
-                                    "type": "object"
-                                },
-                                "entities": {
-                                    "items": {
-                                        "additionalProperties": false,
-                                        "properties": {
-                                            "blast_diameter": {
-                                                "type": "number"
-                                            },
-                                            "expires": {
-                                                "type": "number"
-                                            },
-                                            "hp": {
-                                                "type": "number"
-                                            },
-                                            "owner": {
-                                                "type": "number"
-                                            },
-                                            "type": {
-                                                "enum": [
-                                                    "a",
-                                                    "b",
-                                                    "bp",
-                                                    "m",
-                                                    "o",
-                                                    "t",
-                                                    "w",
-                                                    "x"
-                                                ],
-                                                "type": "string"
-                                            },
-                                            "x": {
-                                                "type": "number"
-                                            },
-                                            "y": {
-                                                "type": "number"
-                                            }
-                                        },
-                                        "required": [
-                                            "type",
-                                            "x",
-                                            "y"
-                                        ],
-                                        "type": "object"
-                                    },
-                                    "type": "array"
-                                },
-                                "tick": {
-                                    "type": "number"
                                 },
                                 "world": {
                                     "additionalProperties": false,
@@ -256,10 +307,11 @@
                                 }
                             },
                             "required": [
-                                "agent_state",
+                                "agents",
                                 "config",
                                 "entities",
                                 "tick",
+                                "unit_state",
                                 "world"
                             ],
                             "type": "object"
@@ -300,11 +352,15 @@
                                 "move"
                             ],
                             "type": "string"
+                        },
+                        "unit_id": {
+                            "type": "string"
                         }
                     },
                     "required": [
                         "move",
-                        "type"
+                        "type",
+                        "unit_id"
                     ],
                     "type": "object"
                 },
@@ -316,10 +372,14 @@
                                 "bomb"
                             ],
                             "type": "string"
+                        },
+                        "unit_id": {
+                            "type": "string"
                         }
                     },
                     "required": [
-                        "type"
+                        "type",
+                        "unit_id"
                     ],
                     "type": "object"
                 },
@@ -344,11 +404,15 @@
                                 "detonate"
                             ],
                             "type": "string"
+                        },
+                        "unit_id": {
+                            "type": "string"
                         }
                     },
                     "required": [
                         "coordinates",
-                        "type"
+                        "type",
+                        "unit_id"
                     ],
                     "type": "object"
                 }
@@ -368,8 +432,8 @@
                                             {
                                                 "additionalProperties": false,
                                                 "properties": {
-                                                    "agent_number": {
-                                                        "type": "number"
+                                                    "agent_id": {
+                                                        "type": "string"
                                                     },
                                                     "data": {
                                                         "anyOf": [
@@ -390,11 +454,15 @@
                                                                             "move"
                                                                         ],
                                                                         "type": "string"
+                                                                    },
+                                                                    "unit_id": {
+                                                                        "type": "string"
                                                                     }
                                                                 },
                                                                 "required": [
                                                                     "move",
-                                                                    "type"
+                                                                    "type",
+                                                                    "unit_id"
                                                                 ],
                                                                 "type": "object"
                                                             },
@@ -406,10 +474,14 @@
                                                                             "bomb"
                                                                         ],
                                                                         "type": "string"
+                                                                    },
+                                                                    "unit_id": {
+                                                                        "type": "string"
                                                                     }
                                                                 },
                                                                 "required": [
-                                                                    "type"
+                                                                    "type",
+                                                                    "unit_id"
                                                                 ],
                                                                 "type": "object"
                                                             },
@@ -434,11 +506,15 @@
                                                                             "detonate"
                                                                         ],
                                                                         "type": "string"
+                                                                    },
+                                                                    "unit_id": {
+                                                                        "type": "string"
                                                                     }
                                                                 },
                                                                 "required": [
                                                                     "coordinates",
-                                                                    "type"
+                                                                    "type",
+                                                                    "unit_id"
                                                                 ],
                                                                 "type": "object"
                                                             }
@@ -446,13 +522,13 @@
                                                     },
                                                     "type": {
                                                         "enum": [
-                                                            "agent"
+                                                            "unit"
                                                         ],
                                                         "type": "string"
                                                     }
                                                 },
                                                 "required": [
-                                                    "agent_number",
+                                                    "agent_id",
                                                     "data",
                                                     "type"
                                                 ],
@@ -512,16 +588,19 @@
                                                     "updated_entity": {
                                                         "additionalProperties": false,
                                                         "properties": {
+                                                            "agent_id": {
+                                                                "type": "string"
+                                                            },
                                                             "blast_diameter": {
+                                                                "type": "number"
+                                                            },
+                                                            "created": {
                                                                 "type": "number"
                                                             },
                                                             "expires": {
                                                                 "type": "number"
                                                             },
                                                             "hp": {
-                                                                "type": "number"
-                                                            },
-                                                            "owner": {
                                                                 "type": "number"
                                                             },
                                                             "type": {
@@ -537,6 +616,9 @@
                                                                 ],
                                                                 "type": "string"
                                                             },
+                                                            "unit_id": {
+                                                                "type": "string"
+                                                            },
                                                             "x": {
                                                                 "type": "number"
                                                             },
@@ -545,6 +627,7 @@
                                                             }
                                                         },
                                                         "required": [
+                                                            "created",
                                                             "type",
                                                             "x",
                                                             "y"
@@ -565,16 +648,19 @@
                                                     "data": {
                                                         "additionalProperties": false,
                                                         "properties": {
+                                                            "agent_id": {
+                                                                "type": "string"
+                                                            },
                                                             "blast_diameter": {
+                                                                "type": "number"
+                                                            },
+                                                            "created": {
                                                                 "type": "number"
                                                             },
                                                             "expires": {
                                                                 "type": "number"
                                                             },
                                                             "hp": {
-                                                                "type": "number"
-                                                            },
-                                                            "owner": {
                                                                 "type": "number"
                                                             },
                                                             "type": {
@@ -590,6 +676,9 @@
                                                                 ],
                                                                 "type": "string"
                                                             },
+                                                            "unit_id": {
+                                                                "type": "string"
+                                                            },
                                                             "x": {
                                                                 "type": "number"
                                                             },
@@ -598,6 +687,7 @@
                                                             }
                                                         },
                                                         "required": [
+                                                            "created",
                                                             "type",
                                                             "x",
                                                             "y"
@@ -623,6 +713,9 @@
                                                     "data": {
                                                         "additionalProperties": false,
                                                         "properties": {
+                                                            "agent_id": {
+                                                                "type": "string"
+                                                            },
                                                             "blast_diameter": {
                                                                 "type": "number"
                                                             },
@@ -657,23 +750,24 @@
                                                             "invulnerability": {
                                                                 "type": "number"
                                                             },
-                                                            "number": {
-                                                                "type": "number"
+                                                            "unit_id": {
+                                                                "type": "string"
                                                             }
                                                         },
                                                         "required": [
+                                                            "agent_id",
                                                             "blast_diameter",
                                                             "coordinates",
                                                             "hp",
                                                             "inventory",
                                                             "invulnerability",
-                                                            "number"
+                                                            "unit_id"
                                                         ],
                                                         "type": "object"
                                                     },
                                                     "type": {
                                                         "enum": [
-                                                            "agent_state"
+                                                            "unit_state"
                                                         ],
                                                         "type": "string"
                                                     }
@@ -717,10 +811,135 @@
                         "payload": {
                             "additionalProperties": false,
                             "properties": {
-                                "agent_state": {
+                                "agents": {
                                     "additionalProperties": {
                                         "additionalProperties": false,
                                         "properties": {
+                                            "agent_id": {
+                                                "type": "string"
+                                            },
+                                            "unit_ids": {
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            }
+                                        },
+                                        "required": [
+                                            "agent_id",
+                                            "unit_ids"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "object"
+                                },
+                                "config": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "fire_spawn_interval_ticks": {
+                                            "type": "number"
+                                        },
+                                        "game_duration_ticks": {
+                                            "type": "number"
+                                        },
+                                        "tick_rate_hz": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "fire_spawn_interval_ticks",
+                                        "game_duration_ticks",
+                                        "tick_rate_hz"
+                                    ],
+                                    "type": "object"
+                                },
+                                "connection": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "agent_id": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "number"
+                                        },
+                                        "role": {
+                                            "enum": [
+                                                "admin",
+                                                "agent",
+                                                "spectator"
+                                            ],
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "agent_id",
+                                        "id",
+                                        "role"
+                                    ],
+                                    "type": "object"
+                                },
+                                "entities": {
+                                    "items": {
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "agent_id": {
+                                                "type": "string"
+                                            },
+                                            "blast_diameter": {
+                                                "type": "number"
+                                            },
+                                            "created": {
+                                                "type": "number"
+                                            },
+                                            "expires": {
+                                                "type": "number"
+                                            },
+                                            "hp": {
+                                                "type": "number"
+                                            },
+                                            "type": {
+                                                "enum": [
+                                                    "a",
+                                                    "b",
+                                                    "bp",
+                                                    "m",
+                                                    "o",
+                                                    "t",
+                                                    "w",
+                                                    "x"
+                                                ],
+                                                "type": "string"
+                                            },
+                                            "unit_id": {
+                                                "type": "string"
+                                            },
+                                            "x": {
+                                                "type": "number"
+                                            },
+                                            "y": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "created",
+                                            "type",
+                                            "x",
+                                            "y"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "tick": {
+                                    "type": "number"
+                                },
+                                "unit_state": {
+                                    "additionalProperties": {
+                                        "additionalProperties": false,
+                                        "properties": {
+                                            "agent_id": {
+                                                "type": "string"
+                                            },
                                             "blast_diameter": {
                                                 "type": "number"
                                             },
@@ -755,114 +974,22 @@
                                             "invulnerability": {
                                                 "type": "number"
                                             },
-                                            "number": {
-                                                "type": "number"
+                                            "unit_id": {
+                                                "type": "string"
                                             }
                                         },
                                         "required": [
+                                            "agent_id",
                                             "blast_diameter",
                                             "coordinates",
                                             "hp",
                                             "inventory",
                                             "invulnerability",
-                                            "number"
+                                            "unit_id"
                                         ],
                                         "type": "object"
                                     },
                                     "type": "object"
-                                },
-                                "config": {
-                                    "additionalProperties": false,
-                                    "properties": {
-                                        "fire_spawn_interval_ticks": {
-                                            "type": "number"
-                                        },
-                                        "game_duration_ticks": {
-                                            "type": "number"
-                                        },
-                                        "tick_rate_hz": {
-                                            "type": "number"
-                                        }
-                                    },
-                                    "required": [
-                                        "fire_spawn_interval_ticks",
-                                        "game_duration_ticks",
-                                        "tick_rate_hz"
-                                    ],
-                                    "type": "object"
-                                },
-                                "connection": {
-                                    "additionalProperties": false,
-                                    "properties": {
-                                        "agent_number": {
-                                            "type": "number"
-                                        },
-                                        "id": {
-                                            "type": "number"
-                                        },
-                                        "role": {
-                                            "enum": [
-                                                "admin",
-                                                "agent",
-                                                "spectator"
-                                            ],
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "agent_number",
-                                        "id",
-                                        "role"
-                                    ],
-                                    "type": "object"
-                                },
-                                "entities": {
-                                    "items": {
-                                        "additionalProperties": false,
-                                        "properties": {
-                                            "blast_diameter": {
-                                                "type": "number"
-                                            },
-                                            "expires": {
-                                                "type": "number"
-                                            },
-                                            "hp": {
-                                                "type": "number"
-                                            },
-                                            "owner": {
-                                                "type": "number"
-                                            },
-                                            "type": {
-                                                "enum": [
-                                                    "a",
-                                                    "b",
-                                                    "bp",
-                                                    "m",
-                                                    "o",
-                                                    "t",
-                                                    "w",
-                                                    "x"
-                                                ],
-                                                "type": "string"
-                                            },
-                                            "x": {
-                                                "type": "number"
-                                            },
-                                            "y": {
-                                                "type": "number"
-                                            }
-                                        },
-                                        "required": [
-                                            "type",
-                                            "x",
-                                            "y"
-                                        ],
-                                        "type": "object"
-                                    },
-                                    "type": "array"
-                                },
-                                "tick": {
-                                    "type": "number"
                                 },
                                 "world": {
                                     "additionalProperties": false,
@@ -882,11 +1009,12 @@
                                 }
                             },
                             "required": [
-                                "agent_state",
+                                "agents",
                                 "config",
                                 "connection",
                                 "entities",
                                 "tick",
+                                "unit_state",
                                 "world"
                             ],
                             "type": "object"
@@ -920,8 +1048,8 @@
                                                         {
                                                             "additionalProperties": false,
                                                             "properties": {
-                                                                "agent_number": {
-                                                                    "type": "number"
+                                                                "agent_id": {
+                                                                    "type": "string"
                                                                 },
                                                                 "data": {
                                                                     "anyOf": [
@@ -942,11 +1070,15 @@
                                                                                         "move"
                                                                                     ],
                                                                                     "type": "string"
+                                                                                },
+                                                                                "unit_id": {
+                                                                                    "type": "string"
                                                                                 }
                                                                             },
                                                                             "required": [
                                                                                 "move",
-                                                                                "type"
+                                                                                "type",
+                                                                                "unit_id"
                                                                             ],
                                                                             "type": "object"
                                                                         },
@@ -958,10 +1090,14 @@
                                                                                         "bomb"
                                                                                     ],
                                                                                     "type": "string"
+                                                                                },
+                                                                                "unit_id": {
+                                                                                    "type": "string"
                                                                                 }
                                                                             },
                                                                             "required": [
-                                                                                "type"
+                                                                                "type",
+                                                                                "unit_id"
                                                                             ],
                                                                             "type": "object"
                                                                         },
@@ -986,11 +1122,15 @@
                                                                                         "detonate"
                                                                                     ],
                                                                                     "type": "string"
+                                                                                },
+                                                                                "unit_id": {
+                                                                                    "type": "string"
                                                                                 }
                                                                             },
                                                                             "required": [
                                                                                 "coordinates",
-                                                                                "type"
+                                                                                "type",
+                                                                                "unit_id"
                                                                             ],
                                                                             "type": "object"
                                                                         }
@@ -998,13 +1138,13 @@
                                                                 },
                                                                 "type": {
                                                                     "enum": [
-                                                                        "agent"
+                                                                        "unit"
                                                                     ],
                                                                     "type": "string"
                                                                 }
                                                             },
                                                             "required": [
-                                                                "agent_number",
+                                                                "agent_id",
                                                                 "data",
                                                                 "type"
                                                             ],
@@ -1064,16 +1204,19 @@
                                                                 "updated_entity": {
                                                                     "additionalProperties": false,
                                                                     "properties": {
+                                                                        "agent_id": {
+                                                                            "type": "string"
+                                                                        },
                                                                         "blast_diameter": {
+                                                                            "type": "number"
+                                                                        },
+                                                                        "created": {
                                                                             "type": "number"
                                                                         },
                                                                         "expires": {
                                                                             "type": "number"
                                                                         },
                                                                         "hp": {
-                                                                            "type": "number"
-                                                                        },
-                                                                        "owner": {
                                                                             "type": "number"
                                                                         },
                                                                         "type": {
@@ -1089,6 +1232,9 @@
                                                                             ],
                                                                             "type": "string"
                                                                         },
+                                                                        "unit_id": {
+                                                                            "type": "string"
+                                                                        },
                                                                         "x": {
                                                                             "type": "number"
                                                                         },
@@ -1097,6 +1243,7 @@
                                                                         }
                                                                     },
                                                                     "required": [
+                                                                        "created",
                                                                         "type",
                                                                         "x",
                                                                         "y"
@@ -1117,16 +1264,19 @@
                                                                 "data": {
                                                                     "additionalProperties": false,
                                                                     "properties": {
+                                                                        "agent_id": {
+                                                                            "type": "string"
+                                                                        },
                                                                         "blast_diameter": {
+                                                                            "type": "number"
+                                                                        },
+                                                                        "created": {
                                                                             "type": "number"
                                                                         },
                                                                         "expires": {
                                                                             "type": "number"
                                                                         },
                                                                         "hp": {
-                                                                            "type": "number"
-                                                                        },
-                                                                        "owner": {
                                                                             "type": "number"
                                                                         },
                                                                         "type": {
@@ -1142,6 +1292,9 @@
                                                                             ],
                                                                             "type": "string"
                                                                         },
+                                                                        "unit_id": {
+                                                                            "type": "string"
+                                                                        },
                                                                         "x": {
                                                                             "type": "number"
                                                                         },
@@ -1150,6 +1303,7 @@
                                                                         }
                                                                     },
                                                                     "required": [
+                                                                        "created",
                                                                         "type",
                                                                         "x",
                                                                         "y"
@@ -1175,6 +1329,9 @@
                                                                 "data": {
                                                                     "additionalProperties": false,
                                                                     "properties": {
+                                                                        "agent_id": {
+                                                                            "type": "string"
+                                                                        },
                                                                         "blast_diameter": {
                                                                             "type": "number"
                                                                         },
@@ -1209,23 +1366,24 @@
                                                                         "invulnerability": {
                                                                             "type": "number"
                                                                         },
-                                                                        "number": {
-                                                                            "type": "number"
+                                                                        "unit_id": {
+                                                                            "type": "string"
                                                                         }
                                                                     },
                                                                     "required": [
+                                                                        "agent_id",
                                                                         "blast_diameter",
                                                                         "coordinates",
                                                                         "hp",
                                                                         "inventory",
                                                                         "invulnerability",
-                                                                        "number"
+                                                                        "unit_id"
                                                                     ],
                                                                     "type": "object"
                                                                 },
                                                                 "type": {
                                                                     "enum": [
-                                                                        "agent_state"
+                                                                        "unit_state"
                                                                     ],
                                                                     "type": "string"
                                                                 }
@@ -1255,10 +1413,110 @@
                                 "initial_state": {
                                     "additionalProperties": false,
                                     "properties": {
-                                        "agent_state": {
+                                        "agents": {
                                             "additionalProperties": {
                                                 "additionalProperties": false,
                                                 "properties": {
+                                                    "agent_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "unit_ids": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "agent_id",
+                                                    "unit_ids"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "object"
+                                        },
+                                        "config": {
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "fire_spawn_interval_ticks": {
+                                                    "type": "number"
+                                                },
+                                                "game_duration_ticks": {
+                                                    "type": "number"
+                                                },
+                                                "tick_rate_hz": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "fire_spawn_interval_ticks",
+                                                "game_duration_ticks",
+                                                "tick_rate_hz"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "entities": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "agent_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "blast_diameter": {
+                                                        "type": "number"
+                                                    },
+                                                    "created": {
+                                                        "type": "number"
+                                                    },
+                                                    "expires": {
+                                                        "type": "number"
+                                                    },
+                                                    "hp": {
+                                                        "type": "number"
+                                                    },
+                                                    "type": {
+                                                        "enum": [
+                                                            "a",
+                                                            "b",
+                                                            "bp",
+                                                            "m",
+                                                            "o",
+                                                            "t",
+                                                            "w",
+                                                            "x"
+                                                        ],
+                                                        "type": "string"
+                                                    },
+                                                    "unit_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "x": {
+                                                        "type": "number"
+                                                    },
+                                                    "y": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "created",
+                                                    "type",
+                                                    "x",
+                                                    "y"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "tick": {
+                                            "type": "number"
+                                        },
+                                        "unit_state": {
+                                            "additionalProperties": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "agent_id": {
+                                                        "type": "string"
+                                                    },
                                                     "blast_diameter": {
                                                         "type": "number"
                                                     },
@@ -1293,89 +1551,22 @@
                                                     "invulnerability": {
                                                         "type": "number"
                                                     },
-                                                    "number": {
-                                                        "type": "number"
+                                                    "unit_id": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "required": [
+                                                    "agent_id",
                                                     "blast_diameter",
                                                     "coordinates",
                                                     "hp",
                                                     "inventory",
                                                     "invulnerability",
-                                                    "number"
+                                                    "unit_id"
                                                 ],
                                                 "type": "object"
                                             },
                                             "type": "object"
-                                        },
-                                        "config": {
-                                            "additionalProperties": false,
-                                            "properties": {
-                                                "fire_spawn_interval_ticks": {
-                                                    "type": "number"
-                                                },
-                                                "game_duration_ticks": {
-                                                    "type": "number"
-                                                },
-                                                "tick_rate_hz": {
-                                                    "type": "number"
-                                                }
-                                            },
-                                            "required": [
-                                                "fire_spawn_interval_ticks",
-                                                "game_duration_ticks",
-                                                "tick_rate_hz"
-                                            ],
-                                            "type": "object"
-                                        },
-                                        "entities": {
-                                            "items": {
-                                                "additionalProperties": false,
-                                                "properties": {
-                                                    "blast_diameter": {
-                                                        "type": "number"
-                                                    },
-                                                    "expires": {
-                                                        "type": "number"
-                                                    },
-                                                    "hp": {
-                                                        "type": "number"
-                                                    },
-                                                    "owner": {
-                                                        "type": "number"
-                                                    },
-                                                    "type": {
-                                                        "enum": [
-                                                            "a",
-                                                            "b",
-                                                            "bp",
-                                                            "m",
-                                                            "o",
-                                                            "t",
-                                                            "w",
-                                                            "x"
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "x": {
-                                                        "type": "number"
-                                                    },
-                                                    "y": {
-                                                        "type": "number"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "type",
-                                                    "x",
-                                                    "y"
-                                                ],
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "tick": {
-                                            "type": "number"
                                         },
                                         "world": {
                                             "additionalProperties": false,
@@ -1395,22 +1586,23 @@
                                         }
                                     },
                                     "required": [
-                                        "agent_state",
+                                        "agents",
                                         "config",
                                         "entities",
                                         "tick",
+                                        "unit_state",
                                         "world"
                                     ],
                                     "type": "object"
                                 },
-                                "winning_agent_number": {
-                                    "type": "number"
+                                "winning_agent_id": {
+                                    "type": "string"
                                 }
                             },
                             "required": [
                                 "history",
                                 "initial_state",
-                                "winning_agent_number"
+                                "winning_agent_id"
                             ],
                             "type": "object"
                         },
@@ -1464,10 +1656,110 @@
                                 "next_state": {
                                     "additionalProperties": false,
                                     "properties": {
-                                        "agent_state": {
+                                        "agents": {
                                             "additionalProperties": {
                                                 "additionalProperties": false,
                                                 "properties": {
+                                                    "agent_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "unit_ids": {
+                                                        "items": {
+                                                            "type": "string"
+                                                        },
+                                                        "type": "array"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "agent_id",
+                                                    "unit_ids"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "object"
+                                        },
+                                        "config": {
+                                            "additionalProperties": false,
+                                            "properties": {
+                                                "fire_spawn_interval_ticks": {
+                                                    "type": "number"
+                                                },
+                                                "game_duration_ticks": {
+                                                    "type": "number"
+                                                },
+                                                "tick_rate_hz": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "fire_spawn_interval_ticks",
+                                                "game_duration_ticks",
+                                                "tick_rate_hz"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "entities": {
+                                            "items": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "agent_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "blast_diameter": {
+                                                        "type": "number"
+                                                    },
+                                                    "created": {
+                                                        "type": "number"
+                                                    },
+                                                    "expires": {
+                                                        "type": "number"
+                                                    },
+                                                    "hp": {
+                                                        "type": "number"
+                                                    },
+                                                    "type": {
+                                                        "enum": [
+                                                            "a",
+                                                            "b",
+                                                            "bp",
+                                                            "m",
+                                                            "o",
+                                                            "t",
+                                                            "w",
+                                                            "x"
+                                                        ],
+                                                        "type": "string"
+                                                    },
+                                                    "unit_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "x": {
+                                                        "type": "number"
+                                                    },
+                                                    "y": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "created",
+                                                    "type",
+                                                    "x",
+                                                    "y"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "tick": {
+                                            "type": "number"
+                                        },
+                                        "unit_state": {
+                                            "additionalProperties": {
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "agent_id": {
+                                                        "type": "string"
+                                                    },
                                                     "blast_diameter": {
                                                         "type": "number"
                                                     },
@@ -1502,89 +1794,22 @@
                                                     "invulnerability": {
                                                         "type": "number"
                                                     },
-                                                    "number": {
-                                                        "type": "number"
+                                                    "unit_id": {
+                                                        "type": "string"
                                                     }
                                                 },
                                                 "required": [
+                                                    "agent_id",
                                                     "blast_diameter",
                                                     "coordinates",
                                                     "hp",
                                                     "inventory",
                                                     "invulnerability",
-                                                    "number"
+                                                    "unit_id"
                                                 ],
                                                 "type": "object"
                                             },
                                             "type": "object"
-                                        },
-                                        "config": {
-                                            "additionalProperties": false,
-                                            "properties": {
-                                                "fire_spawn_interval_ticks": {
-                                                    "type": "number"
-                                                },
-                                                "game_duration_ticks": {
-                                                    "type": "number"
-                                                },
-                                                "tick_rate_hz": {
-                                                    "type": "number"
-                                                }
-                                            },
-                                            "required": [
-                                                "fire_spawn_interval_ticks",
-                                                "game_duration_ticks",
-                                                "tick_rate_hz"
-                                            ],
-                                            "type": "object"
-                                        },
-                                        "entities": {
-                                            "items": {
-                                                "additionalProperties": false,
-                                                "properties": {
-                                                    "blast_diameter": {
-                                                        "type": "number"
-                                                    },
-                                                    "expires": {
-                                                        "type": "number"
-                                                    },
-                                                    "hp": {
-                                                        "type": "number"
-                                                    },
-                                                    "owner": {
-                                                        "type": "number"
-                                                    },
-                                                    "type": {
-                                                        "enum": [
-                                                            "a",
-                                                            "b",
-                                                            "bp",
-                                                            "m",
-                                                            "o",
-                                                            "t",
-                                                            "w",
-                                                            "x"
-                                                        ],
-                                                        "type": "string"
-                                                    },
-                                                    "x": {
-                                                        "type": "number"
-                                                    },
-                                                    "y": {
-                                                        "type": "number"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "type",
-                                                    "x",
-                                                    "y"
-                                                ],
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "tick": {
-                                            "type": "number"
                                         },
                                         "world": {
                                             "additionalProperties": false,
@@ -1604,10 +1829,11 @@
                                         }
                                     },
                                     "required": [
-                                        "agent_state",
+                                        "agents",
                                         "config",
                                         "entities",
                                         "tick",
+                                        "unit_state",
                                         "world"
                                     ],
                                     "type": "object"
@@ -1639,3 +1865,4 @@
         }
     }
 }
+
