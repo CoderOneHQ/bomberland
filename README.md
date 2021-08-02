@@ -1,6 +1,16 @@
-# Documentation
+![Game Version](https://img.shields.io/badge/game%20ver.-622-blue)
 
-Find our documentation here: https://docs.gocoder.one/
+Starter kits for working with the Dungeons and Data Structures game API.
+
+See: [Documentation](https://docs.gocoder.one/)
+
+# Starter kits
+| Language | Link | Description | Up-to-date?
+| --- | --- | --- | --- |
+| Python3 | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/python3) | Basic Python3 starter | ✅ |
+| Python3-fwd | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/python3) | Includes example for using forward model simulator | ❌ |
+| TypeScript | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Basic TypeScript starter | ❌ |
+| TypeScript-fwd | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Includes example for using forward model simulator | ❌ |
 
 # Contributions
 
