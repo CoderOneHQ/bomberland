@@ -2,7 +2,7 @@ import asyncio
 import websockets
 import json
 
-_agent_move_set = set(("up", "down", "left", "right"))
+_move_set = set(("up", "down", "left", "right"))
 
 
 class GameState:
@@ -22,17 +22,17 @@ class GameState:
     async def _send(self, packet):
         await self.connection.send(json.dumps(packet))
 
-    async def send_move(self, move: str):
-        if move in _agent_move_set:
-            packet = {"type": "move", "move": move}
+    async def send_move(self, move: str, unit_id: str):
+        if move in _move_set:
+            packet = {"type": "move", "move": move, "unit_id": unit_id}
             await self._send(packet)
 
-    async def send_bomb(self):
-        packet = {"type": "bomb"}
+    async def send_bomb(self, unit_id: str):
+        packet = {"type": "bomb", "unit_id": unit_id}
         await self._send(packet)
 
-    async def send_detonate(self, x, y):
-        packet = {"type": "detonate", "coordinates": [x, y]}
+    async def send_detonate(self, x, y, unit_id: str):
+        packet = {"type": "detonate", "coordinates": [x, y], "unit_id": unit_id}
         await self._send(packet)
 
     async def _handle_messages(self, connection: str):
@@ -57,6 +57,10 @@ class GameState:
         elif data_type == "tick":
             payload = data.get("payload")
             await self._on_game_tick(payload)
+        elif data_type == "endgame_state":
+            payload = data.get("payload")
+            winning_agent_id = payload.get("winning_agent_id")
+            print(f"Game over. Winner: Agent {winning_agent_id}")
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 
@@ -71,17 +75,16 @@ class GameState:
                 self._on_entity_spawned(event)
             elif event_type == "entity_expired":
                 self._on_entity_expired(event)
-            elif event_type == "agent":
-                agent_action = event.get("data")
-                agent_number = event.get("agent_number")
-                self._on_agent_action(agent_number, agent_action)
-            elif event_type == "agent_state":
+            elif event_type == "unit_state":
                 payload = event.get("data")
-                self._on_agent_state(payload)
+                self._on_unit_state(payload)
             elif event_type == "entity_state":
                 x, y = event.get("coordinates")
                 updated_entity = event.get("updated_entity")
                 self._on_entity_state(x, y, updated_entity)
+            elif event_type == "unit":
+                unit_action = event.get("data")
+                self._on_unit_action(unit_action)
             else:
                 print(f"unknown event type {event_type}: {event}")
         if self._tick_callback is not None:
@@ -105,9 +108,9 @@ class GameState:
         self._state["entities"] = list(filter(
             filter_entity_fn, self._state["entities"]))
 
-    def _on_agent_state(self, agent_state):
-        agent_number = agent_state.get("number")
-        self._state["agent_state"][str(agent_number)] = agent_state
+    def _on_unit_state(self, unit_state):
+        unit_id = unit_state.get("unit_id")
+        self._state["unit_state"][unit_id] = unit_state
 
     def _on_entity_state(self, x, y, updated_entity):
         for entity in self._state.get("entities"):
@@ -115,27 +118,27 @@ class GameState:
                 self._state["entities"].remove(entity)
         self._state["entities"].append(updated_entity)
 
-    def _on_agent_action(self, agent_number, action_packet):
-        agent = self._state["agent_state"][str(agent_number)]
-        coordinates = agent.get("coordinates")
+    def _on_unit_action(self, action_packet):
+        unit_id = action_packet["unit_id"]
+        unit = self._state["unit_state"][unit_id]
+        coordinates = unit.get("coordinates")
         action_type = action_packet.get("type")
         if action_type == "move":
             move = action_packet.get("move")
-            if move in _agent_move_set:
-                new_coordinates = self._get_new_agent_coordinates(
+            if move in _move_set:
+                new_coordinates = self._get_new_unit_coordinates(
                     coordinates, move)
-                self._state["agent_state"][str(
-                    agent_number)]["coordinates"] = new_coordinates
+                self._state["unit_state"][unit_id]["coordinates"] = new_coordinates
         elif action_type == "bomb":
-            # no - op since this is redudnant info
+            # no - op since this is redundant info
             pass
         elif action_type == "detonate":
-            # no - op since this is redudnant info
+            # no - op since this is redundant info
             pass
         else:
             print(f"Unhandled agent action recieved: {action_type}")
 
-    def _get_new_agent_coordinates(self, coordinates, move_action) -> [int, int]:
+    def _get_new_unit_coordinates(self, coordinates, move_action) -> [int, int]:
         [x, y] = coordinates
         if move_action == "up":
             return [x, y+1]
