@@ -2,8 +2,9 @@
 
 # About
 
-[Coder One](https://www.gocoder.one) is an upcoming multi-agent AI competition.
-Agents control multiple units in a Bomberman-like environment.
+Bomberland is a 2D gridworld multi-agent environment inspired by the classic game [Bomberman](https://en.wikipedia.org/wiki/Bomberman). It is designed for an upcoming AI competition called [Coder One](https://www.gocoder.one). 
+
+Each agent controls multiple units. The goal is to take down all of your opponent's units before they take down yours.
 This repo contains starter kits for working with the game API.
 
 ![Multi-agent game](https://uploads-ssl.webflow.com/5ed1e873ef82ae197179be22/60b32c120df5e9f4e02512ee_game-preview.gif)
