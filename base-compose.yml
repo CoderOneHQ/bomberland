@@ -2,7 +2,9 @@ version: "3"
 services:
     game-server:
         image: coderone.azurecr.io/game-server:720
-
+        volumes:
+            - ./logs:/app/logs
+            
     python3-agent:
         build:
             context: python3
