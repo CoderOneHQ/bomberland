@@ -1,4 +1,4 @@
-[![Game Version](https://img.shields.io/badge/game%20ver.-720-blue)](https://docs.gocoder.one/references/release-notes) [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green)](https://github.com/CoderOneHQ/starter-kits/pulls)
+[![Game Version](https://img.shields.io/badge/game%20ver.-894-blue)](https://docs.gocoder.one/references/release-notes) [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green)](https://github.com/CoderOneHQ/starter-kits/pulls)
 
 # About
 
@@ -23,8 +23,6 @@ To connect agents and run a game instance, run from the root directory:
 docker-compose up --abort-on-container-exit --force-recreate
 ```
 
-Starter kits in other languages should implement the simulation logic for handling game state updates (see [example](https://github.com/CoderOneHQ/starter-kits/blob/master/python3/game_state.py)) and follow the [validation schema](https://github.com/CoderOneHQ/starter-kits/blob/master/validation.schema.json).
-
 # Starter kits
 | Kit | Link | Description | Up-to-date?
 | --- | --- | --- | --- |
@@ -32,6 +30,11 @@ Starter kits in other languages should implement the simulation logic for handli
 | Python3-fwd | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/python3) | Includes example for using forward model simulator | ❌ |
 | TypeScript | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Basic TypeScript starter | ❌ |
 | TypeScript-fwd | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Includes example for using forward model simulator | ❌ |
+
+# Contributing
+We'd love any contributions to the starter kits. Feel free to raise a PR for review.
+
+Starter kits in other languages should implement the simulation logic for handling game state updates (see [example](https://github.com/CoderOneHQ/starter-kits/blob/master/python3/game_state.py)) and follow the [validation schema](https://github.com/CoderOneHQ/starter-kits/blob/master/validation.schema.json).
 
 # Discussion and Questions
 
