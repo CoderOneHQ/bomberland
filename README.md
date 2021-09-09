@@ -1,4 +1,4 @@
-[![Game Version](https://img.shields.io/badge/game%20ver.-894-blue)](https://docs.gocoder.one/references/release-notes) [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green)](https://github.com/CoderOneHQ/starter-kits/pulls)
+[![Game Version](https://img.shields.io/badge/game%20ver.-894-blue)](https://www.gocoder.one/docs/release-notes) [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green)](https://github.com/CoderOneHQ/starter-kits/pulls)
 
 # About
 
@@ -11,7 +11,7 @@ This repo contains starter kits for working with the game API.
 
 # Usage
 
-See: [Documentation](https://docs.gocoder.one/)
+See: [Documentation](https://www.gocoder.one/docs)
 
 All starter kits provide an example for connecting with the game server via websockets, and how to send actions to the game server.
 
