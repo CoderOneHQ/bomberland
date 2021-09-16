@@ -1,10 +1,11 @@
-[![Game Version](https://img.shields.io/badge/game%20ver.-894-blue)](https://www.gocoder.one/docs/release-notes) [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green)](https://github.com/CoderOneHQ/starter-kits/pulls)
+[![Game Version](https://img.shields.io/badge/game%20ver.-894-blue)](https://www.gocoder.one/docs/release-notes)
 
 # About
 
-Bomberland is a 2D gridworld multi-agent environment inspired by the classic game [Bomberman](https://en.wikipedia.org/wiki/Bomberman). It is designed for an upcoming AI competition called [Coder One](https://www.gocoder.one). 
+Bomberland is a 1v1 multi-agent environment inspired by the classic console game [Bomberman](https://en.wikipedia.org/wiki/Bomberman) organised by [Coder One](https://www.gocoder.one). For more information, check out the [Bomberland homepage](https://www.gocoder.one/bomberland).
 
-Each agent controls multiple units. The goal is to take down all of your opponent's units before they take down yours.
+Teams build intelligent agents using strategies from tree search to deep reinforcement learning. The goal is to compete in a 2D grid world collecting power-ups and placing explosives to take your opponent down.
+
 This repo contains starter kits for working with the game API.
 
 ![Multi-agent game](https://uploads-ssl.webflow.com/5ed1e873ef82ae197179be22/60b32c120df5e9f4e02512ee_game-preview.gif)
@@ -32,12 +33,14 @@ docker-compose up --abort-on-container-exit --force-recreate
 | TypeScript-fwd | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Includes example for using forward model simulator | ❌ |
 
 # Contributing
-We'd love any contributions to the starter kits. Feel free to raise a PR for review.
+Contributions for Bomberland starter kits in other languages (as well improvements to existing starter kits) are welcome!
 
-Starter kits in other languages should implement the simulation logic for handling game state updates (see [example](https://github.com/CoderOneHQ/starter-kits/blob/master/python3/game_state.py)) and follow the [validation schema](https://github.com/CoderOneHQ/starter-kits/blob/master/validation.schema.json).
+Starter kits in new languages should implement the simulation logic for handling game state updates (see [example](https://github.com/CoderOneHQ/starter-kits/blob/master/python3/game_state.py)) and follow the [validation schema](https://github.com/CoderOneHQ/starter-kits/blob/master/validation.schema.json).
+
+For any help, please contact us directly on [Discord](https://discord.gg/NkfgvRN) or via [email](mailto:humans@gocoder.one).
 
 # Discussion and Questions
 
-Join the community on [Discord](https://discord.gg/NkfgvRN).
+Come join our community on [Discord](https://discord.gg/NkfgvRN).
 
 Please let us know of any bugs or suggestions by [raising an Issue](https://github.com/CoderOneHQ/starter-kits/issues).
