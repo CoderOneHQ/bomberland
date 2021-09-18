@@ -1,4 +1,4 @@
-[![Game Version](https://img.shields.io/badge/game%20ver.-894-blue)](https://www.gocoder.one/docs/release-notes)
+[![Game Version](https://img.shields.io/badge/game%20ver.-974-blue)](https://www.gocoder.one/docs/release-notes)
 
 # About
 
