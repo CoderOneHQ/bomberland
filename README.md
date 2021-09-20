@@ -1,4 +1,4 @@
-[![Game Version](https://img.shields.io/badge/game%20ver.-974-blue)](https://www.gocoder.one/docs/release-notes)
+[![Engine Version](https://img.shields.io/badge/engine%20ver.-974-blue)](#release-notes)
 
 # About
 
@@ -8,17 +8,14 @@ Teams build intelligent agents using strategies from tree search to deep reinfor
 
 This repo contains starter kits for working with the game API.
 
-![Multi-agent game](https://uploads-ssl.webflow.com/5ed1e873ef82ae197179be22/60b32c120df5e9f4e02512ee_game-preview.gif)
+![Multi-agent game](https://www.gocoder.one/static/bomberland-ed5869293b68899949b910448dbab972.gif)
 
 # Usage
 
 See: [Documentation](https://www.gocoder.one/docs)
 
-All starter kits provide an example for connecting with the game server via websockets, and how to send actions to the game server.
-
-Start by cloning or downloading this repo (including both `base-compose.yml` and `docker-compose.yml` files).
-
-To connect agents and run a game instance, run from the root directory:
+1. Clone or download this repo (including both `base-compose.yml` and `docker-compose.yml` files).
+1. To connect agents and run a game instance, run from the root directory:
 
 ```
 docker-compose up --abort-on-container-exit --force-recreate
@@ -38,6 +35,11 @@ Contributions for Bomberland starter kits in other languages (as well improvemen
 Starter kits in new languages should implement the simulation logic for handling game state updates (see [example](https://github.com/CoderOneHQ/starter-kits/blob/master/python3/game_state.py)) and follow the [validation schema](https://github.com/CoderOneHQ/starter-kits/blob/master/validation.schema.json).
 
 For any help, please contact us directly on [Discord](https://discord.gg/NkfgvRN) or via [email](mailto:humans@gocoder.one).
+
+# Release Notes
+| Ver. | Changes |
+| --- | --- |
+| 974 | Added functionality: <ul><li>Reset the game without restarting engine/containers</li><li>Evaluate next state by the game engine given a state + list of actions</li></ul> See: [Docs](https://gocoder.one/docs/api-reference#-administrator-api?s=gh) |
 
 # Discussion and Questions
 
