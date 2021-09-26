@@ -20,7 +20,7 @@ var gameState *bomberland.GameState
 func main() {
 	connectionString := os.Getenv("GAME_CONNECTION_STRING")
 	if connectionString == "" {
-		connectionString = "ws://127.0.0.1:3000/?role=agent&agentId=agentId&name=defaultName"
+		connectionString = "ws://127.0.0.1:3000/?role=agent&agentId=agentA&name=go-agent"
 	}
 	gameState = bomberland.NewGameState(connectionString, tickHandler)
 	err := gameState.Connect()
@@ -36,9 +36,10 @@ func main() {
 func tickHandler(tickNumber float64, state map[string]interface{}) (err error) {
 	logrus.WithField("tick", tickNumber).Info("Start")
 	defer logrus.WithField("tick", tickNumber).Info("Finish")
-	myAgentID := state["connection"].(map[string]interface{})["client_id"].(string)
-	myUnitIDs := state["agents"].(map[string]interface{})[myAgentID].(map[string]interface{})["unit_ids"].([]string)
-	for _, unitID := range myUnitIDs {
+	myAgentID := state["connection"].(map[string]interface{})["agent_id"].(string)
+	myUnitIDs := state["agents"].(map[string]interface{})[myAgentID].(map[string]interface{})["unit_ids"].([]interface{})
+	for _, iUnitID := range myUnitIDs {
+		unitID := iUnitID.(string)
 		action := rand.Int31n(6)
 		move, ok := moveMap[int(action)]
 		if ok {
