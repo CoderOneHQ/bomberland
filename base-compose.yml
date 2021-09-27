@@ -4,7 +4,12 @@ services:
         image: coderone.azurecr.io/game-server:974
         volumes:
             - ./logs:/app/logs
-            
+
+    go-agent:
+        build:
+            context: go
+            dockerfile: Dockerfile
+
     python3-agent:
         build:
             context: python3
