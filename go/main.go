@@ -20,7 +20,9 @@ var gameState *bomberland.GameState
 func main() {
 	connectionString := os.Getenv("GAME_CONNECTION_STRING")
 	if connectionString == "" {
-		connectionString = "ws://127.0.0.1:3000/?role=agent&agentId=agentA&name=go-agent"
+		// agentA = Wizard
+		// agentB = Knight
+		connectionString = "ws://127.0.0.1:3000/?role=agent&agentId=agentB&name=go-agent"
 	}
 	gameState = bomberland.NewGameState(connectionString, tickHandler)
 	err := gameState.Connect()
@@ -50,9 +52,13 @@ func tickHandler(tickNumber float64, state map[string]interface{}) (err error) {
 			continue
 		}
 		if action == 4 {
-			err = gameState.SendBomb(unitID)
-			if err != nil {
-				logrus.Error(err)
+			inventory := state["unit_state"].(map[string]interface{})[unitID].(map[string]interface{})["inventory"].(map[string]interface{})
+			bombs := inventory["bombs"].(float64)
+			if bombs > 0 {
+				err = gameState.SendBomb(unitID)
+				if err != nil {
+					logrus.Error(err)
+				}
 			}
 			continue
 		}
