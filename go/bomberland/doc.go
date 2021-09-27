@@ -1,3 +1,5 @@
+// Package bomberland encapsulates logic for storing and updating game state, as well as sending commands
+// towards the game server.
 package bomberland
 
 const (

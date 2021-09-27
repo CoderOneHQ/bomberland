@@ -1,3 +1,5 @@
+// Package main is the application's entry-point, which essentially provides a "dummy" implementation for stochastic
+// agent that randomly performs different actions.
 package main
 
 const (

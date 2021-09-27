@@ -22,7 +22,7 @@ func main() {
 	if connectionString == "" {
 		// agentA = Wizard
 		// agentB = Knight
-		connectionString = "ws://127.0.0.1:3000/?role=agent&agentId=agentB&name=go-agent"
+		connectionString = "ws://127.0.0.1:3000/?role=agent&agentId=agentA&name=go-agent"
 	}
 	gameState = bomberland.NewGameState(connectionString, tickHandler)
 	err := gameState.Connect()
@@ -42,9 +42,11 @@ func tickHandler(tickNumber float64, state map[string]interface{}) (err error) {
 	myUnitIDs := state["agents"].(map[string]interface{})[myAgentID].(map[string]interface{})["unit_ids"].([]interface{})
 	for _, iUnitID := range myUnitIDs {
 		unitID := iUnitID.(string)
+		logrus.WithField("unit", unitID).Info()
 		action := rand.Int31n(6)
 		move, ok := moveMap[int(action)]
 		if ok {
+			logrus.WithField("action", moveMap[int(action)]).Info()
 			err = gameState.SendMove(move, unitID)
 			if err != nil {
 				logrus.Error(err)
@@ -52,6 +54,7 @@ func tickHandler(tickNumber float64, state map[string]interface{}) (err error) {
 			continue
 		}
 		if action == 4 {
+			logrus.WithField("action", "bomb").Info()
 			inventory := state["unit_state"].(map[string]interface{})[unitID].(map[string]interface{})["inventory"].(map[string]interface{})
 			bombs := inventory["bombs"].(float64)
 			if bombs > 0 {
@@ -59,16 +62,20 @@ func tickHandler(tickNumber float64, state map[string]interface{}) (err error) {
 				if err != nil {
 					logrus.Error(err)
 				}
+			} else {
+				logrus.Warning("no bombs to plant")
 			}
 			continue
 		}
+		logrus.WithField("action", "detonate").Info()
 		x, y := getBombToDetonate(unitID, state)
 		if x > 0 && y > 0 {
 			err = gameState.SendDetonate(x, y, unitID)
 			if err != nil {
 				logrus.Error(err)
 			}
-			continue
+		} else {
+			logrus.Warning("no bombs to detonate")
 		}
 	}
 	return
