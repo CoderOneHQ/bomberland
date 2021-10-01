@@ -20,34 +20,21 @@ services:
         networks:
             - coderone-tournament
 
-    # Uncomment one of the following "agent-a" blocks to connect a second agent to the environment
+    # Uncomment the following "agent-a" blocks to connect a second agent to the environment
 
-#    agent-a:
-#      extends:
-#        file: base-compose.yml
-#        # update next line with a service in base-compose.yml to change agent
-#        service: python3-agent-dev
-#      environment:
-#        - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentA&name=python3-agent-dev
-#        - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-a:6969/?role=admin
-#      depends_on:
-#        - game-server
-#        - fwd-server-a
-#      networks:
-#        - coderone-tournament
-
-#    agent-a:
-#      extends:
-#        file: base-compose.yml
-#        # update next line with a service in base-compose.yml to change agent
-#        service: go-agent
-#      environment:
-#        - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentA&name=python3-agent-dev
-#      depends_on:
-#        - game-server
-#      networks:
-#        - coderone-tournament
-#      restart: on-failure
+    # agent-a:
+    #     extends:
+    #         file: base-compose.yml
+    #         # update next line with a service in base-compose.yml to change agent
+    #         service: python3-agent-dev
+    #     environment:
+    #         - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentA&name=python3-agent-dev
+    #         - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-a:6969/?role=admin
+    #     depends_on:
+    #         - game-server
+    #         - fwd-server-a
+    #     networks:
+    #         - coderone-tournament
 
     fwd-server-a:
         extends:
