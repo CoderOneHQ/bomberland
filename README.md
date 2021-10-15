@@ -2,14 +2,14 @@
 
 # About
 
-[Bomberland](ttps://www.gocoder.one/bomberland?s=gh) is a 1v1 multi-agent environment inspired by the classic console game Bomberman.
+[Bomberland](https://www.gocoder.one/bomberland?s=gh) is a 1v1 multi-agent environment inspired by the classic console game Bomberman.
 
 Teams build intelligent agents using strategies from tree search to deep reinforcement learning. The goal is to compete in a 2D grid world collecting power-ups and placing explosives to take your opponent down.
 
 
 This repo contains starter kits for working with the game API.
 
-![Multi-agent game](https://uploads-ssl.webflow.com/5ed1e873ef82ae197179be22/6147ebda75e04416d37dad06_bomberland.gif)
+![Multi-agent game](https://www.gocoder.one/static/bomberland-529e18e676d8d28feca69f8f78a35c55.gif)
 
 # Usage
 

@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:3.8-bullseye
 
 COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
