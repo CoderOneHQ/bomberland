@@ -38,10 +38,10 @@ Starter kits in new languages should implement the simulation logic for handling
 For any help, please contact us directly on [Discord](https://discord.gg/NkfgvRN) or via [email](mailto:humans@gocoder.one).
 
 # Release Notes
-| Ver. | Changes | Binary |
-| --- | --- | --- |
-| 1065 | Added `UNITS_PER_AGENT` environment flag (See: [Docs](https://gocoder.one/docs/api-reference#%EF%B8%8F-environment-flags)) | - |
-| 974 | Added functionality: <ul><li>Reset the game without restarting engine/containers</li><li>Evaluate next state by the game engine given a state + list of actions</li></ul> See: [Docs](https://gocoder.one/docs/api-reference#-administrator-api?s=gh) | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-974)
+| Ver. | Changes | Binary | Date |
+| --- | --- | --- | --- |
+| 1065 | Added `UNITS_PER_AGENT` environment flag (See: [Docs](https://gocoder.one/docs/api-reference#%EF%B8%8F-environment-flags)) | - | 9 Oct 2021 |
+| 974 | Added functionality: <ul><li>Reset the game without restarting engine/containers</li><li>Evaluate next state by the game engine given a state + list of actions</li></ul> See: [Docs](https://gocoder.one/docs/api-reference#-administrator-api?s=gh) | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-974) | 18 Sep 2021 |
 
 # Discussion and Questions
 
