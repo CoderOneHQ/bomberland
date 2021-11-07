@@ -45,3 +45,9 @@ services:
             dockerfile: Dockerfile.dev
         volumes:
             - ./typescript:/app
+
+    cpp-agent:
+        build:
+            context: C++
+            dockerfile: Dockerfile
+            
