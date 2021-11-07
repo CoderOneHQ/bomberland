@@ -15,7 +15,7 @@
 using easywsclient::WebSocket;
 using nlohmann::json;
 
-#define _TEST_
+// #define _TEST_
 #ifdef _TEST_
 #define TEST(x, y) {std::cout << "TEST |" << x << "|" << y << "|" << std::endl;}
 #else
