@@ -29,7 +29,7 @@ docker-compose up --abort-on-container-exit --force-recreate
 | TypeScript | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Basic TypeScript starter | ❌ | Coder One |
 | TypeScript-fwd | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Includes example for using forward model simulator | ❌ | Coder One |
 | Go | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/go) | Basic Go starter | ✅ | [dtitov](https://github.com/dtitov) |
-| C++ | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/C%2B%2B) | Basic ++ starter | ✅ | [jfbogusz](https://github.com/jfbogusz) |
+| C++ | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/C%2B%2B) | Basic C++ starter | ✅ | [jfbogusz](https://github.com/jfbogusz) |
 
 # Contributing
 Contributions for Bomberland starter kits in other languages (as well improvements to existing starter kits) are welcome!
