@@ -2,7 +2,7 @@
 
 # About
 
-[Bomberland](https://www.gocoder.one/bomberland?s=gh) is a multi-agent AI competition inspired by the classic console game Bomberman.
+[Bomberland](https://www.gocoder.one/bomberland) is a multi-agent AI competition inspired by the classic console game Bomberman.
 
 Teams build intelligent agents using strategies from tree search to deep reinforcement learning. The goal is to compete in a 2D grid world collecting power-ups and placing explosives to take your opponent down.
 
@@ -12,7 +12,7 @@ This repo contains starter kits for working with the game API.
 
 # Usage
 
-See: [Documentation](https://www.gocoder.one/docs?s=gh)
+See: [Documentation](https://www.gocoder.one/docs)
 
 1. Clone or download this repo (including both `base-compose.yml` and `docker-compose.yml` files).
 1. To connect agents and run a game instance, run from the root directory:
@@ -42,11 +42,11 @@ For any help, please contact us directly on [Discord](https://discord.gg/NkfgvRN
 
 # Release Notes
 
-| Ver. | Changes                                                                                                                                                                                                                                               | Binary                                                                  | Date        |
+| Ver. | Changes                                                                                                                                                                                                                                               | Date                                                                  | Binary        |
 | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------- |
-| 1523 | Forward model bug fixes + unit move blocking on moving to same cell + reset game with a set world and prng seed (See: [Docs](https://www.gocoder.one/docs/api-reference#reset-game))                                                                  | 29 Nov 2021                                                             |
-| 1065 | Added `UNITS_PER_AGENT` environment flag (See: [Docs](https://gocoder.one/docs/api-reference#%EF%B8%8F-environment-flags))                                                                                                                            | -                                                                       | 9 Oct 2021  |
-| 974  | Added functionality: <ul><li>Reset the game without restarting engine/containers</li><li>Evaluate next state by the game engine given a state + list of actions</li></ul> See: [Docs](https://gocoder.one/docs/api-reference#-administrator-api?s=gh) | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-974) | 18 Sep 2021 |
+| 1523 | Forward model bug fixes + unit move blocking on moving to same cell + reset game with a set world and prng seed (See: [Docs](https://www.gocoder.one/docs/api-reference#reset-game)) | 29 Nov 2021  | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-1523) |
+| 1065 | Added `UNITS_PER_AGENT` environment flag (See: [Docs](https://gocoder.one/docs/api-reference#%EF%B8%8F-environment-flags))  | 9 Oct 2021 | - |
+| 974 | Added functionality: <ul><li>Reset the game without restarting engine/containers</li><li>Evaluate next state by the game engine given a state + list of actions</li></ul> See: [Docs](https://gocoder.one/docs/api-reference#-administrator-api) | 18 Sep 2021 | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-974) |
 
 # Discussion and Questions
 
