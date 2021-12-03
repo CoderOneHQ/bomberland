@@ -12,21 +12,6 @@
                 {
                     "additionalProperties": false,
                     "properties": {
-                        "type": {
-                            "enum": [
-                                "request_tick"
-                            ],
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ],
-                    "type": "object"
-                },
-                {
-                    "additionalProperties": false,
-                    "properties": {
                         "actions": {
                             "items": {
                                 "additionalProperties": false,
@@ -327,6 +312,42 @@
                         "actions",
                         "sequence_id",
                         "state",
+                        "type"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "type": {
+                            "enum": [
+                                "request_tick"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "prng_seed": {
+                            "type": "number"
+                        },
+                        "type": {
+                            "enum": [
+                                "request_game_reset"
+                            ],
+                            "type": "string"
+                        },
+                        "world_seed": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
                         "type"
                     ],
                     "type": "object"
@@ -1865,4 +1886,3 @@
         }
     }
 }
-
