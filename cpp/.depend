@@ -1,0 +1,2 @@
+easywsclient.o: easywsclient/easywsclient.cpp \
+ easywsclient/easywsclient.hpp

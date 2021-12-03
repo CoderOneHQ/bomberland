@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-server:
-        image: coderone.azurecr.io/game-server:1065
+        image: coderone.azurecr.io/game-server:1523
         volumes:
             - ./logs:/app/logs
 
@@ -48,6 +48,5 @@ services:
 
     cpp-agent:
         build:
-            context: C++
+            context: cpp
             dockerfile: Dockerfile
-            
