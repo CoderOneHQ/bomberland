@@ -76,7 +76,7 @@ void Agent::on_game_tick(int tick_nr, const json& game_state)
       const json& entities = game_state["entities"];
       for (const auto& entity: entities) 
       {
-        if (entity["type"] == "b" && entity["owner_unit_id"] == unit_id) 
+        if (entity["type"] == "b" && entity["agent_id"] == unit_id) 
         {
           int x = entity["x"], y = entity["y"];
           GameState::send_detonate(x, y, unit_id);
