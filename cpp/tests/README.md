@@ -26,7 +26,7 @@ for x in 0 1 2 3 4 5 6 7 8 9; do
     done
 done
 
-5. In directory 'C++/tests' run 
+5. In directory 'cpp/tests' run 
     python test.py
 
    The script will compare logs from agent-a with logs from agent-b in all files '*.log' in 'logs' directory. In case of any difference script will stop and point the difference.
