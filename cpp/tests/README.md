@@ -1,6 +1,6 @@
 To do tests (compare game_state calculated by C++ agent with game_state calculated by python3 agent):
 
-1. In file 'C++/game_state.hpp' uncoment line 
+1. In file 'cpp/game_state.hpp' uncoment line 
 // #define _TEST_
 
 2. In file 'python3/agent.py' add line (at the begining):
