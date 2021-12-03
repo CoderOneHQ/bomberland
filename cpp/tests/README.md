@@ -1,6 +1,6 @@
 To do tests (compare game_state calculated by C++ agent with game_state calculated by python3 agent):
 
-1. In file 'C++/game_state.hpp' uncoment line 
+1. In file 'cpp/game_state.hpp' uncoment line 
 // #define _TEST_
 
 2. In file 'python3/agent.py' add line (at the begining):
@@ -26,7 +26,7 @@ for x in 0 1 2 3 4 5 6 7 8 9; do
     done
 done
 
-5. In directory 'C++/tests' run 
+5. In directory 'cpp/tests' run 
     python test.py
 
    The script will compare logs from agent-a with logs from agent-b in all files '*.log' in 'logs' directory. In case of any difference script will stop and point the difference.

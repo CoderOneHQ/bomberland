@@ -48,5 +48,5 @@ services:
 
     cpp-agent:
         build:
-            context: C++
+            context: cpp
             dockerfile: Dockerfile
