@@ -22,11 +22,11 @@ class Agent():
         ]
         loop.run_until_complete(asyncio.wait(tasks))
 
-    # returns coordinates of the first bomb placed by a unit    
+    # returns coordinates of the first bomb placed by a unit
     def _get_bomb_to_detonate(self, unit) -> [int, int] or None:
         entities = self._client._state.get("entities")
         bombs = list(filter(lambda entity: entity.get(
-            "owner_unit_id") == unit and entity.get("type") == "b", entities))
+            "unit_id") == unit and entity.get("type") == "b", entities))
         bomb = next(iter(bombs or []), None)
         if bomb != None:
             return [bomb.get("x"), bomb.get("y")]
