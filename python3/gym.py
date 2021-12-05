@@ -7,6 +7,9 @@ class GymEnv():
     def __init__(self, fwd_model: ForwardModel):
         self._fwd = fwd_model
 
+    async def reset(self):
+        print("Resetting")
+
 
 class Gym():
     def __init__(self, fwd_model_uri: str):
@@ -16,16 +19,14 @@ class Gym():
         self.connect()
         self._environments: Dict[str, GymEnv] = {}
 
-    def connect(self):
+    async def connect(self):
         loop = asyncio.get_event_loop()
 
-        client_fwd_connection = loop.run_until_complete(
-            self._client_fwd.connect())
+        client_fwd_connection = await self._client_fwd.connect()
 
         loop = asyncio.get_event_loop()
         loop.create_task(
             self._client_fwd._handle_messages(client_fwd_connection))
-        loop.run_forever()
 
     async def _send_eval_next_state(self):
         actions = [

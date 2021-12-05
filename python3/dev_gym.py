@@ -1,3 +1,4 @@
+import asyncio
 from typing import Dict
 from gym import Gym
 import os
@@ -9,8 +10,9 @@ mock_6x6_state: Dict = {"agents": {"a": {"agent_id": "a", "unit_ids": ["c", "e",
     {"created": 0, "x": 0, "y": 3, "type": "m"}, {"created": 0, "x": 5, "y": 3, "type": "m"}, {"created": 0, "x": 4, "y": 3, "type": "m"}, {"created": 0, "x": 1, "y": 3, "type": "m"}, {"created": 0, "x": 3, "y": 5, "type": "m"}, {"created": 0, "x": 2, "y": 5, "type": "m"}, {"created": 0, "x": 5, "y": 4, "type": "m"}, {"created": 0, "x": 0, "y": 4, "type": "m"}, {"created": 0, "x": 1, "y": 1, "type": "w", "hp": 1}, {"created": 0, "x": 4, "y": 1, "type": "w", "hp": 1}, {"created": 0, "x": 3, "y": 0, "type": "w", "hp": 1}, {"created": 0, "x": 2, "y": 0, "type": "w", "hp": 1}, {"created": 0, "x": 5, "y": 5, "type": "w", "hp": 1}, {"created": 0, "x": 0, "y": 5, "type": "w", "hp": 1}, {"created": 0, "x": 4, "y": 0, "type": "w", "hp": 1}, {"created": 0, "x": 1, "y": 0, "type": "w", "hp": 1}, {"created": 0, "x": 5, "y": 0, "type": "w", "hp": 1}, {"created": 0, "x": 0, "y": 0, "type": "w", "hp": 1}], "world": {"width": 6, "height": 6}, "tick": 0, "config": {"tick_rate_hz": 10, "game_duration_ticks": 300, "fire_spawn_interval_ticks": 2}}
 
 
-def main():
+async def main():
     gym = Gym(fwd_model_uri)
+    await gym.connect()
     env = gym.make("bomberland-open-ai-gym", mock_6x6_state)
     await env.reset()
     for _ in range(100):
@@ -19,8 +21,7 @@ def main():
         if done:
             await env.reset()
     # await env.close()
-    Gym()
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
