@@ -11,7 +11,6 @@ mock_6x6_state: Dict = {"agents": {"a": {"agent_id": "a", "unit_ids": ["c", "e",
 
 def main():
     gym = Gym(fwd_model_uri)
-    await gym.connect_forward_model()
     env = gym.make("bomberland-open-ai-gym", mock_6x6_state)
     await env.reset()
     for _ in range(100):

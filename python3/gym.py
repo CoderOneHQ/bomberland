@@ -1,6 +1,11 @@
-import os
 import asyncio
+from typing import Dict
 from forward_model import ForwardModel
+
+
+class GymEnv():
+    def __init__(self, fwd_model: ForwardModel):
+        self._fwd = fwd_model
 
 
 class Gym():
@@ -9,6 +14,7 @@ class Gym():
 
         self._client_fwd.set_next_state_callback(self._on_next_game_state)
         self.connect()
+        self._environments = {}
 
     def connect(self):
         loop = asyncio.get_event_loop()
@@ -36,3 +42,9 @@ class Gym():
     async def _on_next_game_state(self, state):
         print(state)
         pass
+
+    def make(self, name: str, initial_state: Dict):
+        if self._environments.get(name) is not None:
+            raise Exception(
+                f"environment \"{name}\" has already been instantiated")
+        self._environments["name"] = GymEnv(initial_state)
