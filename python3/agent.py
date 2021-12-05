@@ -1,3 +1,4 @@
+from typing import Union
 from game_state import GameState
 import asyncio
 import random
@@ -8,11 +9,12 @@ uri = os.environ.get(
 
 actions = ["up", "down", "left", "right", "bomb", "detonate"]
 
+
 class Agent():
     def __init__(self):
         self._client = GameState(uri)
 
-        ### any initialization code can go here
+        # any initialization code can go here
         self._client.set_game_tick_callback(self._on_game_tick)
 
         loop = asyncio.get_event_loop()
@@ -23,7 +25,7 @@ class Agent():
         loop.run_until_complete(asyncio.wait(tasks))
 
     # returns coordinates of the first bomb placed by a unit
-    def _get_bomb_to_detonate(self, unit) -> [int, int] or None:
+    def _get_bomb_to_detonate(self, unit) -> Union[int, int] or None:
         entities = self._client._state.get("entities")
         bombs = list(filter(lambda entity: entity.get(
             "unit_id") == unit and entity.get("type") == "b", entities))
@@ -56,8 +58,10 @@ class Agent():
             else:
                 print(f"Unhandled action: {action} for unit {unit_id}")
 
+
 def main():
     Agent()
+
 
 if __name__ == "__main__":
     main()
