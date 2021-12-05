@@ -3,12 +3,8 @@ import asyncio
 from forward_model import ForwardModel
 
 
-fwd_model_uri = os.environ.get(
-    "FWD_MODEL_CONNECTION_STRING") or "ws://127.0.0.1:6969/?role=admin"
-
-
 class Gym():
-    def __init__(self):
+    def __init__(self, fwd_model_uri: str):
         self._client_fwd = ForwardModel(fwd_model_uri)
 
         self._client_fwd.set_next_state_callback(self._on_next_game_state)
@@ -38,5 +34,5 @@ class Gym():
         await self._client_fwd.send_next_state(1, self._client._state, actions)
 
     async def _on_next_game_state(self, state):
-        # print(state)
+        print(state)
         pass
