@@ -14,7 +14,7 @@ class Gym():
 
         self._client_fwd.set_next_state_callback(self._on_next_game_state)
         self.connect()
-        self._environments = {}
+        self._environments: Dict[str, GymEnv] = {}
 
     def connect(self):
         loop = asyncio.get_event_loop()
@@ -43,8 +43,9 @@ class Gym():
         print(state)
         pass
 
-    def make(self, name: str, initial_state: Dict):
+    def make(self, name: str, initial_state: Dict) -> GymEnv:
         if self._environments.get(name) is not None:
             raise Exception(
                 f"environment \"{name}\" has already been instantiated")
-        self._environments["name"] = GymEnv(initial_state)
+        self._environments[name] = GymEnv(initial_state)
+        return self._environments[name]
