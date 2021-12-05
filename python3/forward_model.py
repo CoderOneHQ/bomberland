@@ -6,9 +6,11 @@ class ForwardModel:
     def __init__(self, connection_string: str):
         self._connection_string = connection_string
         self._next_state_callback = None
+        self.connection = None
 
     async def close(self):
-        await self.connection.close()
+        if self.connection is not None:
+            await self.connection.close()
 
     def set_next_state_callback(self, next_state_callback):
         self._next_state_callback = next_state_callback
