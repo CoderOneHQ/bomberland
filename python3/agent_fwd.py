@@ -27,7 +27,6 @@ class Agent():
         loop = asyncio.get_event_loop()
 
         client_connection = loop.run_until_complete(self._client.connect())
-        client_fwd_connection = None
 
         client_fwd_connection = loop.run_until_complete(
             self._client_fwd.connect())

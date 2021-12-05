@@ -1,3 +1,4 @@
+import asyncio
 import json
 from typing import Dict
 from forward_model import ForwardModel
@@ -10,6 +11,7 @@ class GymEnv:
     def __init__(self, fwd_model: ForwardModel, initial_state: Dict):
         self._state = initial_state
         self._fwd = fwd_model
+        self._fwd.set_next_state_callback(self._on_next_game_state)
         self._sequenceId = 0
 
     async def reset(self) -> None:
@@ -30,6 +32,9 @@ class GymEnv:
         self._sequenceId += 1
         return self._sequenceId
 
+    async def _on_next_game_state(self, state):
+        print("mex")
+
 
 class Gym:
     def __init__(self, fwd_model_connection_string: str):
@@ -37,7 +42,10 @@ class Gym:
         self._environments = {}
 
     async def connect_forward_model(self):
-        await self._client_fwd.connect()
+        client_fwd_connection = await self._client_fwd.connect()
+        loop = asyncio.get_event_loop()
+        loop.create_task(
+            self._client_fwd._handle_messages(client_fwd_connection))
 
     def make(self, name: str, initial_state: Dict) -> GymEnv:
         if self._environments.get(name) is not None:
