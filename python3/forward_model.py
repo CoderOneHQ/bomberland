@@ -1,3 +1,4 @@
+from typing import Dict, List
 import websockets
 import json
 
@@ -63,7 +64,7 @@ class ForwardModel:
     next_state call since payloads can come back in any order
     It should ideally be unique
     """
-    async def send_next_state(self, sequence_id, game_state, actions):
+    async def send_next_state(self, sequence_id: int, game_state: Dict, actions: List[Dict]):
         game_state.pop("connection", None)
         packet = {"actions": actions,
                   "type": "evaluate_next_state", "state": game_state, "sequence_id": sequence_id}
