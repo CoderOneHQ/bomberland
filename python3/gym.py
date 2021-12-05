@@ -14,6 +14,7 @@ class GymEnv():
     async def step(self, actions):
         print(
             f"stepping with actions {json.dumps(actions, separators=(',', ':'))}")
+        return [1, 2, False, 3]
 
 
 class Gym():
