@@ -15,7 +15,8 @@ class GymEnv:
         self._sequenceId = 0
 
     async def reset(self) -> None:
-        print("resetting")
+        # print("resetting")
+        return
 
     async def step(self, actions):
         print("stepping with actions:{}".format(
