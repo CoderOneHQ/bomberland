@@ -8,10 +8,9 @@ mock_6x6_state: Dict = {"units": [{"coordinates": [0, 1], "hp":3, "inventory":{"
 
 
 class GymEnv:
-    def __init__(self, fwd_model: ForwardModel, initial_state: Dict):
+    def __init__(self, connected_fwd_model: ForwardModel, initial_state: Dict):
+        self._fwd = connected_fwd_model
         self._state = initial_state
-        self._fwd = fwd_model
-        self._fwd.set_next_state_callback(self._on_next_game_state)
         self._sequenceId = 0
 
     async def reset(self) -> None:
@@ -33,23 +32,24 @@ class GymEnv:
         self._sequenceId += 1
         return self._sequenceId
 
-    async def _on_next_game_state(self, state):
-        print("mex")
-
 
 class Gym:
     def __init__(self, fwd_model_connection_string: str):
-        self._client_fwd = ForwardModel(fwd_model_connection_string)
+        self._fwd = ForwardModel(fwd_model_connection_string)
+        self._fwd.set_next_state_callback(self._on_next_game_state)
         self._environments = {}
 
     async def connect_forward_model(self):
-        client_fwd_connection = await self._client_fwd.connect()
+        client_fwd_connection = await self._fwd.connect()
         loop = asyncio.get_event_loop()
         loop.create_task(
-            self._client_fwd._handle_messages(client_fwd_connection))
+            self._fwd._handle_messages(client_fwd_connection))
 
     def make(self, name: str, initial_state: Dict) -> GymEnv:
         if self._environments.get(name) is not None:
             raise Exception(
                 "Environment {} has already been instantiated".format(name))
-        return GymEnv(self._client_fwd, initial_state)
+        return GymEnv(self._fwd, initial_state)
+
+    async def _on_next_game_state(self, state):
+        print("mex")
