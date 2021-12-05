@@ -18,7 +18,8 @@ class GymEnv:
     async def step(self, actions):
         print("stepping with actions:{}".format(
             json.dumps(actions, separators=(',', ':'))))
-        self._fwd.send_next_state()
+        await self._fwd.send_next_state(
+            self._next_sequence_id(), self._state, actions)
         return [1, 2, 3, 4]
 
     async def close(self) -> None:
