@@ -14,8 +14,7 @@ async def main():
     gym = Gym(fwd_model_uri)
     await gym.connect()
     env = gym.make("bomberland-open-ai-gym", mock_6x6_state)
-    await env.reset()
-    for _ in range(1):
+    for _ in range(10):
         actions = []
         observation, reward, done, info = await env.step(actions)
         if done:

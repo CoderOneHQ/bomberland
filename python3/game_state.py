@@ -18,7 +18,7 @@ class GameState:
         self._tick_callback = generate_agent_action_callback
 
     async def connect(self):
-        self.connection = await websockets.client.connect(self._connection_string)
+        self.connection = await websockets.connect(self._connection_string)
         if self.connection.open:
             return self.connection
 

@@ -17,7 +17,7 @@ class ForwardModel:
         self._next_state_callback = next_state_callback
 
     async def connect(self):
-        self.connection = await websockets.client.connect(self._connection_string)
+        self.connection = await websockets.connect(self._connection_string)
         if self.connection.open:
             return self.connection
 

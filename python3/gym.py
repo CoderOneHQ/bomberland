@@ -1,6 +1,8 @@
 import asyncio
 import json
 from typing import Dict
+
+import websockets
 from forward_model import ForwardModel
 
 
