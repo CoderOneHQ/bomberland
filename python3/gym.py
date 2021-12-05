@@ -11,20 +11,16 @@ class Gym():
     def __init__(self):
         self._client_fwd = ForwardModel(fwd_model_uri)
 
-        self._client.set_game_tick_callback(self._on_game_tick)
         self._client_fwd.set_next_state_callback(self._on_next_game_state)
         self.connect()
 
     def connect(self):
         loop = asyncio.get_event_loop()
 
-        client_connection = loop.run_until_complete(self._client.connect())
-
         client_fwd_connection = loop.run_until_complete(
             self._client_fwd.connect())
 
         loop = asyncio.get_event_loop()
-        loop.create_task(self._client._handle_messages(client_connection))
         loop.create_task(
             self._client_fwd._handle_messages(client_fwd_connection))
         loop.run_forever()
