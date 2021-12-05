@@ -5,7 +5,7 @@ services:
             file: base-compose.yml
             service: python3-gym-dev
         environment:
-            - FWD_MODEL_CONNECTION_STRING=ws://fwd-server-a:6969/?role=admin
+            - FWD_MODEL_CONNECTION_STRING=ws://fwd-server:6969/?role=admin
         depends_on:
             - fwd-server
         networks:

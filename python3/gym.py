@@ -29,8 +29,10 @@ class GymEnv:
 class Gym:
     def __init__(self, fwd_model_connection_string: str):
         self._client_fwd = ForwardModel(fwd_model_connection_string)
-        self._client_fwd.connect()
         self._environments = {}
+
+    async def connect_forward_model(self):
+        await self._client_fwd.connect()
 
     def make(self, name: str, initial_state: Dict) -> GymEnv:
         if self._environments.get(name) is not None:

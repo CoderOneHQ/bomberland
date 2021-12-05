@@ -11,6 +11,7 @@ mock_6x6_state = {"units": [{"coordinates": [0, 1], "hp":3, "inventory":{"bombs"
 
 async def main():
     gym = Gym(fwd_model_uri)
+    await gym.connect_forward_model()
     env = gym.make("bomberland-open-ai-gym", mock_6x6_state)
     observation = env.reset()
     for _ in range(100):
