@@ -8,9 +8,9 @@ gym = Gym(fwd_model_uri)
 env = gym.make("CartPole-v1")
 observation = env.reset()
 for _ in range(1000):
-  action = env.action_space.sample() # your agent here (this takes random actions)
-  observation, reward, done, info = env.step(action)
+    actions = []
+    observation, reward, done, info = env.step(actions)
 
-  if done:
-    observation = env.reset()
+    if done:
+        observation = env.reset()
 env.close()

@@ -13,6 +13,7 @@ class GymEnv:
 
     def step(self, action):
         print("stepping")
+        return [1, 2, 3, 4]
 
 
 class Gym:
