@@ -5,7 +5,8 @@ from forward_model import ForwardModel
 
 
 class GymEnv():
-    def __init__(self, fwd_model: ForwardModel):
+    def __init__(self, fwd_model: ForwardModel, initial_state: Dict):
+        self._state = initial_state
         self._fwd = fwd_model
 
     async def reset(self):
@@ -14,6 +15,7 @@ class GymEnv():
     async def step(self, actions):
         print(
             f"stepping with actions {json.dumps(actions, separators=(',', ':'))}")
+        await self._fwd.send_next_state(1, self._state, actions)
         return [1, 2, False, 3]
 
 
@@ -33,18 +35,6 @@ class Gym():
         loop.create_task(
             self._client_fwd._handle_messages(client_fwd_connection))
 
-    async def _send_eval_next_state(self):
-        actions = [
-            {
-                "action": {"move": "right", "type": "move"},
-                "agent_number": 0,
-            }, {
-                "action": {"move": "left", "type": "move"},
-                "agent_number": 1,
-            }
-        ]
-        await self._client_fwd.send_next_state(1, self._client._state, actions)
-
     async def _on_next_game_state(self, state):
         print(state)
         pass
@@ -53,5 +43,5 @@ class Gym():
         if self._environments.get(name) is not None:
             raise Exception(
                 f"environment \"{name}\" has already been instantiated")
-        self._environments[name] = GymEnv(initial_state)
+        self._environments[name] = GymEnv(self._client_fwd, initial_state)
         return self._environments[name]
