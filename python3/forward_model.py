@@ -40,6 +40,9 @@ class ForwardModel:
         elif data_type == "next_game_state":
             payload = data.get("payload")
             await self._on_next_state(payload)
+        elif data_type == "game_state":
+            # no-op
+            return
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 

@@ -38,5 +38,5 @@ class Gym():
         await self._client_fwd.send_next_state(1, self._client._state, actions)
 
     async def _on_next_game_state(self, state):
-        print(state)
+        # print(state)
         pass
