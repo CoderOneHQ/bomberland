@@ -1,4 +1,5 @@
 import asyncio
+import json
 from typing import Dict
 from forward_model import ForwardModel
 
@@ -10,13 +11,16 @@ class GymEnv():
     async def reset(self):
         print("Resetting")
 
+    async def step(self, actions):
+        print(
+            f"stepping with actions {json.dumps(actions, separators=(',', ':'))}")
+
 
 class Gym():
     def __init__(self, fwd_model_uri: str):
         self._client_fwd = ForwardModel(fwd_model_uri)
 
         self._client_fwd.set_next_state_callback(self._on_next_game_state)
-        self.connect()
         self._environments: Dict[str, GymEnv] = {}
 
     async def connect(self):
