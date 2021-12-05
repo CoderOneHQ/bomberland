@@ -15,6 +15,9 @@ class GymEnv:
         print("stepping")
         return [1, 2, 3, 4]
 
+    def close(self):
+        print("closing")
+
 
 class Gym:
     def __init__(self, fwd_model_connection_string: str):
