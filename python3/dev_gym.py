@@ -1,3 +1,4 @@
+from typing import Dict
 from gym import Gym
 import os
 
