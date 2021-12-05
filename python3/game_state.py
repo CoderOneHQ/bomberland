@@ -1,6 +1,9 @@
 import asyncio
+from typing import Union
 import websockets
 import json
+
+from websockets.client import WebSocketClientProtocol
 
 _move_set = set(("up", "down", "left", "right"))
 
@@ -32,10 +35,11 @@ class GameState:
         await self._send(packet)
 
     async def send_detonate(self, x, y, unit_id: str):
-        packet = {"type": "detonate", "coordinates": [x, y], "unit_id": unit_id}
+        packet = {"type": "detonate", "coordinates": [
+            x, y], "unit_id": unit_id}
         await self._send(packet)
 
-    async def _handle_messages(self, connection: str):
+    async def _handle_messages(self, connection: WebSocketClientProtocol):
         while True:
             try:
                 raw_data = await connection.recv()
@@ -138,7 +142,7 @@ class GameState:
         else:
             print(f"Unhandled agent action recieved: {action_type}")
 
-    def _get_new_unit_coordinates(self, coordinates, move_action) -> [int, int]:
+    def _get_new_unit_coordinates(self, coordinates, move_action) -> Union[int, int]:
         [x, y] = coordinates
         if move_action == "up":
             return [x, y+1]

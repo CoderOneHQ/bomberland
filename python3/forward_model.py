@@ -33,6 +33,7 @@ class ForwardModel:
 
     async def _on_data(self, data):
         data_type = data.get("type")
+        print(data_type)
 
         if data_type == "info":
             # no operation
