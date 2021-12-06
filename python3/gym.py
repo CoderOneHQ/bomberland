@@ -42,6 +42,9 @@ class Gym():
         loop.create_task(
             self._client_fwd._handle_messages(client_fwd_connection))
 
+    async def close(self):
+        await self._client_fwd.close()
+
     async def _on_next_game_state(self, state):
         channel = state.get("sequence_id")
         self._channel_is_busy_status[channel] = False

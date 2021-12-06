@@ -11,6 +11,7 @@ mock_6x6_state: Dict = {"agents": {"a": {"agent_id": "a", "unit_ids": ["c", "e",
 
 
 def calculate_reward(state: Dict):
+    # custom reward function
     return 1
 
 
@@ -26,7 +27,7 @@ async def main():
         print(f"reward: {reward} done: {done} info: {info}")
         if done:
             await env.reset()
-    await env.close()
+    await gym.close()
 
 
 if __name__ == "__main__":
