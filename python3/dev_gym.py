@@ -10,17 +10,23 @@ mock_6x6_state: Dict = {"agents": {"a": {"agent_id": "a", "unit_ids": ["c", "e",
     {"created": 0, "x": 0, "y": 3, "type": "m"}, {"created": 0, "x": 5, "y": 3, "type": "m"}, {"created": 0, "x": 4, "y": 3, "type": "m"}, {"created": 0, "x": 1, "y": 3, "type": "m"}, {"created": 0, "x": 3, "y": 5, "type": "m"}, {"created": 0, "x": 2, "y": 5, "type": "m"}, {"created": 0, "x": 5, "y": 4, "type": "m"}, {"created": 0, "x": 0, "y": 4, "type": "m"}, {"created": 0, "x": 1, "y": 1, "type": "w", "hp": 1}, {"created": 0, "x": 4, "y": 1, "type": "w", "hp": 1}, {"created": 0, "x": 3, "y": 0, "type": "w", "hp": 1}, {"created": 0, "x": 2, "y": 0, "type": "w", "hp": 1}, {"created": 0, "x": 5, "y": 5, "type": "w", "hp": 1}, {"created": 0, "x": 0, "y": 5, "type": "w", "hp": 1}, {"created": 0, "x": 4, "y": 0, "type": "w", "hp": 1}, {"created": 0, "x": 1, "y": 0, "type": "w", "hp": 1}, {"created": 0, "x": 5, "y": 0, "type": "w", "hp": 1}, {"created": 0, "x": 0, "y": 0, "type": "w", "hp": 1}], "world": {"width": 6, "height": 6}, "tick": 0, "config": {"tick_rate_hz": 10, "game_duration_ticks": 300, "fire_spawn_interval_ticks": 2}}
 
 
+def calculate_reward(state: Dict):
+    return 1
+
+
 async def main():
     gym = Gym(fwd_model_uri)
     await gym.connect()
     env = gym.make("bomberland-open-ai-gym", mock_6x6_state)
-    for i in range(1000):
+    for i_ in range(1000):
         actions = []
-        observation, reward, done, info = await env.step(actions)
-        print(f"{i},done {done} {info}")
+        observation, done, info = await env.step(actions)
+        reward = calculate_reward(observation)
+
+        print(f"reward: {reward} done: {done} info: {info}")
         if done:
             await env.reset()
-    # await env.close()
+    await env.close()
 
 
 if __name__ == "__main__":

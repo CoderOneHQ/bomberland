@@ -9,16 +9,19 @@ from forward_model import ForwardModel
 class GymEnv():
     def __init__(self, fwd_model: ForwardModel, channel: int, initial_state: Dict, send_next_state: Callable[[Dict, List[Dict],  int], Dict]):
         self._state = initial_state
+        self._initial_state = initial_state
         self._fwd = fwd_model
         self._channel = channel
         self._send = send_next_state
 
     async def reset(self):
+        self._state = self._initial_state
         print("Resetting")
 
     async def step(self, actions):
         state = await self._send(self._state, actions, self._channel)
-        return [state.get("next_state"), 1, state.get("is_complete"), state.get("tick_result")]
+        self._state = state.get("next_state")
+        return [state.get("next_state"), state.get("is_complete"), state.get("tick_result").get("events")]
 
 
 class Gym():
