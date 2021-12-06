@@ -18,7 +18,7 @@ class GymEnv():
 
     async def step(self, actions):
         state = await self._send(self._state, actions, self._channel)
-        return [1, 2, False, 3]
+        return [state.get("next_state"), 1, state.get("is_complete"), state.get("tick_result")]
 
 
 class Gym():
