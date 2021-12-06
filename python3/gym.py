@@ -59,7 +59,7 @@ class Gym():
 
     async def _send_next_state(self, state, actions, channel: int):
         self._channel_is_busy_status[channel] = True
-        await self.__client_fwd.send_next_state(channel, state, actions)
+        await self._client_fwd.send_next_state(channel, state, actions)
         while self._channel_is_busy_status[channel] == True:
             # TODO figure out why packets are not received without some sleep
             await asyncio.sleep(0.0001)
