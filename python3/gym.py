@@ -17,11 +17,7 @@ class GymEnv():
         print("Resetting")
 
     async def step(self, actions):
-        print(
-            f"stepping with actions {json.dumps(actions, separators=(',', ':'))}")
         state = await self._send(self._state, actions, self._channel)
-        print("Result is:")
-        print(state)
         return [1, 2, False, 3]
 
 
