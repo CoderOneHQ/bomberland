@@ -23,14 +23,15 @@ docker-compose up --abort-on-container-exit --force-recreate
 
 # Starter kits
 
-| Kit            | Link                                                                      | Description                                        | Up-to-date? | Contributed by                          |
-| -------------- | ------------------------------------------------------------------------- | -------------------------------------------------- | ----------- | --------------------------------------- |
-| Python3        | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/python3)    | Basic Python3 starter                              | ✅          | Coder One                               |
-| Python3-fwd    | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/python3)    | Includes example for using forward model simulator | ❌          | Coder One                               |
-| TypeScript     | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Basic TypeScript starter                           | ❌          | Coder One                               |
-| TypeScript-fwd | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Includes example for using forward model simulator | ❌          | Coder One                               |
-| Go             | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/go)           | Basic Go starter                                   | ✅          | [dtitov](https://github.com/dtitov)     |
-| C++            | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/C%2B%2B)      | Basic C++ starter                                  | ✅          | [jfbogusz](https://github.com/jfbogusz) |
+| Kit                 | Link                                                                      | Description                                        | Up-to-date? | Contributed by                          |
+| ------------------- | ------------------------------------------------------------------------- | -------------------------------------------------- | ----------- | --------------------------------------- |
+| Python3             | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/python3)    | Basic Python3 starter                              | ✅          | Coder One                               |
+| Python3-fwd         | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/python3)    | Includes example for using forward model simulator | ✅          | Coder One                               |
+| Python3-gym-wrapper | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/python3)    | Open AI Gym wrapper                                | ✅          | Coder One                               |
+| TypeScript          | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Basic TypeScript starter                           | ❌          | Coder One                               |
+| TypeScript-fwd      | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Includes example for using forward model simulator | ❌          | Coder One                               |
+| Go                  | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/go)           | Basic Go starter                                   | ✅          | [dtitov](https://github.com/dtitov)     |
+| C++                 | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/C%2B%2B)      | Basic C++ starter                                  | ✅          | [jfbogusz](https://github.com/jfbogusz) |
 
 # Contributing
 
@@ -42,11 +43,12 @@ For any help, please contact us directly on [Discord](https://discord.gg/NkfgvRN
 
 # Release Notes
 
-| Ver. | Changes                                                                                                                                                                                                                                               | Date                                                                  | Binary        |
-| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------- |
-| 1523 | Forward model bug fixes + unit move blocking on moving to same cell + reset game with a set world and prng seed (See: [Docs](https://www.gocoder.one/docs/api-reference#reset-game)) | 29 Nov 2021  | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-1523) |
-| 1065 | Added `UNITS_PER_AGENT` environment flag (See: [Docs](https://gocoder.one/docs/api-reference#%EF%B8%8F-environment-flags))  | 9 Oct 2021 | - |
-| 974 | Added functionality: <ul><li>Reset the game without restarting engine/containers</li><li>Evaluate next state by the game engine given a state + list of actions</li></ul> See: [Docs](https://gocoder.one/docs/api-reference#-administrator-api) | 18 Sep 2021 | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-974) |
+| Ver. | Changes                                                                                                                                                                                                                                          | Date          | Binary                                                                   |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------------------------ |
+| 1555 | Changes to support open ai gym wrapper                                                                                                                                                                                                           | 6th Dev 2021  | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-1523) |
+| 1523 | Forward model bug fixes + unit move blocking on moving to same cell + reset game with a set world and prng seed (See: [Docs](https://www.gocoder.one/docs/api-reference#reset-game))                                                             | 29th Nov 2021 | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-1523) |
+| 1065 | Added `UNITS_PER_AGENT` environment flag (See: [Docs](https://gocoder.one/docs/api-reference#%EF%B8%8F-environment-flags))                                                                                                                       | 9th Oct 2021  | -                                                                        |
+| 974  | Added functionality: <ul><li>Reset the game without restarting engine/containers</li><li>Evaluate next state by the game engine given a state + list of actions</li></ul> See: [Docs](https://gocoder.one/docs/api-reference#-administrator-api) | 18th Sep 2021 | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-974)  |
 
 # Discussion and Questions
 

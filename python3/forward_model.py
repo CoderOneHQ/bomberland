@@ -1,19 +1,23 @@
-import asyncio
+from typing import Dict, List
 import websockets
 import json
-import copy
 
 
 class ForwardModel:
     def __init__(self, connection_string: str):
         self._connection_string = connection_string
         self._next_state_callback = None
+        self.connection = None
+
+    async def close(self):
+        if self.connection is not None:
+            await self.connection.close()
 
     def set_next_state_callback(self, next_state_callback):
         self._next_state_callback = next_state_callback
 
     async def connect(self):
-        self.connection = await websockets.client.connect(self._connection_string)
+        self.connection = await websockets.connect(self._connection_string)
         if self.connection.open:
             return self.connection
 
@@ -36,6 +40,9 @@ class ForwardModel:
         elif data_type == "next_game_state":
             payload = data.get("payload")
             await self._on_next_state(payload)
+        elif data_type == "game_state":
+            # no-op
+            return
         else:
             print(f"unknown packet \"{data_type}\": {data}")
 
@@ -60,7 +67,7 @@ class ForwardModel:
     next_state call since payloads can come back in any order
     It should ideally be unique
     """
-    async def send_next_state(self, sequence_id, game_state, actions):
+    async def send_next_state(self, sequence_id: int, game_state: Dict, actions: List[Dict]):
         game_state.pop("connection", None)
         packet = {"actions": actions,
                   "type": "evaluate_next_state", "state": game_state, "sequence_id": sequence_id}

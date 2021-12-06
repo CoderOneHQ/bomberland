@@ -1,0 +1,26 @@
+version: "3"
+services:
+    gym:
+        extends:
+            file: base-compose.yml
+            service: python3-gym-dev
+        environment:
+            - FWD_MODEL_CONNECTION_STRING=ws://fwd-server:6969/?role=admin
+        depends_on:
+            - fwd-server
+        networks:
+            - coderone-open-ai-gym-wrapper
+
+    fwd-server:
+        extends:
+            file: base-compose.yml
+            service: game-server
+        environment:
+            - TELEMETRY_ENABLED=0
+            - PORT=6969
+            - WORLD_SEED=1234
+            - PRNG_SEED=1234
+        networks:
+            - coderone-open-ai-gym-wrapper
+networks:
+    coderone-open-ai-gym-wrapper: null

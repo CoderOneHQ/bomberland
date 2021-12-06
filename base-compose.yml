@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-server:
-        image: coderone.azurecr.io/game-server:1523
+        image: coderone.azurecr.io/game-server:1555
         volumes:
             - ./logs:/app/logs
 
@@ -31,6 +31,12 @@ services:
         build:
             context: python3
             dockerfile: Dockerfile.fwd.dev
+        volumes:
+            - ./python3:/app
+    python3-gym-dev:
+        build:
+            context: python3
+            dockerfile: Dockerfile.gym.dev
         volumes:
             - ./python3:/app
 

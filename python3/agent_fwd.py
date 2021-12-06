@@ -1,7 +1,7 @@
+from typing import Union
 from forward_model import ForwardModel
 from game_state import GameState
 import asyncio
-import copy
 import os
 import random
 
@@ -27,7 +27,6 @@ class Agent():
         loop = asyncio.get_event_loop()
 
         client_connection = loop.run_until_complete(self._client.connect())
-        client_fwd_connection = None
 
         client_fwd_connection = loop.run_until_complete(
             self._client_fwd.connect())
@@ -38,7 +37,7 @@ class Agent():
             self._client_fwd._handle_messages(client_fwd_connection))
         loop.run_forever()
 
-    def _get_bomb_to_detonate(self, game_state) -> [int, int] or None:
+    def _get_bomb_to_detonate(self, game_state) -> Union[int, int] or None:
         agent_number = game_state.get("connection").get("agent_number")
         entities = self._client._state.get("entities")
         bombs = list(filter(lambda entity: entity.get(
