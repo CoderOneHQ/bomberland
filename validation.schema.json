@@ -1674,6 +1674,9 @@
                         "payload": {
                             "additionalProperties": false,
                             "properties": {
+                                "is_complete": {
+                                    "type": "boolean"
+                                },
                                 "next_state": {
                                     "additionalProperties": false,
                                     "properties": {
@@ -1861,11 +1864,382 @@
                                 },
                                 "sequence_id": {
                                     "type": "number"
+                                },
+                                "tick_result": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "events": {
+                                            "items": {
+                                                "anyOf": [
+                                                    {
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "agent_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "data": {
+                                                                "anyOf": [
+                                                                    {
+                                                                        "additionalProperties": false,
+                                                                        "properties": {
+                                                                            "move": {
+                                                                                "enum": [
+                                                                                    "down",
+                                                                                    "left",
+                                                                                    "right",
+                                                                                    "up"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "type": {
+                                                                                "enum": [
+                                                                                    "move"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "unit_id": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "move",
+                                                                            "type",
+                                                                            "unit_id"
+                                                                        ],
+                                                                        "type": "object"
+                                                                    },
+                                                                    {
+                                                                        "additionalProperties": false,
+                                                                        "properties": {
+                                                                            "type": {
+                                                                                "enum": [
+                                                                                    "bomb"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "unit_id": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "type",
+                                                                            "unit_id"
+                                                                        ],
+                                                                        "type": "object"
+                                                                    },
+                                                                    {
+                                                                        "additionalProperties": false,
+                                                                        "properties": {
+                                                                            "coordinates": {
+                                                                                "items": [
+                                                                                    {
+                                                                                        "type": "number"
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "number"
+                                                                                    }
+                                                                                ],
+                                                                                "maxItems": 2,
+                                                                                "minItems": 2,
+                                                                                "type": "array"
+                                                                            },
+                                                                            "type": {
+                                                                                "enum": [
+                                                                                    "detonate"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "unit_id": {
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "coordinates",
+                                                                            "type",
+                                                                            "unit_id"
+                                                                        ],
+                                                                        "type": "object"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "type": {
+                                                                "enum": [
+                                                                    "unit"
+                                                                ],
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "agent_id",
+                                                            "data",
+                                                            "type"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    {
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "data": {
+                                                                "items": [
+                                                                    {
+                                                                        "type": "number"
+                                                                    },
+                                                                    {
+                                                                        "type": "number"
+                                                                    }
+                                                                ],
+                                                                "maxItems": 2,
+                                                                "minItems": 2,
+                                                                "type": "array"
+                                                            },
+                                                            "type": {
+                                                                "enum": [
+                                                                    "entity_expired"
+                                                                ],
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "data",
+                                                            "type"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    {
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "coordinates": {
+                                                                "items": [
+                                                                    {
+                                                                        "type": "number"
+                                                                    },
+                                                                    {
+                                                                        "type": "number"
+                                                                    }
+                                                                ],
+                                                                "maxItems": 2,
+                                                                "minItems": 2,
+                                                                "type": "array"
+                                                            },
+                                                            "type": {
+                                                                "enum": [
+                                                                    "entity_state"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "updated_entity": {
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "agent_id": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "blast_diameter": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "created": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "expires": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "hp": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "a",
+                                                                            "b",
+                                                                            "bp",
+                                                                            "m",
+                                                                            "o",
+                                                                            "t",
+                                                                            "w",
+                                                                            "x"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "unit_id": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "x": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "y": {
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "created",
+                                                                    "type",
+                                                                    "x",
+                                                                    "y"
+                                                                ],
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "coordinates",
+                                                            "type",
+                                                            "updated_entity"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    {
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "data": {
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "agent_id": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "blast_diameter": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "created": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "expires": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "hp": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "type": {
+                                                                        "enum": [
+                                                                            "a",
+                                                                            "b",
+                                                                            "bp",
+                                                                            "m",
+                                                                            "o",
+                                                                            "t",
+                                                                            "w",
+                                                                            "x"
+                                                                        ],
+                                                                        "type": "string"
+                                                                    },
+                                                                    "unit_id": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "x": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "y": {
+                                                                        "type": "number"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "created",
+                                                                    "type",
+                                                                    "x",
+                                                                    "y"
+                                                                ],
+                                                                "type": "object"
+                                                            },
+                                                            "type": {
+                                                                "enum": [
+                                                                    "entity_spawned"
+                                                                ],
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "data",
+                                                            "type"
+                                                        ],
+                                                        "type": "object"
+                                                    },
+                                                    {
+                                                        "additionalProperties": false,
+                                                        "properties": {
+                                                            "data": {
+                                                                "additionalProperties": false,
+                                                                "properties": {
+                                                                    "agent_id": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "blast_diameter": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "coordinates": {
+                                                                        "items": [
+                                                                            {
+                                                                                "type": "number"
+                                                                            },
+                                                                            {
+                                                                                "type": "number"
+                                                                            }
+                                                                        ],
+                                                                        "maxItems": 2,
+                                                                        "minItems": 2,
+                                                                        "type": "array"
+                                                                    },
+                                                                    "hp": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "inventory": {
+                                                                        "additionalProperties": false,
+                                                                        "properties": {
+                                                                            "bombs": {
+                                                                                "type": "number"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "bombs"
+                                                                        ],
+                                                                        "type": "object"
+                                                                    },
+                                                                    "invulnerability": {
+                                                                        "type": "number"
+                                                                    },
+                                                                    "unit_id": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "agent_id",
+                                                                    "blast_diameter",
+                                                                    "coordinates",
+                                                                    "hp",
+                                                                    "inventory",
+                                                                    "invulnerability",
+                                                                    "unit_id"
+                                                                ],
+                                                                "type": "object"
+                                                            },
+                                                            "type": {
+                                                                "enum": [
+                                                                    "unit_state"
+                                                                ],
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "data",
+                                                            "type"
+                                                        ],
+                                                        "type": "object"
+                                                    }
+                                                ]
+                                            },
+                                            "type": "array"
+                                        },
+                                        "tick": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "events",
+                                        "tick"
+                                    ],
+                                    "type": "object"
                                 }
                             },
                             "required": [
+                                "is_complete",
                                 "next_state",
-                                "sequence_id"
+                                "sequence_id",
+                                "tick_result"
                             ],
                             "type": "object"
                         },
