@@ -12,6 +12,8 @@ This repo contains starter kits for working with the game API.
 
 # Usage
 
+## Basic usage
+
 See: [Documentation](https://www.gocoder.one/docs)
 
 1. Clone or download this repo (including both `base-compose.yml` and `docker-compose.yml` files).
@@ -20,6 +22,10 @@ See: [Documentation](https://www.gocoder.one/docs)
 ```
 docker-compose up --abort-on-container-exit --force-recreate
 ```
+
+## Open AI gym wrapper
+
+`docker-compose -f open-ai-gym-wrapper-compose.yml up --force-recreate --abort-on-container-exit`
 
 # Starter kits
 
