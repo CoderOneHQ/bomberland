@@ -213,6 +213,9 @@
                                     },
                                     "type": "array"
                                 },
+                                "game_id": {
+                                    "type": "string"
+                                },
                                 "tick": {
                                     "type": "number"
                                 },
@@ -295,6 +298,7 @@
                                 "agents",
                                 "config",
                                 "entities",
+                                "game_id",
                                 "tick",
                                 "unit_state",
                                 "world"
@@ -951,6 +955,9 @@
                                     },
                                     "type": "array"
                                 },
+                                "game_id": {
+                                    "type": "string"
+                                },
                                 "tick": {
                                     "type": "number"
                                 },
@@ -1034,6 +1041,7 @@
                                 "config",
                                 "connection",
                                 "entities",
+                                "game_id",
                                 "tick",
                                 "unit_state",
                                 "world"
@@ -1528,6 +1536,9 @@
                                             },
                                             "type": "array"
                                         },
+                                        "game_id": {
+                                            "type": "string"
+                                        },
                                         "tick": {
                                             "type": "number"
                                         },
@@ -1610,6 +1621,7 @@
                                         "agents",
                                         "config",
                                         "entities",
+                                        "game_id",
                                         "tick",
                                         "unit_state",
                                         "world"
@@ -1774,6 +1786,9 @@
                                             },
                                             "type": "array"
                                         },
+                                        "game_id": {
+                                            "type": "string"
+                                        },
                                         "tick": {
                                             "type": "number"
                                         },
@@ -1856,6 +1871,7 @@
                                         "agents",
                                         "config",
                                         "entities",
+                                        "game_id",
                                         "tick",
                                         "unit_state",
                                         "world"
