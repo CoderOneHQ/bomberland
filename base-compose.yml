@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-server:
-        image: coderone.azurecr.io/game-server:1555
+        image: coderone.azurecr.io/game-server:1608
         volumes:
             - ./logs:/app/logs
 
