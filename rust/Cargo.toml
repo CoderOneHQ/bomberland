@@ -1,0 +1,12 @@
+[package]
+name = "bomberland_starter_kit"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0.51"
+tungstenite = "0.16.0"
+url = "2.2.2"
+rand = "0.8.4"
