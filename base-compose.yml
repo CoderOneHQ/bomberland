@@ -56,3 +56,8 @@ services:
         build:
             context: cpp
             dockerfile: Dockerfile
+
+    rust-agent:
+        build:
+            context: rust
+            dockerfile: Dockerfile
