@@ -17,8 +17,8 @@ pub struct GameConnection {
 }
 
 impl GameConnection {
-    pub fn new(url: String, agent: AgentID) -> GameConnection {
-        let (socket, _) = connect(Url::parse(&url).unwrap()).expect("Can't connect");
+    pub fn new(url: &String, agent: AgentID) -> GameConnection {
+        let (socket, _) = connect(Url::parse(url).unwrap()).expect("Can't connect");
 
         Self {
             socket,

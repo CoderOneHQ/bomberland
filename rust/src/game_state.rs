@@ -33,10 +33,6 @@ impl GameState {
         }
     }
 
-    pub fn on_tick(&mut self) {
-        self.tick += 1;
-    }
-
     pub fn update_entity_state_at_coordinates(&mut self, new_state: Entity, coordinates: [u8; 2]) {
         let mut i = 0;
         while i < self.entities.len() {
