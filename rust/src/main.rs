@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::env;
 
 /// Information on the world map.
 #[derive(Serialize, Deserialize, Debug)]
@@ -77,9 +78,10 @@ pub mod packets;
 pub mod unit;
 
 fn main() -> () {
+    let conn_string = env::var("GAME_CONNECTION_STRING").unwrap_or("ws://127.0.0.1:3000/?role=agent&agentId=agentA&name=RustAgent".to_owned());
     let mut conn = game_connection::GameConnection::new(
-        "ws://127.0.0.1:3000/?role=agent&agentId=agentA&name=RustAgent".to_owned(),
-        agent::AgentID::A,
+        &conn_string,
+        if conn_string.contains("agentA") { agent::AgentID::A } else { agent::AgentID::B },
     );
-    conn.start().unwrap();
+    conn.start().expect(format!("Failed to connect to {}", conn_string).as_ref());
 }
