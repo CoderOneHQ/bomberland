@@ -38,6 +38,7 @@ docker-compose up --abort-on-container-exit --force-recreate
 | TypeScript-fwd      | [Link](https://github.com/CoderOneHQ/starter-kits/tree/master/typescript) | Includes example for using forward model simulator | ❌          | Coder One                               |
 | Go                  | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/go)           | Basic Go starter                                   | ✅          | [dtitov](https://github.com/dtitov)     |
 | C++                 | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/cpp)          | Basic C++ starter                                  | ✅          | [jfbogusz](https://github.com/jfbogusz) |
+| Rust | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/rust) | Basic Rust starter | ✅ | [K-JBoon](https://github.com/K-JBoon) |
 
 # Contributing
 
@@ -45,14 +46,14 @@ Contributions for Bomberland starter kits in other languages (as well improvemen
 
 Starter kits in new languages should implement the simulation logic for handling game state updates (see [example](https://github.com/CoderOneHQ/starter-kits/blob/master/python3/game_state.py)) and follow the [validation schema](https://github.com/CoderOneHQ/starter-kits/blob/master/validation.schema.json).
 
-For any help, please contact us directly on [Discord](https://discord.gg/NkfgvRN) or via [email](mailto:humans@gocoder.one).
+For any help, please contact us directly on [Discord](https://discord.gg/Hd8TRFKsDa) or via [email](mailto:humans@gocoder.one).
 
 # Release Notes
 
 | Ver. | Changes                                                                                                                                                                                                                                          | Date          | Binary                                                                   |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------------------------------------------------------------------ |
 | 1616 | End game fire bugfix                                                                                                                                                                                                                             | 13th Jan 2022 | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-1616) |
-| 1608 | Inject game_id into game state                                                                                                                                                                                                                   | 18th Dec 2021 | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-1608) |
+| 1608 | Inject `game_id` into game state                                                                                                                                                                                                                   | 18th Dec 2021 | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-1608) |
 | 1555 | Changes to support open ai gym wrapper                                                                                                                                                                                                           | 6th Dec 2021  | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-1555) |
 | 1523 | Forward model bug fixes + unit move blocking on moving to same cell + reset game with a set world and prng seed (See: [Docs](https://www.gocoder.one/docs/api-reference#reset-game))                                                             | 29th Nov 2021 | [Link](https://github.com/CoderOneHQ/bomberland/releases/tag/build-1523) |
 | 1065 | Added `UNITS_PER_AGENT` environment flag (See: [Docs](https://gocoder.one/docs/api-reference#%EF%B8%8F-environment-flags))                                                                                                                       | 9th Oct 2021  | -                                                                        |
@@ -60,6 +61,6 @@ For any help, please contact us directly on [Discord](https://discord.gg/NkfgvRN
 
 # Discussion and Questions
 
-Join our community on [Discord](https://discord.gg/NkfgvRN).
+Join our community on [Discord](https://discord.gg/Hd8TRFKsDa).
 
 Please let us know of any bugs or suggestions by [raising an Issue](https://github.com/CoderOneHQ/starter-kits/issues).
