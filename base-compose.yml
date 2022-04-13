@@ -3,7 +3,7 @@ services:
     game-server:
         image: coderone.azurecr.io/game-server:1663
         volumes:
-            - ./logs:/app/logs
+            - ./agents/logs:/app/logs
 
     go-agent:
         build:
@@ -20,7 +20,7 @@ services:
             context: agents/python3
             dockerfile: Dockerfile.dev
         volumes:
-            - ./python3:/app
+            - ./agents/python3:/app
 
     python3-fwd:
         build:
@@ -32,13 +32,13 @@ services:
             context: agents/python3
             dockerfile: Dockerfile.fwd.dev
         volumes:
-            - ./python3:/app
+            - ./agents/python3:/app
     python3-gym-dev:
         build:
             context: agents/python3
             dockerfile: Dockerfile.gym.dev
         volumes:
-            - ./python3:/app
+            - ./agents/python3:/app
 
     typescript-agent:
         build:
@@ -50,7 +50,7 @@ services:
             context: agents/typescript
             dockerfile: Dockerfile.dev
         volumes:
-            - ./typescript:/app
+            - ./agents/typescript:/app
 
     cpp-agent:
         build:
