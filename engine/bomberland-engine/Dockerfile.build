@@ -1,0 +1,33 @@
+FROM node:14.18.1-alpine3.11 as build
+COPY package.json /app/package.json
+COPY yarn.lock /app/yarn.lock
+
+COPY game-library/package.json /app/game-library/package.json
+COPY game-library/tsconfig.json /app/game-library/tsconfig.json
+
+
+COPY ./game-server/package.json /app/game-server/package.json
+COPY ./game-server/yarn.lock /app/game-server/yarn.lock
+
+WORKDIR /app
+RUN yarn install
+
+COPY game-library /app/game-library
+
+WORKDIR /app/game-library
+RUN yarn build
+WORKDIR /app/game-server
+RUN yarn install
+COPY ./game-server /app/game-server
+
+
+RUN yarn run test
+
+ARG ENVIRONMENT
+ENV ENVIRONMENT=${ENVIRONMENT}
+ARG BUILD
+ENV BUILD=${BUILD}
+
+RUN yarn run build
+RUN yarn run build:windows
+RUN yarn run build:linux

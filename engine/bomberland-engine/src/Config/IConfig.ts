@@ -1,0 +1,38 @@
+export interface IConfig {
+    readonly AdminRoleEnabled: boolean;
+    readonly AgentSecretIdMap: Map<string, string>;
+    readonly AmmoDurationTicks: number;
+    readonly AmmoSpawnWeighting: number;
+    readonly BlastDurationTicks: number;
+    readonly BlastPowerupDurationTicks: number;
+    readonly BlastPowerupSpawnWeighting: number;
+    readonly BombArmedTicks: number;
+    readonly BombDurationTicks: number;
+    readonly EntitySpawnProbabilityPerTick: number;
+    readonly FireSpawnIntervalTicks: number;
+    readonly GameDurationTicks: number;
+    readonly GameStartDelayMs: number;
+    readonly HookAuthToken: string | undefined;
+    readonly InitialAmmunition: number;
+    readonly InitialBlastDiameter: number;
+    readonly InitialHP: number;
+    readonly InvunerabilityTicks: number;
+    readonly IsSymmetricalMapEnabled: boolean;
+    readonly IsTelemetryEnabled: boolean;
+    readonly IsTrainingModeEnabled: boolean;
+    readonly MapHeight: number;
+    readonly MapWidth: number;
+    readonly OreBlockFrequency: number;
+    readonly Port: number;
+    readonly PrngSeed: number;
+    readonly ReplayWebhook: string | undefined;
+    readonly SaveReplayEnabled: boolean;
+    readonly ShutdownOnGameEndEnabled: boolean;
+    readonly SteelBlockFrequency: number;
+    readonly TickrateHz: number;
+    readonly TotalAgents: number;
+    readonly TournamentAgentConnectionGracePeriodMs: number | null;
+    readonly UnitsPerAgent: number;
+    readonly WoodBlockFrequency: number;
+    readonly WorldSeed: number;
+}

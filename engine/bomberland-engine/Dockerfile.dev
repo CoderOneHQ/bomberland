@@ -1,0 +1,16 @@
+FROM node:14.18.1-alpine3.11
+COPY package.json /app/package.json
+COPY yarn.lock /app/yarn.lock
+
+COPY game-library/package.json /app/game-library/package.json
+COPY game-library/tsconfig.json /app/game-library/tsconfig.json
+
+COPY ./game-server/package.json /app/game-server/package.json
+COPY ./game-server/yarn.lock /app/game-server/yarn.lock
+
+WORKDIR /app
+RUN yarn install
+
+WORKDIR /app/game-library
+ENV ENVIRONMENT=dev
+ENTRYPOINT yarn build && cd ../game-server && yarn install && yarn run start

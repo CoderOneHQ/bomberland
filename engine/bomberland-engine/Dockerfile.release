@@ -1,0 +1,6 @@
+# copy artifacts
+FROM ubuntu:20.10 as release
+COPY --from=game-server-build /app/game-server/Program /app/game-server
+WORKDIR /app
+RUN chmod +x ./game-server
+ENTRYPOINT ["/app/game-server"]
