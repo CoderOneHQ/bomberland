@@ -2,7 +2,7 @@
     "name": "@coderone/bomberland-engine",
     "version": "1.0.0",
     "author": "Matthew Duong <matt@timeweave.com.au>",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "private": true,
     "dependencies": {
         "ajv": "6.12.6",
