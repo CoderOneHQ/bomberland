@@ -2,15 +2,15 @@ FROM node:16.13.1-alpine3.11
 COPY package.json /app/package.json
 COPY yarn.lock /app/yarn.lock
 
-COPY game-library/package.json /app/game-library/package.json
-COPY game-library/tsconfig.json /app/game-library/tsconfig.json
+COPY bomberland-library/package.json /app/bomberland-library/package.json
+COPY bomberland-library/tsconfig.json /app/bomberland-library/tsconfig.json
 
-COPY ./game-server/package.json /app/game-server/package.json
-COPY ./game-server/yarn.lock /app/game-server/yarn.lock
+COPY ./bomberland-engine/package.json /app/bomberland-engine/package.json
+COPY ./bomberland-engine/yarn.lock /app/bomberland-engine/yarn.lock
 
 WORKDIR /app
 RUN yarn install
 
-WORKDIR /app/game-library
+WORKDIR /app/bomberland-library
 ENV ENVIRONMENT=dev
-ENTRYPOINT yarn build && cd ../game-server && yarn install && yarn run start
+ENTRYPOINT yarn build && cd ../bomberland-engine && yarn install && yarn run start

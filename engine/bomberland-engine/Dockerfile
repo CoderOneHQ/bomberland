@@ -2,23 +2,23 @@ FROM node:14.18.1-alpine3.11 as build
 COPY package.json /app/package.json
 COPY yarn.lock /app/yarn.lock
 
-COPY game-library/package.json /app/game-library/package.json
-COPY game-library/tsconfig.json /app/game-library/tsconfig.json
+COPY bomberland-library/package.json /app/bomberland-library/package.json
+COPY bomberland-library/tsconfig.json /app/bomberland-library/tsconfig.json
 
 
-COPY ./game-server/package.json /app/game-server/package.json
-COPY ./game-server/yarn.lock /app/game-server/yarn.lock
+COPY ./bomberland-engine/package.json /app/bomberland-engine/package.json
+COPY ./bomberland-engine/yarn.lock /app/bomberland-engine/yarn.lock
 
 WORKDIR /app
 RUN yarn install
 
-COPY game-library /app/game-library
+COPY bomberland-library /app/bomberland-library
 
-WORKDIR /app/game-library
+WORKDIR /app/bomberland-library
 RUN yarn build
-WORKDIR /app/game-server
+WORKDIR /app/bomberland-engine
 RUN yarn install
-COPY ./game-server /app/game-server
+COPY ./bomberland-engine /app/bomberland-engine
 RUN yarn run test
 
 ARG ENVIRONMENT
@@ -33,7 +33,7 @@ RUN yarn run build:osx
 
 # copy artifacts
 FROM ubuntu:20.10
-COPY --from=build /app/game-server/linux /app/game-server
+COPY --from=build /app/bomberland-engine/linux /app/bomberland-engine
 WORKDIR /app
-RUN chmod +x ./game-server
-ENTRYPOINT ["/app/game-server"]
+RUN chmod +x ./bomberland-engine
+ENTRYPOINT ["/app/bomberland-engine"]
