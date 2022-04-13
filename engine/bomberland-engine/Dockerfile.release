@@ -1,0 +1,6 @@
+# copy artifacts
+FROM ubuntu:20.10 as release
+COPY --from=bomberland-engine-build /app/bomberland-engine/Program /app/bomberland-engine
+WORKDIR /app
+RUN chmod +x ./bomberland-engine
+ENTRYPOINT ["/app/bomberland-engine"]

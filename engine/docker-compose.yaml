@@ -1,0 +1,28 @@
+version: "3"
+services:
+    bomberland-engine:
+        build:
+            context: .
+            dockerfile: ./bomberland-engine/Dockerfile.dev
+        volumes:
+            - ./bomberland-engine:/app/bomberland-engine
+            - ./bomberland-library:/app/bomberland-library
+            - bomberland-engine_node_modules:/app/bomberland-engine/node_modules
+            - bomberland-engine_output:/app/bomberland-engine/dist
+        ports:
+            - 3001:3001
+        environment:
+            - SHUTDOWN_ON_GAME_END_ENABLED=0
+            - PRNG_SEED=1234
+            - WORLD_SEED=1234
+            - TRAINING_MODE_ENABLED=0
+            - TELEMETRY_ENABLED=1
+            - ENVIRONMENT=dev
+            - BUILD=dev
+        networks:
+            - bomberland-engine-network
+volumes:
+    bomberland-engine_node_modules:
+    bomberland-engine_output:
+networks:
+    bomberland-engine-network:

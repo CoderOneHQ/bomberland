@@ -1,3 +1,5 @@
 __pycache__/
 node_modules
 typescript/dist
+engine/bomberland-engine/dist
+engine/bomberland-library/lib

@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./lib",
+        "skipLibCheck": true
+    },
+    "include": ["src/ValidationTypes/index.ts"],
+    "exclude": ["node_modules"]
+}

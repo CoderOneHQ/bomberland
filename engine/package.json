@@ -1,0 +1,14 @@
+{
+    "scripts": {
+        "build:all": "yarn workspace @coderone/bomberland-library build && yarn workspace @coderone/bomberland-engine build",
+        "build:lib": "yarn workspace @coderone/bomberland-library build",
+        "prettier": "npx prettier --write \"**/*.{js,jsx,ts,tsx}\" \"*.{js,json,md,yml,yaml}\""
+    },
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "bomberland-engine",
+            "bomberland-library"
+        ]
+    }
+}
