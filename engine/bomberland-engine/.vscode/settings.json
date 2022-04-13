@@ -7,7 +7,8 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "dist": true,
-        "coverage": true
+        "coverage": true,
+        "**/node_modules": true
     },
     "eslint.enable": false
 }
