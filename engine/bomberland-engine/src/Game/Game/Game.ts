@@ -18,7 +18,7 @@ import {
     IGameTick,
     IUnitState,
     PacketType,
-} from "@coderone/game-library";
+} from "@coderone/bomberland-library";
 import { getFilteredSameCellActions } from "./getFilteredSameCellActions";
 import { IConfig } from "../../Config/IConfig";
 

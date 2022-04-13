@@ -2,7 +2,7 @@ import express from "express";
 import ws from "ws";
 import http from "http";
 import { AbstractSocketHandler } from "./SocketHandler/AbstractSocketHandler";
-import { AdminPacket, AgentPacket, ServerPacket } from "@coderone/game-library";
+import { AdminPacket, AgentPacket, ServerPacket } from "@coderone/bomberland-library";
 import { AdminSocketHandler } from "./SocketHandler/AdminSocketHandler";
 import { attachSocketHandler, ISocketOptions } from "./SocketHandler/attachSocketHandler";
 import { ConnectionTracker } from "./ConnectionTracker";

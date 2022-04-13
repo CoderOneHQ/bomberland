@@ -1,4 +1,4 @@
-import { GameRole } from "@coderone/game-library";
+import { GameRole } from "@coderone/bomberland-library";
 
 export abstract class AbstractSocketHandler {
     public abstract AgentId: string | null;

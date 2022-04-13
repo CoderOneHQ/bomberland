@@ -23,7 +23,7 @@ import {
     NextGameStatePacket,
     PacketType,
     ServerPacket,
-} from "@coderone/game-library";
+} from "@coderone/bomberland-library";
 import { IConfig } from "../Config/IConfig";
 
 export class GameRunner {

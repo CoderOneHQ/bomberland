@@ -1,7 +1,7 @@
 import { AbstractSocketHandler } from "./SocketHandler/AbstractSocketHandler";
 import { AdminSocketHandler } from "./SocketHandler/AdminSocketHandler";
 import { AgentSocketHandler } from "./SocketHandler/AgentSocketHandler";
-import { GameRole } from "@coderone/game-library";
+import { GameRole } from "@coderone/bomberland-library";
 import { SpectatorSocketHandler } from "./SocketHandler/SpectatorSocketHandler";
 
 const getRoleWeighting = (role: GameRole): number => {

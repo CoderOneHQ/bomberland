@@ -1,4 +1,4 @@
-import { AgentPacket, EntityType, GameEventType, PacketType, UnitMove } from "@coderone/game-library";
+import { AgentPacket, EntityType, GameEventType, PacketType, UnitMove } from "@coderone/bomberland-library";
 import { CoderOneApi } from "../../Services/CoderOneApi/CoderOneApi";
 import { evaluateNextState, INextState } from "./evaluateNextState";
 import { mock15x15gameState } from "./mock15x15gameState";

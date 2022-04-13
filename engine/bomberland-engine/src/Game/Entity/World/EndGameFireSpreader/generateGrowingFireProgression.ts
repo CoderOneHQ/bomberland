@@ -1,4 +1,4 @@
-import { getCellNumberFromCoordinates } from "@coderone/game-library";
+import { getCellNumberFromCoordinates } from "@coderone/bomberland-library";
 
 enum Direction {
     Down,

@@ -1,4 +1,4 @@
-import { getCoordinatesFromCellNumber } from "@coderone/game-library";
+import { getCoordinatesFromCellNumber } from "@coderone/bomberland-library";
 import { PRNG } from "../../Probability/Probability.types";
 import { Utilities } from "../../../Utilities";
 

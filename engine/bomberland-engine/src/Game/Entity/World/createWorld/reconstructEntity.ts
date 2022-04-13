@@ -1,4 +1,4 @@
-import { IEntity, EntityType } from "@coderone/game-library";
+import { IEntity, EntityType } from "@coderone/bomberland-library";
 import { IConfig } from "../../../../Config/IConfig";
 import { GameTicker } from "../../../Game/GameTicker";
 import { AbstractEntity } from "../../AbstractEntity";

@@ -1,5 +1,5 @@
 import { AbstractEntity } from "./AbstractEntity";
-import { EntityType } from "@coderone/game-library";
+import { EntityType } from "@coderone/bomberland-library";
 import { MetalBlockEntity } from "./MetalBlockEntity";
 import { OreBlockEntity } from "./OreBlockEntity";
 import { WoodBlockEntity } from "./WoodBlockEntity";

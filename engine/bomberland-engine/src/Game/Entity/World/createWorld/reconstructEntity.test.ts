@@ -1,4 +1,4 @@
-import { EntityType, getCellNumberFromCoordinates, IEntity } from "@coderone/game-library";
+import { EntityType, getCellNumberFromCoordinates, IEntity } from "@coderone/bomberland-library";
 import { getConfig } from "../../../../Config/getConfig";
 import { mock6x6GameState } from "../../../../mocks/mock6x6GameState";
 import { GameTicker } from "../../../Game/GameTicker";

@@ -1,4 +1,4 @@
-import { EntityType, getCoordinatesFromCellNumber, IEntity } from "@coderone/game-library";
+import { EntityType, getCoordinatesFromCellNumber, IEntity } from "@coderone/bomberland-library";
 import { Telemetry } from "../../Services/Telemetry";
 
 const noBlockEntitites = new Set<EntityType>([EntityType.Ammo, EntityType.TreasureChest, EntityType.Blast, EntityType.BlastPowerup]);

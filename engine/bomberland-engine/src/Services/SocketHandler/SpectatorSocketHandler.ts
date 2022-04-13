@@ -1,7 +1,7 @@
 import ws from "ws";
 import { AbstractSocketHandler } from "./AbstractSocketHandler";
 import { ConnectionTracker } from "../ConnectionTracker";
-import { GameRole } from "@coderone/game-library";
+import { GameRole } from "@coderone/bomberland-library";
 import { Telemetry } from "../Telemetry";
 
 export class SpectatorSocketHandler extends AbstractSocketHandler {

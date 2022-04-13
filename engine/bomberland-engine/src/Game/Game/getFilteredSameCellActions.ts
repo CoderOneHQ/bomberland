@@ -1,4 +1,4 @@
-import { AgentMovePacket, getCellNumberFromCoordinates, UnitMove } from "@coderone/game-library";
+import { AgentMovePacket, getCellNumberFromCoordinates, UnitMove } from "@coderone/bomberland-library";
 import { Telemetry } from "../../Services/Telemetry";
 import { Unit } from "../Unit/Unit";
 

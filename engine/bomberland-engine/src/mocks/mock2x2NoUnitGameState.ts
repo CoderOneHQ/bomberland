@@ -1,4 +1,4 @@
-import { EntityType, IGameState } from "@coderone/game-library";
+import { EntityType, IGameState } from "@coderone/bomberland-library";
 
 export const mock2x2NoUnitGameState: Omit<IGameState, "connection"> = {
     game_id: "test",

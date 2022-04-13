@@ -1,4 +1,4 @@
-import { EndGameStatePacket } from "@coderone/game-library";
+import { EndGameStatePacket } from "@coderone/bomberland-library";
 import { EngineTelemetryEvent } from "./EngineTelemetryEvent";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";

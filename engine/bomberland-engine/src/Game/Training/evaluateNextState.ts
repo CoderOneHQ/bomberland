@@ -1,4 +1,4 @@
-import { AgentPacket, IGameState, IGameTick } from "@coderone/game-library";
+import { AgentPacket, IGameState, IGameTick } from "@coderone/bomberland-library";
 import { createGameFromState } from "../Game/createGameFromState";
 import { Telemetry } from "../../Services/Telemetry";
 export interface INextState {

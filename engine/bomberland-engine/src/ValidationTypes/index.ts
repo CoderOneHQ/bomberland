@@ -1,4 +1,4 @@
-import { AdminPacket, AgentPacket, ServerPacket } from "@coderone/game-library";
+import { AdminPacket, AgentPacket, ServerPacket } from "@coderone/bomberland-library";
 import { IHashMapObject as X } from "./IHashMapObject";
 
 export type ValidAdminPacket = AdminPacket;

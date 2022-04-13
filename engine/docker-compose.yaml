@@ -10,7 +10,7 @@ services:
             - bomberland-engine_node_modules:/app/bomberland-engine/node_modules
             - bomberland-engine_output:/app/bomberland-engine/dist
         ports:
-            - 3000:3000
+            - 3001:3001
         environment:
             - SHUTDOWN_ON_GAME_END_ENABLED=0
             - PRNG_SEED=1234

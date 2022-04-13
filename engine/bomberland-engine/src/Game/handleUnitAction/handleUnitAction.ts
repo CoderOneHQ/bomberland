@@ -1,5 +1,5 @@
 import { Unit } from "../Unit/Unit";
-import { UnitMove, AgentMovePacket, AgentPacket, EntityType, getCellNumberFromCoordinates, PacketType } from "@coderone/game-library";
+import { UnitMove, AgentMovePacket, AgentPacket, EntityType, getCellNumberFromCoordinates, PacketType } from "@coderone/bomberland-library";
 import { BlastEntity } from "../Entity/BlastEntity";
 import { GameTicker } from "../Game/GameTicker";
 import { Telemetry } from "../../Services/Telemetry";

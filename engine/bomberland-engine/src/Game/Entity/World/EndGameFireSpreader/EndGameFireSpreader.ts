@@ -1,6 +1,6 @@
 import { BlastEntity } from "../../BlastEntity";
 import { BombEntity } from "../../BombEntity";
-import { EntityType, GameEvent, getCoordinatesFromCellNumber } from "@coderone/game-library";
+import { EntityType, GameEvent, getCoordinatesFromCellNumber } from "@coderone/bomberland-library";
 import { GameTicker } from "../../../Game/GameTicker";
 import { generateGrowingFireProgression } from "./generateGrowingFireProgression";
 import { World } from "../World";

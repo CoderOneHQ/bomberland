@@ -1,4 +1,4 @@
-import { EntityType, IEntity } from "@coderone/game-library";
+import { EntityType, IEntity } from "@coderone/bomberland-library";
 import { getConfig } from "../../Config/getConfig";
 import { AmmoEntity } from "./AmmoEntity";
 

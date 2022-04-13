@@ -1,6 +1,6 @@
 import ws from "ws";
 import { AbstractSocketHandler } from "./AbstractSocketHandler";
-import { AgentPacket, GameRole } from "@coderone/game-library";
+import { AgentPacket, GameRole } from "@coderone/bomberland-library";
 import { ConnectionTracker } from "../ConnectionTracker";
 import { Telemetry } from "../Telemetry";
 import { validatePacket } from "../../validatePacket";

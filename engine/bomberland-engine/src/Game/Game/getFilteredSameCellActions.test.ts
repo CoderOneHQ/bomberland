@@ -1,4 +1,4 @@
-import { AgentMovePacket, PacketType, UnitMove } from "@coderone/game-library";
+import { AgentMovePacket, PacketType, UnitMove } from "@coderone/bomberland-library";
 import { getConfig } from "../../Config/getConfig";
 import { CoderOneApi } from "../../Services/CoderOneApi/CoderOneApi";
 import { Telemetry } from "../../Services/Telemetry";

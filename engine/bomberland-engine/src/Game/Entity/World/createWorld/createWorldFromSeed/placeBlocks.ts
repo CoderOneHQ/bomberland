@@ -1,7 +1,7 @@
 import { AbstractEntity } from "../../../AbstractEntity";
 import { createBlockEntity } from "../../../createBlockEntity";
 import { EmptyCellTracker } from "../../EmptyCellTracker";
-import { EntityType } from "@coderone/game-library";
+import { EntityType } from "@coderone/bomberland-library";
 import { IConfig } from "../../../../../Config/IConfig";
 
 const placeBlock = (

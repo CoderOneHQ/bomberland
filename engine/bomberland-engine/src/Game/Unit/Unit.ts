@@ -1,4 +1,4 @@
-import { getCellNumberFromCoordinates, IUnitState } from "@coderone/game-library";
+import { getCellNumberFromCoordinates, IUnitState } from "@coderone/bomberland-library";
 import { IConfig } from "../../Config/IConfig";
 
 export class Unit {

@@ -1,6 +1,6 @@
 import { Unit } from "../../../../Unit/Unit";
 import { EmptyCellTracker } from "../../EmptyCellTracker";
-import { getCoordinatesFromCellNumber } from "@coderone/game-library";
+import { getCoordinatesFromCellNumber } from "@coderone/bomberland-library";
 import { IdCounter } from "./IdCounter";
 import { IConfig } from "../../../../../Config/IConfig";
 

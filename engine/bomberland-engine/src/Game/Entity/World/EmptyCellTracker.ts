@@ -1,5 +1,5 @@
 import { CellReserver } from "./CellReserver";
-import { getCellNumberFromCoordinates, getCoordinatesFromCellNumber } from "@coderone/game-library";
+import { getCellNumberFromCoordinates, getCoordinatesFromCellNumber } from "@coderone/bomberland-library";
 import { horizontallyReflectCellNumber } from "./cellFunctions/horizontallyReflectCellNumber";
 import { PRNG } from "../../Probability/Probability.types";
 import { Utilities } from "../../../Utilities";

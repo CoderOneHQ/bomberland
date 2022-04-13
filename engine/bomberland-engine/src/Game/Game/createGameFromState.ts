@@ -1,7 +1,7 @@
 import { Game } from "./Game";
 import { GameTicker } from "./GameTicker";
 import { generateWorldFromState } from "../Entity/World/createWorld/createWorldFromState";
-import { IGameState, IUnitState } from "@coderone/game-library";
+import { IGameState, IUnitState } from "@coderone/bomberland-library";
 import { IWorldState } from "../Entity/World/World";
 import { Telemetry } from "../../Services/Telemetry";
 import { getConfig } from "../../Config/getConfig";

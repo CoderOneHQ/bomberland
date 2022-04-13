@@ -1,5 +1,5 @@
 import { AbstractEntity, IInitialEntityValues } from "./AbstractEntity";
-import { EntityType } from "@coderone/game-library";
+import { EntityType } from "@coderone/bomberland-library";
 import { Telemetry } from "../../Services/Telemetry";
 import { CoderOneApi } from "../../Services/CoderOneApi/CoderOneApi";
 import { Environment } from "../../Environment";

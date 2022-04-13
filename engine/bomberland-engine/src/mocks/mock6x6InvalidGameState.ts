@@ -1,4 +1,4 @@
-import { EntityType } from "@coderone/game-library";
+import { EntityType } from "@coderone/bomberland-library";
 import { IWorldState } from "../Game/Entity/World/World";
 
 export const mock6x6InvalidGameState: IWorldState = {

@@ -3,7 +3,7 @@ import { AbstractEntity } from "../../AbstractEntity";
 import { Unit } from "../../../Unit/Unit";
 import { CellReserver } from "../CellReserver";
 import { EmptyCellTracker } from "../EmptyCellTracker";
-import { getCellNumberFromCoordinates } from "@coderone/game-library";
+import { getCellNumberFromCoordinates } from "@coderone/bomberland-library";
 import { GameTicker } from "../../../Game/GameTicker";
 import { IWorldState, World } from "../World";
 import { PRNG } from "../../../Probability/Probability.types";

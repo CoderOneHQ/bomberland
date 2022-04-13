@@ -23,7 +23,7 @@ import {
     IEntitySpawnedEvent,
     IEntityStateEvent,
     IUnitState,
-} from "@coderone/game-library";
+} from "@coderone/bomberland-library";
 import { IConfig } from "../../../Config/IConfig";
 
 export interface IWorldState {

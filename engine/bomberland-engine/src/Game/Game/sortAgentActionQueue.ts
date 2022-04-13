@@ -1,4 +1,4 @@
-import { AgentPacket, PacketType } from "@coderone/game-library";
+import { AgentPacket, PacketType } from "@coderone/bomberland-library";
 
 /**
  * Sort order:

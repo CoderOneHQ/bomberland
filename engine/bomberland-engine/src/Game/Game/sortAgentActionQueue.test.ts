@@ -1,4 +1,4 @@
-import { AgentBombPacket, AgentDetonatePacket, AgentMovePacket, AgentPacket, PacketType, UnitMove } from "@coderone/game-library";
+import { AgentBombPacket, AgentDetonatePacket, AgentMovePacket, AgentPacket, PacketType, UnitMove } from "@coderone/bomberland-library";
 import { sortAgentActionQueue } from "./sortAgentActionQueue";
 
 type Queue = Array<[string, AgentPacket]>;

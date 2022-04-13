@@ -2,7 +2,7 @@ import { AbstractEntity } from "../../../AbstractEntity";
 import { Unit } from "../../../../Unit/Unit";
 import { CellReserver } from "../../CellReserver";
 import { EmptyCellTracker } from "../../EmptyCellTracker";
-import { EntityType } from "@coderone/game-library";
+import { EntityType } from "@coderone/bomberland-library";
 import { GameTicker } from "../../../../Game/GameTicker";
 import { placeUnits } from "./placeAgents";
 import { placeBlocks } from "./placeBlocks";
