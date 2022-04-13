@@ -19,8 +19,6 @@ services:
             - TELEMETRY_ENABLED=1
             - ENVIRONMENT=dev
             - BUILD=dev
-        depends_on:
-            - api
         networks:
             - bomberland-engine-network
 volumes:
