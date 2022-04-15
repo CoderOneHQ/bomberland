@@ -5608,10 +5608,10 @@ ts-node@^10.2.1:
     v8-compile-cache-lib "^3.0.0"
     yn "3.1.1"
 
-ts-runtime-validation@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/ts-runtime-validation/-/ts-runtime-validation-1.0.4.tgz#17270f9bcabcfa706be7601cf522cc7654ab2188"
-  integrity sha512-hbaYW3aa9zBoiw9iEup7BzGZXKh8cNSy8elyogoBAH6YALKTkAhFdt6kESqexcvs8+pIjj/eHCjyVnxZz0I+yA==
+ts-runtime-validation@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/ts-runtime-validation/-/ts-runtime-validation-1.0.5.tgz#7a72baf40c0fcbb5de04e256c46f64d38c3239fc"
+  integrity sha512-xjaT+lDMti44tPee0dmrzysw0kmr5nl9lGwBq9YQTAWwbDZtjmvLepi/DCe+BTFuW79jEsgfMBa5g0TUwj2TtA==
   dependencies:
     commander "^9.1.0"
     fdir "^5.2.0"
