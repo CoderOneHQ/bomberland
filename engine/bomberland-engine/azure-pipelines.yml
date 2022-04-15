@@ -5,8 +5,7 @@ pr:
             - master
     paths:
         include:
-            - game-library
-            - game-server
+            - engine
 trigger:
     branches:
         include:
@@ -14,16 +13,16 @@ trigger:
     paths:
         include:
             - game-library
-            - game-server
+            - bomberland-engine
 
 resources:
     - repo: self
 
 variables:
     tag: "$(Build.BuildId)"
-    serviceName: Game-server
-    servicePath: game-server
-    repository: game-server
+    serviceName: Bomberland-engine
+    servicePath: bomberland-engine
+    repository: bomberland-engine
     containerRegistryPublic: coderone-public-acr
 
 stages:
@@ -37,9 +36,9 @@ stages:
                 - script: |
                       docker build -f $(Build.SourcesDirectory)/$(servicePath)/Dockerfile $(Build.SourcesDirectory) --target build -t $(servicePath) --build-arg ENVIRONMENT=production --build-arg BUILD=$(Build.BuildId)
                       CID=$(docker create $(servicePath))
-                      docker cp ${CID}:/app/game-server/windows.exe $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-windows.exe
-                      docker cp ${CID}:/app/game-server/linux $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-linux
-                      docker cp ${CID}:/app/game-server/osx $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-osx
+                      docker cp ${CID}:/app/bomberland-engine/windows.exe $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-windows.exe
+                      docker cp ${CID}:/app/bomberland-engine/linux $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-linux
+                      docker cp ${CID}:/app/bomberland-engine/osx $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-osx
                       docker rm ${CID}
                   displayName: "Build binaries and copy to cwd"
                 - task: "PublishBuildArtifacts@1"
