@@ -34,7 +34,7 @@ stages:
             pool: Default
             steps:
                 - script: |
-                      docker build -f $(Build.SourcesDirectory)/$(servicePath)/Dockerfile $(Build.SourcesDirectory) --target build -t $(servicePath) --build-arg ENVIRONMENT=production --build-arg BUILD=$(Build.BuildId)
+                      docker build -f $(Build.SourcesDirectory)/engine/$(servicePath)/Dockerfile $(Build.SourcesDirectory)/engine --target build -t $(servicePath) --build-arg ENVIRONMENT=production --build-arg BUILD=$(Build.BuildId)
                       CID=$(docker create $(servicePath))
                       docker cp ${CID}:/app/bomberland-engine/windows.exe $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-windows.exe
                       docker cp ${CID}:/app/bomberland-engine/linux $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-linux
@@ -52,8 +52,8 @@ stages:
                   inputs:
                       command: build
                       containerRegistry: $(containerRegistryPublic)
-                      buildContext: "$(Build.SourcesDirectory)"
-                      dockerfile: "$(Build.SourcesDirectory)/$(servicePath)/Dockerfile"
+                      buildContext: "$(Build.SourcesDirectory)/engine"
+                      dockerfile: "$(Build.SourcesDirectory)/engine/$(servicePath)/Dockerfile"
                       repository: $(repository)
                       tags: |
                           $(Build.BuildId)
