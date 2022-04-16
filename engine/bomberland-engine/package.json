@@ -16,7 +16,6 @@
         "ws": "7.4.6"
     },
     "scripts": {
-        "generate-typecheck": "ts-runtime-validation",
         "check-dependencies": "depcheck",
         "build": "tsc --build tsconfig.json && yarn inject-environment",
         "build:windows": "nexe ./dist/Program.js -t=windows-x64-12.18.2 --output=windows",
@@ -43,6 +42,6 @@
         "prettier": "^2.5.1",
         "replace-in-file": "6.3.2",
         "ts-jest": "^26.4.4",
-        "ts-runtime-validation": "^1.0.5"
+        "ts-runtime-validation": "^1.1.0"
     }
 }
