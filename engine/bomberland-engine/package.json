@@ -42,6 +42,6 @@
         "prettier": "^2.5.1",
         "replace-in-file": "6.3.2",
         "ts-jest": "^26.4.4",
-        "ts-runtime-validation": "^1.1.0"
+        "ts-runtime-validation": "^1.1.1"
     }
 }
