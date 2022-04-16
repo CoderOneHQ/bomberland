@@ -1,7 +1,6 @@
 import { CoderOneApi } from "../Services/CoderOneApi/CoderOneApi";
 import { Telemetry } from "../Services/Telemetry";
-import { validatePacket } from "../validatePacket";
-import { IHashMapObject } from "../ValidationTypes/Library.types.jsonschema";
+import { IHashMapObject } from "../ValidationTypes/IHashMapObject.jsonschema";
 import { IConfig } from "./IConfig";
 
 const getFlagFromEnv = (shouldLog: boolean, key: string, fallback: boolean): boolean => {
@@ -40,7 +39,7 @@ const parse = (rawString: string): IHashMapObject | undefined => {
     const engineTelemetry = new CoderOneApi("", getConfig(), false, "");
     try {
         const json = JSON.parse(rawString);
-        if (validatePacket(new Telemetry(engineTelemetry, true), json, "#/definitions/IHashMapObject")) {
+        if (isValidSchema(new Telemetry(engineTelemetry, true), json, "#/definitions/IHashMapObject")) {
             return json;
         } else {
             return undefined;
@@ -104,3 +103,6 @@ export const getConfig = (override?: Partial<IConfig>, shouldLogEnv: boolean = f
         ...override,
     };
 };
+function isValidSchema(arg0: Telemetry, json: any, arg2: string) {
+    throw new Error("Function not implemented.");
+}
