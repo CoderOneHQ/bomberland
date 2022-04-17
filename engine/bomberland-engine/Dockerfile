@@ -7,7 +7,6 @@ COPY bomberland-library/tsconfig.json /app/bomberland-library/tsconfig.json
 
 
 COPY ./bomberland-engine/package.json /app/bomberland-engine/package.json
-COPY ./bomberland-engine/yarn.lock /app/bomberland-engine/yarn.lock
 
 WORKDIR /app
 RUN yarn install
