@@ -103,6 +103,3 @@ export const getConfig = (override?: Partial<IConfig>, shouldLogEnv: boolean = f
         ...override,
     };
 };
-function isValidSchema(arg0: Telemetry, json: any, arg2: string) {
-    throw new Error("Function not implemented.");
-}
