@@ -1,3 +1,4 @@
+import { validatePacket } from "./../validatePacket";
 import { CoderOneApi } from "../Services/CoderOneApi/CoderOneApi";
 import { Telemetry } from "../Services/Telemetry";
 import { IHashMapObject } from "../ValidationTypes/IHashMapObject.jsonschema";
@@ -39,7 +40,7 @@ const parse = (rawString: string): IHashMapObject | undefined => {
     const engineTelemetry = new CoderOneApi("", getConfig(), false, "");
     try {
         const json = JSON.parse(rawString);
-        if (isValidSchema(new Telemetry(engineTelemetry, true), json, "#/definitions/IHashMapObject")) {
+        if (validatePacket(new Telemetry(engineTelemetry, true), json, "#/definitions/IHashMapObject")) {
             return json;
         } else {
             return undefined;
