@@ -5549,10 +5549,10 @@ ts-morph@^14.0.0:
     "@ts-morph/common" "~0.13.0"
     code-block-writer "^11.0.0"
 
-ts-runtime-validation@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/ts-runtime-validation/-/ts-runtime-validation-1.1.5.tgz#9911b78a9ed43bab510c077ce626e60020c90a3b"
-  integrity sha512-zetvc6ZYc7VdQ/jomiUHcKBrf5si2+LeBTAMj/Pb+NDs68Y//uMvut/egmQGJbOX53hhEK+7SXFY6CeGoOs8xg==
+ts-runtime-validation@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ts-runtime-validation/-/ts-runtime-validation-1.2.0.tgz#4576eb33dfa84ff5cf399258f0b8a25094d681ff"
+  integrity sha512-L9KfpTPDN+jck8z66VrbK7dfj5msiFO63HzOs9sAJDEF013LuwduK8pzG+okFexZPyRerAx8sNTQTg26II2ELQ==
   dependencies:
     commander "^9.1.0"
     fdir "^5.2.0"
