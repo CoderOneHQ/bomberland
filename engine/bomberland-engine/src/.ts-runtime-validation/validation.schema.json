@@ -1,0 +1,925 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "IHashMapObject": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            }
+        },
+        "ValidAdminPacket": {
+            "$ref": "#/definitions/AdminPacket"
+        },
+        "AdminPacket": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/EvaluateNextStatePacket"
+                },
+                {
+                    "$ref": "#/definitions/RequestTickPacket"
+                },
+                {
+                    "$ref": "#/definitions/RequestGameReset"
+                }
+            ]
+        },
+        "EvaluateNextStatePacket": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "evaluate_next_state"
+                },
+                "sequence_id": {
+                    "type": "number"
+                },
+                "state": {
+                    "type": "object",
+                    "properties": {
+                        "game_id": {
+                            "type": "string"
+                        },
+                        "tick": {
+                            "type": "number"
+                        },
+                        "agents": {
+                            "$ref": "#/definitions/IAgentHashMap"
+                        },
+                        "unit_state": {
+                            "$ref": "#/definitions/IUnitStateHashMap"
+                        },
+                        "entities": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/IEntity"
+                            }
+                        },
+                        "world": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "width",
+                                "height"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "config": {
+                            "type": "object",
+                            "properties": {
+                                "game_duration_ticks": {
+                                    "type": "number"
+                                },
+                                "tick_rate_hz": {
+                                    "type": "number"
+                                },
+                                "fire_spawn_interval_ticks": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "game_duration_ticks",
+                                "tick_rate_hz",
+                                "fire_spawn_interval_ticks"
+                            ],
+                            "additionalProperties": false
+                        }
+                    },
+                    "required": [
+                        "game_id",
+                        "tick",
+                        "agents",
+                        "unit_state",
+                        "entities",
+                        "world",
+                        "config"
+                    ],
+                    "additionalProperties": false
+                },
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "agent_id": {
+                                "type": "string"
+                            },
+                            "action": {
+                                "$ref": "#/definitions/AgentPacket"
+                            }
+                        },
+                        "required": [
+                            "agent_id",
+                            "action"
+                        ],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": [
+                "type",
+                "sequence_id",
+                "state",
+                "actions"
+            ],
+            "additionalProperties": false
+        },
+        "IAgentHashMap": {
+            "type": "object",
+            "additionalProperties": {
+                "$ref": "#/definitions/IAgentState"
+            }
+        },
+        "IAgentState": {
+            "type": "object",
+            "properties": {
+                "agent_id": {
+                    "type": "string"
+                },
+                "unit_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "agent_id",
+                "unit_ids"
+            ],
+            "additionalProperties": false
+        },
+        "IUnitStateHashMap": {
+            "type": "object",
+            "additionalProperties": {
+                "$ref": "#/definitions/IUnitState"
+            }
+        },
+        "IUnitState": {
+            "type": "object",
+            "properties": {
+                "agent_id": {
+                    "type": "string"
+                },
+                "unit_id": {
+                    "type": "string"
+                },
+                "coordinates": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                "inventory": {
+                    "type": "object",
+                    "properties": {
+                        "bombs": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "bombs"
+                    ],
+                    "additionalProperties": false
+                },
+                "blast_diameter": {
+                    "type": "number"
+                },
+                "hp": {
+                    "type": "number"
+                },
+                "invulnerability": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "agent_id",
+                "unit_id",
+                "coordinates",
+                "inventory",
+                "blast_diameter",
+                "hp",
+                "invulnerability"
+            ],
+            "additionalProperties": false
+        },
+        "IEntity": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/EntityType"
+                },
+                "hp": {
+                    "type": "number"
+                },
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                },
+                "unit_id": {
+                    "type": "string"
+                },
+                "agent_id": {
+                    "type": "string"
+                },
+                "created": {
+                    "type": "number"
+                },
+                "expires": {
+                    "type": "number"
+                },
+                "blast_diameter": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "type",
+                "x",
+                "y",
+                "created"
+            ],
+            "additionalProperties": false
+        },
+        "EntityType": {
+            "type": "string",
+            "enum": [
+                "a",
+                "b",
+                "x",
+                "bp",
+                "m",
+                "o",
+                "t",
+                "w"
+            ]
+        },
+        "AgentPacket": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/AgentDetonatePacket"
+                },
+                {
+                    "$ref": "#/definitions/AgentMovePacket"
+                },
+                {
+                    "$ref": "#/definitions/AgentBombPacket"
+                }
+            ]
+        },
+        "AgentDetonatePacket": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "detonate"
+                },
+                "coordinates": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                "unit_id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "coordinates",
+                "unit_id"
+            ],
+            "additionalProperties": false
+        },
+        "AgentMovePacket": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "move"
+                },
+                "move": {
+                    "$ref": "#/definitions/UnitMove"
+                },
+                "unit_id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "move",
+                "unit_id"
+            ],
+            "additionalProperties": false
+        },
+        "UnitMove": {
+            "type": "string",
+            "enum": [
+                "up",
+                "down",
+                "left",
+                "right"
+            ]
+        },
+        "AgentBombPacket": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "bomb"
+                },
+                "unit_id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "unit_id"
+            ],
+            "additionalProperties": false
+        },
+        "RequestTickPacket": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "request_tick"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "RequestGameReset": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "request_game_reset"
+                },
+                "world_seed": {
+                    "type": "number"
+                },
+                "prng_seed": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "ValidAgentPacket": {
+            "$ref": "#/definitions/AgentPacket"
+        },
+        "ValidServerPacket": {
+            "$ref": "#/definitions/ServerPacket"
+        },
+        "ServerPacket": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/GameStatePacket"
+                },
+                {
+                    "$ref": "#/definitions/GameTickPacket"
+                },
+                {
+                    "$ref": "#/definitions/EndGameStatePacket"
+                },
+                {
+                    "$ref": "#/definitions/InfoPacket"
+                },
+                {
+                    "$ref": "#/definitions/NextGameStatePacket"
+                }
+            ]
+        },
+        "GameStatePacket": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "game_state"
+                },
+                "payload": {
+                    "$ref": "#/definitions/IGameState"
+                }
+            },
+            "required": [
+                "type",
+                "payload"
+            ],
+            "additionalProperties": false
+        },
+        "IGameState": {
+            "type": "object",
+            "properties": {
+                "game_id": {
+                    "type": "string"
+                },
+                "tick": {
+                    "type": "number"
+                },
+                "agents": {
+                    "$ref": "#/definitions/IAgentHashMap"
+                },
+                "unit_state": {
+                    "$ref": "#/definitions/IUnitStateHashMap"
+                },
+                "entities": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IEntity"
+                    }
+                },
+                "world": {
+                    "type": "object",
+                    "properties": {
+                        "width": {
+                            "type": "number"
+                        },
+                        "height": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "width",
+                        "height"
+                    ],
+                    "additionalProperties": false
+                },
+                "config": {
+                    "type": "object",
+                    "properties": {
+                        "game_duration_ticks": {
+                            "type": "number"
+                        },
+                        "tick_rate_hz": {
+                            "type": "number"
+                        },
+                        "fire_spawn_interval_ticks": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "game_duration_ticks",
+                        "tick_rate_hz",
+                        "fire_spawn_interval_ticks"
+                    ],
+                    "additionalProperties": false
+                },
+                "connection": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "number"
+                        },
+                        "role": {
+                            "$ref": "#/definitions/GameRole"
+                        },
+                        "agent_id": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "role",
+                        "agent_id"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "game_id",
+                "tick",
+                "agents",
+                "unit_state",
+                "entities",
+                "world",
+                "config",
+                "connection"
+            ],
+            "additionalProperties": false
+        },
+        "GameRole": {
+            "type": "string",
+            "enum": [
+                "admin",
+                "agent",
+                "spectator"
+            ]
+        },
+        "GameTickPacket": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "tick"
+                },
+                "payload": {
+                    "$ref": "#/definitions/IGameTick"
+                }
+            },
+            "required": [
+                "type",
+                "payload"
+            ],
+            "additionalProperties": false
+        },
+        "IGameTick": {
+            "type": "object",
+            "properties": {
+                "events": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GameEvent"
+                    }
+                },
+                "tick": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "events",
+                "tick"
+            ],
+            "additionalProperties": false
+        },
+        "GameEvent": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/IAgentActionEvent"
+                },
+                {
+                    "$ref": "#/definitions/IEntitySpawnedEvent"
+                },
+                {
+                    "$ref": "#/definitions/IEntityExpiredEvent"
+                },
+                {
+                    "$ref": "#/definitions/IAgentStateEvent"
+                },
+                {
+                    "$ref": "#/definitions/IEntityStateEvent"
+                }
+            ]
+        },
+        "IAgentActionEvent": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "unit"
+                },
+                "agent_id": {
+                    "type": "string"
+                },
+                "data": {
+                    "$ref": "#/definitions/AgentPacket"
+                }
+            },
+            "required": [
+                "type",
+                "agent_id",
+                "data"
+            ],
+            "additionalProperties": false
+        },
+        "IEntitySpawnedEvent": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "entity_spawned"
+                },
+                "data": {
+                    "$ref": "#/definitions/IEntity"
+                }
+            },
+            "required": [
+                "type",
+                "data"
+            ],
+            "additionalProperties": false
+        },
+        "IEntityExpiredEvent": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "entity_expired"
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                }
+            },
+            "required": [
+                "type",
+                "data"
+            ],
+            "additionalProperties": false
+        },
+        "IAgentStateEvent": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "unit_state"
+                },
+                "data": {
+                    "$ref": "#/definitions/IUnitState"
+                }
+            },
+            "required": [
+                "type",
+                "data"
+            ],
+            "additionalProperties": false
+        },
+        "IEntityStateEvent": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "entity_state"
+                },
+                "coordinates": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                "updated_entity": {
+                    "$ref": "#/definitions/IEntity"
+                }
+            },
+            "required": [
+                "type",
+                "coordinates",
+                "updated_entity"
+            ],
+            "additionalProperties": false
+        },
+        "EndGameStatePacket": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "endgame_state"
+                },
+                "payload": {
+                    "$ref": "#/definitions/IEndGameState"
+                }
+            },
+            "required": [
+                "type",
+                "payload"
+            ],
+            "additionalProperties": false
+        },
+        "IEndGameState": {
+            "type": "object",
+            "properties": {
+                "initial_state": {
+                    "type": "object",
+                    "properties": {
+                        "game_id": {
+                            "type": "string"
+                        },
+                        "tick": {
+                            "type": "number"
+                        },
+                        "agents": {
+                            "$ref": "#/definitions/IAgentHashMap"
+                        },
+                        "unit_state": {
+                            "$ref": "#/definitions/IUnitStateHashMap"
+                        },
+                        "entities": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/IEntity"
+                            }
+                        },
+                        "world": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "width",
+                                "height"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "config": {
+                            "type": "object",
+                            "properties": {
+                                "game_duration_ticks": {
+                                    "type": "number"
+                                },
+                                "tick_rate_hz": {
+                                    "type": "number"
+                                },
+                                "fire_spawn_interval_ticks": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "game_duration_ticks",
+                                "tick_rate_hz",
+                                "fire_spawn_interval_ticks"
+                            ],
+                            "additionalProperties": false
+                        }
+                    },
+                    "required": [
+                        "game_id",
+                        "tick",
+                        "agents",
+                        "unit_state",
+                        "entities",
+                        "world",
+                        "config"
+                    ],
+                    "additionalProperties": false
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IGameTick"
+                    }
+                },
+                "winning_agent_id": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "initial_state",
+                "history",
+                "winning_agent_id"
+            ],
+            "additionalProperties": false
+        },
+        "InfoPacket": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "info"
+                },
+                "payload": {
+                    "type": "object",
+                    "properties": {
+                        "message": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "message"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "type",
+                "payload"
+            ],
+            "additionalProperties": false
+        },
+        "NextGameStatePacket": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "next_game_state"
+                },
+                "payload": {
+                    "type": "object",
+                    "properties": {
+                        "sequence_id": {
+                            "type": "number"
+                        },
+                        "is_complete": {
+                            "type": "boolean"
+                        },
+                        "tick_result": {
+                            "$ref": "#/definitions/IGameTick"
+                        },
+                        "next_state": {
+                            "type": "object",
+                            "properties": {
+                                "game_id": {
+                                    "type": "string"
+                                },
+                                "tick": {
+                                    "type": "number"
+                                },
+                                "agents": {
+                                    "$ref": "#/definitions/IAgentHashMap"
+                                },
+                                "unit_state": {
+                                    "$ref": "#/definitions/IUnitStateHashMap"
+                                },
+                                "entities": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/IEntity"
+                                    }
+                                },
+                                "world": {
+                                    "type": "object",
+                                    "properties": {
+                                        "width": {
+                                            "type": "number"
+                                        },
+                                        "height": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "width",
+                                        "height"
+                                    ],
+                                    "additionalProperties": false
+                                },
+                                "config": {
+                                    "type": "object",
+                                    "properties": {
+                                        "game_duration_ticks": {
+                                            "type": "number"
+                                        },
+                                        "tick_rate_hz": {
+                                            "type": "number"
+                                        },
+                                        "fire_spawn_interval_ticks": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "game_duration_ticks",
+                                        "tick_rate_hz",
+                                        "fire_spawn_interval_ticks"
+                                    ],
+                                    "additionalProperties": false
+                                }
+                            },
+                            "required": [
+                                "game_id",
+                                "tick",
+                                "agents",
+                                "unit_state",
+                                "entities",
+                                "world",
+                                "config"
+                            ],
+                            "additionalProperties": false
+                        }
+                    },
+                    "required": [
+                        "sequence_id",
+                        "is_complete",
+                        "tick_result",
+                        "next_state"
+                    ],
+                    "additionalProperties": false
+                }
+            },
+            "required": [
+                "type",
+                "payload"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

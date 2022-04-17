@@ -5,7 +5,7 @@
     "license": "MIT",
     "private": true,
     "dependencies": {
-        "ajv": "6.12.6",
+        "ajv": "^8.11.0",
         "axios": "^0.25.0",
         "better-ajv-errors": "0.6.7",
         "express": "4.17.1",
@@ -16,13 +16,13 @@
         "ws": "7.4.6"
     },
     "scripts": {
-        "generate-typecheck": "typescript-json-schema \"validation-tsconfig.json\" \"*\" --out src/validation.schema.json --required --noExtraProps --refs=\"false\" && node ./.scripts/generate-typecheck-ts.js",
         "check-dependencies": "depcheck",
         "build": "tsc --build tsconfig.json && yarn inject-environment",
         "build:windows": "nexe ./dist/Program.js -t=windows-x64-12.18.2 --output=windows",
         "build:linux": "nexe ./dist/Program.js -t=12.9.1 --output=linux",
         "build:osx": "nexe ./dist/Program.js -t=mac-x64-12.9.1 --output=osx",
         "inject-environment": "cross-env replace-in-file process.env.BUILD \"'$BUILD'\" dist/Environment.js && replace-in-file process.env.ENVIRONMENT \"'$ENVIRONMENT'\" dist/Environment.js",
+        "generate-types": "ts-runtime-validation",
         "start": "tsc --build tsconfig.json && concurrently \"tsc --watch\" \"nodemon ./dist/Program.js\"",
         "test": "jest --silent",
         "test:verbose": "jest",
@@ -43,6 +43,6 @@
         "prettier": "^2.5.1",
         "replace-in-file": "6.3.2",
         "ts-jest": "^26.4.4",
-        "typescript-json-schema": "0.50.0"
+        "ts-runtime-validation": "^1.2.0"
     }
 }

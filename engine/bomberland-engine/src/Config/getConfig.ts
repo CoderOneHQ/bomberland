@@ -1,7 +1,7 @@
+import { validatePacket } from "./../validatePacket";
 import { CoderOneApi } from "../Services/CoderOneApi/CoderOneApi";
 import { Telemetry } from "../Services/Telemetry";
-import { validatePacket } from "../validatePacket";
-import { IHashMapObject } from "../ValidationTypes";
+import { IHashMapObject } from "../ValidationTypes/IHashMapObject.jsonschema";
 import { IConfig } from "./IConfig";
 
 const getFlagFromEnv = (shouldLog: boolean, key: string, fallback: boolean): boolean => {

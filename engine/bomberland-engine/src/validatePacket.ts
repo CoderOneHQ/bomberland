@@ -1,7 +1,7 @@
-import * as schema from "./validation.schema.json";
+import { ISchema, schemas } from "./.ts-runtime-validation/SchemaDefinition";
+import * as schema from "./.ts-runtime-validation/validation.schema.json";
 import Ajv, { Options } from "ajv";
 import betterAjvErrors from "better-ajv-errors";
-import { ISchema, schemas } from "./SchemaDefinition";
 import { Telemetry } from "./Services/Telemetry";
 
 const validator = new Ajv({ jsonPointers: true } as Options);
