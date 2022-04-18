@@ -1,5 +1,5 @@
 import * as React from "react";
-import { UnitMove, GameRole, GameStateClient, IEndGameState, IGameState, AdminPacket } from "@coderone/game-library";
+import { UnitMove, GameRole, GameStateClient, IEndGameState, IGameState, AdminPacket } from "@coderone/bomberland-library";
 import { GameMap } from "./GameMap/GameMap";
 import { SoundContextProvider } from "./SoundContext";
 import { ControlPane } from "./ControlPane/ControlPane";

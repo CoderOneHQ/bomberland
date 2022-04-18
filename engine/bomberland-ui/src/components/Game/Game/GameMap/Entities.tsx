@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Entity } from "./Entity/Entity";
-import { IEntity } from "@coderone/game-library";
+import { IEntity } from "@coderone/bomberland-library";
 
 interface IProps {
     readonly entities: Array<IEntity>;

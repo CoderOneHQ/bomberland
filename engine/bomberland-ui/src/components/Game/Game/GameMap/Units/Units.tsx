@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Unit } from "./Unit";
-import { IUnitState } from "@coderone/game-library";
+import { IUnitState } from "@coderone/bomberland-library";
 import { useCallback } from "react";
 
 interface IProps {

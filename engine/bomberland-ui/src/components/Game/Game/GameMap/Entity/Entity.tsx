@@ -14,7 +14,7 @@ import useSound from "use-sound";
 import woodCreateBreak3Sfx from "../../sounds/wood_crate_break3.wav";
 import woodenblock from "../svg/crate.svg";
 import { BlastDiv, BombDiv, FireDiv, ImageDiv } from "./Entity.styles";
-import { EntityType } from "@coderone/game-library";
+import { EntityType } from "@coderone/bomberland-library";
 import { SoundContext } from "../../SoundContext";
 import { useCallback, useContext, useEffect, useState } from "react";
 

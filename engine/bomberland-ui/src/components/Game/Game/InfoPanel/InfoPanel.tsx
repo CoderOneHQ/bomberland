@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
-import { IEndGameState, IGameState } from "@coderone/game-library";
+import { IEndGameState, IGameState } from "@coderone/bomberland-library";
 import { Table, HeaderColumn, TableCell, GameInfoContainer } from "./InfoPanel.styles";
 import { StatusTag, GameStatus } from "./StatusTag/StatusTag";
 import { H2 } from "../../../../../H2/H2";

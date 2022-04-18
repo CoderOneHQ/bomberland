@@ -2,7 +2,7 @@ import * as React from "react";
 import { Units } from "./Units/Units";
 import { Board } from "./Board";
 import { Entities } from "./Entities";
-import { IEndGameState, IGameState } from "@coderone/game-library";
+import { IEndGameState, IGameState } from "@coderone/bomberland-library";
 import { MapContainer } from "./GameMap.styles";
 
 interface IProps {
