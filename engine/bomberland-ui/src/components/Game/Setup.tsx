@@ -89,9 +89,6 @@ export const Setup: React.FC = () => {
         <Root>
             <ContentCard>
                 <SetupFormWrapper>
-                    <HelpTooltipWrapper>
-                        <HelpTooltip href={CoderOneRoute.DocumentationGettingStarted} label={t("howDoIConnect")} />
-                    </HelpTooltipWrapper>
                     <ChoiceGroup defaultSelectedKey={role} options={roleOptions} label="Role" required={true} onChange={onRoleChanged} />
                     <TextInput placeholder={t("host")} value={host} onChange={onHostChanged} label={t("host")} required={true} />
                     <TextInput placeholder={t("port")} value={port} onChange={onPortChanged} label={t("port")} required={true} />
