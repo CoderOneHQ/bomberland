@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Palette } from "../../../../../../../theme/Palette";
+import { Palette } from "../../../../../theme/Palette";
 
 const TagRoot = styled.span`
     border: 1px solid;
