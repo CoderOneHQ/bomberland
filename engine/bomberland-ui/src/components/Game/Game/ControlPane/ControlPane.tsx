@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
-import { AdminPacket, GameRole, IEndGameState, IGameState } from "@coderone/game-library";
+import { AdminPacket, GameRole, IEndGameState, IGameState } from "@coderone/bomberland-library";
 import { useMemo } from "react";
 import { Root } from "./ControlPane.styles";
-import { H2 } from "../../../../../H2/H2";
-import { DownloadFileButton } from "../../../../../DownloadFileButton/DownloadFileButton";
 import { SoundControl } from "../SoundControl/SoundControl";
 import { AdminControls } from "../AdminControls/AdminControls";
-import { ContentCard } from "../../../../../ContentCard/ContentCard";
+import { ContentCard } from "../../../ContentCard/ContentCard";
+import { H2 } from "../../../H2/H2";
+import { DownloadFileButton } from "../../../DownloadFileButton/DownloadFileButton";
 
 interface IProps {
     readonly state: Omit<IGameState, "connection"> | undefined;
