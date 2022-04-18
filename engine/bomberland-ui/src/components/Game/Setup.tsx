@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ChoiceGroup, IChoiceGroupOption } from "@fluentui/react";
-import { GameRole } from "@coderone/game-library";
+import { GameRole } from "@coderone/bomberland-library";
 import { Root, SetupFormWrapper, HelpTooltipWrapper } from "./Setup.styles";
 import { ContentCard } from "../../../ContentCard/ContentCard";
 import { StateButton } from "../../../StateButton/StateButton";
@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { CoderOneRoute } from "../../../Pages/CoderOneRoute";
 import { CopyToClipboardField } from "../../../CopyToClipboardField/CopyToClipboardField";
 import { navigate } from "gatsby";
-import { HelpTooltip } from "../../../HelpTooltip/HelpTooltip";
+import { HelpTooltip } from "../HelpTooltip/HelpTooltip";
 
 const getConnectionString = (role: GameRole, host: string, port: string, name: string, agentId: string) => {
     if (role === GameRole.Agent) {
