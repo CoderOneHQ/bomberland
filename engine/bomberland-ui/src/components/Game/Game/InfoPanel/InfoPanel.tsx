@@ -4,8 +4,8 @@ import { useMemo } from "react";
 import { IEndGameState, IGameState } from "@coderone/bomberland-library";
 import { Table, HeaderColumn, TableCell, GameInfoContainer } from "./InfoPanel.styles";
 import { StatusTag, GameStatus } from "./StatusTag/StatusTag";
-import { H2 } from "../../../../../H2/H2";
-import { ContentCard } from "../../../../../ContentCard/ContentCard";
+import { H2 } from "../../../H2/H2";
+import { ContentCard } from "../../../ContentCard/ContentCard";
 
 interface IProps {
     readonly state: Omit<IGameState, "connection"> | undefined;
