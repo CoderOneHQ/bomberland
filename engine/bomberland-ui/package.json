@@ -23,7 +23,8 @@
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
         "react-i18next": "^11.16.6",
-        "styled-components": "^5.3.5"
+        "styled-components": "^5.3.5",
+        "use-sound": "^2.0.1"
     },
     "devDependencies": {
         "@types/node": "^17.0.23",
