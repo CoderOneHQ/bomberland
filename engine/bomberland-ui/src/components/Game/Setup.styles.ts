@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Palette } from "../../../../theme/Palette";
+import { Palette } from "../../theme/Palette";
 
 export const Root = styled.div`
     background: ${Palette.Neutral10};
