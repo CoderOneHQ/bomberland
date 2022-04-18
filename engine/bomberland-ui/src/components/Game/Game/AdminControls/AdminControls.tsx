@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AdminPacket, IGameState, PacketType, RequestGameReset, RequestTickPacket } from "@coderone/game-library";
+import { AdminPacket, IGameState, PacketType, RequestGameReset, RequestTickPacket } from "@coderone/bomberland-library";
 import { StateButton } from "../../../StateButton/StateButton";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
