@@ -1,10 +1,8 @@
 import * as React from "react";
-import { AuthenticatedFrame } from "../../../AuthenticatedFrame/AuthenticatedFrame";
 import { Game } from "./Game/Game";
-import { SEO } from "../../../SEO/SEO";
 import { Setup } from "./Setup";
 import { useTranslation } from "react-i18next";
-import { WithAuth } from "../../../Auth/WithAuth";
+import { SEO } from "../SEO/SEO";
 
 const Bomberman: React.FC = () => {
     const urlParams = new URLSearchParams(window?.location.search);
@@ -13,12 +11,10 @@ const Bomberman: React.FC = () => {
     const description = t("gameClient");
     const title = t("gameClient");
     return (
-        <WithAuth>
-            <AuthenticatedFrame title={t("gameClient")}>
-                <SEO description={description} title={title} />
-                {connectionString !== null ? <Game connectionString={connectionString} /> : <Setup />}
-            </AuthenticatedFrame>
-        </WithAuth>
+        <>
+            <SEO description={description} title={title} />
+            {connectionString !== null ? <Game connectionString={connectionString} /> : <Setup />}
+        </>
     );
 };
 
