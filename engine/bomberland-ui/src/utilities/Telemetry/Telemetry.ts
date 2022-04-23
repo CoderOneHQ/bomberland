@@ -24,11 +24,7 @@ class Telemetry {
     };
 
     private sendTelemetry = async (event: TelemetryEvent, payload: any) => {
-        const request = axios.post(
-            `${Constants.Origin}/api/telemetry`,
-            { _initId: this.InitId, _clientId: this.ClientId, event, data: payload },
-            this.getConfig()
-        );
+        const request = axios.post(`${Constants.Origin}/api/telemetry`, { _initId: this.InitId, event, data: payload }, this.getConfig());
 
         const { data } = await request;
         return data;
@@ -38,8 +34,7 @@ class Telemetry {
         if (typeof window === "undefined") {
             return {};
         }
-        const token = window.localStorage.getItem(LocalStorageKey.AuthToken);
-        return { headers: { Authorization: `Bearer ${token}`, "x-clientId": this.ClientId, "x-initId": this.InitId } };
+        return { headers: { "x-clientId": null, "x-initId": this.InitId } };
     };
 }
 export const telemetry = new Telemetry();

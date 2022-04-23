@@ -13,14 +13,10 @@ interface IProps {
     readonly label: string;
 }
 
-const onDownloadClicked = () => {
-    telemetry.Log(TelemetryEvent.DownloadInit, null);
-};
-
 export const DownloadFileButton: React.FC<IProps> = ({ data, fileName, mediaType, label }) => {
     const dataStr = `data:${mediaType},${data}`;
     return (
-        <LinkButton onClick={onDownloadClicked} href={dataStr} download={fileName}>
+        <LinkButton href={dataStr} download={fileName}>
             {label} <DownloadIcon />
         </LinkButton>
     );
