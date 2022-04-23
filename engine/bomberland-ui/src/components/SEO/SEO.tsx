@@ -8,25 +8,12 @@ import { TelemetryEvent } from "../../utilities/Telemetry/TelemetryEvent";
 interface IProps {
     readonly title?: string;
     readonly description: string;
-    readonly socialImage?: string;
 }
 
 const maxOgTitleLength = 60;
 const ellipsis = "...";
 
-export const SEO: React.FC<IProps> = ({ title, description, socialImage }) => {
-    const staticData = useStaticQuery(graphql`
-        query {
-            file(relativePath: { eq: "default-og-image.png" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: FIXED, width: 1200, height: 675)
-                }
-            }
-        }
-    `);
-    const { file } = staticData;
-    const ogImage = socialImage ?? `https://${process.env.GATSBY_HOST}${file.childImageSharp.gatsbyImageData}`;
-
+export const SEO: React.FC<IProps> = ({ title, description }) => {
     const helmetTitle = title === undefined ? "Coder One" : `${title} | Coder One`;
     const ogTitle =
         helmetTitle.length > maxOgTitleLength ? `${helmetTitle.substring(0, maxOgTitleLength - ellipsis.length)}${ellipsis}` : helmetTitle;
@@ -57,11 +44,9 @@ export const SEO: React.FC<IProps> = ({ title, description, socialImage }) => {
             <meta name="theme-color" content="#ffffff" />
             <meta name="description" content={description} />
             <meta property="og:title" content={ogTitle} />
-            <meta property="og:image" content={ogImage} />
             <meta property="og:description" content={description} />
             <meta name="twitter:card" property="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" property="twitter:title" content={ogTitle} />
-            <meta name="twitter:image" property="twitter:image" content={ogImage} />
             <meta name="twitter:description" property="twitter:description" content={description} />
         </Helmet>
     );
