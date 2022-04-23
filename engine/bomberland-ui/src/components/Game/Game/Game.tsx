@@ -6,16 +6,16 @@ import { ControlPane } from "./ControlPane/ControlPane";
 import { InfoPanel } from "./InfoPanel/InfoPanel";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Grid, GridItem, ErrorMessageContainer, LoadingContainer, LoadingMessage } from "./Game.styles";
-import { useKeypress } from "../../../../../hooks/useKeyPress";
-import { InfoBar } from "../../../../InfoBar/InfoBar";
 import { Trans } from "react-i18next";
-import { RouterLink } from "../../../../RouterLink/RouterLink";
-import { CoderOneRoute } from "../../../../Pages/CoderOneRoute";
-import { Spinner } from "../../../../Spinner/Spinner";
-import { telemetry } from "../../../../../utilities/Telemetry/Telemetry";
-import { TelemetryEvent } from "../../../../../utilities/Telemetry/TelemetryEvent";
-import { Constants } from "../../../../../utilities/Constants";
-import { TelemetryLink } from "../../../../TelemetryLink/TelemetryLink";
+import { RouterLink } from "../../RouterLink/RouterLink";
+import { Spinner } from "../../Spinner/Spinner";
+import { TelemetryLink } from "../../TelemetryLink/TelemetryLink";
+import { useKeypress } from "../../../hooks/useKeyPress";
+import { InfoBar } from "../../InfoBar/InfoBar";
+import { telemetry } from "../../../utilities/Telemetry/Telemetry";
+import { TelemetryEvent } from "../../../utilities/Telemetry/TelemetryEvent";
+import { CoderOneRoute } from "../../../CoderOneRoute";
+import { Constants } from "../../../utilities/Constants";
 
 export enum GameKeys {
     Up = "ArrowUp",
