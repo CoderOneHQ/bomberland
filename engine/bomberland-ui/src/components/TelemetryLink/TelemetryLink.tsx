@@ -46,7 +46,9 @@ export const TelemetryLink: React.FC<IProps> = ({ href, children, target = "_sel
     );
     return (
         <StyledLink onClick={onClick} href={href} target={target}>
-            {children} {shouldShowIcon && <ExternalLinkIcon />}
+            <>
+                {children} {shouldShowIcon && <ExternalLinkIcon />}
+            </>
         </StyledLink>
     );
 };
