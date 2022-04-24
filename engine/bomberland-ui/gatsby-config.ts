@@ -9,7 +9,7 @@ const config: GatsbyConfig = {
         {
             resolve: "gatsby-plugin-express",
             options: {
-                output: "config/gatsby-express.json",
+                output: "gatsby-express.json",
             },
         },
     ],
