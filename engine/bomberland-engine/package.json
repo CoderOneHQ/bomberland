@@ -18,7 +18,7 @@
     },
     "scripts": {
         "check-dependencies": "depcheck",
-        "dev": "tsc --build tsconfig.json && concurrently \"tsc --watch\" \"nodemon ./dist/Program.js\"",
+        "dev": "tsc --build tsconfig.json && concurrently \"tsc --watch\" \"env-cmd -f dev.env nodemon --delay 2 ./dist/Program.js\"",
         "build": "tsc --build tsconfig.json && yarn inject-environment",
         "build:windows": "nexe ./dist/Program.js -t=windows-x64-12.18.2 --output=windows",
         "build:linux": "nexe ./dist/Program.js -t=12.9.1 --output=linux",
