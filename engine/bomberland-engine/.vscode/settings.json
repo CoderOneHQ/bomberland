@@ -6,9 +6,9 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/dist/**": true,
-        "**/coverage/**": true,
-        "**/node_modules/**": true
+        "**/dist": true,
+        "**/coverage": true,
+        "**/node_modules": true
     },
     "eslint.enable": false
 }
