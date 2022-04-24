@@ -11,7 +11,7 @@ import { Telemetry } from "./Services/Telemetry";
 import { CoderOneApi } from "./Services/CoderOneApi/CoderOneApi";
 import { getConfig } from "./Config/getConfig";
 import express from "express";
-import * as gatsyExpress from "gatsby-plugin-express";
+const gatsyExpress = require("gatsby-plugin-express");
 
 const config = getConfig({}, true);
 
@@ -27,6 +27,7 @@ class Program {
         this.telemetry = new Telemetry(this.engineTelemetry, config.IsTelemetryEnabled);
         this.httpServer = http.createServer(this.app);
         this.instantiateGame();
+        this.instantiateUI();
     }
 
     private instantiateGame = () => {
