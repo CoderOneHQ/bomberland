@@ -1,6 +1,5 @@
-import express from "express";
 import ws from "ws";
-import http from "http";
+import { Server } from "http";
 import { AbstractSocketHandler } from "./SocketHandler/AbstractSocketHandler";
 import { AdminPacket, AgentPacket, ServerPacket } from "@coderone/bomberland-library";
 import { AdminSocketHandler } from "./SocketHandler/AdminSocketHandler";
@@ -13,7 +12,6 @@ import { IConfig } from "../Config/IConfig";
 
 export class GameWebsocket {
     private connectionIdCounter = 0;
-    private app: express.Express;
     private wss: ws.Server;
     private onConnectionSuccess?: (connection: AbstractSocketHandler) => void;
     private onAdminAction?: (adminPayload: AdminPacket, connection: AdminSocketHandler) => void;
@@ -22,9 +20,8 @@ export class GameWebsocket {
         private telemetry: Telemetry,
         private config: IConfig,
         private connectionTracker: ConnectionTracker,
-        private port: number
+        private httpServer: Server
     ) {
-        this.app = express();
         this.wss = new ws.Server({ noServer: true });
         this.configure();
     }
@@ -32,13 +29,11 @@ export class GameWebsocket {
     private configure = () => {
         this.wss.on("connection", this.onConnection);
 
-        const server = http.createServer(this.app);
-        server.on("upgrade", (request, socket, head) => {
+        this.httpServer.on("upgrade", (request, socket, head) => {
             this.wss.handleUpgrade(request, socket as Socket, head, (socket) => {
                 this.wss.emit("connection", socket, request);
             });
         });
-        server.listen(this.port);
     };
 
     private onConnection = (connection: ws.Server, request: IncomingMessage) => {
