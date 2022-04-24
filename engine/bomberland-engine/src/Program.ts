@@ -55,12 +55,10 @@ class Program {
     private instantiateUI = () => {
         this.app.use(express.static("public/"));
         this.app.use(
-            gatsyExpress("config/gatsby-express.json", {
+            gatsyExpress("gatsby-express.json", {
                 publicDir: "public/",
                 template: "public/404/index.html",
 
-                // redirects all /path/ to /path
-                // should be used with gatsby-plugin-remove-trailing-slashes
                 redirectSlashes: true,
             })
         );
