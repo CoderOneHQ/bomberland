@@ -11,6 +11,7 @@ import { Telemetry } from "./Services/Telemetry";
 import { CoderOneApi } from "./Services/CoderOneApi/CoderOneApi";
 import { getConfig } from "./Config/getConfig";
 import express from "express";
+import * as gatsyExpress from "gatsby-plugin-express";
 
 const config = getConfig({}, true);
 
@@ -18,15 +19,17 @@ class Program {
     private engineTelemetry: CoderOneApi;
     private telemetry: Telemetry;
     private httpServer: Server;
+    private app: express.Express;
+
     public constructor() {
-        const app = express();
+        this.app = express();
         this.engineTelemetry = new CoderOneApi(Environment.Environment, config, true, Environment.Build);
         this.telemetry = new Telemetry(this.engineTelemetry, config.IsTelemetryEnabled);
-        this.httpServer = http.createServer(app);
-        this.instantiate();
+        this.httpServer = http.createServer(this.app);
+        this.instantiateGame();
     }
 
-    private instantiate = () => {
+    private instantiateGame = () => {
         checkLatestEngineVersion(Environment.Environment, Environment.Build);
         logConfig(this.engineTelemetry);
         console.log(`Bomberland game engine (build: ${Environment.Build})\n\n`);
@@ -46,6 +49,20 @@ class Program {
         );
 
         gameRunner.Start();
+    };
+
+    private instantiateUI = () => {
+        this.app.use(express.static("public/"));
+        this.app.use(
+            gatsyExpress("config/gatsby-express.json", {
+                publicDir: "public/",
+                template: "public/404/index.html",
+
+                // redirects all /path/ to /path
+                // should be used with gatsby-plugin-remove-trailing-slashes
+                redirectSlashes: true,
+            })
+        );
     };
 
     private attachErrorHandlers = () => {
