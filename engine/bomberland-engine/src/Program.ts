@@ -1,3 +1,4 @@
+import http, { Server } from "http";
 import "source-map-support/register";
 import { checkLatestEngineVersion } from "./Services/checkLatestEngineVersion";
 import { ConnectionTracker } from "./Services/ConnectionTracker";
@@ -9,30 +10,77 @@ import { sys } from "typescript";
 import { Telemetry } from "./Services/Telemetry";
 import { CoderOneApi } from "./Services/CoderOneApi/CoderOneApi";
 import { getConfig } from "./Config/getConfig";
+import express from "express";
+const gatsyExpress = require("gatsby-plugin-express");
 
 const config = getConfig({}, true);
 
-const engineTelemetry = new CoderOneApi(Environment.Environment, config, true, Environment.Build);
-const telemetry = new Telemetry(engineTelemetry, config.IsTelemetryEnabled);
+class Program {
+    private engineTelemetry: CoderOneApi;
+    private telemetry: Telemetry;
+    private httpServer: Server;
+    private app: express.Express;
 
-checkLatestEngineVersion(Environment.Environment, Environment.Build);
-logConfig(engineTelemetry);
-console.log(`Bomberland game engine (build: ${Environment.Build})\n\n`);
-
-const handle = (signal: NodeJS.Signals) => {
-    telemetry.Info(`Received signal: ${signal}`);
-    if (signal === "SIGINT" || signal === "SIGTERM") {
-        telemetry.Info(`Shutting down`);
-        sys.exit(0);
+    public constructor() {
+        this.app = express();
+        this.engineTelemetry = new CoderOneApi(Environment.Environment, config, true, Environment.Build);
+        this.telemetry = new Telemetry(this.engineTelemetry, config.IsTelemetryEnabled);
+        this.httpServer = http.createServer(this.app);
+        this.instantiateGame();
+        this.instantiateUI();
     }
-};
 
-process.on("SIGINT", handle);
-process.on("SIGTERM", handle);
+    private instantiateGame = () => {
+        checkLatestEngineVersion(Environment.Environment, Environment.Build);
+        logConfig(this.engineTelemetry);
+        console.log(`Bomberland game engine (build: ${Environment.Build})\n\n`);
 
-const connectionTracker = new ConnectionTracker();
-const socket = new GameWebsocket(telemetry, config, connectionTracker, config.Port);
+        this.attachErrorHandlers();
 
-const gameRunner = new GameRunner(telemetry, config, engineTelemetry, socket, connectionTracker, config.IsTrainingModeEnabled === true);
+        const connectionTracker = new ConnectionTracker();
+        const socket = new GameWebsocket(this.telemetry, config, connectionTracker, this.httpServer);
 
-gameRunner.Start();
+        const gameRunner = new GameRunner(
+            this.telemetry,
+            config,
+            this.engineTelemetry,
+            socket,
+            connectionTracker,
+            config.IsTrainingModeEnabled === true
+        );
+
+        gameRunner.Start();
+    };
+
+    private instantiateUI = () => {
+        this.app.use(express.static("public/"));
+        this.app.use(
+            gatsyExpress("gatsby-express.json", {
+                publicDir: "public/",
+                template: "public/404/index.html",
+
+                redirectSlashes: true,
+            })
+        );
+    };
+
+    private attachErrorHandlers = () => {
+        const handle = (signal: NodeJS.Signals) => {
+            this.telemetry.Info(`Received signal: ${signal}`);
+            if (signal === "SIGINT" || signal === "SIGTERM") {
+                this.telemetry.Info(`Shutting down`);
+                sys.exit(0);
+            }
+        };
+
+        process.on("SIGINT", handle);
+        process.on("SIGTERM", handle);
+    };
+    public Listen = () => {
+        this.httpServer.listen(config.Port);
+        this.telemetry.Info(`Open for connections on port: ${config.Port}`);
+    };
+}
+
+const engine = new Program();
+engine.Listen();

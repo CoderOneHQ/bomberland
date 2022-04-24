@@ -1,0 +1,41 @@
+{
+    "name": "@coderone/bomberland-ui",
+    "version": "1.0.0",
+    "private": true,
+    "description": "bomberland-ui",
+    "author": "Matthew",
+    "keywords": [
+        "gatsby"
+    ],
+    "scripts": {
+        "develop": "gatsby develop",
+        "start": "gatsby develop",
+        "build": "gatsby build",
+        "serve": "gatsby serve",
+        "clean": "gatsby clean",
+        "copy": "shx cp -r public ../bomberland-engine/public && shx cp gatsby-express.json ../bomberland-engine/gatsby-express.json",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@fluentui/react": "^8.65.0",
+        "babel-plugin-styled-components": "^2.0.7",
+        "gatsby": "^4.12.1",
+        "gatsby-plugin-express": "^1.1.6",
+        "gatsby-plugin-styled-components": "^5.12.1",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "react-helmet": "^6.1.0",
+        "react-i18next": "^11.16.6",
+        "styled-components": "^5.3.5",
+        "use-sound": "^2.0.1"
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.23",
+        "@types/react": "^17.0.44",
+        "@types/react-dom": "^17.0.15",
+        "@types/react-helmet": "^6.1.5",
+        "@types/styled-components": "^5.1.25",
+        "shx": "^0.3.4",
+        "typescript": "^4.6.3"
+    }
+}

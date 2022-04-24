@@ -9,6 +9,7 @@
         "axios": "^0.25.0",
         "better-ajv-errors": "0.6.7",
         "express": "4.17.1",
+        "gatsby-plugin-express": "^1.1.6",
         "jwt-decode": "^3.1.2",
         "mersenne-twister": "1.1.0",
         "source-map-support": "0.5.19",
@@ -17,6 +18,7 @@
     },
     "scripts": {
         "check-dependencies": "depcheck",
+        "dev": "tsc --build tsconfig.json && concurrently \"tsc --watch\" \"env-cmd -f dev.env nodemon --delay 2 ./dist/Program.js\"",
         "build": "tsc --build tsconfig.json && yarn inject-environment",
         "build:windows": "nexe ./dist/Program.js -t=windows-x64-12.18.2 --output=windows",
         "build:linux": "nexe ./dist/Program.js -t=12.9.1 --output=linux",
@@ -37,6 +39,7 @@
         "concurrently": "^7.0.0",
         "cross-env": "^7.0.3",
         "depcheck": "^1.4.3",
+        "env-cmd": "^10.1.0",
         "jest": "^26.6.3",
         "nexe": "^4.0.0-beta.19",
         "nodemon": "^2.0.15",

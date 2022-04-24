@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns:v="https://vecta.io/nano"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 16 16"
+	 style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#72D6CE;}
+	.st1{fill:#FDF7ED;}
+	.st2{fill:#417089;}
+	.st3{fill:#F78697;}
+	.st4{fill:#DC4A7B;}
+	.st5{fill:#222222;}
+</style>
+<path class="st0" d="M4,3h8v9H4V3z"/>
+<path class="st1" d="M10,5V3h2v2H10 M12,9V6h2v3H12 M12,12V9h-1v3H12"/>
+<path class="st2" d="M5,14H4v-2h2v1H5l0,0 M10,13v-1h2v1h-1 M12,9H7V8h5V9 M7,5H6v3h1V5 M12,4H7v1h1v2h1V5h1v2h1V5h1V4 M12,7V5h1v2
+	H12"/>
+<path class="st3" d="M9,3V2L8,1H7H5v1h1v1h1l0,0H9"/>
+<path class="st4" d="M8,3V2h1v1H8 M6,3V2H5v1h2 M5,1H3v1H2v1H1v1h2V3h2V1"/>
+<path class="st5" d="M3,5H1V4h1l0-1H1V2h1V1h1V0h5v1h2v1l0,0v1h2v1h1l0,0h1v1h1v3h-1v1h-1v5h-3v-1H6v1H5v1H3V5 M3,4V3h1V2h1v1H4v11
+	h1v-1h1v-1h4v1h2V8h2V5h-2V2h-2v1H9V2H8V1H3v1H2v1H1v1H3"/>
+<polyline class="st5" points="10,2 12,2 12,3 10,3 "/>
+<rect x="12" y="3" class="st5" width="1" height="1"/>
+<g id="Layer_2">
+</g>
+<rect x="4" y="10" class="st2" width="8" height="1"/>
+</svg>

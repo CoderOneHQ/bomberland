@@ -11,6 +11,7 @@ services:
             - bomberland-engine_output:/app/bomberland-engine/dist
         ports:
             - 3001:3001
+        env_file: bomberland-engine/dev.env
         environment:
             - SHUTDOWN_ON_GAME_END_ENABLED=0
             - PRNG_SEED=1234
