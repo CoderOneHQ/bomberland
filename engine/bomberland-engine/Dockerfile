@@ -15,9 +15,11 @@ COPY bomberland-library /app/bomberland-library
 
 WORKDIR /app/bomberland-library
 RUN yarn build
+WORKDIR /app/bomberland-ui
+RUN yarn build
 WORKDIR /app/bomberland-engine
 RUN yarn install
-COPY ./bomberland-engine /app/bomberland-engine
+COPY . /app
 RUN yarn run test
 
 ARG ENVIRONMENT
