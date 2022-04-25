@@ -11,7 +11,6 @@ import { Telemetry } from "./Services/Telemetry";
 import { CoderOneApi } from "./Services/CoderOneApi/CoderOneApi";
 import { getConfig } from "./Config/getConfig";
 import express from "express";
-const gatsyExpress = require("gatsby-plugin-express");
 
 const config = getConfig({}, true);
 
@@ -27,7 +26,9 @@ class Program {
         this.telemetry = new Telemetry(this.engineTelemetry, config.IsTelemetryEnabled);
         this.httpServer = http.createServer(this.app);
         this.instantiateGame();
-        this.instantiateUI();
+        if (config.UIEnabled) {
+            this.instantiateUI();
+        }
     }
 
     private instantiateGame = () => {
@@ -53,15 +54,7 @@ class Program {
     };
 
     private instantiateUI = () => {
-        this.app.use(express.static("public/"));
-        this.app.use(
-            gatsyExpress("gatsby-express.json", {
-                publicDir: "public/",
-                template: "public/404/index.html",
-
-                redirectSlashes: true,
-            })
-        );
+        this.app.use(express.static("public"));
     };
 
     private attachErrorHandlers = () => {

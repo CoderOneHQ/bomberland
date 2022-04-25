@@ -13,7 +13,7 @@
         "build": "gatsby build",
         "serve": "gatsby serve",
         "clean": "gatsby clean",
-        "copy": "shx cp -r public ../bomberland-engine/public && shx cp gatsby-express.json ../bomberland-engine/gatsby-express.json",
+        "copy": "shx cp -r public ../bomberland-engine/dist/public && shx cp gatsby-express.json ../bomberland-engine/dist/gatsby-express.json",
         "typecheck": "tsc --noEmit"
     },
     "dependencies": {

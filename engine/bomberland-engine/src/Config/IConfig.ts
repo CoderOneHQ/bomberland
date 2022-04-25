@@ -32,6 +32,7 @@ export interface IConfig {
     readonly TickrateHz: number;
     readonly TotalAgents: number;
     readonly TournamentAgentConnectionGracePeriodMs: number | null;
+    readonly UIEnabled: boolean;
     readonly UnitsPerAgent: number;
     readonly WoodBlockFrequency: number;
     readonly WorldSeed: number;
