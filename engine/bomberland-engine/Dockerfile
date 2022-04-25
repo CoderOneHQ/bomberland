@@ -1,34 +1,34 @@
-FROM node:14.18.1-alpine3.11 as build-ui
+# FROM node:14.18.1-alpine3.11 as build-ui
 
-RUN apk update
-RUN \
-    apk add --no-cache gcc python3 make g++ automake autoconf libtool nasm shadow musl-dev tiff jpeg zlib zlib-dev file pkgconf && \
-    apk add vips-dev fftw-dev --no-cache --repository http://dl-3.alpinelinux.org/alpine/v3.10/community --repository http://dl-3.alpinelinux.org/alpine/v3.10/main vips-dev && \
-    rm -fR /var/cache/apk/*
+# RUN apk update
+# RUN \
+#     apk add --no-cache gcc python3 make g++ automake autoconf libtool nasm shadow musl-dev tiff jpeg zlib zlib-dev file pkgconf && \
+#     apk add vips-dev fftw-dev --no-cache --repository http://dl-3.alpinelinux.org/alpine/v3.10/community --repository http://dl-3.alpinelinux.org/alpine/v3.10/main vips-dev && \
+#     rm -fR /var/cache/apk/*
 
-COPY package.json /app/package.json
-COPY yarn.lock /app/yarn.lock
+# COPY package.json /app/package.json
+# COPY yarn.lock /app/yarn.lock
 
-COPY bomberland-library/package.json /app/bomberland-library/package.json
-COPY bomberland-library/tsconfig.json /app/bomberland-library/tsconfig.json
+# COPY bomberland-library/package.json /app/bomberland-library/package.json
+# COPY bomberland-library/tsconfig.json /app/bomberland-library/tsconfig.json
 
-COPY bomberland-ui/package.json /app/bomberland-ui/package.json
+# COPY bomberland-ui/package.json /app/bomberland-ui/package.json
 
-WORKDIR /app
-RUN yarn install
+# WORKDIR /app
+# RUN yarn install
 
-COPY bomberland-library /app/bomberland-library
+# COPY bomberland-library /app/bomberland-library
 
-WORKDIR /app/bomberland-library
-RUN yarn build
-WORKDIR /app/bomberland-ui
-RUN yarn install
-COPY bomberland-ui /app/bomberland-ui
-ARG ENVIRONMENT
-ENV ENVIRONMENT=${ENVIRONMENT}
-ARG GATSBY_BUILD
-ENV GATSBY_BUILD=${GATSBY_BUILD}
-RUN yarn run build
+# WORKDIR /app/bomberland-library
+# RUN yarn build
+# WORKDIR /app/bomberland-ui
+# RUN yarn install
+# COPY bomberland-ui /app/bomberland-ui
+# ARG ENVIRONMENT
+# ENV ENVIRONMENT=${ENVIRONMENT}
+# ARG GATSBY_BUILD
+# ENV GATSBY_BUILD=${GATSBY_BUILD}
+# RUN yarn run build
 
 FROM node:16.13.2-alpine as build-engine
 COPY package.json /app/package.json
@@ -38,7 +38,8 @@ COPY bomberland-library/package.json /app/bomberland-library/package.json
 COPY bomberland-library/tsconfig.json /app/bomberland-library/tsconfig.json
 
 
-COPY ./bomberland-engine/package.json /app/bomberland-engine/package.json
+COPY bomberland-engine/package.json /app/bomberland-engine/package.json
+COPY bomberland-engine/tsconfig.json /app/bomberland-engine/tsconfig.json
 
 WORKDIR /app
 RUN yarn install
