@@ -11,6 +11,7 @@
         "develop": "gatsby develop",
         "start": "gatsby develop",
         "build": "gatsby build",
+        "build:prod": "gatsby build && yarn copy",
         "serve": "gatsby serve",
         "clean": "gatsby clean",
         "copy": "shx cp -r public ../bomberland-engine/public",

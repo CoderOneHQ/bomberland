@@ -15,7 +15,8 @@ COPY bomberland-library /app/bomberland-library
 
 WORKDIR /app/bomberland-library
 RUN yarn build
-WORKDIR /app/bomberland-ui
+WORKDIR /app/
+RUN ls -al
 RUN yarn build
 WORKDIR /app/bomberland-engine
 RUN yarn install
