@@ -9,7 +9,8 @@
     "workspaces": {
         "packages": [
             "bomberland-engine",
-            "bomberland-library"
+            "bomberland-library",
+            "bomberland-ui"
         ]
     }
 }
