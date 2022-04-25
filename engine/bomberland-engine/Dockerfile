@@ -24,7 +24,6 @@ RUN yarn build
 WORKDIR /app/bomberland-ui
 RUN yarn install
 COPY bomberland-ui /app/bomberland-ui
-RUN yarn run test
 ARG ENVIRONMENT
 ENV ENVIRONMENT=${ENVIRONMENT}
 ARG GATSBY_BUILD
