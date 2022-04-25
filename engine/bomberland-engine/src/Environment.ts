@@ -1,4 +1,4 @@
-const environment = process.env.ENVIRONMENT ?? "";
+const environment = process.env.ENVIRONMENT ?? "dev";
 
 const build = process.env.BUILD ?? "0";
 export abstract class Environment {
