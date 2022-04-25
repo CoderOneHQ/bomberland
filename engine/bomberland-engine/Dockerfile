@@ -20,7 +20,10 @@ ENV ENVIRONMENT=${ENVIRONMENT}
 ARG BUILD
 ENV BUILD=${BUILD}
 
+RUN yarn test:all
+
 RUN yarn build:all
+RUN ls -al /app/bomberland-engine
 
 # copy artifacts
 FROM ubuntu:20.10
