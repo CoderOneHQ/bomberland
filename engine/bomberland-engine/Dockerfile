@@ -16,7 +16,6 @@ COPY bomberland-ui/package.json /app/bomberland-ui/package.json
 
 WORKDIR /app
 RUN yarn install
-COPY library /app/library
 
 COPY bomberland-library /app/bomberland-library
 
@@ -24,7 +23,7 @@ WORKDIR /app/bomberland-library
 RUN yarn build
 WORKDIR /app/bomberland-ui
 RUN yarn install
-COPY ./bomberland-ui /app/bomberland-ui
+COPY bomberland-ui /app/bomberland-ui
 RUN yarn run test
 ARG ENVIRONMENT
 ENV ENVIRONMENT=${ENVIRONMENT}
