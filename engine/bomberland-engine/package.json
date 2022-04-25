@@ -22,7 +22,7 @@
         "build:windows": "nexe ./dist/Program.js -t=windows-x64-12.18.2 --output=windows",
         "build:linux": "nexe ./dist/Program.js -t=12.9.1 --output=linux",
         "build:osx": "nexe ./dist/Program.js -t=mac-x64-12.9.1 --output=osx",
-        "inject-environment": "cross-env replace-in-file process.env.BUILD \"'$BUILD'\" dist/Environment.js && replace-in-file process.env.ENVIRONMENT \"'$ENVIRONMENT'\" dist/Environment.js",
+        "inject-environment": "cross-env replace-in-file process.env.BUILD \"'$BUILD'\" dist/Environment.js && replace-in-file process.env.ENVIRONMENT \"'${ENVIRONMENT:-dev}'\" dist/Environment.js",
         "generate-types": "ts-runtime-validation",
         "start": "tsc --build tsconfig.json && concurrently \"tsc --watch\" \"nodemon ./dist/Program.js\"",
         "test": "jest --silent",
