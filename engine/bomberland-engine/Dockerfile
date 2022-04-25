@@ -14,27 +14,12 @@ COPY bomberland-ui/tsconfig.json /app/bomberland-ui/tsconfig.json
 WORKDIR /app
 RUN yarn install
 
-COPY bomberland-library /app/bomberland-library
-
-WORKDIR /app/bomberland-library
-RUN yarn build
-WORKDIR /app/
-RUN ls -al
-RUN yarn build
-WORKDIR /app/bomberland-engine
-RUN yarn install
-COPY . /app
-RUN yarn run test
-
 ARG ENVIRONMENT
 ENV ENVIRONMENT=${ENVIRONMENT}
 ARG BUILD
 ENV BUILD=${BUILD}
 
-RUN yarn run build
-RUN yarn run build:windows
-RUN yarn run build:linux
-RUN yarn run build:osx
+RUN yarn build:all
 
 # copy artifacts
 FROM ubuntu:20.10
