@@ -6,13 +6,14 @@ COPY bomberland-library/package.json /app/bomberland-library/package.json
 COPY bomberland-library/tsconfig.json /app/bomberland-library/tsconfig.json
 
 
-COPY ./bomberland-engine/package.json /app/bomberland-engine/package.json
+COPY bomberland-engine/package.json /app/bomberland-engine/package.json
 
 COPY bomberland-ui/package.json /app/bomberland-ui/package.json
 COPY bomberland-ui/tsconfig.json /app/bomberland-ui/tsconfig.json
 
 WORKDIR /app
 RUN yarn install
+COPY . /app
 
 ARG ENVIRONMENT
 ENV ENVIRONMENT=${ENVIRONMENT}
