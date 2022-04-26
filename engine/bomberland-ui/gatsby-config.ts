@@ -4,15 +4,7 @@ const config: GatsbyConfig = {
     siteMetadata: {
         title: `Bomberland Ui`,
     },
-    plugins: [
-        "gatsby-plugin-styled-components",
-        {
-            resolve: "gatsby-plugin-express",
-            options: {
-                output: "gatsby-express.json",
-            },
-        },
-    ],
+    plugins: ["gatsby-plugin-styled-components"],
 };
 
 export default config;

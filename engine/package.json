@@ -1,15 +1,16 @@
 {
     "scripts": {
-        "build:all": "yarn workspace @coderone/bomberland-library build && yarn workspace @coderone/bomberland-engine build",
+        "build:all": "yarn workspace @coderone/bomberland-library build && yarn workspace @coderone/bomberland-ui build:prod && yarn workspace @coderone/bomberland-engine build:all",
         "build:lib": "yarn workspace @coderone/bomberland-library build",
-        "dev": "yarn build:lib && yarn",
-        "prettier": "npx prettier --write \"**/*.{js,jsx,ts,tsx}\" \"*.{js,json,md,yml,yaml}\""
+        "prettier": "npx prettier --write \"**/*.{js,jsx,ts,tsx}\" \"*.{js,json,md,yml,yaml}\"",
+        "test:all": "yarn workspace @coderone/bomberland-library test && yarn workspace @coderone/bomberland-engine test"
     },
     "private": true,
     "workspaces": {
         "packages": [
             "bomberland-engine",
-            "bomberland-library"
+            "bomberland-library",
+            "bomberland-ui"
         ]
     }
 }

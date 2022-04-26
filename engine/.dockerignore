@@ -1,0 +1,15 @@
+node_modules
+Dockerfile
+dist
+
+bomberland-engine/node_modules
+bomberland-engine/Dockerfile
+bomberland-engine/dist
+
+bomberland-library/node_modules
+bomberland-library/Dockerfile
+bomberland-library/dist
+
+bomberland-ui/node_modules
+bomberland-ui/Dockerfile
+bomberland-ui/dist

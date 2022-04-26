@@ -98,6 +98,7 @@ export const getConfig = (override?: Partial<IConfig>, shouldLogEnv: boolean = f
         TickrateHz: getIntFromEnv(shouldLogEnv, "TICK_RATE_HZ", 10),
         TotalAgents: getIntFromEnv(shouldLogEnv, "TOTAL_AGENTS", 2),
         TournamentAgentConnectionGracePeriodMs: getOptionalIntFromEnv(shouldLogEnv, "TOURNAMENT_AGENT_CONNECTION_GRACE_PERIOD_MS"),
+        UIEnabled: getFlagFromEnv(shouldLogEnv, "UI_ENABLED", true),
         UnitsPerAgent: getIntFromEnv(shouldLogEnv, "UNITS_PER_AGENT", 3),
         WoodBlockFrequency: getFloatFromEnv(shouldLogEnv, "WOOD_BLOCK_FREQUENCY", 0.2469135802469136),
         WorldSeed: getIntFromEnv(shouldLogEnv, "WORLD_SEED", Math.floor(Math.random() * Math.pow(10, 6)), true),
