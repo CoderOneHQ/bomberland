@@ -1,6 +1,6 @@
 version: "3"
 services:
-    game-engineserver:
+    game-engine:
         extends:
             file: base-compose.yml
             service: game-engine
