@@ -1,9 +1,9 @@
 version: "3"
 services:
-    game-server:
+    game-engine:
         extends:
             file: base-compose.yml
-            service: game-server
+            service: game-engine
         ports:
             - 3000:3000
         environment:
@@ -28,10 +28,9 @@ services:
     #         # update next line with a service in base-compose.yml to change agent
     #         service: python3-agent-dev
     #     environment:
-    #         - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentA&name=python3-agent-dev
+    #         - GAME_CONNECTION_STRING=ws://game-engine:3000/?role=agent&agentId=agentA&name=python3-agent-dev
     #     depends_on:
-    #         - game-server
-    #         - fwd-server-a
+    #         - game-engine
     #     networks:
     #         - coderone-tournament
 
@@ -39,11 +38,11 @@ services:
         extends:
             file: base-compose.yml
             # update next line with a service in base-compose.yml to change agent
-            service: python3-agent-dev
+            service: python3-agent
         environment:
-            - GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentB&name=python3-agent
+            - GAME_CONNECTION_STRING=ws://game-engine:3000/?role=agent&agentId=agentB&name=python3-agent
         depends_on:
-            - game-server
+            - game-engine
         networks:
             - coderone-tournament
         restart: on-failure
