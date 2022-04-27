@@ -31,7 +31,6 @@ services:
     #         - GAME_CONNECTION_STRING=ws://game-engine:3000/?role=agent&agentId=agentA&name=python3-agent-dev
     #     depends_on:
     #         - game-engine
-    #         - fwd-server-a
     #     networks:
     #         - coderone-tournament
 
