@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Palette } from "../theme/Palette";
-import { Viewport } from "../utilities/Constants/Viewport";
+import { Viewport } from "../utilities/Viewport";
 require("prismjs/themes/prism.css");
 
 export const Root = styled.div`
