@@ -14,7 +14,7 @@ import { useKeypress } from "../../../hooks/useKeyPress";
 import { InfoBar } from "../../InfoBar/InfoBar";
 import { telemetry } from "../../../utilities/Telemetry/Telemetry";
 import { TelemetryEvent } from "../../../utilities/Telemetry/TelemetryEvent";
-import { CoderOneRoute } from "../../../CoderOneRoute";
+import { CoderOneRoute } from "../../../utilities/CoderOneRoute";
 import { Constants } from "../../../utilities/Constants";
 
 export enum GameKeys {
