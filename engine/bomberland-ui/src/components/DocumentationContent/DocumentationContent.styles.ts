@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Viewport } from "../../utilities/Constants/Viewport";
+import { Viewport } from "../../utilities/Viewport";
 
 export const Root = styled.div`
     @media screen and (max-width: ${Viewport.Large}px) {

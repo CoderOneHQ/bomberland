@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { Grid, Root, Headline, InformationHeader } from "./DocumentationContent.styles";
-import { RouterLink } from "../RouterLink/RouterLink";
 import { CoderOneRoute } from "../../utilities/CoderOneRoute";
 import { TelemetryLink } from "../TelemetryLink/TelemetryLink";
 
