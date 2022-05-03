@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { CopyToClipboardField } from "../CopyToClipboardField/CopyToClipboardField";
 import { navigate } from "gatsby";
 import { HelpTooltip } from "../HelpTooltip/HelpTooltip";
-import { CoderOneRoute } from "../../CoderOneRoute";
+import { CoderOneRoute } from "../../utilities/CoderOneRoute";
 
 const getConnectionString = (role: GameRole, host: string, port: string, name: string, agentId: string) => {
     if (role === GameRole.Agent) {
