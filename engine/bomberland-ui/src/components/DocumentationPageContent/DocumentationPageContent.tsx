@@ -12,7 +12,6 @@ import {
 } from "../../page-styles/markdown.styles";
 import { RouterLink } from "../RouterLink/RouterLink";
 import { TableOfContents } from "../TableOfContents/TableOfContents";
-import { CoderOneRoute } from "../Pages/CoderOneRoute";
 import { DocumentationOrderedNavigation } from "../DocumentationOrderedNavigation/DocumentationOrderedNavigation";
 
 interface IProps {
