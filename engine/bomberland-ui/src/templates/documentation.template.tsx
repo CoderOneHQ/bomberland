@@ -27,7 +27,6 @@ export const pageQuery = graphql`
             html
             tableOfContents(absolute: true, pathToSlugField: "frontmatter.slug")
             frontmatter {
-                date(formatString: "MMMM DD, YYYY")
                 slug
                 title
                 description
