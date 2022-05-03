@@ -40,7 +40,6 @@ export const pageQuery = graphql`
                     id
                     timeToRead
                     frontmatter {
-                        date(formatString: "MMMM DD, YYYY")
                         slug
                         title
                         description
