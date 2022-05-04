@@ -12,6 +12,7 @@
         "jwt-decode": "^3.1.2",
         "mersenne-twister": "1.1.0",
         "source-map-support": "0.5.19",
+        "ts-runtime-validation": "^1.2.6",
         "typescript": "^4.5.5",
         "ws": "7.4.6"
     },
