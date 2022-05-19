@@ -14078,10 +14078,10 @@ ts-node@^9:
     source-map-support "^0.5.17"
     yn "3.1.1"
 
-ts-runtime-validation@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/ts-runtime-validation/-/ts-runtime-validation-1.2.0.tgz#4576eb33dfa84ff5cf399258f0b8a25094d681ff"
-  integrity sha512-L9KfpTPDN+jck8z66VrbK7dfj5msiFO63HzOs9sAJDEF013LuwduK8pzG+okFexZPyRerAx8sNTQTg26II2ELQ==
+ts-runtime-validation@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/ts-runtime-validation/-/ts-runtime-validation-1.2.7.tgz#a03c5cc0ea23fc8b5e0f8ec3b7c4110bd10194d9"
+  integrity sha512-wOT4TYf1g4w1IFhPwEF5EEf9uQIj+c9pNaZQ+Qf9eQt55l9/3ZHXkXSyFUm9QBGNNOgTwjtNpkURSxS8tUxbRQ==
   dependencies:
     commander "^9.1.0"
     fdir "^5.2.0"
