@@ -1,4 +1,3 @@
-import { IOutputError } from "better-ajv-errors";
 import { CoderOneApi } from "./CoderOneApi/CoderOneApi";
 
 export class Telemetry {
@@ -22,7 +21,7 @@ export class Telemetry {
         }
     };
 
-    public ValidationError = (error: Array<IOutputError> | void) => {
+    public ValidationError = (error: string) => {
         console.error(error);
     };
 
