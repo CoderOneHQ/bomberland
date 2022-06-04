@@ -72,6 +72,9 @@ class Program {
     public Listen = () => {
         this.httpServer.listen(config.Port);
         this.telemetry.Info(`Open for connections on port: ${config.Port}`);
+        if (config.UIEnabled) {
+            this.telemetry.Info(`UI running on port: ${config.Port}`);
+        }
     };
 }
 
