@@ -40,7 +40,7 @@ stages:
                       docker cp ${CID}:/app/bomberland-engine/osx $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-osx
                       docker rm ${CID}
                   env:
-                    DOCKER_BUILDKIT: 1
+                    DOCKER_BUILDKIT: 0
                   displayName: "Build binaries and copy to cwd"
                 - task: "PublishBuildArtifacts@1"
                   inputs:
