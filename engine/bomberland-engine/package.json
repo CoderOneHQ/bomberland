@@ -5,6 +5,7 @@
     "license": "MIT",
     "private": true,
     "dependencies": {
+        "@coderone/bomberland-library": "^1.0.5",
         "ajv": "^8.11.0",
         "axios": "^0.27.2",
         "better-ajv-errors": "^1.2.0",
