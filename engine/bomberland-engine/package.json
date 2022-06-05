@@ -6,14 +6,15 @@
     "private": true,
     "dependencies": {
         "ajv": "^8.11.0",
-        "axios": "^0.25.0",
-        "better-ajv-errors": "0.6.7",
-        "express": "4.17.1",
+        "axios": "^0.27.2",
+        "better-ajv-errors": "^1.2.0",
+        "express": "^4.18.1",
         "jwt-decode": "^3.1.2",
         "mersenne-twister": "1.1.0",
-        "source-map-support": "0.5.19",
-        "ts-runtime-validation": "^1.2.7",
-        "typescript": "^4.5.5",
+        "source-map-support": "^0.5.21",
+        "ts-runtime-validation": "^1.2.8",
+        "typescript": "^4.7.3",
+        "uuid": "^8.3.2",
         "ws": "7.4.6"
     },
     "scripts": {
@@ -33,20 +34,20 @@
     },
     "devDependencies": {
         "@types/express": "^4.17.13",
-        "@types/jest": "^26.0.20",
+        "@types/jest": "^28.1.0 ",
         "@types/mersenne-twister": "1.1.2",
         "@types/uuid": "^8.3.4",
         "@types/ws": "7.4.0",
-        "concurrently": "^7.0.0",
+        "concurrently": "^7.2.1",
         "cross-env": "^7.0.3",
         "depcheck": "^1.4.3",
         "env-cmd": "^10.1.0",
-        "jest": "^26.6.3",
-        "nexe": "^4.0.0-beta.19",
-        "nodemon": "^2.0.15",
+        "jest": "^28.1.0",
+        "nexe": "^4.0.0-rc.1",
+        "nodemon": "^2.0.16",
         "prettier": "^2.5.1",
-        "replace-in-file": "6.3.2",
-        "ts-jest": "^26.4.4",
-        "ts-runtime-validation": "^1.2.0"
+        "replace-in-file": "^6.3.5",
+        "ts-jest": "^28.0.4",
+        "ts-runtime-validation": "^1.2.8"
     }
 }

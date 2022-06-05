@@ -1,4 +1,4 @@
-import { AgentMove, EntityType, GameStateClient, IGameState } from "@coderone/game-library";
+import { AgentMove, EntityType, GameStateClient, IGameState } from "@coderone/bomberland-library";
 
 const gameConnectionString = process.env["GAME_CONNECTION_STRING"] || "ws://127.0.0.1:3000/?role=agent&agentId=agentIdA&name=RandomAgent";
 enum Action {

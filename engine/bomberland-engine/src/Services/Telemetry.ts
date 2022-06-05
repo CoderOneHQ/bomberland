@@ -21,7 +21,7 @@ export class Telemetry {
         }
     };
 
-    public ValidationError = (error: Array<betterAjvErrors.IOutputError> | void) => {
+    public ValidationError = (error: string) => {
         console.error(error);
     };
 
