@@ -3,6 +3,7 @@ from game_state import GameState
 import asyncio
 import random
 import os
+import time
 
 uri = os.environ.get(
     'GAME_CONNECTION_STRING') or "ws://127.0.0.1:3000/?role=agent&agentId=agentId&name=defaultName"
@@ -60,7 +61,14 @@ class Agent():
 
 
 def main():
-    Agent()
+    for i in range(0,10):
+        while True:
+            try:
+                Agent()
+            except:
+                time.sleep(5)
+                continue
+            break
 
 
 if __name__ == "__main__":
