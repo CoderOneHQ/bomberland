@@ -1,4 +1,4 @@
-FROM node:14.18.1-alpine3.11 as build-ui
+FROM node:16.16.0-alpine3.15 as build-ui
 
 RUN apk update
 RUN \
