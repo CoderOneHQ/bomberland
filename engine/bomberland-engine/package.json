@@ -28,6 +28,7 @@
         "inject-environment": "cross-env replace-in-file process.env.BUILD \"'${BUILD:-0}'\" dist/Environment.js && replace-in-file process.env.ENVIRONMENT \"'${ENVIRONMENT:-dev}'\" dist/Environment.js",
         "generate-types": "ts-runtime-validation --tsconfigPath tsconfig.json",
         "start": "tsc --build tsconfig.json && concurrently \"tsc --watch\" \"nodemon ./dist/Program.js\"",
+        "start:local": "env-cmd -f dev.env tsc --build tsconfig.json && concurrently \"tsc --watch\" \"nodemon ./dist/Program.js\"",
         "test": "jest --silent",
         "test:verbose": "jest",
         "prettier": "prettier --write \"{src,web}/**/*.{js,jsx,ts,tsx}\" \"*.{js,json,md,yml,yaml}\""
