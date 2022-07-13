@@ -13,5 +13,8 @@
             "bomberland-library",
             "bomberland-ui"
         ]
+    },
+    "devDependencies": {
+        "npm-check-updates": "^15.2.6"
     }
 }
