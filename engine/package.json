@@ -3,7 +3,8 @@
         "build:all": "yarn workspace @coderone/bomberland-library build && yarn workspace @coderone/bomberland-ui build:prod && yarn workspace @coderone/bomberland-engine build:all",
         "build:lib": "yarn workspace @coderone/bomberland-library build",
         "prettier": "npx prettier --write \"**/*.{js,jsx,ts,tsx}\" \"*.{js,json,md,yml,yaml}\"",
-        "test:all": "yarn workspace @coderone/bomberland-library test && yarn workspace @coderone/bomberland-engine test"
+        "test:all": "yarn workspace @coderone/bomberland-library test && yarn workspace @coderone/bomberland-engine test",
+        "update-packages": "yarn workspace @coderone/bomberland-library ncu -u && yarn workspace @coderone/bomberland-engine ncu -u && yarn workspace @coderone/bomberland-ui ncu -u"
     },
     "private": true,
     "workspaces": {
@@ -12,5 +13,8 @@
             "bomberland-library",
             "bomberland-ui"
         ]
+    },
+    "devDependencies": {
+        "npm-check-updates": "^15.2.6"
     }
 }
