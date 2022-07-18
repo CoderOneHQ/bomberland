@@ -1,5 +1,5 @@
-import { ISchema, schemas } from "./.ts-runtime-validation/SchemaDefinition";
-import * as schema from "./.ts-runtime-validation/validation.schema.json";
+import { ISchema, schemas } from "./runtime-validation/SchemaDefinition";
+import * as schema from "./runtime-validation/validation.schema.json";
 import Ajv, { Options } from "ajv";
 import betterAjvErrors from "better-ajv-errors";
 import { Telemetry } from "./Services/Telemetry";

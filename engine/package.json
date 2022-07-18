@@ -1,5 +1,6 @@
 {
     "scripts": {
+        "dev:local": "yarn workspace @coderone/bomberland-library build && yarn workspace @coderone/bomberland-ui start:local & yarn workspace @coderone/bomberland-engine start:local",
         "build:all": "yarn workspace @coderone/bomberland-library build && yarn workspace @coderone/bomberland-ui build:prod && yarn workspace @coderone/bomberland-engine build:all",
         "build:lib": "yarn workspace @coderone/bomberland-library build",
         "prettier": "npx prettier --write \"**/*.{js,jsx,ts,tsx}\" \"*.{js,json,md,yml,yaml}\"",
