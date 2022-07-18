@@ -10,6 +10,7 @@
         "better-ajv-errors": "^1.2.0",
         "jwt-decode": "^3.1.2",
         "koa": "^2.13.4",
+        "koa-body": "^5.0.0",
         "koa-static": "^5.0.0",
         "mersenne-twister": "1.1.0",
         "source-map-support": "^0.5.21",

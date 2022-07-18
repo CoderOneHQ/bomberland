@@ -1,5 +1,6 @@
 import http, { Server } from "http";
 import Koa from "koa";
+import koaBody from "koa-body";
 import serve from "koa-static";
 import "source-map-support/register";
 import { sys } from "typescript";
@@ -30,6 +31,7 @@ class Program {
         if (config.UIEnabled) {
             this.instantiateUI();
         }
+        this.instantiateApi();
     }
 
     private instantiateGame = () => {
@@ -56,6 +58,15 @@ class Program {
 
     private instantiateUI = () => {
         this.app.use(serve("public"));
+    };
+
+    private instantiateApi = () => {
+        this.app.use(koaBody());
+        routers.forEach((getRouter) => {
+            const router = getRouter(services);
+            this.app.use(router.routes());
+            this.app.use(router.allowedMethods());
+        });
     };
 
     private attachErrorHandlers = () => {
