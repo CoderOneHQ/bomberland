@@ -4,6 +4,7 @@ import koaBody from "koa-body";
 import serve from "koa-static";
 import "source-map-support/register";
 import { sys } from "typescript";
+import { IServices, routers } from "./Api/routers";
 import { getConfig } from "./Config/getConfig";
 import { Environment } from "./Environment";
 import { GameRunner } from "./Game/GameRunner";
@@ -61,6 +62,7 @@ class Program {
     };
 
     private instantiateApi = () => {
+        const services: IServices = {};
         this.app.use(koaBody());
         routers.forEach((getRouter) => {
             const router = getRouter(services);
