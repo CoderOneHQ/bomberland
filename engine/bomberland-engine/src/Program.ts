@@ -1,17 +1,17 @@
 import http, { Server } from "http";
+import Koa from "koa";
+import serve from "koa-static";
 import "source-map-support/register";
-import { checkLatestEngineVersion } from "./Services/checkLatestEngineVersion";
-import { ConnectionTracker } from "./Services/ConnectionTracker";
+import { sys } from "typescript";
+import { getConfig } from "./Config/getConfig";
 import { Environment } from "./Environment";
 import { GameRunner } from "./Game/GameRunner";
+import { checkLatestEngineVersion } from "./Services/checkLatestEngineVersion";
+import { CoderOneApi } from "./Services/CoderOneApi/CoderOneApi";
+import { ConnectionTracker } from "./Services/ConnectionTracker";
 import { GameWebsocket } from "./Services/GameWebSocket";
 import { logConfig } from "./Services/logConfig";
-import { sys } from "typescript";
 import { Telemetry } from "./Services/Telemetry";
-import { CoderOneApi } from "./Services/CoderOneApi/CoderOneApi";
-import { getConfig } from "./Config/getConfig";
-import express from "express";
-import Koa from "koa";
 
 const config = getConfig({}, true);
 
@@ -55,7 +55,7 @@ class Program {
     };
 
     private instantiateUI = () => {
-        this.app.use(express.static("public"));
+        this.app.use(serve("public"));
     };
 
     private attachErrorHandlers = () => {
