@@ -924,12 +924,16 @@
         "IPostTelemetryBody": {
             "type": "object",
             "properties": {
+                "_initId": {
+                    "type": "string"
+                },
                 "event": {
                     "type": "string"
                 },
                 "data": {}
             },
             "required": [
+                "_initId",
                 "event",
                 "data"
             ],
