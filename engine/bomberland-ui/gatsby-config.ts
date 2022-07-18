@@ -22,6 +22,7 @@ const config: GatsbyConfig = {
     siteMetadata: {
         title: `Bomberland Ui`,
     },
+    ...proxyCfg,
     plugins: [
         "gatsby-plugin-styled-components",
         {
