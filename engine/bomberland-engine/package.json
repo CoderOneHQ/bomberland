@@ -11,6 +11,7 @@
         "jwt-decode": "^3.1.2",
         "koa": "^2.13.4",
         "koa-body": "^5.0.0",
+        "koa-router": "^11.0.1",
         "koa-static": "^5.0.0",
         "mersenne-twister": "1.1.0",
         "source-map-support": "^0.5.21",
@@ -38,6 +39,7 @@
     "devDependencies": {
         "@types/jest": "^28.1.5",
         "@types/koa": "^2.13.5",
+        "@types/koa-router": "^7.4.4",
         "@types/koa-static": "^4.0.2",
         "@types/mersenne-twister": "1.1.2",
         "@types/uuid": "^8.3.4",
