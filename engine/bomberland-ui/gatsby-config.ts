@@ -1,5 +1,22 @@
 import type { GatsbyConfig } from "gatsby";
 
+const proxyCfg =
+    process.env.API_HOST !== undefined
+        ? {
+              developMiddleware: (app) => {
+                  app.use(
+                      "/api/",
+                      createProxyMiddleware({
+                          target: `http://${process.env.API_HOST}`,
+                          pathRewrite: {
+                              "/api/": "",
+                          },
+                      })
+                  );
+              },
+          }
+        : {};
+
 const config: GatsbyConfig = {
     siteMetadata: {
         title: `Bomberland Ui`,
