@@ -1,5 +1,5 @@
-import { validateRequestSchema } from "./../../.ts-runtime-validation/validateRequestSchema";
 import Application from "koa";
+import { validateRequestSchema } from "../../runtime-validation/validateRequestSchema";
 import { IServices } from "../routers";
 
 export const postTelemetryRoute = (_services: IServices) => {

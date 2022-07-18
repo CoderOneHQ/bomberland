@@ -920,6 +920,20 @@
                 "payload"
             ],
             "additionalProperties": false
+        },
+        "IPostTelemetryBody": {
+            "type": "object",
+            "properties": {
+                "event": {
+                    "type": "string"
+                },
+                "data": {}
+            },
+            "required": [
+                "event",
+                "data"
+            ],
+            "additionalProperties": false
         }
     }
 }
