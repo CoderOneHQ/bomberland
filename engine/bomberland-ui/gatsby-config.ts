@@ -1,4 +1,5 @@
 import type { GatsbyConfig } from "gatsby";
+import { createProxyMiddleware } from "http-proxy-middleware";
 
 const proxyCfg =
     process.env.API_HOST !== undefined
