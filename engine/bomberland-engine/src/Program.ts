@@ -14,19 +14,18 @@ import express from "express";
 import Koa from "koa";
 
 const config = getConfig({}, true);
-const app = new Koa();
 
 class Program {
     private engineTelemetry: CoderOneApi;
     private telemetry: Telemetry;
     private httpServer: Server;
-    private app: express.Express;
+    private app: Koa;
 
     public constructor() {
-        this.app = express();
+        this.app = new Koa();
         this.engineTelemetry = new CoderOneApi(Environment.Environment, config, true, Environment.Build);
         this.telemetry = new Telemetry(this.engineTelemetry, config.IsTelemetryEnabled);
-        this.httpServer = http.createServer(this.app);
+        this.httpServer = http.createServer(this.app.callback());
         this.instantiateGame();
         if (config.UIEnabled) {
             this.instantiateUI();
