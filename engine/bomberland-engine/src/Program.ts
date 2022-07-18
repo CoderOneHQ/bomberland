@@ -11,8 +11,10 @@ import { Telemetry } from "./Services/Telemetry";
 import { CoderOneApi } from "./Services/CoderOneApi/CoderOneApi";
 import { getConfig } from "./Config/getConfig";
 import express from "express";
+import Koa from "koa";
 
 const config = getConfig({}, true);
+const app = new Koa();
 
 class Program {
     private engineTelemetry: CoderOneApi;
