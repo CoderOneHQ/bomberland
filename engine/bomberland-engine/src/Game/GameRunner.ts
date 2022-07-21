@@ -214,7 +214,7 @@ export class GameRunner {
         if (this.config.SaveReplayEnabled === true) {
             const content = JSON.stringify(packet);
             try {
-                fs.writeFileSync("./logs/replay.json", content);
+                fs.writeFileSync("./replay.json", content);
             } catch (err) {
                 console.error(err);
             }

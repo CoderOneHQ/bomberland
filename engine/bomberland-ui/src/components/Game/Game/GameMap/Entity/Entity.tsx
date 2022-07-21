@@ -13,6 +13,7 @@ import steelBreak2Sfx from "../../sounds/steel_break2.wav";
 import useSound from "use-sound";
 import woodCreateBreak3Sfx from "../../sounds/wood_crate_break3.wav";
 import woodenblock from "../svg/crate.svg";
+import snowflake from "../svg/snowflake.svg";
 import { BlastDiv, BombDiv, FireDiv, ImageDiv } from "./Entity.styles";
 import { EntityType } from "@coderone/bomberland-library";
 import { SoundContext } from "../../SoundContext";
@@ -106,6 +107,8 @@ export const Entity: React.FC<IProps> = ({ expires, type, x, y, onBombDetonated,
             return <ImageDiv image={oreblock} x={x} y={y} width={width} height={height} />;
         case EntityType.MetalBlock:
             return <ImageDiv image={steelblock} x={x} y={y} width={width} height={height} />;
+        case EntityType.FreezePowerup:
+            return <ImageDiv image={snowflake} x={x} y={y} width={width} height={height} />;
         case EntityType.Blast:
             if (expires) {
                 return <BlastDiv image={blast3} x={x} y={y} width={width} height={height} />;

@@ -141,20 +141,22 @@ The following environment data is available from the game server:
         "blast_diameter": 3,
         "unit_id": "c",
         "agent_id": "a",
-        "invulnerability": 0
+        "invulnerable": 0,
+        "stunned": 0
     }
 ```
 
-| Property          | Type             | Description                                                                                                                                                  |
-| ----------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `coordinates`     | [number, number] | [X, Y] location                                                                                                                                              |
-| `hp`              | number           | Health points                                                                                                                                                |
-| `inventory `      | object           | Items owned by unit (currently just bomb and ammunition)                                                                                                     |
-| `bombs`           | number           | Number of bombs available to place (i.e. ammunition) <br /> E.g. to get ammunition for unit C: `game_state["unit_state"]["c"]["inventory"]["bombs"]`         |
-| `blast_diameter`  | number           | Diameter of blast range for bombs placed by this unit                                                                                                        |
-| `unit_id`         | string           | This unit's identifier (valid IDs: `c`, `d`, `e`, `f`, `g`, `h`)                                                                                             |
-| `agent_id`        | string           | The agent to which this unit belongs (either `a` or `b`)                                                                                                     |
-| `invulnerability` | number           | Latest tick number after which this unit is no longer invulnerable (inclusive). <br> E.g. `"invulnerability": 60` → this unit is invulnerable until tick 60. |
+| Property         | Type             | Description                                                                                                                                               |
+| ---------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `coordinates`    | [number, number] | [X, Y] location                                                                                                                                           |
+| `hp`             | number           | Health points                                                                                                                                             |
+| `inventory `     | object           | Items owned by unit (currently just bomb and ammunition)                                                                                                  |
+| `bombs`          | number           | Number of bombs available to place (i.e. ammunition) <br /> E.g. to get ammunition for unit C: `game_state["unit_state"]["c"]["inventory"]["bombs"]`      |
+| `blast_diameter` | number           | Diameter of blast range for bombs placed by this unit                                                                                                     |
+| `unit_id`        | string           | This unit's identifier (valid IDs: `c`, `d`, `e`, `f`, `g`, `h`)                                                                                          |
+| `agent_id`       | string           | The agent to which this unit belongs (either `a` or `b`)                                                                                                  |
+| `invulnerable`   | number           | Latest tick number after which this unit is no longer invulnerable (inclusive). <br> E.g. `"invulnerable": 60` → this unit is invulnerable until tick 60. |
+| `stunned`        | number           | Latest tick number after which this unit is no longer stunned (inclusive). <br> E.g. `"stunned": 60` → this unit is stunned until tick 60.                |
 
 ### entities
 

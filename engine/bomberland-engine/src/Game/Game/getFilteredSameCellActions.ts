@@ -1,6 +1,6 @@
 import { AgentMovePacket, getCellNumberFromCoordinates, UnitMove } from "@coderone/bomberland-library";
 import { Telemetry } from "../../Services/Telemetry";
-import { Unit } from "../Unit/Unit";
+import { UnitTracker } from "./../Entity/World/UnitTracker";
 
 const getDeltaCoordinates = (move: UnitMove): [number, number] => {
     switch (move) {
@@ -33,7 +33,7 @@ const getTargetCell = (originCoordinates: [number, number], move: UnitMove, worl
 export const getFilteredSameCellActions = (
     telemetry: Telemetry,
     moveActions: Array<[string, AgentMovePacket]>,
-    unitMap: Map<string, Unit>,
+    unitTracker: UnitTracker,
     worldWidth: number
 ): Array<[string, AgentMovePacket]> => {
     const targetedCells = new Map<number, Set<string>>();
@@ -41,7 +41,7 @@ export const getFilteredSameCellActions = (
     moveActions.forEach((action) => {
         const [, agentPacket] = action;
         const { move, unit_id } = agentPacket;
-        const unit = unitMap.get(unit_id);
+        const unit = unitTracker.GetUnitById(unit_id);
         if (unit === undefined) {
             throw new Error(`Unit ${unit_id} in moveActions not found`);
         }

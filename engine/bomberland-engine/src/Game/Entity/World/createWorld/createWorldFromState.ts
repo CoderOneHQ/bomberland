@@ -1,3 +1,4 @@
+import { UnitTracker } from "./../UnitTracker";
 import MersenneTwister from "mersenne-twister";
 import { AbstractEntity } from "../../AbstractEntity";
 import { Unit } from "../../../Unit/Unit";
@@ -12,10 +13,10 @@ import { reconstructEntity } from "./reconstructEntity";
 import { IConfig } from "../../../../Config/IConfig";
 import { getConfig } from "../../../../Config/getConfig";
 
-const reconstructAgentMap = (config: IConfig, worldState: IWorldState, mapWidth: number): Map<string, Unit> => {
-    const unitMap = new Map<string, Unit>();
+const reconstructUnitTracker = (config: IConfig, worldState: IWorldState, mapWidth: number): UnitTracker => {
+    const unitTracker = new UnitTracker();
     worldState.units.forEach((unit) => {
-        const reconstructedAgent = new Unit(
+        const reconstructedUnit = new Unit(
             config,
             unit.coordinates,
             mapWidth,
@@ -24,11 +25,12 @@ const reconstructAgentMap = (config: IConfig, worldState: IWorldState, mapWidth:
             unit.inventory.bombs,
             unit.hp,
             unit.blast_diameter,
-            unit.invulnerability
+            unit.invulnerable,
+            unit.stunned
         );
-        unitMap.set(unit.unit_id, reconstructedAgent);
+        unitTracker.Set(reconstructedUnit);
     });
-    return unitMap;
+    return unitTracker;
 };
 
 const reconstructEntities = (
@@ -67,10 +69,10 @@ export const generateWorldFromState = (
     const cellReserver = new CellReserver(width * height, prngGame, width);
     const emptyCellTracker = new EmptyCellTracker(telemetry, width, height, prngGame, cellReserver);
 
-    const agentMap = reconstructAgentMap(config, worldState, width);
+    const unitTracker = reconstructUnitTracker(config, worldState, width);
     const entities = reconstructEntities(worldState, width, gameTicker, cellReserver, config);
 
-    const world = new World(telemetry, config, prngGame, cellReserver, emptyCellTracker, agentMap, entities, gameTicker, width, height);
+    const world = new World(telemetry, config, prngGame, cellReserver, emptyCellTracker, unitTracker, entities, gameTicker, width, height);
     telemetry.Info(JSON.stringify(world.WorldState));
     return world;
 };

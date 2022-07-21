@@ -10,6 +10,9 @@ export interface IConfig {
     readonly BombDurationTicks: number;
     readonly EntitySpawnProbabilityPerTick: number;
     readonly FireSpawnIntervalTicks: number;
+    readonly FreezeDebuffDurationTicks: number;
+    readonly FreezePowerupDurationTicks: number;
+    readonly FreezePowerupSpawnWeighting: number;
     readonly GameDurationTicks: number;
     readonly GameStartDelayMs: number;
     readonly HookAuthToken: string | undefined;

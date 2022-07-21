@@ -1,7 +1,13 @@
 import { EntityType, getCoordinatesFromCellNumber, IEntity } from "@coderone/bomberland-library";
 import { Telemetry } from "../../Services/Telemetry";
 
-const noBlockEntitites = new Set<EntityType>([EntityType.Ammo, EntityType.TreasureChest, EntityType.Blast, EntityType.BlastPowerup]);
+const noBlockEntitites = new Set<EntityType>([
+    EntityType.Ammo,
+    EntityType.TreasureChest,
+    EntityType.Blast,
+    EntityType.BlastPowerup,
+    EntityType.FreezePowerup,
+]);
 
 export interface IInitialEntityValues {
     readonly cellNumber: number;

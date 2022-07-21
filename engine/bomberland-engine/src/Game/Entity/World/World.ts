@@ -1,3 +1,4 @@
+import { UnitTracker } from "./UnitTracker";
 import { AbstractEntity } from "../AbstractEntity";
 import { Unit } from "../../Unit/Unit";
 import { AmmoEntity } from "../AmmoEntity";
@@ -25,6 +26,7 @@ import {
     IUnitState,
 } from "@coderone/bomberland-library";
 import { IConfig } from "../../../Config/IConfig";
+import { FreezePowerupEntity } from "../FreezePowerupEntity";
 
 export interface IWorldState {
     readonly units: Array<IUnitState>;
@@ -38,13 +40,17 @@ export class World {
     private shouldSpawnBooleanDie: BooleanDie;
     private spawnWeightedDie: WeightedDie<EntityType>;
 
+    public get UnitTracker() {
+        return this.unitTracker;
+    }
+
     public constructor(
         private telemetry: Telemetry,
         private config: IConfig,
         prngGame: PRNG,
         private cellReserver: CellReserver,
         private emptyCellTracker: EmptyCellTracker,
-        public UnitMap: Map<string, Unit>,
+        private unitTracker: UnitTracker,
         private entities: Map<number, AbstractEntity>,
         private gameTicker: GameTicker,
         public readonly Width: number,
@@ -56,12 +62,13 @@ export class World {
             [
                 { weighting: this.config.AmmoSpawnWeighting, value: EntityType.Ammo },
                 { weighting: this.config.BlastPowerupSpawnWeighting, value: EntityType.BlastPowerup },
+                { weighting: this.config.FreezePowerupSpawnWeighting, value: EntityType.FreezePowerup },
             ],
             prngGame
         );
 
         if (this.agentCellNumbers.size <= 0) {
-            this.UnitMap.forEach((agent) => {
+            this.unitTracker.Units.forEach((agent) => {
                 this.agentCellNumbers.add(agent.CellNumber);
             });
         }
@@ -69,15 +76,15 @@ export class World {
 
     public get WorldState(): IWorldState {
         return {
-            units: Array.from(this.UnitMap.values()).map((agent) => agent.State),
+            units: this.unitTracker.Units.map((agent) => agent.State),
             entities: Array.from(this.entities.values()).map((entity) => entity.ToJSON()),
         };
     }
 
     public GetUnit = (unitId: string): Unit => {
-        const agent = this.UnitMap.get(unitId);
+        const agent = this.unitTracker.GetUnitById(unitId);
         if (agent === undefined) {
-            throw Error(`UnitId ${unitId} not found in unitMap: ${Array.from(this.UnitMap.keys())}.`);
+            throw Error(`UnitId ${unitId} not found in unitMap: ${this.unitTracker.UnitIds}.`);
         }
         return agent;
     };
@@ -105,7 +112,7 @@ export class World {
     };
 
     public PlaceBomb = (cellNumber: number, unitId: string) => {
-        const unit = this.UnitMap.get(unitId);
+        const unit = this.unitTracker.GetUnitById(unitId);
         const [x, y] = getCoordinatesFromCellNumber(cellNumber, this.Width);
         if (unit !== undefined && this.IsCoordinateVacant(x, y)) {
             const agentId = unit.AgentId;
@@ -132,7 +139,7 @@ export class World {
     public Tick = (): Array<GameEvent> => {
         this.expireEntities();
         this.checkAgentEntityCollision();
-        this.randomSpawn();
+        this.rollRandomSpawn();
         const events = [...this.worldTickEvents];
         this.worldTickEvents = [];
         return events;
@@ -152,20 +159,31 @@ export class World {
         });
     };
 
-    private randomSpawn = () => {
+    private rollRandomSpawn = () => {
         const shouldSpawnEntity = this.shouldSpawnBooleanDie.Roll();
         if (shouldSpawnEntity === true) {
-            const entityType = this.spawnWeightedDie.Roll();
             const randomUnassignedCellNumber = this.emptyCellTracker.ReserveRandomEmptyCell(this.agentCellNumbers);
             if (randomUnassignedCellNumber !== undefined) {
-                if (entityType === EntityType.BlastPowerup) {
-                    this.onBlastPowerupSpawned(randomUnassignedCellNumber);
-                } else if (entityType === EntityType.Ammo) {
-                    this.onAmmoSpawned(randomUnassignedCellNumber);
-                } else {
-                    this.telemetry.Warning(`Unhandled entity type: ${entityType}`);
-                }
+                this.placeRandomSpawn(randomUnassignedCellNumber);
             }
+        }
+    };
+
+    private placeRandomSpawn = (cellNumber: number) => {
+        const entityType = this.spawnWeightedDie.Roll();
+        switch (entityType) {
+            case EntityType.BlastPowerup:
+                this.onBlastPowerupSpawned(cellNumber);
+                break;
+            case EntityType.Ammo:
+                this.onAmmunitionSpawned(cellNumber);
+                break;
+
+            case EntityType.FreezePowerup:
+                this.onFreezePowerupSpawned(cellNumber);
+                break;
+            default:
+                this.telemetry.Warning(`Unhandled entity type: ${entityType}`);
         }
     };
 
@@ -174,9 +192,14 @@ export class World {
         this.PlaceEntity(blastPowerup);
     };
 
-    private onAmmoSpawned = (cellNumber: number) => {
+    private onAmmunitionSpawned = (cellNumber: number) => {
         const ammo = new AmmoEntity(this.config, cellNumber, this.Width, this.gameTicker.CurrentTick);
         this.PlaceEntity(ammo);
+    };
+
+    private onFreezePowerupSpawned = (cellNumber: number) => {
+        const freezePowerup = new FreezePowerupEntity(this.config, cellNumber, this.Width, this.gameTicker.CurrentTick);
+        this.PlaceEntity(freezePowerup);
     };
 
     private expireEntities = () => {
@@ -211,9 +234,9 @@ export class World {
                 const blast = entity as BlastEntity;
                 const cell = blast.CellNumber;
                 if (this.agentCellNumbers.has(cell)) {
-                    this.UnitMap.forEach((agent) => {
-                        if (agent.CellNumber === cell) {
-                            this.reduceAgentHealth(agent);
+                    this.unitTracker.Units.forEach((unit) => {
+                        if (unit.CellNumber === cell) {
+                            this.reduceUnitHealth(unit);
                         }
                     });
                 }
@@ -221,9 +244,9 @@ export class World {
             if (entity.Type === EntityType.Ammo) {
                 const cell = entity.CellNumber;
                 if (this.agentCellNumbers.has(cell)) {
-                    this.UnitMap.forEach((agent) => {
-                        if (agent.CellNumber === cell) {
-                            this.increaseAgentAmmo(agent);
+                    this.unitTracker.Units.forEach((unit) => {
+                        if (unit.CellNumber === cell) {
+                            this.increaseAgentAmmunition(unit);
                             this.RemoveEntity(cell);
                         }
                     });
@@ -232,9 +255,21 @@ export class World {
             if (entity.Type === EntityType.BlastPowerup) {
                 const cell = entity.CellNumber;
                 if (this.agentCellNumbers.has(cell)) {
-                    this.UnitMap.forEach((agent) => {
-                        if (agent.CellNumber === cell) {
-                            this.increaseAgentBlast(agent);
+                    this.unitTracker.Units.forEach((unit) => {
+                        if (unit.CellNumber === cell) {
+                            this.increaseAgentBlast(unit);
+                            this.RemoveEntity(cell);
+                        }
+                    });
+                }
+            }
+
+            if (entity.Type === EntityType.FreezePowerup) {
+                const cell = entity.CellNumber;
+                if (this.agentCellNumbers.has(cell)) {
+                    this.unitTracker.Units.forEach((unit) => {
+                        if (unit.CellNumber === cell) {
+                            this.triggerUnitFreeze(unit);
                             this.RemoveEntity(cell);
                         }
                     });
@@ -323,9 +358,9 @@ export class World {
         const agentId = this.getAgentIdFromUnitId(unitId);
 
         if (isAgentInCell) {
-            this.UnitMap.forEach((agent) => {
-                if (agent.CellNumber === cellNumber) {
-                    this.reduceAgentHealth(agent);
+            this.unitTracker.Units.forEach((units) => {
+                if (units.CellNumber === cellNumber) {
+                    this.reduceUnitHealth(units);
                 }
             });
         }
@@ -363,6 +398,8 @@ export class World {
                 if (entity.Type === EntityType.Bomb) {
                     const bomb = entity as BombEntity;
                     this.CreateBlastFromOrigin(getCoordinatesFromCellNumber(bomb.CellNumber, this.Width), bomb.BlastDiameter, bomb.UnitId);
+                } else if (entity.Type === EntityType.WoodBlock || entity.Type === EntityType.OreBlock) {
+                    this.placeRandomSpawn(cellNumber);
                 }
             }
         }
@@ -376,7 +413,7 @@ export class World {
         return false;
     };
 
-    public RemoveEntity = (cellNumber: number) => {
+    public RemoveEntity = (cellNumber: number): boolean => {
         if (this.entities.has(cellNumber)) {
             this.entities.delete(cellNumber);
             const expiryEvent: IEntityExpiredEvent = {
@@ -385,7 +422,9 @@ export class World {
             };
             this.cellReserver.FreeCell(cellNumber);
             this.worldTickEvents.push(expiryEvent);
+            return true;
         }
+        return false;
     };
 
     public PlaceEntity = (entity: AbstractEntity) => {
@@ -407,25 +446,35 @@ export class World {
         this.worldTickEvents.push(agentState);
     };
 
-    private reduceAgentHealth = (agent: Unit) => {
-        if (agent.Invulnerability < this.gameTicker.CurrentTick) {
-            agent.ReduceHealth(this.gameTicker.CurrentTick);
-            this.pushAgentState(agent);
+    private reduceUnitHealth = (unit: Unit) => {
+        if (unit.Invulnerable < this.gameTicker.CurrentTick) {
+            unit.ReduceHealth(this.gameTicker.CurrentTick);
+            this.pushAgentState(unit);
         }
     };
 
-    private increaseAgentAmmo = (agent: Unit) => {
-        agent.IncreaseAmmo();
+    private increaseAgentAmmunition = (agent: Unit) => {
+        agent.IncreaseAmmunition();
         this.pushAgentState(agent);
     };
 
-    private increaseAgentBlast = (agent: Unit) => {
-        agent.IncreaseBlast();
-        this.pushAgentState(agent);
+    private triggerUnitFreeze = (unit: Unit) => {
+        const agentToPunish = unit.AgentId === "a" ? "b" : "a";
+        const unitToFreeze = this.unitTracker.GetRandomAliveUnitByAgent(agentToPunish);
+        if (unitToFreeze === null) {
+            return;
+        }
+        unitToFreeze.Stun(this.gameTicker.CurrentTick);
+        this.pushAgentState(unitToFreeze);
+    };
+
+    private increaseAgentBlast = (unit: Unit) => {
+        unit.IncreaseBlast();
+        this.pushAgentState(unit);
     };
 
     private getAgentIdFromUnitId = (unitId: string | undefined) => {
-        const unit = this.UnitMap.get(unitId ?? "");
+        const unit = this.unitTracker.GetUnitById(unitId ?? "");
         return unit?.AgentId;
     };
 }

@@ -15,13 +15,26 @@ interface IProps {
     readonly unitId: string;
     readonly isInvulnerable: boolean;
     readonly isDead: boolean;
+    readonly isStunned: boolean;
     readonly isSelected: boolean;
     readonly onClick?: () => void;
     readonly width: number;
     readonly height: number;
 }
 
-export const Unit: React.FC<IProps> = ({ x, y, agentId, unitId, isInvulnerable, isDead, isSelected, onClick, width, height }) => {
+export const Unit: React.FC<IProps> = ({
+    x,
+    y,
+    agentId,
+    unitId,
+    isInvulnerable,
+    isDead,
+    isStunned,
+    isSelected,
+    onClick,
+    width,
+    height,
+}) => {
     const { volume } = useContext(SoundContext);
     const [playSand1] = useSound(sand1, { volume });
     const [playSand2] = useSound(sand2, { volume });
@@ -50,6 +63,7 @@ export const Unit: React.FC<IProps> = ({ x, y, agentId, unitId, isInvulnerable, 
             isInvulnerable={isInvulnerable}
             isSelected={isSelected}
             isDead={isDead}
+            isStunned={isStunned}
         />
     );
 };

@@ -20,6 +20,7 @@ interface IUnitStyleProps {
     readonly unitId: string;
     readonly isInvulnerable: boolean;
     readonly isDead: boolean;
+    readonly isStunned: boolean;
     readonly isSelected: boolean;
     readonly x: number;
     readonly y: number;
@@ -100,6 +101,7 @@ export const UnitDiv = styled("div")<IUnitStyleProps>`
     border: ${({ isSelected }) => (isSelected ? `5px solid #ff9900` : `none`)};
     box-sizing: border-box;
     opacity: ${({ isInvulnerable, isDead }) => (isInvulnerable || isDead ? 0.4 : 1)};
+    filter: ${({ isStunned }) => (isStunned ? `grayscale(100%)` : `grayscale(0%)`)};
     animation: ${({ agentId, isDead }) => !isDead && (agentId === "a" ? wizardAnimation : knightAnimation)} 0.5s linear infinite;
     background-image: url(${({ agentId, isDead }) => isDead && (agentId === "a" ? wizard1 : knight1)});
     bottom: ${({ y, height }) => (y * Math.floor((100 / height) * 100)) / 100}%;

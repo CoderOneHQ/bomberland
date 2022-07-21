@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
-import { IEndGameState, IGameState } from "@coderone/bomberland-library";
+import { IEndGameState, IGameState, IUnitState } from "@coderone/bomberland-library";
 import { Table, HeaderColumn, TableCell, GameInfoContainer } from "./InfoPanel.styles";
 import { StatusTag, GameStatus } from "./StatusTag/StatusTag";
 import { H2 } from "../../../H2/H2";
@@ -29,7 +29,7 @@ export const InfoPanel: React.FC<IProps> = ({ connection, state, selectedUnitId,
         return null;
     }
     const [t] = useTranslation();
-    const agentHeaderData = ["Unit", "Health", "Ammunition", "Blast diameter", "Coordinates", "Invulnerability"];
+    const agentHeaderData = ["Unit", "Health", "Ammunition", "Blast diameter", "Coordinates", "Invulnerable", "Stunned"];
     const currentAgent = connection?.agent_id || "";
     const selectableUnits = currentAgent ? state.agents[currentAgent]?.unit_ids ?? [] : "";
     const isGameRunning = state.tick > 0;
@@ -67,7 +67,7 @@ export const InfoPanel: React.FC<IProps> = ({ connection, state, selectedUnitId,
                         })}
                     </tr>
 
-                    {Object.values(state ? state.unit_state : "").map((unit) => {
+                    {Object.values(state ? state.unit_state : "").map((unit: IUnitState) => {
                         return (
                             <tr key={unit.unit_id}>
                                 <TableCell currAgent={selectedUnitId === unit.unit_id} selectableUnit={currentAgent === unit.agent_id}>
@@ -86,7 +86,10 @@ export const InfoPanel: React.FC<IProps> = ({ connection, state, selectedUnitId,
                                     {JSON.stringify(unit.coordinates)}
                                 </TableCell>
                                 <TableCell currAgent={selectedUnitId === unit.unit_id} selectableUnit={currentAgent === unit.agent_id}>
-                                    {unit.invulnerability}
+                                    {unit.invulnerable}
+                                </TableCell>
+                                <TableCell currAgent={selectedUnitId === unit.unit_id} selectableUnit={currentAgent === unit.agent_id}>
+                                    {unit.stunned}
                                 </TableCell>
                             </tr>
                         );

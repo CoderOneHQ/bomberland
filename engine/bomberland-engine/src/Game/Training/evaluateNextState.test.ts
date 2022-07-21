@@ -153,6 +153,7 @@ describe("evaluateNextState", () => {
     test(`it should correctly evaluates state when there is a spawn right before fire spread event`, async () => {
         process.env["AMMO_SPAWN_WEIGHTING"] = "1.0";
         process.env["BLAST_POWERUP_SPAWN_WEIGHTING"] = "0.0";
+        process.env["FREEZE_POWERUP_SPAWN_WEIGHTING"] = "0.0";
         process.env["ENTITY_SPAWN_PROBABILITY_PER_TICK"] = "1";
         process.env["MAP_WIDTH"] = "2";
         process.env["MAP_HEIGHT"] = "2";

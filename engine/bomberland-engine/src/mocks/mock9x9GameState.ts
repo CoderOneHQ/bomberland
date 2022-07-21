@@ -13,7 +13,8 @@ export const mock9x9GameState: Omit<IGameState, "connection"> = {
             blast_diameter: 3,
             agent_id: "a",
             unit_id: "a",
-            invulnerability: 0,
+            invulnerable: 0,
+            stunned: 0,
         },
         b: {
             coordinates: [5, 5],
@@ -24,7 +25,8 @@ export const mock9x9GameState: Omit<IGameState, "connection"> = {
             blast_diameter: 3,
             agent_id: "b",
             unit_id: "b",
-            invulnerability: 0,
+            invulnerable: 0,
+            stunned: 0,
         },
     },
     entities: [

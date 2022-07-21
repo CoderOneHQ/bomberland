@@ -22,8 +22,9 @@ export const Units: React.FC<IProps> = ({ unitState, currentTick, selectedUnitId
         const [x, y] = unit.coordinates;
         const { unit_id, agent_id } = unit;
         const isSelected = unit_id === selectedUnitId;
-        const isInvulnerable = unit.invulnerability > currentTick;
+        const isInvulnerable = unit.invulnerable >= currentTick;
         const isDead = unit.hp <= 0;
+        const isStunned = unit.stunned >= currentTick;
         const onSetUnitId = useCallback(() => {
             setSelectedUnitId(unit_id);
         }, [unit_id, setSelectedUnitId]);
@@ -43,6 +44,7 @@ export const Units: React.FC<IProps> = ({ unitState, currentTick, selectedUnitId
                 unitId={unit_id}
                 isInvulnerable={isInvulnerable}
                 isDead={isDead}
+                isStunned={isStunned}
             />
         );
     });
