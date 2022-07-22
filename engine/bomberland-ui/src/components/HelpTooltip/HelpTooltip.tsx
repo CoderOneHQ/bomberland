@@ -9,7 +9,7 @@ interface IProps {
     readonly label?: string;
 }
 
-export const HelpTooltip: React.FC<IProps> = ({ href, label }) => {
+export const HelpTooltip: React.FC<React.PropsWithChildren<IProps>> = ({ href, label }) => {
     return (
         <Tooltip text={label}>
             <RouterLink href={href}>

@@ -21,7 +21,7 @@ const Root = styled.div`
     padding: 8px 0;
 `;
 
-export const OrderedNavigation: React.FC<IProps> = ({ pageNavigation }) => {
+export const OrderedNavigation: React.FC<React.PropsWithChildren<IProps>> = ({ pageNavigation }) => {
     const [t] = useTranslation();
     if (pageNavigation === undefined) {
         return null;

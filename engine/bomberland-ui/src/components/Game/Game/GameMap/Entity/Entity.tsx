@@ -33,7 +33,7 @@ interface IProps {
 export const imagedEntities = new Set<string>([EntityType.Bomb, EntityType.WoodBlock, EntityType.OreBlock, EntityType.MetalBlock]);
 
 // TODO: split out into individual entities since this is growing large
-export const Entity: React.FC<IProps> = ({ expires, type, x, y, onBombDetonated, agent_id, width, height }) => {
+export const Entity: React.FC<React.PropsWithChildren<IProps>> = ({ expires, type, x, y, onBombDetonated, agent_id, width, height }) => {
     const { volume } = useContext(SoundContext);
     const [playExplode5] = useSound(explode5Sfx, { volume });
     const [playConcreteBreak5] = useSound(concreteBreak5Sfx, { volume: volume });

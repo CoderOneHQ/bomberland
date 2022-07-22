@@ -15,7 +15,7 @@ interface IProps {
     readonly height: number;
 }
 
-export const Units: React.FC<IProps> = ({ unitState, currentTick, selectedUnitId, selectableUnits, setSelectedUnitId, width, height }) => {
+export const Units: React.FC<React.PropsWithChildren<IProps>> = ({ unitState, currentTick, selectedUnitId, selectableUnits, setSelectedUnitId, width, height }) => {
     const unitData = Object.values(unitState);
     const allowedUnits = new Set(selectableUnits);
     const units = unitData.map((unit) => {

@@ -22,7 +22,7 @@ interface IProps {
     readonly height: number;
 }
 
-export const Unit: React.FC<IProps> = ({
+export const Unit: React.FC<React.PropsWithChildren<IProps>> = ({
     x,
     y,
     agentId,

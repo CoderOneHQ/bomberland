@@ -11,7 +11,7 @@ interface IProps {
     readonly status: GameStatus.Pending | GameStatus.Running | GameStatus.GameOver;
 }
 
-export const StatusTag: React.FC<IProps> = ({ status, children }) => {
+export const StatusTag: React.FC<React.PropsWithChildren<IProps>> = ({ status, children }) => {
     switch (status) {
         case GameStatus.Pending:
             return <PendingStatusTag>{children}</PendingStatusTag>;

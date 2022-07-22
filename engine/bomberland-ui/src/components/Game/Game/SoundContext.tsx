@@ -8,7 +8,7 @@ interface ISoundContext {
 
 export const SoundContext = React.createContext({} as ISoundContext);
 
-export const SoundContextProvider: React.FC = ({ children }) => {
+export const SoundContextProvider: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
     const [volume, setVolume] = useState(0);
 
     return <SoundContext.Provider value={{ volume, setVolume }}>{children}</SoundContext.Provider>;

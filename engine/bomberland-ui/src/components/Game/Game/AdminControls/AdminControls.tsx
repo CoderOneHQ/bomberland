@@ -11,7 +11,7 @@ interface IProps {
     readonly sendAdminPacket: (adminPacket: AdminPacket) => void;
 }
 
-export const AdminControls: React.FC<IProps> = ({ isEnabled, sendAdminPacket }) => {
+export const AdminControls: React.FC<React.PropsWithChildren<IProps>> = ({ isEnabled, sendAdminPacket }) => {
     const [t] = useTranslation();
     const [prngSeed, setPrngSeed] = useState<string | undefined>(undefined);
     const [worldSeed, setWorldSeed] = useState<string | undefined>(undefined);
@@ -34,14 +34,14 @@ export const AdminControls: React.FC<IProps> = ({ isEnabled, sendAdminPacket }) 
     }
 
     const onPrngSeedChanged = useCallback(
-        (_, value) => {
+        (_: any, value: any) => {
             setPrngSeed(value ?? undefined);
         },
         [setPrngSeed]
     );
 
     const onWorldSeedChanged = useCallback(
-        (_, value) => {
+        (_: any, value: any) => {
             setWorldSeed(value ?? undefined);
         },
         [setWorldSeed]

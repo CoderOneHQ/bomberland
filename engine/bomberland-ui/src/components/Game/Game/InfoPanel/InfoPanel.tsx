@@ -24,7 +24,7 @@ const getGameStatus = (endGameState: IEndGameState | undefined, isGameRunning: b
     }
 };
 
-export const InfoPanel: React.FC<IProps> = ({ connection, state, selectedUnitId, endGameState }) => {
+export const InfoPanel: React.FC<React.PropsWithChildren<IProps>> = ({ connection, state, selectedUnitId, endGameState }) => {
     if (state === undefined) {
         return null;
     }

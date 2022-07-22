@@ -12,7 +12,7 @@ interface IProps {
     readonly styledOverride?: StyledComponent<"a", any, {}, never>;
 }
 
-export const TelemetryLink: React.FC<IProps> = ({ href, children, target = "_self", styledOverride }) => {
+export const TelemetryLink: React.FC<React.PropsWithChildren<IProps>> = ({ href, children, target = "_self", styledOverride }) => {
     const shouldShowIcon = target === "_blank";
     const StyledLink = React.useMemo(() => {
         return (

@@ -16,7 +16,7 @@ interface IProps {
     };
 }
 
-export const DocumentationPagePreview: React.FC<IProps> = ({ excerpt, frontmatter, children, timeToRead }) => {
+export const DocumentationPagePreview: React.FC<React.PropsWithChildren<IProps>> = ({ excerpt, frontmatter, children, timeToRead }) => {
     const { title, slug } = frontmatter;
     const [t] = useTranslation();
     return (

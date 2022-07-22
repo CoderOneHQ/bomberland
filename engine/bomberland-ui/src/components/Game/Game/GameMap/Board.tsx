@@ -6,7 +6,7 @@ interface IProps {
     readonly height: number;
 }
 
-export const Board: React.FC<IProps> = ({ width, height }) => {
+export const Board: React.FC<React.PropsWithChildren<IProps>> = ({ width, height }) => {
     const totalCells = width * height;
 
     return (

@@ -6,7 +6,7 @@ import { useCallback } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
-export const SoundControl: React.FC = () => {
+export const SoundControl: React.FC<React.PropsWithChildren<unknown>> = () => {
     const { setVolume, volume } = useContext(SoundContext);
     const [t] = useTranslation();
 

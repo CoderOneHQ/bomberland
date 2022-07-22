@@ -17,7 +17,7 @@ interface IProps {
     readonly sendAdminPacket: (adminPacket: AdminPacket) => void;
 }
 
-export const ControlPane: React.FC<IProps> = ({ connection, state, endGameState, sendAdminPacket }) => {
+export const ControlPane: React.FC<React.PropsWithChildren<IProps>> = ({ connection, state, endGameState, sendAdminPacket }) => {
     if (state === undefined) {
         return null;
     }

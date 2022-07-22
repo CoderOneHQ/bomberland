@@ -14,7 +14,7 @@ interface IProps {
     readonly placeholder?: string;
 }
 
-export const CopyToClipboardField: React.FC<IProps> = ({ value, label, readOnly = true, placeholder }) => {
+export const CopyToClipboardField: React.FC<React.PropsWithChildren<IProps>> = ({ value, label, readOnly = true, placeholder }) => {
     const [t] = useTranslation();
     const copyToClipboard = useCallback(async () => {
         await navigator.clipboard.writeText(value ?? "");

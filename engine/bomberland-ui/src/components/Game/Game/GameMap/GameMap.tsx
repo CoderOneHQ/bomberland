@@ -17,7 +17,7 @@ interface IProps {
 const vwOffset = 750; // taken up by navbar + panels
 const vhOffset = 136; // padding
 
-export const GameMap: React.FC<IProps> = ({ connection, state, onBombDetonated, selectedUnitId, setSelectedUnitId }) => {
+export const GameMap: React.FC<React.PropsWithChildren<IProps>> = ({ connection, state, onBombDetonated, selectedUnitId, setSelectedUnitId }) => {
     if (state === undefined) {
         return null;
     }

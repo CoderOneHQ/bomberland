@@ -34,7 +34,7 @@ interface IProps {
     readonly y: number;
 }
 
-export const Cell: React.FC<IProps> = ({ x, y, width, height }) => {
+export const Cell: React.FC<React.PropsWithChildren<IProps>> = ({ x, y, width, height }) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     useEffect(() => {
         const randomIndex = Math.floor(Math.random() * imageSet.length);
