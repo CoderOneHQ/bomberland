@@ -6,19 +6,19 @@ import { Environment } from "../../Environment";
 import { IConfig } from "../../Config/IConfig";
 
 export class AmmoEntity extends AbstractEntity {
-    public constructor(config: IConfig, cellNumber: number, mapWidth: number, currentTick: number, createdOverride?: number) {
+    public constructor(config: IConfig, cellNumber: number, currentTick: number, createdOverride?: number) {
         const engineTelemetry = new CoderOneApi(Environment.Environment, config, true, Environment.Build);
         const telemetry = new Telemetry(engineTelemetry, config.IsTelemetryEnabled);
         const createdTick = createdOverride ?? currentTick;
         const initialValues: IInitialEntityValues = {
             cellNumber,
-            mapWidth,
+            mapWidth: config.MapWidth,
             type: EntityType.Ammo,
             created: createdTick,
             hp: 1,
             unitId: undefined,
             agentId: undefined,
-            expires: createdTick + config.AmmoDurationTicks,
+            expires: createdTick + config.AmmunitionDurationTicks,
             blastDiameter: undefined,
         };
         super(telemetry, initialValues);

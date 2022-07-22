@@ -24,7 +24,11 @@ export class WeightedDie<T> {
         }, 0);
 
         if (weightingSum !== 1) {
-            throw new Error(`Weightings must add up to 1.0 got: ${weightingSum}`);
+            throw new Error(
+                `Weightings must add up to 1.0 got: ${weightingSum} from input weightings: ${this.weightings
+                    .map((weighting) => weighting.value)
+                    .join(",")}`
+            );
         }
     };
 

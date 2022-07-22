@@ -205,7 +205,11 @@ export class Game {
             const [agentId, agentPacket] = move;
             const { unit_id } = agentPacket;
             try {
-                const unit = this.world.GetUnit(unit_id);
+                const unitTracker = this.world.UnitTracker;
+                const unit = unitTracker.GetUnitById(unit_id);
+                if (unit === undefined) {
+                    throw Error(`UnitId ${unit_id} not found in unitMap: ${unitTracker.UnitIds}.`);
+                }
                 handleUnitAction(this.telemetry, agentPacket, unit, this.world, this.gameTicker, this.config);
                 successfulActions.push(move);
             } catch (e) {

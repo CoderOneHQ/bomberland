@@ -1,25 +1,25 @@
-import { UnitTracker } from "./../UnitTracker";
+import { getCellNumberFromCoordinates } from "@coderone/bomberland-library";
 import MersenneTwister from "mersenne-twister";
-import { AbstractEntity } from "../../AbstractEntity";
+import { getConfig } from "../../../../Config/getConfig";
+import { IConfig } from "../../../../Config/IConfig";
+import { Telemetry } from "../../../../Services/Telemetry";
+import { GameTicker } from "../../../Game/GameTicker";
+import { PRNG } from "../../../Probability/Probability.types";
 import { Unit } from "../../../Unit/Unit";
 import { CellReserver } from "../CellReserver";
 import { EmptyCellTracker } from "../EmptyCellTracker";
-import { getCellNumberFromCoordinates } from "@coderone/bomberland-library";
-import { GameTicker } from "../../../Game/GameTicker";
 import { IWorldState, World } from "../World";
-import { PRNG } from "../../../Probability/Probability.types";
-import { Telemetry } from "../../../../Services/Telemetry";
+import { EntityTracker } from "./../EntityTracker";
+import { UnitTracker } from "./../UnitTracker";
 import { reconstructEntity } from "./reconstructEntity";
-import { IConfig } from "../../../../Config/IConfig";
-import { getConfig } from "../../../../Config/getConfig";
 
-const reconstructUnitTracker = (config: IConfig, worldState: IWorldState, mapWidth: number): UnitTracker => {
-    const unitTracker = new UnitTracker();
+const reconstructUnitTracker = (config: IConfig, worldState: IWorldState, prngGame: PRNG): UnitTracker => {
+    const unitTracker = new UnitTracker(prngGame);
     worldState.units.forEach((unit) => {
         const reconstructedUnit = new Unit(
             config,
             unit.coordinates,
-            mapWidth,
+            config.MapWidth,
             unit.agent_id,
             unit.unit_id,
             unit.inventory.bombs,
@@ -39,8 +39,8 @@ const reconstructEntities = (
     gameTicker: GameTicker,
     cellReserver: CellReserver,
     config: IConfig
-): Map<number, AbstractEntity> => {
-    const entities = new Map<number, AbstractEntity>();
+): EntityTracker => {
+    const entities = new EntityTracker();
     worldState.entities.forEach((entity) => {
         const { x, y } = entity;
         const cellNumber = getCellNumberFromCoordinates([x, y], width);
@@ -50,7 +50,7 @@ const reconstructEntities = (
         }
         const reconstructedEntity = reconstructEntity(entity, width, worldState, cellNumber, gameTicker, config);
 
-        entities.set(cellNumber, reconstructedEntity);
+        entities.Add(reconstructedEntity);
     });
     return entities;
 };
@@ -69,7 +69,7 @@ export const generateWorldFromState = (
     const cellReserver = new CellReserver(width * height, prngGame, width);
     const emptyCellTracker = new EmptyCellTracker(telemetry, width, height, prngGame, cellReserver);
 
-    const unitTracker = reconstructUnitTracker(config, worldState, width);
+    const unitTracker = reconstructUnitTracker(config, worldState, prngGame);
     const entities = reconstructEntities(worldState, width, gameTicker, cellReserver, config);
 
     const world = new World(telemetry, config, prngGame, cellReserver, emptyCellTracker, unitTracker, entities, gameTicker, width, height);

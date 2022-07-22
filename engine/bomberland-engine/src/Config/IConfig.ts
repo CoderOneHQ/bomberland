@@ -1,8 +1,8 @@
 export interface IConfig {
     readonly AdminRoleEnabled: boolean;
     readonly AgentSecretIdMap: Map<string, string>;
-    readonly AmmoDurationTicks: number;
-    readonly AmmoSpawnWeighting: number;
+    readonly AmmunitionDurationTicks: number;
+    readonly AmmunitionSpawnWeighting: number;
     readonly BlastDurationTicks: number;
     readonly BlastPowerupDurationTicks: number;
     readonly BlastPowerupSpawnWeighting: number;
@@ -25,6 +25,7 @@ export interface IConfig {
     readonly IsTrainingModeEnabled: boolean;
     readonly MapHeight: number;
     readonly MapWidth: number;
+    readonly MaximumConcurrentBombs: number;
     readonly OreBlockFrequency: number;
     readonly Port: number;
     readonly PrngSeed: number;

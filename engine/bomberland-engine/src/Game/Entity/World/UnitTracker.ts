@@ -1,8 +1,5 @@
+import { PRNG } from "./../../Probability/Probability.types";
 import { Unit } from "./../../Unit/Unit";
-
-const getRandomInt = (maximum: number) => {
-    return Math.floor(Math.random() * maximum);
-};
 
 export class UnitTracker {
     private unitMap: Map<string, Unit> = new Map();
@@ -22,7 +19,7 @@ export class UnitTracker {
         return Array.from(this.unitMap.keys());
     }
 
-    public constructor() {}
+    public constructor(private prngGame: PRNG) {}
 
     public Set = (unit: Unit) => {
         this.unitMap.set(unit.UnitId, unit);
@@ -49,7 +46,7 @@ export class UnitTracker {
         if (aliveUnits.length === 0) {
             return null;
         }
-        const randomIndex = getRandomInt(aliveUnits.length);
+        const randomIndex = Math.floor(this.prngGame() * aliveUnits.length);
         return aliveUnits[randomIndex] ?? null;
     };
 }
