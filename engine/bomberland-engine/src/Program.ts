@@ -63,7 +63,7 @@ class Program {
     };
 
     private instantiateApi = () => {
-        const services: IServices = {};
+        const services: IServices = { coderoneApi: this.engineTelemetry };
         this.app.use(koaBody());
         const apiRouter = new Router({ prefix: "/api" });
         routers.forEach((getRouter) => {
