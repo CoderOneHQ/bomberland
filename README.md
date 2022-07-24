@@ -40,7 +40,7 @@ docker-compose up --abort-on-container-exit --force-recreate
 | Python3             | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/python3)    | Basic Python3 starter                              | ✅          | Coder One                               |
 | Python3-fwd         | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/python3)    | Includes example for using forward model simulator | ✅          | Coder One                               |
 | Python3-gym-wrapper | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/python3)    | Open AI Gym wrapper                                | ✅          | Coder One                               |
-| TypeScript          | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/typescript) | Basic TypeScript starter                           | ❌          | Coder One                               |
+| TypeScript          | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/typescript) | Basic TypeScript starter                           | ✅          | Coder One                               |
 | TypeScript-fwd      | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/typescript) | Includes example for using forward model simulator | ❌          | Coder One                               |
 | Go                  | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/go)                | Basic Go starter                                   | ✅          | [dtitov](https://github.com/dtitov)     |
 | C++                 | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/cpp)               | Basic C++ starter                                  | ✅          | [jfbogusz](https://github.com/jfbogusz) |

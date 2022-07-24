@@ -45,6 +45,6 @@ services:
             - game-engine
         networks:
             - coderone-tournament
-        restart: on-failure
+
 networks:
     coderone-tournament:
