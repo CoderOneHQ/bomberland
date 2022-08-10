@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" xmlns:v="https://vecta.io/nano"><path d="M1 1h14.1v14.1H1z" fill="#a1a1a1"/><path d="M15 10V9h-1v1h-4V7H9v4h5v-1h1m-7 0V9H7v1H3V9H2V6H1v4h1v1h5v-1h1m6-6H6V3H5V2h1v1h8v1M4 4H2V3h2v1" fill="#fff"/><path d="M15 14v-3h-5v4h4v-1h1m-7 1H2v-4h6v4m1-5H8V5H2V4h2V2h1v2h8v1h-3v1H9v4" fill="#00648c"/><path d="M9 6H7V4h2v2M5 5H4V4h1v1M2 5H1V4h1v1m7 10H8v-5h1v5m6-10h-2V4h2v1"/><g opacity=".929" enable-background="new"><path d="M14 1h1v1h-1z"/><path d="M15 2h1v12h-1V2m-1 13v1H2v-1h12M1 14H0V1h1V0h13v1H2v1H1v12"/><path d="M4 1h1v1H4zM1 14h1v1H1z"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 14 16" shape-rendering="crispEdges">
+<metadata>Made with Pixels to Svg https://codepen.io/shshaw/pen/XbxvNj</metadata>
+<path stroke="#625565" d="M0 0h14M0 1h1M13 1h1M1 3h1M10 3h1M1 4h2M10 4h2M1 6h1M10 6h1M1 7h2M10 7h2M1 10h1M3 10h8M12 10h1M1 11h12M1 12h1M3 12h8M12 12h1M1 13h12M0 14h1M13 14h1M0 15h14" />
+<path stroke="#3e3546" d="M1 1h12M0 2h1M13 2h1M0 3h1M2 3h1M11 3h1M13 3h1M0 4h1M13 4h1M0 5h1M13 5h1M0 6h1M2 6h1M11 6h1M13 6h1M0 7h1M13 7h1M0 8h14M0 9h1M13 9h1M0 10h1M2 10h1M11 10h1M13 10h1M0 11h1M13 11h1M0 12h1M2 12h1M11 12h1M13 12h1M0 13h1M13 13h1M1 14h12" />
+<path stroke="#9babb2" d="M1 2h12M12 3h1M12 4h1M12 5h1M12 6h1M12 7h1M1 9h12" />
+<path stroke="#7f708a" d="M3 3h7M3 4h7M1 5h11M3 6h7M3 7h7" />
+</svg>
