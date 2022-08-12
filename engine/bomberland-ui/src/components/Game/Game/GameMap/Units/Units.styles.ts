@@ -1,12 +1,28 @@
-import knight1 from "../svg/knight_animation_1.svg";
-import knight2 from "../svg/knight_animation_2.svg";
-import knight3 from "../svg/knight_animation_3.svg";
-import knight4 from "../svg/knight_animation_4.svg";
+import unitCFrame1 from "../svg/astronaut-u1-1.svg";
+import unitCFrame2 from "../svg/astronaut-u1-2.svg";
+import unitCFrame3 from "../svg/astronaut-u1-3.svg";
+import unitCFrame4 from "../svg/astronaut-u1-4.svg";
+import unitDFrame1 from "../svg/alien-u1-1.svg";
+import unitDFrame2 from "../svg/alien-u1-2.svg";
+import unitDFrame3 from "../svg/alien-u1-3.svg";
+import unitDFrame4 from "../svg/alien-u1-4.svg";
+import unitEFrame1 from "../svg/astronaut-u2-1.svg";
+import unitEFrame2 from "../svg/astronaut-u2-2.svg";
+import unitEFrame3 from "../svg/astronaut-u2-3.svg";
+import unitEFrame4 from "../svg/astronaut-u2-4.svg";
+import unitFFrame1 from "../svg/alien-u2-1.svg";
+import unitFFrame2 from "../svg/alien-u2-2.svg";
+import unitFFrame3 from "../svg/alien-u2-3.svg";
+import unitFFrame4 from "../svg/alien-u2-4.svg";
+import unitGFrame1 from "../svg/astronaut-u3-1.svg";
+import unitGFrame2 from "../svg/astronaut-u3-2.svg";
+import unitGFrame3 from "../svg/astronaut-u3-3.svg";
+import unitGFrame4 from "../svg/astronaut-u3-4.svg";
+import unitHFrame1 from "../svg/alien-u3-1.svg";
+import unitHFrame2 from "../svg/alien-u3-2.svg";
+import unitHFrame3 from "../svg/alien-u3-3.svg";
+import unitHFrame4 from "../svg/alien-u3-4.svg";
 import styled, { keyframes } from "styled-components";
-import wizard1 from "../svg/wizard_animation_1.svg";
-import wizard2 from "../svg/wizard_animation_2.svg";
-import wizard3 from "../svg/wizard_animation_3.svg";
-import wizard4 from "../svg/wizard_animation_4.svg";
 
 interface IStyleProps {
     readonly x: number;
@@ -29,49 +45,79 @@ interface IUnitStyleProps {
     readonly height: number;
 }
 
-const wizardAnimation = keyframes`
-    0% {
-        background-image: url(${wizard1});
-    }
+interface UnitMap {
+    [id: string]: any
+}
 
-    25% {
-        background-image: url(${wizard2});
-    }
+const unitSprites: UnitMap = {
+    "c": [unitCFrame1, unitCFrame2, unitCFrame3, unitCFrame4],
+    "d": [unitDFrame1, unitDFrame2, unitDFrame3, unitDFrame4],
+    "e": [unitEFrame1, unitEFrame2, unitEFrame3, unitEFrame4],
+    "f": [unitFFrame1, unitFFrame2, unitFFrame3, unitFFrame4],
+    "g": [unitGFrame1, unitGFrame2, unitGFrame3, unitGFrame4],
+    "h": [unitHFrame1, unitHFrame2, unitHFrame3, unitHFrame4]
+}
 
-    50% {
-        background-image: url(${wizard3});
-    }
+const agentDefaultSprites: UnitMap = {
+    "a": [unitCFrame1, unitCFrame2, unitCFrame3, unitCFrame4],
+    "b": [unitDFrame1, unitDFrame2, unitDFrame3, unitDFrame4]
+}
 
-    75% {
-        background-image: url(${wizard4});
-    }
+function getUnitAnimation(unitId: string, agentId: string) {
 
-    100% {
-        background-image: url(${wizard1});
-    }
-`;
+    if (unitId in unitSprites) {
 
-const knightAnimation = keyframes`
-    0% {
-        background-image: url(${knight1});
-    }
+        const unitAnimation = keyframes`
+        0% {
+            background-image: url(${[unitSprites[unitId][0]]});
+        }
 
-    25% {
-        background-image: url(${knight2});
-    }
+        25% {
+            background-image: url(${unitSprites[unitId][1]});
+        }
 
-    50% {
-        background-image: url(${knight3});
-    }
+        50% {
+            background-image: url(${unitSprites[unitId][2]});
+        }
 
-    75% {
-        background-image: url(${knight4});
-    }
+        75% {
+            background-image: url(${unitSprites[unitId][3]});
+        }
 
-    100% {
-        background-image: url(${knight1});
+        100% {
+            background-image: url(${unitSprites[unitId][0]});
+        }
+        `;
+
+        return unitAnimation
+
+    } else {
+        
+        const unitAnimation = keyframes`
+        0% {
+            background-image: url(${[agentDefaultSprites[agentId][0]]});
+        }
+
+        25% {
+            background-image: url(${agentDefaultSprites[agentId][1]});
+        }
+
+        50% {
+            background-image: url(${agentDefaultSprites[agentId][2]});
+        }
+
+        75% {
+            background-image: url(${agentDefaultSprites[agentId][3]});
+        }
+
+        100% {
+            background-image: url(${agentDefaultSprites[agentId][0]});
+        }
+        `;
+
+        return unitAnimation
     }
-`;
+}
 
 export const ImageDiv = styled("div")<IStyleProps>`
     width: ${({ width }) => Math.floor((100 / width) * 100) / 100}%;
@@ -102,8 +148,8 @@ export const UnitDiv = styled("div")<IUnitStyleProps>`
     box-sizing: border-box;
     opacity: ${({ isInvulnerable, isDead }) => (isInvulnerable || isDead ? 0.4 : 1)};
     filter: ${({ isStunned }) => (isStunned ? `grayscale(100%)` : `grayscale(0%)`)};
-    animation: ${({ agentId, isDead }) => !isDead && (agentId === "a" ? wizardAnimation : knightAnimation)} 0.5s linear infinite;
-    background-image: url(${({ agentId, isDead }) => isDead && (agentId === "a" ? wizard1 : knight1)});
+    animation: ${({ unitId, agentId, isDead }) => !isDead && (getUnitAnimation(unitId, agentId))} 0.5s linear infinite;
+    background-image: url(${({ agentId, unitId, isDead }) => isDead && (unitId in unitSprites ? unitSprites[unitId][0] : agentDefaultSprites[agentId])});
     bottom: ${({ y, height }) => (y * Math.floor((100 / height) * 100)) / 100}%;
     left: ${({ x, width }) => (x * Math.floor((100 / width) * 100)) / 100}%;
     display: flex;

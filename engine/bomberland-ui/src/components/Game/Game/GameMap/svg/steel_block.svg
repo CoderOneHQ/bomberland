@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" xmlns:v="https://vecta.io/nano"><path d="M1 1h14.1v14.1H1z" fill="#a1a1a1"/><path d="M15 10V9h-1v1h-4V7H9v4h5v-1h1m-7 0V9H7v1H3V9H2V6H1v4h1v1h5v-1h1m6-6H6V3H5V2h1v1h8v1M4 4H2V3h2v1" fill="#fff"/><path d="M15 14v-3h-5v4h4v-1h1m-7 1H2v-4h6v4m1-5H8V5H2V4h2V2h1v2h8v1h-3v1H9v4" fill="#00648c"/><path d="M9 6H7V4h2v2M5 5H4V4h1v1M2 5H1V4h1v1m7 10H8v-5h1v5m6-10h-2V4h2v1"/><g opacity=".929" enable-background="new"><path d="M14 1h1v1h-1z"/><path d="M15 2h1v12h-1V2m-1 13v1H2v-1h12M1 14H0V1h1V0h13v1H2v1H1v12"/><path d="M4 1h1v1H4zM1 14h1v1H1z"/></g></svg>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1H15.1V15.1H1V1Z" fill="#9BABB2"/>
+<path d="M15 10V9H14V10H10V7H9V11H14V10H15ZM8 10V9H7V10H3V9H2V6H1V10H2V11H7V10H8ZM14 4H6V3H5V2H6V3H14V4ZM4 4H2V3H4V4Z" fill="white"/>
+<path d="M15 14V11H10V15H14V14H15ZM8 15H2V11H8V15ZM9 10H8V5H2V4H4V2H5V4H13V5H10V6H9V10Z" fill="#484A77"/>
+<path d="M9 6H7V4H9V6ZM5 5H4V4H5V5ZM2 5H1V4H2V5ZM9 15H8V10H9V15ZM15 5H13V4H15V5Z" fill="#2E222F"/>
+<g opacity="0.929">
+<path d="M14 1H15V2H14V1Z" fill="#2E222F"/>
+<path d="M15 2H16V14H15V2ZM14 15V16H2V15H14ZM1 14H0V1H1V0H14V1H2V2H1V14Z" fill="#2E222F"/>
+<path d="M4 1H5V2H4V1ZM1 14H2V15H1V14Z" fill="#2E222F"/>
+</g>
+</svg>

@@ -18,12 +18,11 @@ export const NavigationLinkItem: React.FC<React.PropsWithChildren<IProps>> = ({ 
     if (link === null) {
         return null;
     }
-    const { slug, title, timeToRead } = link;
+    const { slug, title } = link;
     return (
         <Root>
             <span>{label}: </span>
             <RouterLink href={`${slug}`}>{title}</RouterLink>
-            <span> {t("readingTime", { minutes: timeToRead })}</span>
         </Root>
     );
 };
