@@ -65,7 +65,7 @@ To submit:
 You've now submitted your first agent to the competition! Check back regularly to see your results from the [Matches](https://www.gocoder.one/adjudicated-games) page.
 
 ## Next steps
-You're now all set up to compete! Check out the ^NTS^ [beginner tutorial](...) for a guided walkthrough on developing a basic agent.
+You're now all set up to compete! Check out the [introductory tutorial](https://www.gocoder.one/blog/ai-programming-tutorial-bomberman) for a guided walkthrough on developing a basic agent.
 
 If you need help or have any feedback, please reach out on [Discord](https://discord.gg/NkfgvRN).
 

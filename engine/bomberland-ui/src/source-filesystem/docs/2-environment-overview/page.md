@@ -8,7 +8,6 @@ order: 2
 In **Bomberland** you control a team of units navigating a 2D gridworld filled with traps and powerups. Your goal is to take down your opponent's units and **be the last team left standing**.
 
 ![Bomberland environment](./bomberland.gif "Bomberland environment")
-!NTS: Update image!
 
 > See the [Release Notes](https://github.com/CoderOneHQ/bomberland/blob/master/CHANGELOG.md) for a summary of changes since the last season.
 
@@ -67,7 +66,6 @@ Check [🕹️ Action Packets](../docs/api-reference/#%EF%B8%8F-action-packets) 
 - Bombs can also detonate early if they are hit by a neighboring exploding bomb.
 
 ## Environment Entities
-!NTS: update assets!
 
 There are 3 types of blocks in the game:
 
@@ -79,16 +77,16 @@ There are 3 types of blocks in the game:
 
 There are 2 types of items that have a chance of spawning once a block is destroyed:
 
-1. **Freeze Powerup**: Randomly stuns an opponent's unit for X ticks. !NTS!
 1. **Blast Powerup**: Extends bomb blast radius by 1 unit in each direction.
+1. **Freeze Powerup**: Temporarily stuns a random opponent unit for 25 ticks.
 
-![Image depicting environment pickups](./pickups.png "Image depicting environment pickups")
+![Image depicting environment pickups](./powerup.JPG "Image depicting environment pickups")
+
 
 Pickups will perish after 40 ticks, or if hit by an explosion or end-game fire.
 
 ## Ring of Fire
-!NTS: update after deciding # of ticks for game duration!
-After 100 ticks, the map will start to gradually fill up with flames.
+After 200 ticks, the map will start to gradually fill up with flames.
 
 ![Image showing the end game ring of fire](./fire.png "Image showing the end game ring of fire")
 

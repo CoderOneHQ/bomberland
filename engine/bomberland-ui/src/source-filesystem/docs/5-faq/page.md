@@ -34,8 +34,6 @@ Yes, you can change environment variables using the flags [here](/docs/api-refer
 ### What resources will be available for my agent during online matches?
 It will be safe to assume the following default runtime resources will be available:
 
-!NTS: will this be changed?!
-
 ```yaml
 --cpus=2
 --cpu-period=100000

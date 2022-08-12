@@ -458,8 +458,6 @@ The response will be the next game state as evaluated by the game engine.
 
 ## ⚙️ Environment Flags
 
-!NTS: Update defaults!
-
 The environment's default variables can be changed by setting the appropriate flag in `docker-compose.yml`.
 
 You will need to add the `--build` flag when restarting the game engine (i.e. `docker-compose --build`).
@@ -470,9 +468,9 @@ You will need to add the `--build` flag when restarting the game engine (i.e. `d
 | `AGENT_SECRET_ID_MAP=agentA,agentB`                    | Used for game connection                                                                                                                                        |
 | `AMMO_DURATION_TICKS=40`                               | Number of ticks before ammunition pickup perishes                                                                                                               |
 | `AMMO_SPAWN_WEIGHTING=0`                             | If a spawn appears, weighting % that it will be an ammunition (versus a powerup). <br> `AMMO_SPAWN_WEIGHTING + BLAST_POWERUP_SPAWN_WEIGHTING + FREEZE_POWERUP_SPAWN_WEIGHTING = 1` (deprecated)               |
-| `BLAST_DURATION_TICKS=10`                              | Number of ticks before blast removed                                                                                                                            |
+| `BLAST_DURATION_TICKS=10`                              | Number of ticks before blast disappears                                                                                                                            |
 | `BLAST_POWERUP_DURATION_TICKS=40`                      | Number of ticks before blast powerup perishes                                                                                                                   |
-| `BLAST_POWERUP_SPAWN_WEIGHTING=0.1`                    | If a spawn appears, weighting % that it will be a blast powerup. <br> `AMMO_SPAWN_WEIGHTING + BLAST_POWERUP_SPAWN_WEIGHTING + FREEZE_POWERUP_SPAWN_WEIGHTING = 1`               |
+| `BLAST_POWERUP_SPAWN_WEIGHTING=0.1`                    | If a spawn appears, weighting % that it will be a blast powerup. <br> `AMMO_SPAWN_WEIGHTING + BLAST_POWERUP_SPAWN_WEIGHTING + FREEZE_POWERUP_SPAWN_WEIGHTING = 1`                |
 | `BOMB_DURATION_TICKS=40`                               | Number of ticks before a bomb explodes                                                                                                                          |
 | `BOMB_ARMED_TICKS=5`                                   | Number of ticks before a bomb can be remotely detonated                                                                                                         |
 | `ENTITY_SPAWN_PROBABILITY_PER_TICK=0`              | Probability of a spawn appearing somewhere on the map each tick (deprecated)                                                                                                |
