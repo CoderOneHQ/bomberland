@@ -19,5 +19,4 @@ export const ContentCard = styled("div")<IProps>`
     background-color: ${({ backgroundColor }) => (backgroundColor !== undefined ? backgroundColor : Palette.Neutral0)};
     max-width: ${({ maxWidth }) => (maxWidth !== undefined ? maxWidth : "500px")};
     min-width: ${({ minWidth }) => (minWidth !== undefined ? minWidth : "auto")};
-    margin: 0 auto;
 `;
