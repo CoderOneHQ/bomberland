@@ -148,8 +148,8 @@ export const UnitDiv = styled("div")<IUnitStyleProps>`
     box-sizing: border-box;
     opacity: ${({ isInvulnerable, isDead }) => (isInvulnerable || isDead ? 0.4 : 1)};
     filter: ${({ isStunned }) => (isStunned ? `grayscale(100%)` : `grayscale(0%)`)};
-    animation: ${({ unitId, agentId, isDead }) => !isDead && (getUnitAnimation(unitId, agentId))} 0.5s linear infinite;
-    background-image: url(${({ agentId, unitId, isDead }) => isDead && (unitId in unitSprites ? unitSprites[unitId][0] : agentDefaultSprites[agentId])});
+    animation: ${({ unitId, agentId, isDead, isStunned }) => !(isDead || isStunned) && (getUnitAnimation(unitId, agentId))} 0.5s linear infinite;
+    background-image: url(${({ agentId, unitId, isDead, isStunned }) => (isDead || isStunned) && (unitId in unitSprites ? unitSprites[unitId][0] : agentDefaultSprites[agentId])});
     bottom: ${({ y, height }) => (y * Math.floor((100 / height) * 100)) / 100}%;
     left: ${({ x, width }) => (x * Math.floor((100 / width) * 100)) / 100}%;
     display: flex;
