@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ChoiceGroup, IChoiceGroupOption } from "@fluentui/react";
 import { GameRole } from "@coderone/bomberland-library";
-import { Root, SetupFormWrapper, HelpTooltipWrapper } from "./Setup.styles";
+import { Root, SetupFormWrapper } from "./Setup.styles";
 import { ContentCard } from "../ContentCard/ContentCard";
 import { StateButton } from "../StateButton/StateButton";
 import { TextInput } from "../TextInput/TextInput";
@@ -9,8 +9,8 @@ import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CopyToClipboardField } from "../CopyToClipboardField/CopyToClipboardField";
 import { navigate } from "gatsby";
-import { HelpTooltip } from "../HelpTooltip/HelpTooltip";
 import { BomberlandRoute } from "../../utilities/BomberlandRoute";
+import { ClientFooter } from "../ClientFooter/ClientFooter";
 
 const getConnectionString = (role: GameRole, host: string, port: string, name: string, agentId: string) => {
     if (role === GameRole.Agent) {
@@ -87,7 +87,7 @@ export const Setup: React.FC<React.PropsWithChildren<unknown>> = () => {
 
     return (
         <Root>
-            <ContentCard>
+            <ContentCard minWidth="480px">
                 <SetupFormWrapper>
                     <ChoiceGroup defaultSelectedKey={role} options={roleOptions} label="Role" required={true} onChange={onRoleChanged} />
                     <TextInput placeholder={t("host")} value={host} onChange={onHostChanged} label={t("host")} required={true} />
@@ -102,6 +102,7 @@ export const Setup: React.FC<React.PropsWithChildren<unknown>> = () => {
                 </SetupFormWrapper>
                 <StateButton onClick={onConnectClicked}>{t("connect")}</StateButton>
             </ContentCard>
+            <ClientFooter />
         </Root>
     );
 };
