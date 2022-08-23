@@ -22,6 +22,17 @@ export const IconButton = styled.button`
     align-items: center;
     padding: 0px 8px;
     cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: ${Palette.Neutral10};
+
+    :hover {
+        background-color: ${Palette.Neutral20};
+    }
+
+    :active {
+        background-color: ${Palette.Neutral10};
+    }
 `;
 
 export const Label = styled.span`

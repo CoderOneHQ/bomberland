@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Palette } from "../../theme/Palette";
 
 interface IProps {
+    readonly minWidth?: string;
     readonly maxWidth?: string;
     readonly gridRowGap?: string;
     readonly padding?: string;
@@ -17,4 +18,5 @@ export const ContentCard = styled("div")<IProps>`
     padding: ${({ padding }) => (padding !== undefined ? padding : "24px")};
     background-color: ${({ backgroundColor }) => (backgroundColor !== undefined ? backgroundColor : Palette.Neutral0)};
     max-width: ${({ maxWidth }) => (maxWidth !== undefined ? maxWidth : "500px")};
+    min-width: ${({ minWidth }) => (minWidth !== undefined ? minWidth : "auto")};
 `;

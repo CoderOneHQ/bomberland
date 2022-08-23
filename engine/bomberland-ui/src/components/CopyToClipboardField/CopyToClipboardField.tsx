@@ -1,11 +1,9 @@
 import * as React from "react";
 import { IconButton, Label, Root, Body } from "./CopyToClipboardField.styles";
 import { TextInput } from "../TextInput/TextInput";
-import { Icon } from "@fluentui/react/lib/Icon";
+import CopyPasteIcon from "./copy_paste.svg";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-
-const CopyIcon = () => <Icon iconName="Copy" />;
 
 interface IProps {
     readonly value: string | undefined;
@@ -26,7 +24,7 @@ export const CopyToClipboardField: React.FC<React.PropsWithChildren<IProps>> = (
             <Body>
                 <TextInput type="text" value={value} readOnly={readOnly} placeholder={placeholder} />
                 <IconButton onClick={copyToClipboard} aria-label={t("copyToClipboard")}>
-                    <CopyIcon />
+                    <img src={CopyPasteIcon} alt="Copy paste icon" />
                 </IconButton>
             </Body>
         </Root>

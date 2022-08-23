@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Grid = styled.div`
     display: grid;
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     grid-template-columns: max-content max-content;
     grid-column-gap: 32px;
 `;

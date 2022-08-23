@@ -22,7 +22,6 @@ export const ControlPane: React.FC<React.PropsWithChildren<IProps>> = ({ connect
         return null;
     }
     const [t] = useTranslation();
-    const dataUri = useMemo(() => encodeURIComponent(JSON.stringify(endGameState)), [endGameState]);
     const adminControlsEnabled = connection?.role === GameRole.Admin;
 
     return (
@@ -32,18 +31,6 @@ export const ControlPane: React.FC<React.PropsWithChildren<IProps>> = ({ connect
                 <AdminControls isEnabled={adminControlsEnabled} sendAdminPacket={sendAdminPacket} gameState={state} />
                 <SoundControl />
             </ContentCard>
-
-            {endGameState !== undefined && (
-                <ContentCard>
-                    <H2>{t("replay")}</H2>
-                    <DownloadFileButton
-                        fileName="replay.json"
-                        data={dataUri}
-                        mediaType="text/json;charset=utf-8"
-                        label={t("downloadReplay")}
-                    />
-                </ContentCard>
-            )}
         </Root>
     );
 };
