@@ -26,6 +26,7 @@ export interface IConfig {
     readonly MapHeight: number;
     readonly MapWidth: number;
     readonly MaximumConcurrentBombs: number;
+    readonly ObjectDestructionItemDropProbability: number;
     readonly OreBlockFrequency: number;
     readonly Port: number;
     readonly PrngSeed: number;

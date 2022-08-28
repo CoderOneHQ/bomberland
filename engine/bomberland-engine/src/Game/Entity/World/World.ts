@@ -40,6 +40,7 @@ export class World {
     private worldTickEvents: Array<GameEvent> = [];
     private shouldSpawnBooleanDie: BooleanDie;
     private spawnWeightedDie: WeightedDie<EntityType>;
+    private objectDestructionSpawnWeightedDie: BooleanDie;
 
     public get UnitTracker() {
         return this.unitTracker;
@@ -71,6 +72,8 @@ export class World {
             ],
             prngGame
         );
+
+        this.objectDestructionSpawnWeightedDie = new BooleanDie(this.config.ObjectDestructionItemDropProbability, prngGame);
 
         if (this.agentCellNumbers.size <= 0) {
             this.unitTracker.Units.forEach((agent) => {
@@ -392,10 +395,18 @@ export class World {
                     const bomb = entity as BombEntity;
                     this.CreateBlastFromOrigin(getCoordinatesFromCellNumber(bomb.CellNumber, this.Width), bomb.BlastDiameter, bomb.UnitId);
                 } else if (entity.Type === EntityType.WoodBlock || entity.Type === EntityType.OreBlock) {
-                    this.placeRandomSpawn(cellNumber);
+                    this.placeObjectDestructionItemSpawn(cellNumber);
                 }
             }
         }
+    };
+
+    private placeObjectDestructionItemSpawn = (cellNumber: number) => {
+        const shouldSpawn = this.objectDestructionSpawnWeightedDie.Roll();
+        if (shouldSpawn === false) {
+            return;
+        }
+        this.placeRandomSpawn(cellNumber);
     };
 
     private areCoordinatesValid = (coordinates: [number, number]): boolean => {
