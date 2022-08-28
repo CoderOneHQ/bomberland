@@ -91,7 +91,7 @@ export const getConfig = (override?: Partial<IConfig>, shouldLogEnv: boolean = f
         IsTrainingModeEnabled: getFlagFromEnv(shouldLogEnv, "TRAINING_MODE_ENABLED", false),
         MapHeight: getIntFromEnv(shouldLogEnv, "MAP_HEIGHT", 15),
         MapWidth: getIntFromEnv(shouldLogEnv, "MAP_WIDTH", 15),
-        MaximumConcurrentBombs: getIntFromEnv(shouldLogEnv, "MAXIMUM_CONCURRENT_BOMBS", 5),
+        MaximumConcurrentBombs: getIntFromEnv(shouldLogEnv, "MAXIMUM_CONCURRENT_BOMBS", 3),
         ObjectDestructionItemDropProbability: getIntFromEnv(shouldLogEnv, "OBJECT_DESTRUCTION_ITEM_DROP_PROBABILITY", 1),
         OreBlockFrequency: getFloatFromEnv(shouldLogEnv, "ORE_BLOCK_FREQUENCY", 0.3617283950617284),
         Port: getFloatFromEnv(shouldLogEnv, "PORT", 3000),
