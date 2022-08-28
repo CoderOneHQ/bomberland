@@ -45,6 +45,9 @@ const ButtonContainer = styled.div`
 
 export const IndexContent: React.FC<React.PropsWithChildren<unknown>> = () => {
     const buildData = useBuild();
+    if (buildData.status === "loading") {
+        return <>Loading</>;
+    }
     return (
         <>
             <Root>
@@ -60,6 +63,9 @@ export const IndexContent: React.FC<React.PropsWithChildren<unknown>> = () => {
                         </RouterLink>
                         <RouterLink href={BomberlandRoute.DocumentationIndex}>
                             <Button>Docs</Button>
+                        </RouterLink>
+                        <RouterLink href={BomberlandRoute.Replays}>
+                            <Button>Replays</Button>
                         </RouterLink>
                     </ButtonContainer>
                 </Container>
