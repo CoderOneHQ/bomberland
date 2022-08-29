@@ -7,4 +7,5 @@ export abstract class Constants {
     public static readonly Origin = getOrigin();
     public static readonly Home = "https://www.gocoder.one";
     public static readonly ReportBugEmail = "mailto:humans@gocoder.one?subject=Reporting a bug/issue with Coder One";
+    public static readonly ReportBugIssuesLink = "https://github.com/CoderOneHQ/bomberland/issues";
 }

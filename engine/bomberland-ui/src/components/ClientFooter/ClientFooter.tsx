@@ -5,6 +5,7 @@ import { Constants } from "../../utilities/Constants";
 import styled from "styled-components";
 import { Palette } from "../../theme/Palette";
 import ReportBugIcon from "./bug_report.svg";
+import { useTranslation } from "react-i18next";
 
 const Root = styled.div`
     display: flex;
@@ -34,13 +35,15 @@ const LinkStyledOverride = styled.a`
 `;
 
 export const ClientFooter: React.FC<React.PropsWithChildren<unknown>> = () => {
+    const [t] = useTranslation();
     return (
         <Root>
             <TelemetryLink href={Constants.Home}>
                 <img src={CoderOneLogo} alt="Coder One logo" />
             </TelemetryLink>
-            <TelemetryLink href={Constants.ReportBugEmail} styledOverride={LinkStyledOverride}>
-                <img src={ReportBugIcon} alt="Report an issue icon" />Report an issue
+            <TelemetryLink href={Constants.ReportBugIssuesLink} styledOverride={LinkStyledOverride} target="_blank">
+                <img src={ReportBugIcon} alt="Report an issue icon" />
+                Report an issue
             </TelemetryLink>
         </Root>
     );
