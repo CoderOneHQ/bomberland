@@ -20,6 +20,7 @@
     },
     "dependencies": {
         "@fluentui/react": "^8.82.2",
+        "@fontsource/inter": "^4.5.12",
         "@tanstack/react-query": "^4.0.10",
         "babel-plugin-styled-components": "^2.0.7",
         "gatsby": "^4.19.2",
@@ -43,6 +44,7 @@
         "react-helmet": "^6.1.0",
         "react-i18next": "^11.18.1",
         "styled-components": "^5.3.5",
+        "styled-reset": "^4.4.2",
         "use-sound": "^2.0.1"
     },
     "devDependencies": {

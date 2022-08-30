@@ -22,14 +22,14 @@ const Container = styled.div`
 const Button = styled.div`
     cursor: pointer;
     border-radius: 4px;
-    background-color: ${Palette.Neutral10};
+    background-color: ${Palette.Neutral20};
     padding: 8px 16px;
     color: ${Palette.Neutral100};
     text-align: center;
     transition: background-color 100ms ease;
 
     :hover {
-        background-color: ${Palette.Neutral20};
+        background-color: ${Palette.Neutral30};
     }
 
     :active {
@@ -41,6 +41,13 @@ const ButtonContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
+    padding-top: 16px;
+`;
+
+const Heading = styled.h1`
+    font-size: 36px;
+    font-weight: 700;
+    padding-top: 16px;
 `;
 
 export const IndexContent: React.FC<React.PropsWithChildren<unknown>> = () => {
@@ -52,7 +59,7 @@ export const IndexContent: React.FC<React.PropsWithChildren<unknown>> = () => {
         <>
             <Root>
                 <Container>
-                    <h1>Bomberland</h1>
+                    <Heading>Bomberland</Heading>
                     <p>
                         <strong>Engine build version: </strong>
                         <span>{buildData.data?.build}</span>

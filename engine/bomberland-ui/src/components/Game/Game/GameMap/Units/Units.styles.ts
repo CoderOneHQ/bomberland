@@ -46,27 +46,25 @@ interface IUnitStyleProps {
 }
 
 interface UnitMap {
-    [id: string]: any
+    [id: string]: any;
 }
 
 const unitSprites: UnitMap = {
-    "c": [unitCFrame1, unitCFrame2, unitCFrame3, unitCFrame4],
-    "d": [unitDFrame1, unitDFrame2, unitDFrame3, unitDFrame4],
-    "e": [unitEFrame1, unitEFrame2, unitEFrame3, unitEFrame4],
-    "f": [unitFFrame1, unitFFrame2, unitFFrame3, unitFFrame4],
-    "g": [unitGFrame1, unitGFrame2, unitGFrame3, unitGFrame4],
-    "h": [unitHFrame1, unitHFrame2, unitHFrame3, unitHFrame4]
-}
+    c: [unitCFrame1, unitCFrame2, unitCFrame3, unitCFrame4],
+    d: [unitDFrame1, unitDFrame2, unitDFrame3, unitDFrame4],
+    e: [unitEFrame1, unitEFrame2, unitEFrame3, unitEFrame4],
+    f: [unitFFrame1, unitFFrame2, unitFFrame3, unitFFrame4],
+    g: [unitGFrame1, unitGFrame2, unitGFrame3, unitGFrame4],
+    h: [unitHFrame1, unitHFrame2, unitHFrame3, unitHFrame4],
+};
 
 const agentDefaultSprites: UnitMap = {
-    "a": [unitCFrame1, unitCFrame2, unitCFrame3, unitCFrame4],
-    "b": [unitDFrame1, unitDFrame2, unitDFrame3, unitDFrame4]
-}
+    a: [unitCFrame1, unitCFrame2, unitCFrame3, unitCFrame4],
+    b: [unitDFrame1, unitDFrame2, unitDFrame3, unitDFrame4],
+};
 
 function getUnitAnimation(unitId: string, agentId: string) {
-
     if (unitId in unitSprites) {
-
         const unitAnimation = keyframes`
         0% {
             background-image: url(${[unitSprites[unitId][0]]});
@@ -89,10 +87,8 @@ function getUnitAnimation(unitId: string, agentId: string) {
         }
         `;
 
-        return unitAnimation
-
+        return unitAnimation;
     } else {
-        
         const unitAnimation = keyframes`
         0% {
             background-image: url(${[agentDefaultSprites[agentId][0]]});
@@ -115,7 +111,7 @@ function getUnitAnimation(unitId: string, agentId: string) {
         }
         `;
 
-        return unitAnimation
+        return unitAnimation;
     }
 }
 
@@ -135,23 +131,62 @@ export const ImageDiv = styled("div")<IStyleProps>`
     transition: 0.07s;
 `;
 
-export const UnitDiv = styled("div")<IUnitStyleProps>`
-    cursor: ${({ hasClickHandler }) => (hasClickHandler ? `pointer` : `default`)};
+export interface IUnitRootProps {
+    readonly x: number;
+    readonly y: number;
+    readonly width: number;
+    readonly height: number;
+}
+
+export const UnitRoot = styled("div")<IUnitRootProps>`
+    position: absolute;
     width: ${({ width }) => Math.floor((100 / width) * 100) / 100}%;
     height: ${({ height }) => Math.floor((100 / height) * 100) / 100}%;
+    bottom: ${({ y, height }) => (y * Math.floor((100 / height) * 100)) / 100}%;
+    left: ${({ x, width }) => (x * Math.floor((100 / width) * 100)) / 100}%;
+    transition: 0.07s;
+`;
+
+export const UnitIdLabel = styled("div")`
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    font-size: 12px;
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 0 0 2px #000;
+`;
+
+export const UnitHealthLabel = styled("div")`
+    top: 0px;
+    right: 0px;
+    position: absolute;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 2px #000;
+`;
+
+export const UnitDiv = styled("div")<IUnitStyleProps>`
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: ${({ hasClickHandler }) => (hasClickHandler ? `pointer` : `default`)};
     color: #ff9900;
     font-weight: bold;
-    position: absolute;
     background-size: contain;
     background-position: center center;
     border: ${({ isSelected }) => (isSelected ? `5px solid #ff9900` : `none`)};
     box-sizing: border-box;
     opacity: ${({ isInvulnerable, isDead }) => (isInvulnerable || isDead ? 0.4 : 1)};
     filter: ${({ isStunned }) => (isStunned ? `grayscale(100%)` : `grayscale(0%)`)};
-    animation: ${({ unitId, agentId, isDead, isStunned }) => !(isDead || isStunned) && (getUnitAnimation(unitId, agentId))} 0.5s linear infinite;
-    background-image: url(${({ agentId, unitId, isDead, isStunned }) => (isDead || isStunned) && (unitId in unitSprites ? unitSprites[unitId][0] : agentDefaultSprites[agentId])});
-    bottom: ${({ y, height }) => (y * Math.floor((100 / height) * 100)) / 100}%;
-    left: ${({ x, width }) => (x * Math.floor((100 / width) * 100)) / 100}%;
+    animation: ${({ unitId, agentId, isDead, isStunned }) => !(isDead || isStunned) && getUnitAnimation(unitId, agentId)} 0.5s linear
+        infinite;
+    background-image: url(${({ agentId, unitId, isDead, isStunned }) =>
+        (isDead || isStunned) && (unitId in unitSprites ? unitSprites[unitId][0] : agentDefaultSprites[agentId])});
+
     display: flex;
     align-items: center;
     justify-content: center;
