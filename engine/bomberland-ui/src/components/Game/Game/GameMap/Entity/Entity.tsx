@@ -1,7 +1,7 @@
 import * as React from "react";
 import ammunition from "../svg/remote_ammo.svg";
 import blast3 from "../svg/boom_3.svg";
-import fire1 from "../svg/fire_1.svg";
+import fire1 from "../svg/vortex.svg";
 import blastpowerup from "../svg/blast_powerup.svg";
 import bombPlacedSfx from "../../sounds/bomb_placed.wav";
 import concreteBreak5Sfx from "../../sounds/concrete_break2.wav";
@@ -96,9 +96,9 @@ export const Entity: React.FC<React.PropsWithChildren<IProps>> = ({ expires, typ
 
     switch (type) {
         case EntityType.BlastPowerup:
-            return <ImageDiv image={blastpowerup} x={x} y={y} width={width} height={height} />;
+            return <ImageDiv image={blastpowerup} x={x} y={y} width={width} height={height} animated={true} />;
         case EntityType.Ammo:
-            return <ImageDiv image={ammunition} x={x} y={y} width={width} height={height} />;
+            return <ImageDiv image={ammunition} x={x} y={y} width={width} height={height} animated={true} />;
         case EntityType.Bomb:
             return <BombDiv onClick={onClick} x={x} y={y} width={width} height={height} owner={agent_id} />;
         case EntityType.WoodBlock:
@@ -108,7 +108,7 @@ export const Entity: React.FC<React.PropsWithChildren<IProps>> = ({ expires, typ
         case EntityType.MetalBlock:
             return <ImageDiv image={steelblock} x={x} y={y} width={width} height={height} />;
         case EntityType.FreezePowerup:
-            return <ImageDiv image={snowflake} x={x} y={y} width={width} height={height} />;
+            return <ImageDiv image={snowflake} x={x} y={y} width={width} height={height} animated={true} />;
         case EntityType.Blast:
             if (expires) {
                 return <BlastDiv image={blast3} x={x} y={y} width={width} height={height} />;

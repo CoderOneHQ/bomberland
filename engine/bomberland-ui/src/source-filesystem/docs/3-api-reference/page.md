@@ -468,14 +468,14 @@ You will need to add the `--build` flag when restarting the game engine (i.e. `d
 | `AGENT_SECRET_ID_MAP=agentA,agentB`                    | Used for game connection                                                                                                                                                           |
 | `AMMO_DURATION_TICKS=40`                               | Number of ticks before ammunition pickup perishes                                                                                                                                  |
 | `AMMO_SPAWN_WEIGHTING=0`                               | If a spawn appears, weighting % that it will be an ammunition (versus a powerup). <br> `AMMO_SPAWN_WEIGHTING + BLAST_POWERUP_SPAWN_WEIGHTING + FREEZE_POWERUP_SPAWN_WEIGHTING = 1` |
-| `BLAST_DURATION_TICKS=10`                              | Number of ticks before blast disappears                                                                                                                                            |
+| `BLAST_DURATION_TICKS=5`                              | Number of ticks before blast disappears                                                                                                                                            |
 | `BLAST_POWERUP_DURATION_TICKS=40`                      | Number of ticks before blast powerup perishes                                                                                                                                      |
-| `BLAST_POWERUP_SPAWN_WEIGHTING=0.1`                    | If a spawn appears, weighting % that it will be a blast powerup. <br> `AMMO_SPAWN_WEIGHTING + BLAST_POWERUP_SPAWN_WEIGHTING + FREEZE_POWERUP_SPAWN_WEIGHTING = 1`                  |
+| `BLAST_POWERUP_SPAWN_WEIGHTING=0.5`                    | If a spawn appears, weighting % that it will be a blast powerup. <br> `AMMO_SPAWN_WEIGHTING + BLAST_POWERUP_SPAWN_WEIGHTING + FREEZE_POWERUP_SPAWN_WEIGHTING = 1`                  |
 | `BOMB_DURATION_TICKS=40`                               | Number of ticks before a bomb explodes                                                                                                                                             |
 | `BOMB_ARMED_TICKS=5`                                   | Number of ticks before a bomb can be remotely detonated                                                                                                                            |
 | `ENTITY_SPAWN_PROBABILITY_PER_TICK=0`                  | Probability of a spawn appearing somewhere on the map each tick                                                                                                                    |
 | `FIRE_SPAWN_INTERVAL_TICKS=2`                          | Number of ticks between each single tile of fire spawned                                                                                                                           |
-| `FREEZE_DEBUFF_DURATION_TICKS=25`                      | Number of ticks that a unit will be stunned for by a freeze powerup                                                                                                                |
+| `FREEZE_DEBUFF_DURATION_TICKS=15`                      | Number of ticks that a unit will be stunned for by a freeze powerup                                                                                                                |
 | `FREEZE_POWERUP_DURATION_TICKS=40`                     | Number of ticks before a freeze powerup perishes                                                                                                                                   |
 | `FREEZE_POWERUP_SPAWN_WEIGHTING=0.5`                   | If a spawn appears, weighting % that it will be a freeze powerup. <br> `AMMO_SPAWN_WEIGHTING + BLAST_POWERUP_SPAWN_WEIGHTING + FREEZE_POWERUP_SPAWN_WEIGHTING = 1`                 |
 | `GAME_DURATION_TICKS=200`                              | Number of ticks before ring of fire spawns                                                                                                                                         |
@@ -490,7 +490,7 @@ You will need to add the `--build` flag when restarting the game engine (i.e. `d
 | `MAP_HEIGHT=15`                                        | Size of map (y-axis)                                                                                                                                                               |
 | `MAP_WIDTH=15`                                         | Size of map (x-axis)                                                                                                                                                               |
 | `MAXIMUM_CONCURRENT_BOMBS=3`                           | Maximum number of bombs than a unit may have on the map at any one time                                                                                                            |
-| `OBJECT_DESTRUCTION_ITEM_DROP_PROBABILITY=1`           | Controls how often an item will drop when a wooden block or an ore block is destroyed                                                                                              |
+| `OBJECT_DESTRUCTION_ITEM_DROP_PROBABILITY=0.5`           | Controls how often an item will drop when a wooden block or an ore block is destroyed                                                                                              |
 | `ORE_BLOCK_FREQUENCY=0.3617283950617284`               | Controls the number of ore blocks in the world                                                                                                                                     |
 | `PORT=3000`                                            | For game server communication                                                                                                                                                      |
 | `PRNG_SEED`                                            | Defaults to a random seed if no flag is specified. See [🗺️ Map generation​](../docs/api-reference/#%EF%B8%8F-map-generation-using-prng_seed-and-world_seed)                        |
@@ -523,7 +523,7 @@ Some seeds will generate invalid maps.
 
 ## 🔼 Forward Model
 
-**This is still experimental**. This feature is intended for agents to build simulations of potential future states (such as for Monte Carlo Tree Search).
+**The forward model will not be provided in tournament servers. You can still use the forward model for your own training purposes, but this feature is still experimental**. This feature is intended for agents to build simulations of potential future states (such as for Monte Carlo Tree Search).
 
 If you're interested in this feature, please get in touch with us on [Discord](https://discord.gg/NkfgvRN) or [email](mailto:humans@gocoder.one) so we can improve on it!
 

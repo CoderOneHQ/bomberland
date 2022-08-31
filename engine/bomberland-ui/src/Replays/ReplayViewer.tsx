@@ -62,7 +62,6 @@ export const ReplayViewer: React.FC<React.PropsWithChildren<IProps>> = ({ replay
             </GridItem>
             <GridItem>
                 <Box>
-                    <SoundControl />
                     <Slider
                         label={t("tickNumber", { tick: tick, totalTicks: replay.TotalTicks })}
                         onChange={onProgressChanged}
@@ -71,8 +70,9 @@ export const ReplayViewer: React.FC<React.PropsWithChildren<IProps>> = ({ replay
                         value={tick}
                     />
                     <Slider label={t("playbackSpeed")} onChange={onSpeedChanged} min={0} max={30} value={tickRateHz} />
-                    <InfoPanel state={gameState} selectedUnitId={selectedUnitId} />
+                    <SoundControl />
                 </Box>
+                <InfoPanel state={gameState} selectedUnitId={selectedUnitId} />
             </GridItem>
         </Grid>
     );

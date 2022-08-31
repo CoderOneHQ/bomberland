@@ -35,7 +35,7 @@ Yes, you can change environment variables using the flags [here](/docs/api-refer
 It will be safe to assume the following default runtime resources will be available:
 
 ```yaml
---cpus=2
+--cpus=1
 --cpu-period=100000
 --memory=1024m
 ```

@@ -1,12 +1,13 @@
 import * as React from "react";
-import f1 from "../svg/floor_1.svg";
-import f2 from "../svg/floor_2.svg";
-import f3 from "../svg/floor_3.svg";
-import f4 from "../svg/floor_4.svg";
+import f1 from "../svg/tile-1.svg";
+import f2 from "../svg/tile-2.svg";
+import f3 from "../svg/tile-3.svg";
+import f4 from "../svg/tile-4.svg";
+import f5 from "../svg/tile-5.svg";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
-const imageSet = [f1, f2, f3, f4];
+const imageSet = [f1, f2, f3, f4, f5];
 
 const Tile = styled("div")<IStyleProps>`
     color: #ff9900;
