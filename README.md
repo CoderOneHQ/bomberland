@@ -10,7 +10,7 @@ Teams build intelligent agents using strategies from tree search to deep reinfor
 
 This repo contains starter kits for working with the game engine + the engine source!
 
-![Bomberland multi-agent environment](https://www.gocoder.one/static/bomberland-529e18e676d8d28feca69f8f78a35c55.gif "Bomberland")
+![Bomberland multi-agent environment](./engine/bomberland-ui/src/source-filesystem/docs/2-environment-overview/bomberland-preview.gif "Bomberland")
 
 ## Contributing
 
