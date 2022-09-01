@@ -196,7 +196,10 @@
                 "hp": {
                     "type": "number"
                 },
-                "invulnerability": {
+                "invulnerable": {
+                    "type": "number"
+                },
+                "stunned": {
                     "type": "number"
                 }
             },
@@ -207,7 +210,8 @@
                 "inventory",
                 "blast_diameter",
                 "hp",
-                "invulnerability"
+                "invulnerable",
+                "stunned"
             ],
             "additionalProperties": false
         },
@@ -257,6 +261,7 @@
                 "b",
                 "x",
                 "bp",
+                "fp",
                 "m",
                 "o",
                 "t",
