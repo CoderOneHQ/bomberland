@@ -3,7 +3,9 @@ services:
     game-engine:
         image: coderone.azurecr.io/bomberland-engine:2344
         volumes:
-            - ./agents/logs:/app/logs
+            - type: "bind"
+              source: ./agents/replay.json
+              target: /app/replay.json
 
     go-agent:
         build:
