@@ -1,4 +1,4 @@
-[![Engine Version](https://img.shields.io/badge/engine%20ver.-2344-blue)](#release-notes)
+[![Engine Version](https://img.shields.io/badge/engine%20ver.-2381-blue)](#release-notes)
 
 # Bomberland engine + starter kits
 
@@ -38,8 +38,8 @@ docker-compose up --abort-on-container-exit --force-recreate
 | Kit                 | Link                                                                           | Description                                        | Up-to-date? | Contributed by                          |
 | ------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------- | ----------- | --------------------------------------- |
 | Python3             | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/python3)    | Basic Python3 starter                              | ✅          | Coder One                               |
-| Python3-fwd         | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/python3)    | Includes example for using forward model simulator | ❌          | Coder One                               |
-| Python3-gym-wrapper | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/python3)    | Open AI Gym wrapper                                | ❌          | Coder One                               |
+| Python3-fwd         | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/python3)    | Includes example for using forward model simulator | ✅          | Coder One                               |
+| Python3-gym-wrapper | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/python3)    | Open AI Gym wrapper                                | ✅          | Coder One                               |
 | TypeScript          | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/typescript) | Basic TypeScript starter                           | ✅          | Coder One                               |
 | TypeScript-fwd      | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/typescript) | Includes example for using forward model simulator | ❌          | Coder One                               |
 | Go                  | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/go)         | Basic Go starter                                   | ❌          | [dtitov](https://github.com/dtitov)     |
