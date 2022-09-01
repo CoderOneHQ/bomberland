@@ -14,7 +14,7 @@ services:
     fwd-server:
         extends:
             file: base-compose.yml
-            service: game-server
+            service: game-engine
         environment:
             - TELEMETRY_ENABLED=0
             - PORT=6969

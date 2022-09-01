@@ -42,9 +42,9 @@ docker-compose up --abort-on-container-exit --force-recreate
 | Python3-gym-wrapper | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/python3)    | Open AI Gym wrapper                                | ❌          | Coder One                               |
 | TypeScript          | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/typescript) | Basic TypeScript starter                           | ✅          | Coder One                               |
 | TypeScript-fwd      | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/typescript) | Includes example for using forward model simulator | ❌          | Coder One                               |
-| Go                  | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/go)                | Basic Go starter                                   | ❌          | [dtitov](https://github.com/dtitov)     |
-| C++                 | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/cpp)               | Basic C++ starter                                  | ❌          | [jfbogusz](https://github.com/jfbogusz) |
-| Rust                | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/rust)              | Basic Rust starter                                 | ❌          | [K-JBoon](https://github.com/K-JBoon)   |
+| Go                  | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/go)         | Basic Go starter                                   | ❌          | [dtitov](https://github.com/dtitov)     |
+| C++                 | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/cpp)        | Basic C++ starter                                  | ❌          | [jfbogusz](https://github.com/jfbogusz) |
+| Rust                | [Link](https://github.com/CoderOneHQ/bomberland/tree/master/agents/rust)       | Basic Rust starter                                 | ❌          | [K-JBoon](https://github.com/K-JBoon)   |
 
 ## Discussion and Questions
 
