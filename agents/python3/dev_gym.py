@@ -2,6 +2,7 @@ import asyncio
 from typing import Dict
 from gym import Gym
 import os
+import time
 
 fwd_model_uri = os.environ.get(
     "FWD_MODEL_CONNECTION_STRING") or "ws://127.0.0.1:6969/?role=admin"
@@ -17,7 +18,15 @@ def calculate_reward(state: Dict):
 
 async def main():
     gym = Gym(fwd_model_uri)
-    await gym.connect()
+    for i in range(0,10):
+        while True:
+            try:
+                await gym.connect()
+            except:
+                time.sleep(5)
+                continue
+            break
+    
     env = gym.make("bomberland-open-ai-gym", mock_6x6_state)
     for i_ in range(1000):
         actions = []

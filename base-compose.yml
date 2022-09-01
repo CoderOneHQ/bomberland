@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-engine:
-        image: coderone.azurecr.io/bomberland-engine:2344
+        image: coderone.azurecr.io/bomberland-engine:2381
         volumes:
             - type: "bind"
               source: ./agents/replay.json

@@ -1,4 +1,4 @@
-[![Engine Version](https://img.shields.io/badge/engine%20ver.-2344-blue)](#release-notes)
+[![Engine Version](https://img.shields.io/badge/engine%20ver.-2381-blue)](#release-notes)
 
 # Bomberland engine + starter kits
 
