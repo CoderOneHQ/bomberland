@@ -11,7 +11,7 @@ const Root = styled.span`
     display: inline-block;
 `;
 
-export const RoundCheckIcon: React.FC<IProps> = ({ color = "currentColor", fontSize = "1em" }) => {
+export const RoundCheckIcon: React.FC<React.PropsWithChildren<IProps>> = ({ color = "currentColor", fontSize = "1em" }) => {
     return (
         <Root>
             <svg fill={color} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={fontSize} height={fontSize}>

@@ -1,11 +1,12 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { useMemo } from "react";
-import { IEndGameState, IGameState } from "@coderone/bomberland-library";
-import { Table, HeaderColumn, TableCell, GameInfoContainer } from "./InfoPanel.styles";
+import { IEndGameState, IGameState, IUnitState } from "@coderone/bomberland-library";
+import { Table, HeaderColumn, TableCell, GameInfoContainer, Field } from "./InfoPanel.styles";
 import { StatusTag, GameStatus } from "./StatusTag/StatusTag";
 import { H2 } from "../../../H2/H2";
 import { ContentCard } from "../../../ContentCard/ContentCard";
+import { DownloadFileButton } from "../../../DownloadFileButton/DownloadFileButton";
 
 interface IProps {
     readonly state: Omit<IGameState, "connection"> | undefined;
@@ -24,40 +25,55 @@ const getGameStatus = (endGameState: IEndGameState | undefined, isGameRunning: b
     }
 };
 
-export const InfoPanel: React.FC<IProps> = ({ connection, state, selectedUnitId, endGameState }) => {
+export const InfoPanel: React.FC<React.PropsWithChildren<IProps>> = ({ connection, state, selectedUnitId, endGameState }) => {
     if (state === undefined) {
         return null;
     }
     const [t] = useTranslation();
-    const agentHeaderData = ["Unit", "Health", "Ammunition", "Blast diameter", "Coordinates", "Invulnerability"];
+    const agentHeaderData = ["Unit", "Health", "Ammunition", "Blast diameter", "Coordinates", "Invulnerable", "Stunned"];
     const currentAgent = connection?.agent_id || "";
     const selectableUnits = currentAgent ? state.agents[currentAgent]?.unit_ids ?? [] : "";
     const isGameRunning = state.tick > 0;
     const gameStatus = useMemo(() => getGameStatus(endGameState, isGameRunning), [endGameState, isGameRunning]);
     const gameId = state.game_id;
+    const dataUri = useMemo(() => encodeURIComponent(JSON.stringify(endGameState)), [endGameState]);
 
     return (
         <GameInfoContainer>
             <ContentCard>
                 <H2>{t("gameInfo")}</H2>
-                <p>
-                    {t("gameEngine.status")}: <StatusTag status={gameStatus}>{t(`gameEngine.${gameStatus}`)}</StatusTag>
-                </p>
-                <p>
-                    {t("gameEngine.id")}: {gameId}
-                </p>
-                <p>
-                    {t("gameEngine.myAgent")}: {currentAgent ? (currentAgent === "a" ? "A (Wizard)" : "B (Knight)") : ""}
-                </p>
-                <p>
-                    {t("gameEngine.myUnits")}: {selectableUnits.toString()}
-                </p>
-                <p>
-                    {t("gameEngine.winner")}: {endGameState ? "Agent " + (endGameState.winning_agent_id === "a" ? "A" : "B") : ""}
-                </p>
-                <p>
-                    {t("gameEngine.currentTick")}: {state ? state.tick : ""}
-                </p>
+                <Field>
+                    <strong>{t("gameEngine.status")}:</strong> <StatusTag status={gameStatus}>{t(`gameEngine.${gameStatus}`)}</StatusTag>
+                </Field>
+                <Field>
+                    <strong>{t("gameEngine.id")}:</strong> {gameId}
+                </Field>
+                <Field>
+                    <strong>{t("gameEngine.myAgent")}:</strong> {currentAgent ? (currentAgent === "a" ? "A" : "B") : ""}
+                </Field>
+                <Field>
+                    <strong>{t("gameEngine.myUnits")}:</strong> {selectableUnits.toString()}
+                </Field>
+                <Field>
+                    <strong>{t("gameEngine.winner")}:</strong> {endGameState ? "Agent " + (endGameState.winning_agent_id === "a" ? "A" : "B") : ""}
+                </Field>
+                <Field>
+                    <strong>{t("gameEngine.currentTick")}:</strong> {state ? state.tick : ""}
+                </Field>
+                <Field>
+                    <strong>{t("replay")}</strong>:{" "} 
+                    {endGameState !== undefined ? (
+                        <DownloadFileButton
+                                fileName="replay.json"
+                                data={dataUri}
+                                mediaType="text/json;charset=utf-8"
+                                label={t("downloadReplay")}
+                        />
+                    )
+                        :
+                        "Available after the game ends"
+                    }
+                </Field>
             </ContentCard>
             <Table>
                 <tbody>
@@ -67,7 +83,7 @@ export const InfoPanel: React.FC<IProps> = ({ connection, state, selectedUnitId,
                         })}
                     </tr>
 
-                    {Object.values(state ? state.unit_state : "").map((unit) => {
+                    {Object.values(state ? state.unit_state : "").map((unit: IUnitState) => {
                         return (
                             <tr key={unit.unit_id}>
                                 <TableCell currAgent={selectedUnitId === unit.unit_id} selectableUnit={currentAgent === unit.agent_id}>
@@ -86,7 +102,10 @@ export const InfoPanel: React.FC<IProps> = ({ connection, state, selectedUnitId,
                                     {JSON.stringify(unit.coordinates)}
                                 </TableCell>
                                 <TableCell currAgent={selectedUnitId === unit.unit_id} selectableUnit={currentAgent === unit.agent_id}>
-                                    {unit.invulnerability}
+                                    {unit.invulnerable}
+                                </TableCell>
+                                <TableCell currAgent={selectedUnitId === unit.unit_id} selectableUnit={currentAgent === unit.agent_id}>
+                                    {unit.stunned}
                                 </TableCell>
                             </tr>
                         );

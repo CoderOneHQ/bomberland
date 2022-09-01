@@ -17,6 +17,7 @@ export const Table = styled.table`
     width: 100%;
     font-size: 14px;
     text-align: center;
+    border-collapse: collapse;
 `;
 
 export const HeaderColumn = styled.th`
@@ -32,4 +33,8 @@ export const TableCell = styled.td<ICellStyleProps>`
     border: 1px solid ${Palette.Neutral20};
     font-weight: ${({ selectableUnit }) => (selectableUnit ? "700" : "400")};
     padding: 8px;
+`;
+
+export const Field = styled.div`
+    display: inline;
 `;

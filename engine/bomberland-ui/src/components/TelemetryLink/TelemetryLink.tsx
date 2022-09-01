@@ -3,8 +3,8 @@ import { useCallback, useState } from "react";
 import { telemetry } from "../../utilities/Telemetry/Telemetry";
 import { TelemetryEvent } from "../../utilities/Telemetry/TelemetryEvent";
 import styled, { StyledComponent } from "styled-components";
-import { Palette } from "../../theme/Palette";
 import { ExternalLinkIcon } from "../Icons/ExternalLink";
+import { StyledLink } from "./TelemetryLink.styles";
 
 interface IProps {
     readonly href: string;
@@ -12,24 +12,9 @@ interface IProps {
     readonly styledOverride?: StyledComponent<"a", any, {}, never>;
 }
 
-export const TelemetryLink: React.FC<IProps> = ({ href, children, target = "_self", styledOverride }) => {
+export const TelemetryLink: React.FC<React.PropsWithChildren<IProps>> = ({ href, children, target = "_self", styledOverride }) => {
     const shouldShowIcon = target === "_blank";
-    const StyledLink = React.useMemo(() => {
-        return (
-            styledOverride ??
-            styled.a`
-                color: ${Palette.Primary100};
-                cursor: pointer;
-                text-decoration: none;
-                display: inline;
-                font-weight: 700;
-
-                :hover {
-                    color: ${Palette.Primary110};
-                }
-            `
-        );
-    }, [styledOverride]);
+    const LinkComponent = styledOverride ?? StyledLink;
     const [hasLoggedTelemetry, setHasLoggedTelemetry] = useState(false);
     const onClick = useCallback(
         async (ev: React.MouseEvent) => {
@@ -45,10 +30,10 @@ export const TelemetryLink: React.FC<IProps> = ({ href, children, target = "_sel
         [href, target, hasLoggedTelemetry, setHasLoggedTelemetry]
     );
     return (
-        <StyledLink onClick={onClick} href={href} target={target}>
+        <LinkComponent onClick={onClick} href={href} target={target}>
             <>
                 {children} {shouldShowIcon && <ExternalLinkIcon />}
             </>
-        </StyledLink>
+        </LinkComponent>
     );
 };

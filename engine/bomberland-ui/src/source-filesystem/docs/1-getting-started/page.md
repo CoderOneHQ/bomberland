@@ -14,7 +14,7 @@ order: 1
 
 ## Step 2: Install Docker
 
-Docker is used to start the game engine and connect both agents in a single command. It's also used to ensure the same performance of your agent locally versus on our servers.
+Docker is used to start the game engine and connect both agents in a single command. It also ensures that your agent performs the same locally versus on our tournament servers.
 
 [Download Docker →](https://www.docker.com)
 
@@ -45,7 +45,7 @@ Since Bomberland is a 2-player environment, the game engine will wait for a seco
 
 1. In either a Firefox or Chrome browser, open the [Game client →](/game)
 2. Leave the default settings. Click **Connect**.
-3. Use the following keys to play as the Wizard:
+3. Use the following keys to play as your character (check which character you're playing as from the **Game Information** panel):
 
 -   **Click** a unit to control it
 -   `↑` / `↓` / `←` / `→` - arrows to move
@@ -54,22 +54,22 @@ Since Bomberland is a 2-player environment, the game engine will wait for a seco
 
 ## Step 5: Submit your first agent
 
-You can submit an agent to compete against others in 1v1 matches. Matches run weekly and top agents are displayed on the [leaderboard](/leaderboard). 
+You can submit your agent to the tournament server and compete against other submitted agents. Your agent's ranking will be displayed on the [leaderboard](https://www.gocoder.one/leaderboard). 
 
 To submit:
-1. Create a [Team](/team) (teams can be 1 - 5 members).
-2. Navigate to [Submissions](/submissions) and paste the following: `docker.io/coderonehq/hello-world`. This image contains a basic starter agent that takes random actions.
+1. Create a [Team](https://www.gocoder.one/team) (teams can be 1 - 5 members).
+2. Navigate to [Submissions](https://www.gocoder.one/submissions) and paste the following: `docker.io/coderonehq/hello-world`. This image contains a basic starter agent that takes random actions. Later, you can submit your own agent image.
 3. Click **Submit Agent**. 
 4. After a few minutes, you should see the message "Successfully pulled image".
 
-You've now submitted your first agent to the competition! Check back regularly to see your results from the [Matches](/adjudicated-games) page.
+You've now submitted your first agent to the competition! Check back regularly to see your results from the [Matches](https://www.gocoder.one/adjudicated-games) page.
 
 ## Next steps
-You're now all set up to compete in Bomberland.
+You're now all set up to compete! Check out the [introductory tutorial](https://www.gocoder.one/blog/ai-programming-tutorial-bomberman) for a guided walkthrough on developing a basic agent.
 
-If you need help, please reach out on [Discord](https://discord.gg/NkfgvRN).
+If you need help or have any feedback, please reach out on [Discord](https://discord.gg/NkfgvRN).
 
-Here are some tasks to try:
+Here are some other tasks to try:
 
 - [ ] **Switch agents:** `docker-compose.yml` specifies which agents to connect. Try switching which character you play as, or playing your agent against itself.
 - [ ] **Change environment variables:** Settings such as tick rate, map size, no. of agents can be changed under `docker-compose.yml` > `game-server` > `environment`. See [⚙️ Environment Flags](/docs/api-reference/#%EF%B8%8F-environment-flags) for a full list of available settings.

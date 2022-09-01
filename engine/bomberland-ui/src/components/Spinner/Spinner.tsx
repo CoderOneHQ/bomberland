@@ -7,7 +7,7 @@ interface IProps {
     readonly fontSize?: string;
 }
 
-export const Spinner: React.FC<IProps> = ({ label, color, fontSize }) => {
+export const Spinner: React.FC<React.PropsWithChildren<IProps>> = ({ label, color, fontSize }) => {
     return (
         <Root>
             <AnimatedSpinner color={color} fontSize={fontSize} />

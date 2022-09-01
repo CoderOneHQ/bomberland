@@ -26,6 +26,7 @@ describe("createGameFromState", () => {
     });
 
     test(`it should recreate a game from an 15x15 IGameState object and reproduce the same gamestate for 9x9 state`, () => {
+        process.env["BOMB_DURATION_TICKS"] = "40";
         const config = getConfig();
         const engineTelemetry = new CoderOneApi("test", config, false, "dev");
         const telemetry = new Telemetry(engineTelemetry, false);

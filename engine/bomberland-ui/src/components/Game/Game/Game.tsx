@@ -14,7 +14,7 @@ import { useKeypress } from "../../../hooks/useKeyPress";
 import { InfoBar } from "../../InfoBar/InfoBar";
 import { telemetry } from "../../../utilities/Telemetry/Telemetry";
 import { TelemetryEvent } from "../../../utilities/Telemetry/TelemetryEvent";
-import { CoderOneRoute } from "../../../utilities/CoderOneRoute";
+import { BomberlandRoute } from "../../../utilities/BomberlandRoute";
 import { Constants } from "../../../utilities/Constants";
 
 export enum GameKeys {
@@ -39,7 +39,7 @@ interface IProps {
     readonly connectionString: string;
 }
 
-export const Game: React.FC<IProps> = ({ connectionString }) => {
+export const Game: React.FC<React.PropsWithChildren<IProps>> = ({ connectionString }) => {
     const state = useRef<GameStateClient>();
     const [hasSentConnectionSucces, setHasSentConnectionSucces] = useState(false);
     const [gameState, setGameState] = useState<Omit<IGameState, "connection"> | undefined>();
@@ -71,7 +71,7 @@ export const Game: React.FC<IProps> = ({ connectionString }) => {
 
     const [hasSocketErrored, setHasSocketErrored] = useState(false);
     const onSocketError = useCallback(
-        (_err) => {
+        (_err: any) => {
             setHasSocketErrored(true);
             telemetry.Log(TelemetryEvent.EngineConnectError, null);
         },
@@ -190,7 +190,7 @@ export const Game: React.FC<IProps> = ({ connectionString }) => {
                                     Discord
                                 </TelemetryLink>{" "}
                                 or check the{" "}
-                                <RouterLink href={CoderOneRoute.DocumentationGettingStarted}>Getting Started documentation</RouterLink>.
+                                <RouterLink href={BomberlandRoute.DocumentationGettingStarted}>Getting Started documentation</RouterLink>.
                             </Trans>
                         </div>
                     </InfoBar>

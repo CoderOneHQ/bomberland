@@ -1,10 +1,13 @@
 import * as React from "react";
-import f1 from "../svg/floor_1.svg";
-import f2 from "../svg/floor_2.svg";
+import f1 from "../svg/tile-1.svg";
+import f2 from "../svg/tile-2.svg";
+import f3 from "../svg/tile-3.svg";
+import f4 from "../svg/tile-4.svg";
+import f5 from "../svg/tile-5.svg";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
-const imageSet = [f1, f2];
+const imageSet = [f1, f2, f3, f4, f5];
 
 const Tile = styled("div")<IStyleProps>`
     color: #ff9900;
@@ -34,7 +37,7 @@ interface IProps {
     readonly y: number;
 }
 
-export const Cell: React.FC<IProps> = ({ x, y, width, height }) => {
+export const Cell: React.FC<React.PropsWithChildren<IProps>> = ({ x, y, width, height }) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     useEffect(() => {
         const randomIndex = Math.floor(Math.random() * imageSet.length);

@@ -7,7 +7,7 @@ interface IProps extends IRouterLinkStyleProps {
     readonly href?: string;
     readonly onClick?: () => void;
 }
-export const RouterLink: React.FC<IProps> = ({
+export const RouterLink: React.FC<React.PropsWithChildren<IProps>> = ({
     href,
     children,
     onClick,

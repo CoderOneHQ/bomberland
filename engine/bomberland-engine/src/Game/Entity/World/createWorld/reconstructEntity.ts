@@ -25,7 +25,7 @@ export const reconstructEntity = (
     if (blockType.has(type)) {
         return createBlockEntity(config, cellNumber, width, type, unit_id, agent_id, tick, entity.created);
     } else if (type === EntityType.Ammo) {
-        return new AmmoEntity(config, cellNumber, width, tick, entity.created);
+        return new AmmoEntity(config, cellNumber, tick, entity.created);
     } else if (type === EntityType.Blast) {
         return new BlastEntity(config, cellNumber, unit_id, agent_id, entity.expires, tick, entity.created);
     } else if (type === EntityType.BlastPowerup) {

@@ -1,7 +1,7 @@
 version: "3"
 services:
     game-engine:
-        image: coderone.azurecr.io/bomberland-engine:1878
+        image: coderone.azurecr.io/bomberland-engine:2344
         volumes:
             - ./agents/logs:/app/logs
 

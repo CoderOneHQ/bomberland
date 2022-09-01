@@ -5,6 +5,7 @@ export enum EntityType {
     Bomb = "b",
     Blast = "x",
     BlastPowerup = "bp",
+    FreezePowerup = "fp",
     MetalBlock = "m",
     OreBlock = "o",
     TreasureChest = "t",
@@ -83,7 +84,8 @@ export interface IUnitState {
     };
     readonly blast_diameter: number;
     readonly hp: number;
-    readonly invulnerability: number;
+    readonly invulnerable: number;
+    readonly stunned: number;
 }
 
 export interface IGameTick {

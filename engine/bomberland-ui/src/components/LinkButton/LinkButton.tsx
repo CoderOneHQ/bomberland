@@ -12,10 +12,11 @@ export const LinkButton = styled.a`
     background-color: ${Palette.Neutral100};
     border-color: ${Palette.Neutral100};
     display: inline-block;
-    padding: 8px 16px;
+    padding: 4px 8px;
     color: ${Palette.Neutral0};
     text-align: center;
     transition: background-color 100ms ease;
+    margin-left: 8px;
 
     :hover {
         background-color: ${Palette.Neutral90};

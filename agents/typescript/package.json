@@ -4,7 +4,7 @@
     "license": "MIT",
     "private": true,
     "dependencies": {
-        "@coderone/bomberland-library": "^1.0.5",
+        "@coderone/bomberland-library": "^4.0.0",
         "typescript": "^4.7.3"
     },
     "scripts": {

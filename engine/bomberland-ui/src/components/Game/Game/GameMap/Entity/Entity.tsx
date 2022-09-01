@@ -1,7 +1,7 @@
 import * as React from "react";
 import ammunition from "../svg/remote_ammo.svg";
 import blast3 from "../svg/boom_3.svg";
-import fire1 from "../svg/fire_1.svg";
+import fire1 from "../svg/vortex.svg";
 import blastpowerup from "../svg/blast_powerup.svg";
 import bombPlacedSfx from "../../sounds/bomb_placed.wav";
 import concreteBreak5Sfx from "../../sounds/concrete_break2.wav";
@@ -13,6 +13,7 @@ import steelBreak2Sfx from "../../sounds/steel_break2.wav";
 import useSound from "use-sound";
 import woodCreateBreak3Sfx from "../../sounds/wood_crate_break3.wav";
 import woodenblock from "../svg/crate.svg";
+import snowflake from "../svg/snowflake.svg";
 import { BlastDiv, BombDiv, FireDiv, ImageDiv } from "./Entity.styles";
 import { EntityType } from "@coderone/bomberland-library";
 import { SoundContext } from "../../SoundContext";
@@ -32,7 +33,7 @@ interface IProps {
 export const imagedEntities = new Set<string>([EntityType.Bomb, EntityType.WoodBlock, EntityType.OreBlock, EntityType.MetalBlock]);
 
 // TODO: split out into individual entities since this is growing large
-export const Entity: React.FC<IProps> = ({ expires, type, x, y, onBombDetonated, agent_id, width, height }) => {
+export const Entity: React.FC<React.PropsWithChildren<IProps>> = ({ expires, type, x, y, onBombDetonated, agent_id, width, height }) => {
     const { volume } = useContext(SoundContext);
     const [playExplode5] = useSound(explode5Sfx, { volume });
     const [playConcreteBreak5] = useSound(concreteBreak5Sfx, { volume: volume });
@@ -95,9 +96,9 @@ export const Entity: React.FC<IProps> = ({ expires, type, x, y, onBombDetonated,
 
     switch (type) {
         case EntityType.BlastPowerup:
-            return <ImageDiv image={blastpowerup} x={x} y={y} width={width} height={height} />;
+            return <ImageDiv image={blastpowerup} x={x} y={y} width={width} height={height} animated={true} />;
         case EntityType.Ammo:
-            return <ImageDiv image={ammunition} x={x} y={y} width={width} height={height} />;
+            return <ImageDiv image={ammunition} x={x} y={y} width={width} height={height} animated={true} />;
         case EntityType.Bomb:
             return <BombDiv onClick={onClick} x={x} y={y} width={width} height={height} owner={agent_id} />;
         case EntityType.WoodBlock:
@@ -106,6 +107,8 @@ export const Entity: React.FC<IProps> = ({ expires, type, x, y, onBombDetonated,
             return <ImageDiv image={oreblock} x={x} y={y} width={width} height={height} />;
         case EntityType.MetalBlock:
             return <ImageDiv image={steelblock} x={x} y={y} width={width} height={height} />;
+        case EntityType.FreezePowerup:
+            return <ImageDiv image={snowflake} x={x} y={y} width={width} height={height} animated={true} />;
         case EntityType.Blast:
             if (expires) {
                 return <BlastDiv image={blast3} x={x} y={y} width={width} height={height} />;

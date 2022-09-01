@@ -4,7 +4,7 @@ import sand2 from "../../sounds/sand2.wav";
 import sand3 from "../../sounds/sand3.wav";
 import sand4 from "../../sounds/sand4.wav";
 import useSound from "use-sound";
-import { UnitDiv } from "./Units.styles";
+import { UnitDiv, UnitHealthLabel, UnitIdLabel, UnitRoot } from "./Units.styles";
 import { SoundContext } from "../../SoundContext";
 import { useContext, useEffect, useMemo, useState } from "react";
 
@@ -15,13 +15,28 @@ interface IProps {
     readonly unitId: string;
     readonly isInvulnerable: boolean;
     readonly isDead: boolean;
+    readonly isStunned: boolean;
     readonly isSelected: boolean;
     readonly onClick?: () => void;
     readonly width: number;
     readonly height: number;
+    readonly hp: number;
 }
 
-export const Unit: React.FC<IProps> = ({ x, y, agentId, unitId, isInvulnerable, isDead, isSelected, onClick, width, height }) => {
+export const Unit: React.FC<React.PropsWithChildren<IProps>> = ({
+    x,
+    y,
+    agentId,
+    unitId,
+    isInvulnerable,
+    isDead,
+    isStunned,
+    isSelected,
+    onClick,
+    width,
+    height,
+    hp,
+}) => {
     const { volume } = useContext(SoundContext);
     const [playSand1] = useSound(sand1, { volume });
     const [playSand2] = useSound(sand2, { volume });
@@ -37,19 +52,24 @@ export const Unit: React.FC<IProps> = ({ x, y, agentId, unitId, isInvulnerable, 
 
     const hasClickHandler = onClick !== undefined;
     return (
-        <UnitDiv
-            onClick={onClick}
-            hasClickHandler={hasClickHandler}
-            key={agentId}
-            agentId={agentId}
-            unitId={unitId}
-            x={x}
-            y={y}
-            width={width}
-            height={height}
-            isInvulnerable={isInvulnerable}
-            isSelected={isSelected}
-            isDead={isDead}
-        />
+        <UnitRoot x={x} y={y} width={width} height={height}>
+            <UnitDiv
+                onClick={onClick}
+                hasClickHandler={hasClickHandler}
+                key={agentId}
+                agentId={agentId}
+                unitId={unitId}
+                x={x}
+                y={y}
+                width={width}
+                height={height}
+                isInvulnerable={isInvulnerable}
+                isSelected={isSelected}
+                isDead={isDead}
+                isStunned={isStunned}
+            />
+            <UnitHealthLabel>{hp}</UnitHealthLabel>
+            <UnitIdLabel>{unitId}</UnitIdLabel>
+        </UnitRoot>
     );
 };

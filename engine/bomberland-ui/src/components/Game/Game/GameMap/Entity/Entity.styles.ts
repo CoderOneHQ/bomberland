@@ -11,7 +11,30 @@ interface IStyleProps {
     readonly owner?: string;
     readonly width: number;
     readonly height: number;
+    readonly animated?: boolean;
 }
+
+const floatAnimation = keyframes`
+    0% {
+        transform: translatey(0px);
+    }
+
+    25% {
+        transform: translatey(-1px);
+    }
+
+    50% {
+        transform: translatey(-2px);
+    }
+
+    75% {
+        transform: translatey(-1px);
+    }
+
+    100% {
+        transform: translatey(0px);
+    }
+    `;
 
 export const ImageDiv = styled("div")<IStyleProps>`
     width: ${({ width }) => Math.floor((100 / width) * 100) / 100}%;
@@ -25,6 +48,7 @@ export const ImageDiv = styled("div")<IStyleProps>`
     position: absolute;
     bottom: ${({ y, height }) => (y * Math.floor((100 / height) * 100)) / 100}%;
     left: ${({ x, width }) => (x * Math.floor((100 / width) * 100)) / 100}%;
+    animation: ${({ animated }) => (animated && floatAnimation)} 2s linear infinite;
 `;
 
 const blastImageAnimation = keyframes`
@@ -42,7 +66,7 @@ const blastImageAnimation = keyframes`
 
 const throbbing = keyframes`
     0% {
-        transform: scale(0.6);
+        transform: scale(0.8);
     }
 
     50% {
@@ -118,7 +142,7 @@ export const FireDiv = styled("div")<IStyleProps>`
     background-image: url(${({ image }) => image});
     background-repeat: no-repeat;
     background-position: center center;
-    animation: ${blastImageAnimation} 1s linear infinite;
+    animation: ${blastImageAnimation} 2s linear infinite;
     user-select: none;
     font-weight: bold;
     position: absolute;

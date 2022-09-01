@@ -9,7 +9,7 @@ interface IProps {
     readonly height: number;
 }
 
-export const Entities: React.FC<IProps> = ({ entities, onBombDetonated, width, height }) => {
+export const Entities: React.FC<React.PropsWithChildren<IProps>> = ({ entities, onBombDetonated, width, height }) => {
     return (
         <>
             {entities.map((entity) => {

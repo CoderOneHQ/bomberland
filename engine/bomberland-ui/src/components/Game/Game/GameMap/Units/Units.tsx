@@ -15,15 +15,24 @@ interface IProps {
     readonly height: number;
 }
 
-export const Units: React.FC<IProps> = ({ unitState, currentTick, selectedUnitId, selectableUnits, setSelectedUnitId, width, height }) => {
+export const Units: React.FC<React.PropsWithChildren<IProps>> = ({
+    unitState,
+    currentTick,
+    selectedUnitId,
+    selectableUnits,
+    setSelectedUnitId,
+    width,
+    height,
+}) => {
     const unitData = Object.values(unitState);
     const allowedUnits = new Set(selectableUnits);
     const units = unitData.map((unit) => {
         const [x, y] = unit.coordinates;
-        const { unit_id, agent_id } = unit;
+        const { unit_id, agent_id, hp } = unit;
         const isSelected = unit_id === selectedUnitId;
-        const isInvulnerable = unit.invulnerability > currentTick;
+        const isInvulnerable = unit.invulnerable >= currentTick;
         const isDead = unit.hp <= 0;
+        const isStunned = unit.stunned >= currentTick;
         const onSetUnitId = useCallback(() => {
             setSelectedUnitId(unit_id);
         }, [unit_id, setSelectedUnitId]);
@@ -32,6 +41,7 @@ export const Units: React.FC<IProps> = ({ unitState, currentTick, selectedUnitId
 
         return (
             <Unit
+                hp={hp}
                 onClick={onClick}
                 isSelected={isSelected}
                 key={unit_id}
@@ -43,6 +53,7 @@ export const Units: React.FC<IProps> = ({ unitState, currentTick, selectedUnitId
                 unitId={unit_id}
                 isInvulnerable={isInvulnerable}
                 isDead={isDead}
+                isStunned={isStunned}
             />
         );
     });

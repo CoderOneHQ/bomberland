@@ -10,7 +10,7 @@ If you can't find a resolution to your issue below, please report it on our [Git
 ## General
 
 ### How do I change what agents are playing?
-By default, the [provided starter kits](https://github.com/CoderOneHQ/bomberland#starter-kits) will only connect Agent B (knight). You can play as Agent A (wizard) via the [client](https://www.gocoder.one/game).
+By default, the [provided starter kits](https://github.com/CoderOneHQ/bomberland#starter-kits) will only connect Agent B. You can play as Agent A via the [client](https://www.gocoder.one/game).
 
 **To connect a second agent:**
 1. Open `docker-compose.yaml`
@@ -35,14 +35,14 @@ Yes, you can change environment variables using the flags [here](/docs/api-refer
 It will be safe to assume the following default runtime resources will be available:
 
 ```yaml
---cpus=2
+--cpus=1
 --cpu-period=100000
 --memory=1024m
 ```
 
-### What happens if my Agent makes an invalid move?
+### What happens if my Agent or unit makes an invalid move?
 If your Agent tries to make an invalid move, the server will drop the action and your Agent will do nothing instead.
-If both Agents try and occupy the same spot in the same tick, both agents will have their actions dropped.
+If multiple units try and occupy the same spot in the same tick, all units will have their actions dropped.
 
 ### In what order does the game server resolve events?
 The game server will resolve events in the order listed [here](/docs/api-reference/#-server-packets-events).

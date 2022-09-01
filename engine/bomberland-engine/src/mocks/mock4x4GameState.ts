@@ -13,7 +13,8 @@ export const mock4x4GameState: Omit<IGameState, "connection"> = {
             blast_diameter: 3,
             unit_id: "a",
             agent_id: "a",
-            invulnerability: 0,
+            invulnerable: 0,
+            stunned: 0,
         },
         b: {
             coordinates: [1, 0],
@@ -24,7 +25,8 @@ export const mock4x4GameState: Omit<IGameState, "connection"> = {
             blast_diameter: 3,
             unit_id: "b",
             agent_id: "b",
-            invulnerability: 0,
+            invulnerable: 0,
+            stunned: 0,
         },
     },
     entities: [

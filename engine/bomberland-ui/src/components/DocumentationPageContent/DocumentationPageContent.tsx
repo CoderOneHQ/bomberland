@@ -13,7 +13,7 @@ import {
 import { RouterLink } from "../RouterLink/RouterLink";
 import { TableOfContents } from "../TableOfContents/TableOfContents";
 import { DocumentationOrderedNavigation } from "../DocumentationOrderedNavigation/DocumentationOrderedNavigation";
-import { CoderOneRoute } from "../../utilities/CoderOneRoute";
+import { BomberlandRoute } from "../../utilities/BomberlandRoute";
 
 interface IProps {
     readonly title: string;
@@ -22,7 +22,7 @@ interface IProps {
     readonly tableOfContents: string;
 }
 
-export const DocumentationPageContent: React.FC<IProps> = ({ title, order, html, tableOfContents }) => {
+export const DocumentationPageContent: React.FC<React.PropsWithChildren<IProps>> = ({ title, order, html, tableOfContents }) => {
     const [t] = useTranslation();
     return (
         <PageContainer>
@@ -30,7 +30,7 @@ export const DocumentationPageContent: React.FC<IProps> = ({ title, order, html,
             <ContentRoot>
                 <Header>
                     <Breadcrumb>
-                        <RouterLink href={CoderOneRoute.DocumentationIndex}>{t("allDocs")}</RouterLink> / {title}
+                        <RouterLink href={BomberlandRoute.DocumentationIndex}>{t("allDocs")}</RouterLink> / {title}
                     </Breadcrumb>
                     <DocumentationOrderedNavigation currentPageOrder={order} />
                     <H1>{title}</H1>

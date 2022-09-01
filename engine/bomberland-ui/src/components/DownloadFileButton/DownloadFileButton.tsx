@@ -13,7 +13,7 @@ interface IProps {
     readonly label: string;
 }
 
-export const DownloadFileButton: React.FC<IProps> = ({ data, fileName, mediaType, label }) => {
+export const DownloadFileButton: React.FC<React.PropsWithChildren<IProps>> = ({ data, fileName, mediaType, label }) => {
     const dataStr = `data:${mediaType},${data}`;
     return (
         <LinkButton href={dataStr} download={fileName}>

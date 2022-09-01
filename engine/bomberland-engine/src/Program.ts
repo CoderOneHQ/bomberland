@@ -1,6 +1,7 @@
 import http, { Server } from "http";
 import Koa from "koa";
 import koaBody from "koa-body";
+import Router from "koa-router";
 import serve from "koa-static";
 import "source-map-support/register";
 import { sys } from "typescript";
@@ -62,13 +63,15 @@ class Program {
     };
 
     private instantiateApi = () => {
-        const services: IServices = {};
+        const services: IServices = { coderoneApi: this.engineTelemetry };
         this.app.use(koaBody());
+        const apiRouter = new Router({ prefix: "/api" });
         routers.forEach((getRouter) => {
             const router = getRouter(services);
-            this.app.use(router.routes());
-            this.app.use(router.allowedMethods());
+            apiRouter.use(router.routes(), router.allowedMethods());
         });
+        this.app.use(apiRouter.allowedMethods());
+        this.app.use(apiRouter.routes());
     };
 
     private attachErrorHandlers = () => {

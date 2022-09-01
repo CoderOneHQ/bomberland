@@ -42,7 +42,7 @@ export class EndGameFireSpreader {
         if (cellNumber !== undefined) {
             this.reservedCells.add(cellNumber);
             const blast = new BlastEntity(this.config, cellNumber, undefined, undefined, undefined, this.gameTicker.CurrentTick);
-            const entityInCell = this.world.GetEntityInCell(cellNumber);
+            const entityInCell = this.world.EntityTracker.Get(cellNumber);
             this.world.RemoveEntity(cellNumber);
             if (entityInCell?.Type === EntityType.Bomb) {
                 const bomb = entityInCell as BombEntity;

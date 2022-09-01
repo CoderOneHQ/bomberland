@@ -5,8 +5,12 @@ export class Unit {
     public get BlastDiameter(): number {
         return this.blastDiameter;
     }
-    public get Invulnerability(): number {
-        return this.invulnerability;
+    public get Invulnerable(): number {
+        return this.invulnerable;
+    }
+
+    public get Stunned(): number {
+        return this.stunned;
     }
     public get State(): IUnitState {
         return {
@@ -18,7 +22,8 @@ export class Unit {
             blast_diameter: this.blastDiameter,
             unit_id: this.UnitId,
             agent_id: this.AgentId,
-            invulnerability: this.invulnerability,
+            invulnerable: this.invulnerable,
+            stunned: this.stunned,
         };
     }
 
@@ -39,7 +44,8 @@ export class Unit {
         private bombs: number,
         public HP: number,
         private blastDiameter: number,
-        private invulnerability: number
+        private invulnerable: number,
+        private stunned: number
     ) {}
 
     public SetCoordinates = (x: number, y: number): void => {
@@ -53,11 +59,11 @@ export class Unit {
 
     public ReduceHealth = (currentTick: number): number => {
         this.HP--;
-        this.invulnerability = currentTick + this.config.InvunerabilityTicks;
+        this.invulnerable = currentTick + this.config.InvunerabilityTicks;
         return this.HP;
     };
 
-    public IncreaseAmmo = (): number => {
+    public IncreaseAmmunition = (): number => {
         this.bombs++;
         return this.bombs;
     };
@@ -65,5 +71,9 @@ export class Unit {
     public IncreaseBlast = (): number => {
         this.blastDiameter += 2;
         return this.blastDiameter;
+    };
+
+    public Stun = (currentTick: number) => {
+        this.stunned = currentTick + this.config.FreezeDebuffDurationTicks;
     };
 }

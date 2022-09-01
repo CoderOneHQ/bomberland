@@ -13,17 +13,16 @@ const Root = styled.div`
     padding: 4px 0;
 `;
 
-export const NavigationLinkItem: React.FC<IProps> = ({ link, label }) => {
+export const NavigationLinkItem: React.FC<React.PropsWithChildren<IProps>> = ({ link, label }) => {
     const [t] = useTranslation();
     if (link === null) {
         return null;
     }
-    const { slug, title, timeToRead } = link;
+    const { slug, title } = link;
     return (
         <Root>
             <span>{label}: </span>
             <RouterLink href={`${slug}`}>{title}</RouterLink>
-            <span> {t("readingTime", { minutes: timeToRead })}</span>
         </Root>
     );
 };

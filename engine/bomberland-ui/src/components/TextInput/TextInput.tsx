@@ -37,7 +37,7 @@ interface IProps {
     readonly prefixAdornment?: string | undefined;
 }
 
-export const TextInput: React.FC<IProps> = ({
+export const TextInput: React.FC<React.PropsWithChildren<IProps>> = ({
     onChange,
     placeholder,
     value,

@@ -55,9 +55,15 @@ const placeBomb = (unit: Unit, world: World, gameTicker: GameTicker, config: ICo
     if (bombCount <= 0) {
         throw new Error("No bombs in inventory.");
     }
+    const maximumConcurrentBombs = config.MaximumConcurrentBombs;
+    const totalPlacedBombs = world.EntityTracker.ActiveBombCountByAgent(unit.AgentId);
+    if (totalPlacedBombs >= maximumConcurrentBombs) {
+        throw new Error(`Agent ${unit.AgentId} cannot place more than ${maximumConcurrentBombs} bombs`);
+    }
+
     const cellNumber = unit.CellNumber;
 
-    const entityInCell = world.GetEntityInCell(cellNumber);
+    const entityInCell = world.EntityTracker.Get(cellNumber);
     if (entityInCell === undefined) {
         world.PlaceBomb(cellNumber, unit.State.unit_id);
     } else if (entityInCell.Type === EntityType.Blast) {
@@ -78,7 +84,7 @@ const placeBomb = (unit: Unit, world: World, gameTicker: GameTicker, config: ICo
 
 const detonateBomb = (unit: Unit, world: World, coordinates: [number, number], gameTicker: GameTicker, config: IConfig) => {
     const cellNumber = getCellNumberFromCoordinates(coordinates, world.Width);
-    const entity = world.GetEntityInCell(cellNumber);
+    const entity = world.EntityTracker.Get(cellNumber);
     if (entity !== undefined && entity.Type === EntityType.Bomb && entity.UnitId === unit.State.unit_id) {
         const currentTick = gameTicker.CurrentTick;
         const isBombArmed = currentTick - entity.Created > config.BombArmedTicks;

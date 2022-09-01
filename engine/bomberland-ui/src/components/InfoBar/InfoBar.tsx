@@ -17,7 +17,7 @@ const Root = styled.div`
     border-radius: 4px;
 `;
 
-export const InfoBar: React.FC = ({ children }) => {
+export const InfoBar: React.FC<React.PropsWithChildren<unknown>> = ({ children }) => {
     return (
         <Root>
             <InfoIcon />

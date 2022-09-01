@@ -90,6 +90,7 @@ describe("evaluateNextState", () => {
     });
 
     test(`it should correctly evaluate the next state given an existing state and empty agent actions`, async () => {
+        process.env["BOMB_DURATION_TICKS"] = "40";
         const state = await evaluateNextState(telemetry, mock15x15gameState, []);
         const result: INextState = {
             next_state: { ...mock15x15gameState, tick: mock15x15gameState.tick + 1 },
@@ -100,6 +101,7 @@ describe("evaluateNextState", () => {
     });
 
     test(`it should correctly evaluates state when there is a spawn event triggered right after blast spawn and there is no available space`, async () => {
+        process.env["BLAST_DURATION_TICKS"] = "15";
         process.env["ENTITY_SPAWN_PROBABILITY_PER_TICK"] = "1";
         process.env["MAP_WIDTH"] = "2";
         process.env["MAP_HEIGHT"] = "2";
@@ -153,6 +155,7 @@ describe("evaluateNextState", () => {
     test(`it should correctly evaluates state when there is a spawn right before fire spread event`, async () => {
         process.env["AMMO_SPAWN_WEIGHTING"] = "1.0";
         process.env["BLAST_POWERUP_SPAWN_WEIGHTING"] = "0.0";
+        process.env["FREEZE_POWERUP_SPAWN_WEIGHTING"] = "0.0";
         process.env["ENTITY_SPAWN_PROBABILITY_PER_TICK"] = "1";
         process.env["MAP_WIDTH"] = "2";
         process.env["MAP_HEIGHT"] = "2";

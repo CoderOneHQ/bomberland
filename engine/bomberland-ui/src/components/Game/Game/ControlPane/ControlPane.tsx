@@ -17,12 +17,11 @@ interface IProps {
     readonly sendAdminPacket: (adminPacket: AdminPacket) => void;
 }
 
-export const ControlPane: React.FC<IProps> = ({ connection, state, endGameState, sendAdminPacket }) => {
+export const ControlPane: React.FC<React.PropsWithChildren<IProps>> = ({ connection, state, endGameState, sendAdminPacket }) => {
     if (state === undefined) {
         return null;
     }
     const [t] = useTranslation();
-    const dataUri = useMemo(() => encodeURIComponent(JSON.stringify(endGameState)), [endGameState]);
     const adminControlsEnabled = connection?.role === GameRole.Admin;
 
     return (
@@ -32,18 +31,6 @@ export const ControlPane: React.FC<IProps> = ({ connection, state, endGameState,
                 <AdminControls isEnabled={adminControlsEnabled} sendAdminPacket={sendAdminPacket} gameState={state} />
                 <SoundControl />
             </ContentCard>
-
-            {endGameState !== undefined && (
-                <ContentCard>
-                    <H2>{t("replay")}</H2>
-                    <DownloadFileButton
-                        fileName="replay.json"
-                        data={dataUri}
-                        mediaType="text/json;charset=utf-8"
-                        label={t("downloadReplay")}
-                    />
-                </ContentCard>
-            )}
         </Root>
     );
 };

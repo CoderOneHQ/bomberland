@@ -9,7 +9,6 @@ services:
         environment:
             - ADMIN_ROLE_ENABLED=0
             - AGENT_ID_MAPPING=agentA,agentB
-            - INITIAL_AMMUNITION=3
             - INITIAL_HP=3
             - PRNG_SEED=1234
             - SHUTDOWN_ON_GAME_END_ENABLED=1
@@ -17,6 +16,11 @@ services:
             - TICK_RATE_HZ=10
             - TRAINING_MODE_ENABLED=0
             - WORLD_SEED=1234
+        deploy:
+            resources:
+                limits:
+                    cpus: "1"
+                    memory: "1024M"
         networks:
             - coderone-tournament
 
@@ -31,6 +35,11 @@ services:
     #         - GAME_CONNECTION_STRING=ws://game-engine:3000/?role=agent&agentId=agentA&name=python3-agent-dev
     #     depends_on:
     #         - game-engine
+    #     deploy:
+    #         resources:
+    #             limits:
+    #                 cpus: "1"
+    #                 memory: "1024M"
     #     networks:
     #         - coderone-tournament
 
@@ -38,13 +47,18 @@ services:
         extends:
             file: base-compose.yml
             # update next line with a service in base-compose.yml to change agent
-            service: python3-agent
+            service: python3-agent-dev
         environment:
             - GAME_CONNECTION_STRING=ws://game-engine:3000/?role=agent&agentId=agentB&name=python3-agent
         depends_on:
             - game-engine
+        deploy:
+            resources:
+                limits:
+                    cpus: "1"
+                    memory: "1024M"
         networks:
             - coderone-tournament
-        restart: on-failure
+
 networks:
     coderone-tournament:

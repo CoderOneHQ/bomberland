@@ -9,9 +9,7 @@ const proxyCfg =
                       "/api/",
                       createProxyMiddleware({
                           target: `http://${process.env.API_HOST}`,
-                          pathRewrite: {
-                              "/api/": "",
-                          },
+                          pathRewrite: {},
                       })
                   );
               },

@@ -1,15 +1,15 @@
-import { AbstractEntity } from "../../../AbstractEntity";
-import { Unit } from "../../../../Unit/Unit";
+import { EntityType } from "@coderone/bomberland-library";
+import { IConfig } from "../../../../../Config/IConfig";
+import { Telemetry } from "../../../../../Services/Telemetry";
+import { GameTicker } from "../../../../Game/GameTicker";
+import { PRNG } from "../../../../Probability/Probability.types";
 import { CellReserver } from "../../CellReserver";
 import { EmptyCellTracker } from "../../EmptyCellTracker";
-import { EntityType } from "@coderone/bomberland-library";
-import { GameTicker } from "../../../../Game/GameTicker";
+import { World } from "../../World";
+import { EntityTracker } from "./../../EntityTracker";
+import { UnitTracker } from "./../../UnitTracker";
 import { placeUnits } from "./placeAgents";
 import { placeBlocks } from "./placeBlocks";
-import { PRNG } from "../../../../Probability/Probability.types";
-import { Telemetry } from "../../../../../Services/Telemetry";
-import { World } from "../../World";
-import { IConfig } from "../../../../../Config/IConfig";
 
 const maxTries = 3;
 
@@ -48,11 +48,11 @@ export const createWorldFromSeed = (
         try {
             const cellReserver = new CellReserver(width * height, prngWorld, width);
             const emptyCellTracker = new EmptyCellTracker(telemetry, width, height, prngWorld, cellReserver);
-            const entities = new Map<number, AbstractEntity>();
-            const unitMap = new Map<string, Unit>();
+            const entities = new EntityTracker();
+            const unitTracker = new UnitTracker(prngGame);
             const currentTick = gameTicker.CurrentTick;
             validateWorldOptions(options);
-            placeUnits(config, unitMap, emptyCellTracker, totalAgents, width, isSymmetricalMap);
+            placeUnits(config, unitTracker, emptyCellTracker, totalAgents, width, isSymmetricalMap);
 
             placeBlocks(config, width, isSymmetricalMap, emptyCellTracker, entities, steelBlocks, EntityType.MetalBlock, currentTick);
             placeBlocks(config, width, isSymmetricalMap, emptyCellTracker, entities, woodenBlocks, EntityType.WoodBlock, currentTick);
@@ -64,7 +64,7 @@ export const createWorldFromSeed = (
                 prngGame,
                 cellReserver,
                 emptyCellTracker,
-                unitMap,
+                unitTracker,
                 entities,
                 gameTicker,
                 width,
@@ -77,7 +77,9 @@ export const createWorldFromSeed = (
             return world;
         } catch (e) {
             telemetry.Warning(e as string);
-            telemetry.Warning(`Failed to instantitate world attempt ${attempts} of ${maxTries}`);
+            telemetry.Warning(
+                `Failed to instantitate world attempt ${attempts} of ${maxTries} with worldSeed: ${config.WorldSeed} and prngSeed: ${config.PrngSeed}`
+            );
             if (attempts >= maxTries) {
                 throw new Error(`Exceeded max attempts of ${maxTries} trying to instantiate world`);
             }

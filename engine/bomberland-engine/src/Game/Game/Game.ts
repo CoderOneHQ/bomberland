@@ -44,9 +44,9 @@ export class Game {
     }
 
     public IsGameComplete = (): boolean => {
-        const units = this.world.UnitMap;
+        const unitTracker = this.world.UnitTracker;
         const agentUnitsAliveMap = new Map<string, number>();
-        units.forEach((unit) => {
+        unitTracker.Units.forEach((unit) => {
             const { AgentId, HP } = unit;
 
             if (HP > 0) {
@@ -156,10 +156,11 @@ export class Game {
         const currentTick = this.gameTicker.CurrentTick;
         const lastActionTaken = this.lastActionMap.get(unitId) ?? -1;
         const isActionThrottled = lastActionTaken >= currentTick;
-        const unit = this.world.UnitMap.get(unitId);
+        const unit = this.world.UnitTracker.GetUnitById(unitId);
         const canControlUnit = unit?.AgentId === agentId;
         const unitHealth = unit?.HP ?? 0;
         const isUnitAlive = unitHealth > 0;
+        const isUnitStunned = (unit?.Stunned ?? 0) >= currentTick;
         if (canControlUnit === false) {
             this.telemetry.Info(
                 `Dropping action (doesn't own unit): ${JSON.stringify(action.type)} for agent: ${agentId}, unit: ${unitId}`
@@ -170,6 +171,9 @@ export class Game {
             return false;
         } else if (isActionThrottled) {
             this.telemetry.Info(`Throttling action: ${JSON.stringify(action.type)} for agent: ${agentId}, unit: ${unitId}`);
+            return false;
+        } else if (isUnitStunned) {
+            this.telemetry.Info(`Dropping action (unit is stunned): ${JSON.stringify(action.type)} for agent: ${agentId}, unit: ${unitId}`);
             return false;
         } else {
             this.lastActionMap.set(unitId, currentTick);
@@ -189,7 +193,7 @@ export class Game {
                 moveActions.push([agentId, action]);
             }
         });
-        const filteredActions = getFilteredSameCellActions(this.telemetry, moveActions, this.world.UnitMap, this.world.Width);
+        const filteredActions = getFilteredSameCellActions(this.telemetry, moveActions, this.world.UnitTracker, this.world.Width);
 
         return [...this.handleActions(nonMoveActions), ...this.handleActions(filteredActions)];
     };
@@ -201,7 +205,11 @@ export class Game {
             const [agentId, agentPacket] = move;
             const { unit_id } = agentPacket;
             try {
-                const unit = this.world.GetUnit(unit_id);
+                const unitTracker = this.world.UnitTracker;
+                const unit = unitTracker.GetUnitById(unit_id);
+                if (unit === undefined) {
+                    throw Error(`UnitId ${unit_id} not found in unitMap: ${unitTracker.UnitIds}.`);
+                }
                 handleUnitAction(this.telemetry, agentPacket, unit, this.world, this.gameTicker, this.config);
                 successfulActions.push(move);
             } catch (e) {

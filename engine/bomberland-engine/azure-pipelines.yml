@@ -33,21 +33,20 @@ stages:
             pool: Default
             steps:
                 - script: |
-                      docker build -f $(Build.SourcesDirectory)/engine/$(servicePath)/Dockerfile $(Build.SourcesDirectory)/engine --target build-ui -t $(servicePath) --build-arg ENVIRONMENT=production --build-arg BUILD=$(Build.BuildId)
+                      docker build -f $(Build.SourcesDirectory)/engine/$(servicePath)/Dockerfile $(Build.SourcesDirectory)/engine --target build-engine -t $(servicePath) --build-arg ENVIRONMENT=production --build-arg BUILD=$(Build.BuildId)
                       CID=$(docker create $(servicePath))
                       docker cp ${CID}:/app/bomberland-engine/windows.exe $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-windows.exe
                       docker cp ${CID}:/app/bomberland-engine/linux $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-linux
                       docker cp ${CID}:/app/bomberland-engine/osx $(Build.ArtifactStagingDirectory)/$(servicePath)-$(tag)-osx
                       docker rm ${CID}
                   env:
-                    DOCKER_BUILDKIT: 0
+                      DOCKER_BUILDKIT: 0
                   displayName: "Build binaries and copy to cwd"
                 - task: "PublishBuildArtifacts@1"
                   inputs:
                       PathtoPublish: "$(Build.ArtifactStagingDirectory)"
                       ArtifactName: "binaries"
                       publishLocation: "Container"
-                  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
                 - task: Docker@2
                   displayName: Build and test $(serviceName) public
                   inputs:

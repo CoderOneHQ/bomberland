@@ -13,7 +13,7 @@ interface IProps {
 const maxOgTitleLength = 60;
 const ellipsis = "...";
 
-export const SEO: React.FC<IProps> = ({ title, description }) => {
+export const SEO: React.FC<React.PropsWithChildren<IProps>> = ({ title, description }) => {
     const helmetTitle = title === undefined ? "Coder One" : `${title} | Coder One`;
     const ogTitle =
         helmetTitle.length > maxOgTitleLength ? `${helmetTitle.substring(0, maxOgTitleLength - ellipsis.length)}${ellipsis}` : helmetTitle;

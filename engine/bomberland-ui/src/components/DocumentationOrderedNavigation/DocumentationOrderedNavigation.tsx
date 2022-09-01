@@ -42,7 +42,7 @@ interface IProps {
     readonly currentPageOrder: number;
 }
 
-export const DocumentationOrderedNavigation: React.FC<IProps> = ({ currentPageOrder }) => {
+export const DocumentationOrderedNavigation: React.FC<React.PropsWithChildren<IProps>> = ({ currentPageOrder }) => {
     const data = useStaticQuery(graphql`
         {
             allMarkdownRemark(

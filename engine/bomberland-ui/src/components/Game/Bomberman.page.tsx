@@ -4,7 +4,7 @@ import { Setup } from "./Setup";
 import { useTranslation } from "react-i18next";
 import { SEO } from "../SEO/SEO";
 
-const Bomberman: React.FC = () => {
+const Bomberman: React.FC<React.PropsWithChildren<unknown>> = () => {
     const urlParams = new URLSearchParams(window?.location.search);
     const connectionString = urlParams.get("uri");
     const [t] = useTranslation();
