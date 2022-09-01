@@ -383,7 +383,7 @@ Below is a list of the possible event types (in the order they are executed). Se
 
 On each tick, the game server accepts one action packet per unit per agent.
 
-An action packet must conform to the [validation schema](https://github.com/CoderOneHQ/starter-kits/blob/6403659c68f93e053f47b3b67f0976c073ee700e/validation.schema.json#L284) (`ValidAgentPacket`). The starter kits provide an interface for sending actions.
+An action packet must conform to the [validation schema](https://github.com/CoderOneHQ/bomberland/blob/master/engine/bomberland-engine/src/runtime-validation/validation.schema.json#L389) (`ValidAgentPacket`). The starter kits provide an interface for sending actions.
 
 The available action packets are detailed below.
 
@@ -405,7 +405,7 @@ action_packet = {
 
 ## 🔐 Administrator API
 
-[Full reference found on our github](https://github.com/CoderOneHQ/bomberland/blob/2faea184e179949a4d01e49359ddaa521b6d9bd9/validation.schema.json#L10)
+[Full reference found on our github](https://github.com/CoderOneHQ/bomberland/blob/master/engine/bomberland-engine/src/runtime-validation/validation.schema.json#L10)
 
 Requirements:
 
