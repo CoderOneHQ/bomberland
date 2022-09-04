@@ -93,6 +93,7 @@ class GameState:
                 print(f"unknown event type {event_type}: {event}")
         if self._tick_callback is not None:
             tick_number = game_tick.get("tick")
+            self._state["tick"] = tick_number
             await self._tick_callback(tick_number, self._state)
 
     def _on_entity_spawned(self, spawn_event):
