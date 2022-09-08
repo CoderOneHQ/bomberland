@@ -52,7 +52,7 @@ Check [🕹️ Action Packets](../docs/api-reference/#%EF%B8%8F-action-packets) 
 ### Ammunition
 
 -   Each unit starts the game with (effectively) unlimited ammunition.
--   Each unit can only have 3 bombs placed on the map at any one point in time.
+-   Each agent can only have 3 bombs placed on the map at any one point in time.
 
 ### Remote detonation
 
