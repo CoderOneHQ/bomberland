@@ -12,6 +12,8 @@ pub enum EntityType {
     Blast,
     #[serde(rename = "bp")]
     BlastPowerUp,
+    #[serde(rename = "fp")]
+    FreezePowerUp,
     #[serde(rename = "m")]
     MetalBlock,
     #[serde(rename = "o")]

@@ -77,7 +77,7 @@ pub struct Unit {
     /// The agent to which this unit belongs.
     pub agent_id: AgentID,
     /// Latest tick number after which this unit is no longer invulnerable (inclusive).
-    pub invulnerability: u16,
+    pub invulnerable: u16,
 }
 
 impl Unit {
@@ -144,7 +144,7 @@ impl Unit {
             self.inventory = new_state.inventory;
             self.blast_diameter = new_state.blast_diameter;
             self.agent_id = new_state.agent_id;
-            self.invulnerability = new_state.invulnerability;
+            self.invulnerable = new_state.invulnerable;
         } else {
             panic!(
                 "Attempted to update unit '{:?}' with data from unit '{:?}'",
