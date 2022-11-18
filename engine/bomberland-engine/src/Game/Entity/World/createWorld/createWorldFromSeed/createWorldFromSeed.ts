@@ -78,7 +78,7 @@ export const createWorldFromSeed = (
         } catch (e) {
             telemetry.Warning(e as string);
             telemetry.Warning(
-                `Failed to instantitate world attempt ${attempts} of ${maxTries} with worldSeed: ${config.WorldSeed} and prngSeed: ${config.PrngSeed}`
+                `Failed to instantiate world attempt ${attempts} of ${maxTries} with worldSeed: ${config.WorldSeed} and prngSeed: ${config.PrngSeed}`
             );
             if (attempts >= maxTries) {
                 throw new Error(`Exceeded max attempts of ${maxTries} trying to instantiate world`);
