@@ -23,11 +23,14 @@ Contributions are always welcome, see our contribution guidelines [here](CONTRIB
 See: [Documentation](https://www.gocoder.one/docs)
 
 1. Clone or download this repo (including both `base-compose.yml` and `docker-compose.yml` files).
-1. To connect agents and run a game instance, run from the root directory:
+2. To connect agents and run a game instance, run from the root directory:
 
 ```
 docker-compose up --abort-on-container-exit --force-recreate
 ```
+
+3. While the engine is running, access the client by going to `http://localhost:3000/` in your browser (may be different depending on your settings).
+4. From the client, you can connect as a `spectator` or `agent` (to play as a human player)
 
 ### Open AI gym wrapper
 
