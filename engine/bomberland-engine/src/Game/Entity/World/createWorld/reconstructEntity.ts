@@ -8,6 +8,7 @@ import { BlastPowerupEntity } from "../../BlastPowerupEntity";
 import { BombEntity } from "../../BombEntity";
 import { createBlockEntity } from "../../createBlockEntity";
 import { IWorldState } from "../World";
+import { FreezePowerupEntity } from "../../FreezePowerupEntity";
 
 const blockType = new Set([EntityType.MetalBlock, EntityType.OreBlock, EntityType.WoodBlock]);
 
@@ -26,6 +27,8 @@ export const reconstructEntity = (
         return createBlockEntity(config, cellNumber, width, type, unit_id, agent_id, tick, entity.created);
     } else if (type === EntityType.Ammo) {
         return new AmmoEntity(config, cellNumber, tick, entity.created);
+    } else if (type === EntityType.FreezePowerup) {
+        return new FreezePowerupEntity(config, cellNumber, width, tick);
     } else if (type === EntityType.Blast) {
         return new BlastEntity(config, cellNumber, unit_id, agent_id, entity.expires, tick, entity.created);
     } else if (type === EntityType.BlastPowerup) {
