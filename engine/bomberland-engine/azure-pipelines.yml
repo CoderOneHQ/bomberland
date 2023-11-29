@@ -31,6 +31,7 @@ stages:
           - job: CI
             displayName: CI
             pool: Default
+            timeoutInMinutes: 120
             steps:
                 - script: |
                       docker build -f $(Build.SourcesDirectory)/engine/$(servicePath)/Dockerfile $(Build.SourcesDirectory)/engine --target build-engine -t $(servicePath) --build-arg ENVIRONMENT=production --build-arg BUILD=$(Build.BuildId)
@@ -42,6 +43,7 @@ stages:
                   env:
                       DOCKER_BUILDKIT: 0
                   displayName: "Build binaries and copy to cwd"
+                  timeoutInMinutes: 120
                 - task: "PublishBuildArtifacts@1"
                   inputs:
                       PathtoPublish: "$(Build.ArtifactStagingDirectory)"
