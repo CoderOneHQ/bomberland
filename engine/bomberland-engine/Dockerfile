@@ -22,7 +22,7 @@ COPY bomberland-library /app/bomberland-library
 WORKDIR /app/bomberland-library
 RUN yarn build
 WORKDIR /app/bomberland-ui
-RUN yarn install
+RUN yarn install --verbose
 COPY bomberland-ui /app/bomberland-ui
 ARG ENVIRONMENT
 ENV ENVIRONMENT=${ENVIRONMENT}
