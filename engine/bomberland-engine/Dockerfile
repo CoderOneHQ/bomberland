@@ -15,7 +15,7 @@ COPY bomberland-library/tsconfig.json /app/bomberland-library/tsconfig.json
 COPY bomberland-ui/package.json /app/bomberland-ui/package.json
 
 WORKDIR /app
-RUN yarn install --verbose
+RUN yarn cache clean && yarn install
 
 COPY bomberland-library /app/bomberland-library
 
