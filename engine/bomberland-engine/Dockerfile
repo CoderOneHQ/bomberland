@@ -1,4 +1,4 @@
-FROM node:16.16.0-alpine3.15 as build-ui
+FROM node:18.12-alpine3.15 as build
 
 RUN apk update
 RUN \
@@ -15,7 +15,7 @@ COPY bomberland-library/tsconfig.json /app/bomberland-library/tsconfig.json
 COPY bomberland-ui/package.json /app/bomberland-ui/package.json
 
 WORKDIR /app
-RUN yarn cache clean && yarn install
+RUN yarn install
 
 COPY bomberland-library /app/bomberland-library
 
