@@ -1,4 +1,4 @@
-FROM node:18.12-bullseye-slim as build-ui
+FROM node:16.16.0-alpine3.15 as build-ui
 
 RUN apk update
 RUN \
