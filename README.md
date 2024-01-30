@@ -32,7 +32,7 @@ docker-compose up --abort-on-container-exit --force-recreate
 3. While the engine is running, access the client by going to `http://localhost:3000/` in your browser (may be different depending on your settings).
 4. From the client, you can connect as a `spectator` or `agent` (to play as a human player)
 
-### Open AI gym wrapper
+### Open AI gym wrapper (experimental)
 
 `docker-compose -f open-ai-gym-wrapper-compose.yml up --force-recreate --abort-on-container-exit`
 
