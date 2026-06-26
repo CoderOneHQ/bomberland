@@ -54,18 +54,18 @@ Since Bomberland is a 2-player environment, the game engine will wait for a seco
 
 ## Step 5: Submit your first agent
 
-You can submit your agent to the tournament server and compete against other submitted agents. Your agent's ranking will be displayed on the [leaderboard](https://www.gocoder.one/leaderboard). 
+You can submit your agent to the tournament server and compete against other submitted agents. Your agent's ranking will be displayed on the [leaderboard](https://www.coderone.dev/leaderboard). 
 
 To submit:
-1. Create a [Team](https://www.gocoder.one/team) (teams can be 1 - 5 members).
-2. Navigate to [Submissions](https://www.gocoder.one/submissions) and paste the following: `docker.io/coderonehq/hello-world`. This image contains a basic starter agent that takes random actions. Later, you can submit your own agent image.
+1. Create a [Team](https://www.coderone.dev/team) (teams can be 1 - 5 members).
+2. Navigate to [Submissions](https://www.coderone.dev/submissions) and paste the following: `docker.io/coderonehq/hello-world`. This image contains a basic starter agent that takes random actions. Later, you can submit your own agent image.
 3. Click **Submit Agent**. 
 4. After a few minutes, you should see the message "Successfully pulled image".
 
-You've now submitted your first agent to the competition! Check back regularly to see your results from the [Matches](https://www.gocoder.one/adjudicated-games) page.
+You've now submitted your first agent to the competition! Check back regularly to see your results from the [Matches](https://www.coderone.dev/adjudicated-games) page.
 
 ## Next steps
-You're now all set up to compete! Check out the [introductory tutorial](https://www.gocoder.one/blog/ai-programming-tutorial-bomberman) for a guided walkthrough on developing a basic agent.
+You're now all set up to compete! Check out the [introductory tutorial](https://www.coderone.dev/blog/ai-programming-tutorial-bomberman) for a guided walkthrough on developing a basic agent.
 
 If you need help or have any feedback, please reach out on [Discord](https://discord.gg/NkfgvRN).
 

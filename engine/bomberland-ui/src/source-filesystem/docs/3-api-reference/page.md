@@ -525,7 +525,7 @@ Some seeds will generate invalid maps.
 
 **The forward model will not be provided in tournament servers. You can still use the forward model for your own training purposes, but this feature is still experimental**. This feature is intended for agents to build simulations of potential future states (such as for Monte Carlo Tree Search).
 
-If you're interested in this feature, please get in touch with us on [Discord](https://discord.gg/NkfgvRN) or [email](mailto:humans@gocoder.one) so we can improve on it!
+If you're interested in this feature, please get in touch with us on [Discord](https://discord.gg/NkfgvRN) or [email](mailto:humans@coderone.dev) so we can improve on it!
 
 We've provided starter kits for implementing an agent that uses a forward model (\_fwd) to simulate actions in the game state.
 

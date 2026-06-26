@@ -5,7 +5,7 @@ description: "Quickly get started with the Bomberland environment"
 order: 4
 ---
 
-To join a tournament, you will need to push your Docker image to a public registry and upload it to the [Submissions page](https://www.gocoder.one/submissions).
+To join a tournament, you will need to push your Docker image to a public registry and upload it to the [Submissions page](https://www.coderone.dev/submissions).
 
 You can use any public registry. Follow instructions below for Docker Hub:
 
@@ -49,4 +49,4 @@ c1ee23f20937: Pushed
 ...
 ```
 
-Upload the public registry link to the [Submissions →](https://www.gocoder.one/submissions) page. If you have submitted correctly, you will see the message "Successfully pulled image".
+Upload the public registry link to the [Submissions →](https://www.coderone.dev/submissions) page. If you have submitted correctly, you will see the message "Successfully pulled image".

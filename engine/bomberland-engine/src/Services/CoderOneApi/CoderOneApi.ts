@@ -8,9 +8,9 @@ export class CoderOneApi {
     private apiPath: string;
     private launchId = uuidv4();
     public constructor(private environment: string, private config: IConfig, private isEnabled: boolean, private build: string | number) {
-        this.apiPath = environment === "production" ? "https://www.gocoder.one/api" : "https://www.stage-gocoder.one/api";
+        this.apiPath = environment === "production" ? "https://www.coderone.dev/api" : "https://stage.coderone.dev/api";
         if (process.env.ENGINE_TELEMETRY_STAGE_MODE !== undefined) {
-            this.apiPath = "https://www.stage-gocoder.one/api";
+            this.apiPath = "https://stage.coderone.dev/api";
         }
     }
 
