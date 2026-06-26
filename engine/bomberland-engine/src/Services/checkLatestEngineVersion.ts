@@ -17,7 +17,7 @@ const evaluateBuildNumber = (build: string) => {
 export const checkLatestEngineVersion = async (environment: string, build: string) => {
     const buildNumber = evaluateBuildNumber(build);
     try {
-        const url = environment === "production" ? "https://gocoder.one/api/engine-version" : "http://api:8080/engine-version";
+        const url = environment === "production" ? "https://www.coderone.dev/api/engine-version" : "http://api:8080/engine-version";
         const response = await axios.get<IGetEngineVersionResponse>(url);
         if (buildNumber !== DEV_BUILD_NUMBER) {
             const { data } = response;

@@ -16,4 +16,4 @@ Starter kits in new languages should implement the simulation logic for handling
 
 ## How to get help
 
-For any help, please contact us directly on [Discord](https://discord.gg/Hd8TRFKsDa) or via [email](mailto:humans@gocoder.one).
+For any help, please contact us directly on [Discord](https://discord.gg/Hd8TRFKsDa) or via [email](mailto:humans@coderone.dev).

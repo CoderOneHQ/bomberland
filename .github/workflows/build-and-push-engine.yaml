@@ -1,0 +1,84 @@
+name: Build and Push Bomberland Engine
+
+# Public repo: this runs on GitHub-hosted runners (ubuntu-latest), never the
+# self-hosted homeserver runners, so untrusted fork PRs can't execute on our
+# infrastructure. Pull requests build only (no registry login, no push); the
+# image is pushed to Docker Hub only on push to master.
+
+on:
+    push:
+        branches:
+            - master
+        paths:
+            - "engine/**"
+            - ".github/workflows/build-and-push-engine.yaml"
+    pull_request:
+        branches:
+            - master
+        paths:
+            - "engine/**"
+            - ".github/workflows/build-and-push-engine.yaml"
+    workflow_dispatch:
+
+concurrency:
+    group: build-engine-${{ github.ref }}
+    cancel-in-progress: true
+
+env:
+    IMAGE: coderonehq/bomberland-engine
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        timeout-minutes: 120
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            # Build the build-engine stage and copy the cross-platform binaries
+            # out of the image (same outputs the Azure pipeline published).
+            - name: Build engine binaries
+              env:
+                  DOCKER_BUILDKIT: "0"
+              run: |
+                  docker build -f engine/bomberland-engine/Dockerfile engine \
+                    --target build-engine -t bomberland-engine-build \
+                    --build-arg ENVIRONMENT=production \
+                    --build-arg BUILD=${{ github.run_number }}
+                  CID=$(docker create bomberland-engine-build)
+                  mkdir -p artifacts
+                  docker cp "${CID}:/app/bomberland-engine/windows.exe" "artifacts/bomberland-engine-${{ github.run_number }}-windows.exe"
+                  docker cp "${CID}:/app/bomberland-engine/linux"       "artifacts/bomberland-engine-${{ github.run_number }}-linux"
+                  docker cp "${CID}:/app/bomberland-engine/osx"         "artifacts/bomberland-engine-${{ github.run_number }}-osx"
+                  docker rm "${CID}"
+
+            - name: Upload engine binaries
+              uses: actions/upload-artifact@v4
+              with:
+                  name: bomberland-engine-binaries
+                  path: artifacts/
+
+            # Only authenticate on master — PRs (incl. forks) never receive secrets.
+            - name: Log in to Docker Hub
+              if: github.ref == 'refs/heads/master'
+              uses: docker/login-action@v3
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Build and push engine image
+              uses: docker/build-push-action@v6
+              with:
+                  context: engine
+                  file: engine/bomberland-engine/Dockerfile
+                  push: ${{ github.ref == 'refs/heads/master' }}
+                  build-args: |
+                      ENVIRONMENT=production
+                      BUILD=${{ github.run_number }}
+                  tags: |
+                      ${{ env.IMAGE }}:latest
+                      ${{ env.IMAGE }}:${{ github.run_number }}
+                      ${{ env.IMAGE }}:${{ github.sha }}

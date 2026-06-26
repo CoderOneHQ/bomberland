@@ -10,7 +10,7 @@ If you can't find a resolution to your issue below, please report it on our [Git
 ## General
 
 ### How do I change what agents are playing?
-By default, the [provided starter kits](https://github.com/CoderOneHQ/bomberland#starter-kits) will only connect Agent B. You can play as Agent A via the [client](https://www.gocoder.one/game).
+By default, the [provided starter kits](https://github.com/CoderOneHQ/bomberland#starter-kits) will only connect Agent B. You can play as Agent A via the [client](https://www.coderone.dev/game).
 
 **To connect a second agent:**
 1. Open `docker-compose.yaml`

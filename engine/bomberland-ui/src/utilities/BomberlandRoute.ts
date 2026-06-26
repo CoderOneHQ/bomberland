@@ -1,5 +1,5 @@
 export abstract class BomberlandRoute {
-    public static readonly Bomberland = "https://www.gocoder.one/bomberland";
+    public static readonly Bomberland = "https://www.coderone.dev/bomberland";
     public static readonly DocumentationIndex = "/docs";
     public static readonly Game = "/game";
     public static readonly Replays = "/replays";
