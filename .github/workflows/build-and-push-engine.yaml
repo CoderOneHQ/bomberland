@@ -23,7 +23,7 @@ concurrency:
     cancel-in-progress: true
 
 env:
-    IMAGE: coderonehq/bomberland-engine
+    IMAGE: gocoderone/bomberland-engine
 
 jobs:
     build:
