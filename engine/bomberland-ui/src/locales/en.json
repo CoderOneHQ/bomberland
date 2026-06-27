@@ -70,7 +70,7 @@
     "joinWaitlist": "Join waitlist →",
     "keepUpToDate": "To keep up to date on all announcements and giveaways, make sure you join the <1>Discord Group</1>.",
     "lastUpdated": "Last update",
-    "latestImage": "Latest tournament engine image: coderone.azurecr.io/game-server:1663",
+    "latestImage": "Latest tournament engine image: gocoderone/bomberland-engine:latest",
     "leaderboard": "Leaderboard",
     "leaderboardCountdown": "Next matches run in... {{currentTimer}}",
     "learnMore": "Learn more",
