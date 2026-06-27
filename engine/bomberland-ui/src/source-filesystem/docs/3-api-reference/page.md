@@ -12,7 +12,7 @@ Agents connect to the game server via websockets.
 The provided [starter kits](https://github.com/CoderOneHQ/bomberland) will have this set up for you.
 
 ```bash
-GAME_CONNECTION_STRING=ws://game-server:3000/?role=agent&agentId=agentId&name=python3-agent
+GAME_CONNECTION_STRING=ws://game-engine:3000/?role=agent&agentId=agentId&name=python3-agent
 ```
 
 ### Roles

@@ -36,7 +36,7 @@ It may take a few minutes to run the first time. This will build the game server
 
 Once the game server is running, you should see:
 ```bash
-game-server_1    | [1] 2021-10-28T02:57:47.701Z - Agent [defaultName](b) connected to the server
+game-engine-1    | [1] 2021-10-28T02:57:47.701Z - Agent [defaultName](b) connected to the server
 ```
 
 Since Bomberland is a 2-player environment, the game engine will wait for a second agent to connect.
@@ -72,7 +72,7 @@ If you need help or have any feedback, please reach out on [Discord](https://dis
 Here are some other tasks to try:
 
 - [ ] **Switch agents:** `docker-compose.yml` specifies which agents to connect. Try switching which character you play as, or playing your agent against itself.
-- [ ] **Change environment variables:** Settings such as tick rate, map size, no. of agents can be changed under `docker-compose.yml` > `game-server` > `environment`. See [⚙️ Environment Flags](/docs/api-reference/#%EF%B8%8F-environment-flags) for a full list of available settings.
+- [ ] **Change environment variables:** Settings such as tick rate, map size, no. of agents can be changed under `docker-compose.yml` > `game-engine` > `environment`. See [⚙️ Environment Flags](/docs/api-reference/#%EF%B8%8F-environment-flags) for a full list of available settings.
 - [ ] **Improve the starter agent:** Try building an agent that beats the random agent.
 - [ ] **Make a new submission:** Follow the [Submission Instructions](/docs/submission-instructions).
 
