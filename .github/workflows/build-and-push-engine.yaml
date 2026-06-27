@@ -6,12 +6,10 @@ name: Build and Push Bomberland Engine
 # image is pushed to Docker Hub only on push to master.
 
 on:
+    # Every merge/commit to master builds and pushes the engine image.
     push:
         branches:
             - master
-        paths:
-            - "engine/**"
-            - ".github/workflows/build-and-push-engine.yaml"
     pull_request:
         branches:
             - master
