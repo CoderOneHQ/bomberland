@@ -22,7 +22,6 @@ export class ConnectionTracker {
     private readonly agentSockets = new Map<string, AgentSocketHandler>();
     private readonly spectators = new Map<number, SpectatorSocketHandler>();
     private readonly connections: Array<AbstractSocketHandler> = [];
-    private readonly connectionNumberIndexMap = new Map<number, number>();
 
     public get Connections(): Array<AbstractSocketHandler> {
         return this.connections;
@@ -70,16 +69,16 @@ export class ConnectionTracker {
     };
 
     private addConnection = (connection: AbstractSocketHandler) => {
-        this.connectionNumberIndexMap.set(connection.ConnectionId, this.connections.length);
         this.connections.push(connection);
         this.connections.sort(connectionSortComparatorFn);
     };
 
     private removeConnection = (connectionId: number) => {
-        const index = this.connectionNumberIndexMap.get(connectionId);
-        if (index !== undefined) {
+        // Remove by identity. The connections array is re-sorted on every add, so a
+        // stored index would be stale; look the connection up by its unique id instead.
+        const index = this.connections.findIndex((connection) => connection.ConnectionId === connectionId);
+        if (index !== -1) {
             this.connections.splice(index, 1);
-            this.connectionNumberIndexMap.delete(connectionId);
         }
     };
 }

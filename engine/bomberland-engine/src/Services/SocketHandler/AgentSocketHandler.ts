@@ -28,6 +28,9 @@ export class AgentSocketHandler extends AbstractSocketHandler {
             this.onMessage(message);
         });
         this.connection.on("close", this.onClose());
+        this.connection.on("error", (error: Error) => {
+            this.telemetry.Error(`Agent socket error [${this.name}](${this.AgentId}): ${error.message}`);
+        });
         this.onConnection?.(this);
         this.telemetry.Info(`Agent [${this.name}](${this.agentId}) connected to the server`);
     };
@@ -45,7 +48,15 @@ export class AgentSocketHandler extends AbstractSocketHandler {
     };
 
     public Send = (message: string) => {
-        (this.connection as ws.Server & { send: (message: string) => void }).send(message);
+        const socket = this.connection as ws.Server & { send: (message: string) => void; readyState: number };
+        if (socket.readyState !== ws.OPEN) {
+            return;
+        }
+        try {
+            socket.send(message);
+        } catch (error) {
+            this.telemetry.Error(`Failed to send to agent ${this.AgentId}: ${error}`);
+        }
     };
 
     private onClose = () => {

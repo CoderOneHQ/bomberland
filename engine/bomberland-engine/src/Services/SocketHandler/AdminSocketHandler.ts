@@ -26,6 +26,9 @@ export class AdminSocketHandler extends AbstractSocketHandler {
             this.onMessage(message);
         });
         this.connection.on("close", this.onClose());
+        this.connection.on("error", (error: Error) => {
+            this.telemetry.Error(`Admin socket error [${this.ConnectionId}]: ${error.message}`);
+        });
         this.onConnection?.(this);
         this.telemetry.Info(`Admin [${this.ConnectionId}] connected to the server`);
     };
@@ -44,7 +47,15 @@ export class AdminSocketHandler extends AbstractSocketHandler {
     };
 
     public Send = (message: string) => {
-        (this.connection as ws.Server & { send: (message: string) => void }).send(message);
+        const socket = this.connection as ws.Server & { send: (message: string) => void; readyState: number };
+        if (socket.readyState !== ws.OPEN) {
+            return;
+        }
+        try {
+            socket.send(message);
+        } catch (error) {
+            this.telemetry.Error(`Failed to send to admin ${this.ConnectionId}: ${error}`);
+        }
     };
 
     private onClose = () => {

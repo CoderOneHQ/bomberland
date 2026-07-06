@@ -80,10 +80,13 @@ export class GameRunner {
             };
             this.sockets.BroadCast(endGamePacket);
             this.writeEndGamePacket(endGamePacket);
-            this.api.SendReplayToWebhook(endGamePacket);
+            this.api.SendReplayToWebhook(endGamePacket).catch((error) => {
+                this.telemetry.Error(`Failed to send replay to webhook: ${error}`);
+            });
 
             await this.telemetry.Engine.LogEvent(EngineTelemetryEvent.GameEnded, { tick: this.tickCount - 1 });
             this.shutdown();
+            return;
         }
         const tickResult = await this.game.GetTickResult();
         const tickPacket: GameTickPacket = {
@@ -140,7 +143,9 @@ export class GameRunner {
         switch (adminPacket.type) {
             case PacketType.RequestTick:
                 if (this.shouldWaitForPlayers === false) {
-                    this.tick();
+                    this.tick().catch((error) => {
+                        this.telemetry.Error(`Failed to process requested tick: ${error}`);
+                    });
                 }
                 break;
 
@@ -231,7 +236,9 @@ export class GameRunner {
 
     private resetGame = async (worldSeed?: number, prngSeed?: number) => {
         this.telemetry.Info(`Resetting game with world_seed: ${worldSeed ?? "current"}, prng_seed: ${prngSeed ?? "current"}`);
-        this.api.LogEvent(EngineTelemetryEvent.GameReset, null);
+        this.api.LogEvent(EngineTelemetryEvent.GameReset, null).catch((error) => {
+            this.telemetry.Error(`Failed to log game reset event: ${error}`);
+        });
         await this.Stop();
         this.tickCount = 1;
         this.game = createGameFromSeed(this.telemetry, this.config, worldSeed ?? this.config.WorldSeed, prngSeed ?? this.config.PrngSeed);
