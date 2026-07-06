@@ -21,12 +21,23 @@ export class SpectatorSocketHandler extends AbstractSocketHandler {
 
     protected instantiateSocketHandler = () => {
         this.connection.on("close", this.onClose());
+        this.connection.on("error", (error: Error) => {
+            this.telemetry.Error(`Spectator socket error (${this.ConnectionId}): ${error.message}`);
+        });
         this.onConnection?.(this);
         this.telemetry.Info(`Spectator (${this.ConnectionId}) connected to the server`);
     };
 
     public Send = (message: string) => {
-        (this.connection as ws.Server & { send: (message: string) => void }).send(message);
+        const socket = this.connection as ws.Server & { send: (message: string) => void; readyState: number };
+        if (socket.readyState !== ws.OPEN) {
+            return;
+        }
+        try {
+            socket.send(message);
+        } catch (error) {
+            this.telemetry.Error(`Failed to send to spectator ${this.ConnectionId}: ${error}`);
+        }
     };
 
     private onClose = () => {

@@ -62,6 +62,7 @@ export class GameWebsocket {
                 );
             } catch (e) {
                 this.telemetry.Error(`Unable to connect socket with error: ${e}`);
+                connection.close();
             }
         } else {
             this.telemetry.Error(`Client tried to connect with invalid query params: ${request.url}`);

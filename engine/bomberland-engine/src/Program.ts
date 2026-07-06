@@ -55,7 +55,9 @@ class Program {
             config.IsTrainingModeEnabled === true
         );
 
-        gameRunner.Start();
+        gameRunner.Start().catch((error) => {
+            this.telemetry.Error(`GameRunner failed to start: ${error}`);
+        });
     };
 
     private instantiateUI = () => {
@@ -85,6 +87,16 @@ class Program {
 
         process.on("SIGINT", handle);
         process.on("SIGTERM", handle);
+
+        // Keep the match alive when a stray async rejection or exception escapes.
+        // Without these, an unhandled rejection (telemetry/webhook/admin state eval) or
+        // an uncaught throw would tear down the process for every connected player.
+        process.on("unhandledRejection", (reason) => {
+            this.telemetry.Error(`Unhandled promise rejection: ${reason instanceof Error ? reason.stack : reason}`);
+        });
+        process.on("uncaughtException", (error) => {
+            this.telemetry.Error(`Uncaught exception: ${error.stack ?? error.message}`);
+        });
     };
     public Listen = () => {
         this.httpServer.listen(config.Port);

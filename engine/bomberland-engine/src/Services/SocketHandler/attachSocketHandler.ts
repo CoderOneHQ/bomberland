@@ -67,6 +67,7 @@ export const attachSocketHandler = (
             connectionTracker.AddSpectator(spectator);
             break;
         default:
-            telemetry.Error(`Unknown role ${role}`);
+            // Throw so the caller closes the socket instead of leaving it open with no handlers.
+            throw new Error(`Unknown role ${role}`);
     }
 };
