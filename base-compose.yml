@@ -54,6 +54,18 @@ services:
         volumes:
             - ./agents/typescript:/app
 
+    typescript-fwd:
+        build:
+            context: agents/typescript
+            dockerfile: Dockerfile.fwd
+
+    typescript-fwd-dev:
+        build:
+            context: agents/typescript
+            dockerfile: Dockerfile.fwd.dev
+        volumes:
+            - ./agents/typescript:/app
+
     cpp-agent:
         build:
             context: agents/cpp

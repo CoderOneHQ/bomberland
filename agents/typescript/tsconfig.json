@@ -9,6 +9,7 @@
         "lib": ["es6", "dom"],
         "esModuleInterop": true,
         "moduleResolution": "node",
+        "skipLibCheck": true,
         "strictNullChecks": true,
         "noImplicitAny": true,
         "strict": true
