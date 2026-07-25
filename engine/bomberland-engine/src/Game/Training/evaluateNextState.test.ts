@@ -261,4 +261,16 @@ describe("evaluateNextState", () => {
 
         expect(result2).toStrictEqual(expectedState2);
     });
+
+    test(`it is deterministic: identical (state, actions) inputs reproduce an identical next_state`, async () => {
+        // Force a spawn every tick while keeping several empty cells so BOTH the spawn location
+        // and type depend on the game PRNG. This exercises the state-reconstruction seeding path
+        // (createWorldFromState) that previously used Math.random() and was non-reproducible.
+        process.env["ENTITY_SPAWN_PROBABILITY_PER_TICK"] = "1";
+        const runA = await evaluateNextState(telemetry, mock4x4GameState, []);
+        const runB = await evaluateNextState(telemetry, mock4x4GameState, []);
+        const spawned = runA.tick_result.events.some((event) => event.type === GameEventType.EntitySpawned);
+        expect(spawned).toBe(true);
+        expect(runB).toStrictEqual(runA);
+    });
 });
