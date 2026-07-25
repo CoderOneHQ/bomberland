@@ -4,12 +4,21 @@ import (
 	"encoding/json"
 	"github.com/stretchr/testify/assert"
 	"github.com/xeipuuv/gojsonschema"
+	"os"
 	"path/filepath"
 	"testing"
 )
 
 func TestJSONSchema(t *testing.T) {
-	abs, err := filepath.Abs("../validation.schema.json")
+	// The engine's schema is the source of truth. CI points BOMBERLAND_SCHEMA_PATH at
+	// engine/bomberland-engine/src/runtime-validation/validation.schema.json so fixtures are
+	// validated against the live engine contract; the bundled copy is the fallback used by the
+	// Docker build and standalone clones (which don't have the engine tree available).
+	schemaPath := os.Getenv("BOMBERLAND_SCHEMA_PATH")
+	if schemaPath == "" {
+		schemaPath = "../validation.schema.json"
+	}
+	abs, err := filepath.Abs(schemaPath)
 	assert.NoError(t, err)
 	// Validate against the ServerPacket union specifically. The document root only holds
 	// `definitions` (no root constraints), so referencing it directly would accept anything;
