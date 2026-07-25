@@ -65,7 +65,7 @@ impl GameState {
 
     pub fn get_bomb_for_unit(&self, unit_id: &UnitID) -> Option<&Entity> {
         for entity in self.entities.iter() {
-            if entity.r#type == EntityType::Bomb && entity.owner_unit_id == Some(unit_id.clone()) {
+            if entity.r#type == EntityType::Bomb && entity.unit_id == Some(unit_id.clone()) {
                 return Some(&entity);
             }
         }

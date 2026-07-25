@@ -1,4 +1,4 @@
-FROM rust:1.57-slim-buster as build
+FROM rust:1-slim-bookworm AS build
 RUN USER=root cargo new --bin bomberland_starter_kit
 WORKDIR /bomberland_starter_kit
 
@@ -12,6 +12,6 @@ COPY ./src ./src
 RUN rm ./target/release/deps/bomberland_starter_kit*
 RUN cargo build --release
 
-FROM debian:buster-slim
+FROM debian:bookworm-slim
 COPY --from=build /bomberland_starter_kit/target/release/bomberland_starter_kit .
 CMD ["./bomberland_starter_kit"]

@@ -19,6 +19,10 @@ pub enum ServerPacketType {
     Tick,
     #[serde(rename = "endgame_state")]
     EndGameState,
+    /// Sent while the engine waits for players to connect. Carries a human-readable
+    /// message; agents can safely ignore it (but must not fail to parse it).
+    #[serde(rename = "info")]
+    Info,
 }
 
 #[derive(Serialize, Deserialize, Debug)]

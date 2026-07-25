@@ -1,3 +1,4 @@
+use crate::agent::AgentID;
 use crate::unit::UnitID;
 use serde::{Deserialize, Serialize};
 
@@ -33,9 +34,12 @@ pub struct Entity {
     pub y: u8,
     /// the type of entity
     pub r#type: EntityType,
-    /// ID of the unit that owns this entity
+    /// ID of the unit that owns this entity (e.g. the unit that placed a bomb)
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub owner_unit_id: Option<UnitID>,
+    pub unit_id: Option<UnitID>,
+    /// ID of the agent that owns this entity
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub agent_id: Option<AgentID>,
     /// Tick on which this entity will perish from the map.
     /// E.g. a bomb placed with expires=74 will explode on tick 74.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -54,7 +58,8 @@ impl Entity {
         self.x = new_state.x;
         self.y = new_state.y;
         self.r#type = new_state.r#type.clone();
-        self.owner_unit_id = new_state.owner_unit_id.clone();
+        self.unit_id = new_state.unit_id.clone();
+        self.agent_id = new_state.agent_id.clone();
         self.expires = new_state.expires;
         self.hp = new_state.hp;
         self.blast_diameter = new_state.blast_diameter;
