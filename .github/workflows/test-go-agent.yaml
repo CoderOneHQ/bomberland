@@ -1,8 +1,6 @@
 name: Test Go Starter Kit
 
-# Public repo: this runs on GitHub-hosted runners (ubuntu-latest), never the
-# self-hosted homeserver runners, so untrusted fork PRs can't execute on our
-# infrastructure.
+# Runs on GitHub-hosted runners (ubuntu-latest).
 #
 # The engine's JSON schema is the source of truth for the wire protocol. This
 # workflow validates the Go starter kit's fixtures against that schema, and is
