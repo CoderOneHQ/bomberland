@@ -1,0 +1,64 @@
+name: Test Go Starter Kit
+
+# Public repo: this runs on GitHub-hosted runners (ubuntu-latest), never the
+# self-hosted homeserver runners, so untrusted fork PRs can't execute on our
+# infrastructure.
+#
+# The engine's JSON schema is the source of truth for the wire protocol. This
+# workflow validates the Go starter kit's fixtures against that schema, and is
+# triggered whenever the schema changes — so a protocol update to the engine
+# surfaces any drift in the Go kit immediately.
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+        paths:
+            - "agents/go/**"
+            - "engine/bomberland-engine/src/runtime-validation/validation.schema.json"
+            - ".github/workflows/test-go-agent.yaml"
+    workflow_dispatch:
+
+concurrency:
+    group: test-go-agent-${{ github.ref }}
+    cancel-in-progress: true
+
+env:
+    ENGINE_SCHEMA: engine/bomberland-engine/src/runtime-validation/validation.schema.json
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Go
+              uses: actions/setup-go@v5
+              with:
+                  go-version: stable
+                  cache-dependency-path: agents/go/go.sum
+
+            # The engine schema is the source of truth. Fail if the kit's bundled copy has
+            # drifted from it — that copy is what the Docker build and standalone clones use,
+            # since they don't have the engine tree available.
+            - name: Check bundled schema is in sync with engine
+              run: |
+                  if ! cmp -s "$ENGINE_SCHEMA" agents/go/validation.schema.json; then
+                    echo "::error::agents/go/validation.schema.json is out of sync with $ENGINE_SCHEMA"
+                    echo "Re-sync with: cp $ENGINE_SCHEMA agents/go/validation.schema.json"
+                    diff -u agents/go/validation.schema.json "$ENGINE_SCHEMA" || true
+                    exit 1
+                  fi
+
+            # Validate fixtures against the engine's live schema (not just the bundled copy),
+            # so fixture/protocol drift fails CI even before the copy is re-synced.
+            - name: Run Go tests against engine schema
+              working-directory: agents/go
+              env:
+                  BOMBERLAND_SCHEMA_PATH: ${{ github.workspace }}/engine/bomberland-engine/src/runtime-validation/validation.schema.json
+              run: go test ./... -count=1

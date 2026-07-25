@@ -69,7 +69,7 @@ func tickHandler(tickNumber float64, state map[string]interface{}) (err error) {
 		}
 		logrus.WithField("action", "detonate").Info()
 		x, y := getBombToDetonate(unitID, state)
-		if x > 0 && y > 0 {
+		if x >= 0 && y >= 0 {
 			err = gameState.SendDetonate(x, y, unitID)
 			if err != nil {
 				logrus.Error(err)
@@ -84,7 +84,9 @@ func tickHandler(tickNumber float64, state map[string]interface{}) (err error) {
 func getBombToDetonate(unitID string, state map[string]interface{}) (float64, float64) {
 	for _, iEntity := range state["entities"].([]interface{}) {
 		entity := iEntity.(map[string]interface{})
-		if entity["owner_unit_id"] == unitID && entity["type"] == "b" {
+		// Bombs are type "b"; the placing unit is identified by "unit_id"
+		// (the engine renamed this from the old "owner_unit_id").
+		if entity["unit_id"] == unitID && entity["type"] == "b" {
 			return entity["x"].(float64), entity["y"].(float64)
 		}
 	}
