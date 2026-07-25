@@ -6,18 +6,19 @@ import { Environment } from "../../Environment";
 import { IConfig } from "../../Config/IConfig";
 
 export class BlastPowerupEntity extends AbstractEntity {
-    public constructor(config: IConfig, cellNumber: number, mapWidth: number, currentTick: number) {
+    public constructor(config: IConfig, cellNumber: number, mapWidth: number, currentTick: number, createdOverride?: number) {
         const engineTelemetry = new CoderOneApi(Environment.Environment, config, true, Environment.Build);
         const telemetry = new Telemetry(engineTelemetry, config.IsTelemetryEnabled);
+        const createdTick = createdOverride ?? currentTick;
         const initialValues: IInitialEntityValues = {
             cellNumber,
             mapWidth,
             type: EntityType.BlastPowerup,
-            created: currentTick,
+            created: createdTick,
             hp: 1,
             unitId: undefined,
             agentId: undefined,
-            expires: currentTick + config.BlastPowerupDurationTicks,
+            expires: createdTick + config.BlastPowerupDurationTicks,
             blastDiameter: undefined,
         };
         super(telemetry, initialValues);

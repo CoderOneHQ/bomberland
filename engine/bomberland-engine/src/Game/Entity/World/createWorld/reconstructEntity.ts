@@ -28,21 +28,27 @@ export const reconstructEntity = (
     } else if (type === EntityType.Ammo) {
         return new AmmoEntity(config, cellNumber, tick, entity.created);
     } else if (type === EntityType.FreezePowerup) {
-        return new FreezePowerupEntity(config, cellNumber, width, tick);
+        return new FreezePowerupEntity(config, cellNumber, width, tick, entity.created);
     } else if (type === EntityType.Blast) {
         return new BlastEntity(config, cellNumber, unit_id, agent_id, entity.expires, tick, entity.created);
     } else if (type === EntityType.BlastPowerup) {
-        return new BlastPowerupEntity(config, cellNumber, width, tick);
+        return new BlastPowerupEntity(config, cellNumber, width, tick, entity.created);
     } else if (type === EntityType.Bomb) {
         const unit = worldState.units.find((unit) => {
             return unit.agent_id === agent_id;
         });
 
-        if (unit !== undefined) {
-            return new BombEntity(config, cellNumber, width, unit_id, agent_id, tick, unit?.blast_diameter, entity.created);
+        // Prefer the bomb's own serialised blast diameter (the radius it was thrown with);
+        // fall back to the owning unit's current diameter only when the bomb didn't carry one.
+        const blastDiameter = entity.blast_diameter ?? unit?.blast_diameter;
+
+        if (blastDiameter !== undefined) {
+            return new BombEntity(config, cellNumber, width, unit_id, agent_id, tick, blastDiameter, entity.created);
         }
 
-        throw new Error("Agent cannot be undefined since bombs must have an owner");
+        throw new Error(
+            `Cannot reconstruct bomb at cell ${cellNumber}: no serialised blast_diameter and no owning unit for agent ${agent_id}`
+        );
     } else {
         throw new Error(`Unhandled entity type ${type} when reconstructing entity`);
     }
