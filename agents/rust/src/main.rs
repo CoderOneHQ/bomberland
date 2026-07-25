@@ -77,6 +77,9 @@ pub mod game_state;
 pub mod packets;
 pub mod unit;
 
+#[cfg(test)]
+mod tests;
+
 fn main() -> () {
     let conn_string = env::var("GAME_CONNECTION_STRING").unwrap_or("ws://127.0.0.1:3000/?role=agent&agentId=agentA&name=RustAgent".to_owned());
     let mut conn = game_connection::GameConnection::new(

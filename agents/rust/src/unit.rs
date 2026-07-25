@@ -78,6 +78,8 @@ pub struct Unit {
     pub agent_id: AgentID,
     /// Latest tick number after which this unit is no longer invulnerable (inclusive).
     pub invulnerable: u16,
+    /// Latest tick number until which this unit is stunned/frozen (inclusive).
+    pub stunned: u16,
 }
 
 impl Unit {
@@ -121,7 +123,7 @@ impl Unit {
         }
 
         ActionPacket {
-            r#type: ActionPacketType::Bomb,
+            r#type: ActionPacketType::Detonate,
             unit_id: Some(self.unit_id.clone()),
             coordinates: Some([entity.x, entity.y]),
             r#move: None,
@@ -145,6 +147,7 @@ impl Unit {
             self.blast_diameter = new_state.blast_diameter;
             self.agent_id = new_state.agent_id;
             self.invulnerable = new_state.invulnerable;
+            self.stunned = new_state.stunned;
         } else {
             panic!(
                 "Attempted to update unit '{:?}' with data from unit '{:?}'",

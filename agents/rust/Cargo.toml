@@ -10,3 +10,8 @@ anyhow = "1.0.51"
 tungstenite = "0.16.0"
 url = "2.2.2"
 rand = "0.8.4"
+
+[dev-dependencies]
+# Test-only: validates the kit's protocol fixtures against the engine's canonical JSON schema.
+# Not compiled into the release binary (the Dockerfile builds the bin target only).
+jsonschema = "0.18"

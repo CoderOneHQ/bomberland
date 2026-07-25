@@ -154,6 +154,8 @@ impl GameConnection {
                 }
                 return true;
             }
+            // Informational packet sent while waiting for players; nothing to do.
+            ServerPacketType::Info => {}
         }
         false
     }
