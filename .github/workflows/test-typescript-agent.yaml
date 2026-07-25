@@ -1,0 +1,47 @@
+name: Test TypeScript Starter Kit
+
+# Runs on GitHub-hosted runners (ubuntu-latest).
+#
+# The TypeScript kit's wire-protocol conformance is enforced at compile time by the typed
+# @coderone/bomberland-library package, so this workflow type-checks the kit — both the basic
+# agent and the forward-model example (Agent_fwd.ts / ForwardModel.ts) — with tsc.
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches:
+            - master
+        paths:
+            - "agents/typescript/**"
+            - ".github/workflows/test-typescript-agent.yaml"
+    workflow_dispatch:
+
+concurrency:
+    group: test-typescript-agent-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        defaults:
+            run:
+                working-directory: agents/typescript
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: yarn
+                  cache-dependency-path: agents/typescript/yarn.lock
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Type-check (tsc build)
+              run: yarn build
